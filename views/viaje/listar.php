@@ -38,7 +38,7 @@
 
             <p> <?= $viaje->getDescripcion(); ?> </p>
 
-            <form action="<?=base_url.'viaje/ver&id='.$viaje->getId() ?>" method="GET">
+            <form action="<?=$_ENV['BASE_URL'].'viaje/ver&id='.$viaje->getId() ?>" method="GET">
                 <input class="ver_mas" type="submit" value="ver más">
             </form>
         </section>

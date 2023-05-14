@@ -11,7 +11,8 @@
 
             <p class="contenido"> <?= $comentario->getContenido(); ?> </p>
 
-            <form action="<?=base_url.'comentario/verviaje&id='.$comentario->getId_viaje() ?>" method="GET">
+            
+            <form action="<?=$_ENV['BASE_URL'].'comentario/ver_viaje&id='.$comentario->getId_viaje() ?>" method="GET">
                 <input class="ver_viaje" type="submit" value="ver viaje ".<?= $comentario->getNombre_viaje()?> >
             </form>
         </section>

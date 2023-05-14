@@ -97,42 +97,49 @@ session_start();
         
         <br><br><br><br>
 
-        <?php
-            //RUTAS
-
-            // //ruta por defecto(listar viajes)
-            Router::add('GET', '/', function(){
-                (new ViajeController())->listar();
-            });
-
-            Router::add('GET', '/opiniones', function(){
-                (new ComentarioController())->listar();
-            });
-
-            Router::add('GET', '/galeria', function(){
-                (new ImagenController())->listar();
-            });
-
-            // para acceder al formulario
-            Router::add('GET', '/usuario/registro', function(){
-                (new UsuarioController())->registro();
-            });
-
-            // para recoger los datos del formulario
-            Router::add('POST', '/usuario/registro', function(){
-                (new UsuarioController())->registro();
-            });
-
-
-            Router::add('GET', '/login', function(){
-                (new UsuarioController())->login();
-            });
-
-
-            Router::dispatch();
-        ?>
+       
 
     </main>
+
+<?php
+    //RUTAS
+
+    // //ruta por defecto(listar viajes)
+    Router::add('GET', '/', function(){
+        (new ViajeController())->listar();
+    });
+
+    Router::add('GET', '/opiniones', function(){
+        (new ComentarioController())->listar();
+    });
+
+    Router::add('GET', '/galeria', function(){
+        (new ImagenController())->listar();
+    });
+
+    // para acceder al formulario
+    Router::add('GET', '/usuario/registro', function(){
+        (new UsuarioController())->registro();
+    });
+
+    // para recoger los datos del formulario
+    Router::add('POST', '/usuario/registro', function(){
+        (new UsuarioController())->registro();
+    });
+
+
+    // para acceder al formulario
+    Router::add('GET', '/usuario/login', function(){
+        (new UsuarioController())->login();
+    });
+    // para recoger los datos del formulario
+    Router::add('POST', '/usuario/registro', function(){
+        (new UsuarioController())->registro();
+    });
+
+
+    Router::dispatch();
+?>
 
     
 
