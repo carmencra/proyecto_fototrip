@@ -10,19 +10,9 @@
     position: relative;
     color: white;
     padding: 0.1% 1% 1% 1%;
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
-.imagen::after {
-    content: "";
-    background-color: black;
-    opacity: 0.8;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: absolute;
-    z-index: -1;   
-}
 
 .imagen h4 {
     color: #2CCBCB;

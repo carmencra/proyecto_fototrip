@@ -99,15 +99,25 @@ session_start();
 
        
 
-    </main>
 
 <?php
     //RUTAS
 
+// RUTAS VIAJE
     // //ruta por defecto(listar viajes)
     Router::add('GET', '/', function(){
         (new ViajeController())->listar();
     });
+
+    Router::add('GET', '/viaje/buscar', function(){
+        (new ViajeController())->buscar();
+    });
+
+    Router::add('GET', '/viaje/ver:id', function(int $viaje_id) {
+        (new ViajeController())->ver($viaje_id);
+    });
+
+    
 
     Router::add('GET', '/opiniones', function(){
         (new ComentarioController())->listar();
@@ -149,6 +159,7 @@ session_start();
     </a>
 
 
+    </main>
 
     <footer>
         <img id="logo" src="fuente/media/images/logo.png" alt="logo fototrip"/>

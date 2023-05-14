@@ -10,8 +10,7 @@ header {
     position: fixed;
     width: 100%;
     height: max-content;
-    background-color: rgb(0, 0, 0);  
-    opacity: 0.8;
+    background-color: rgba(0, 0, 0, 0.8);
     color: #FFFFFF;
     display: flex;
     top: 0%;

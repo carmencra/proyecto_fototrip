@@ -5,19 +5,9 @@
     width: 90%;
     margin: auto;
     margin-bottom: 2%;
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
-.comentario::after {
-    content: "";
-    background-color: black;
-    opacity: 0.8;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: absolute;
-    z-index: -1;   
-}
 
 .comentario h4 {
     color: #2CCBCB;
