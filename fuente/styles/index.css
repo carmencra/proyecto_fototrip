@@ -1,0 +1,65 @@
+video {
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+    top: 0%;
+}
+
+
+.titulo {
+    position: relative;
+    z-index: 1;
+    margin-top: 11%;
+    text-align: center;
+}
+
+.titulo h1 {
+    color: #2CCBCB;
+    font-size: 60px;
+    background-color: black;
+    padding: 1%;
+    width: max-content;
+    margin: auto; 
+    opacity: 0.8;
+    margin-bottom: 1.5%;
+}
+
+.titulo h3 {
+    color: white;
+    font-size: 22px;
+    background-color: black;
+    padding: 0.5%;
+    width: max-content;
+    margin: auto; 
+    opacity: 0.8;
+    margin-bottom: 4%;
+}
+
+.titulo a {
+    background-color: #2CCBCB;
+    padding: 0.7%;
+    text-decoration: none;
+    color: black;
+    font-weight: bolder;
+    
+}
+
+
+
+main {
+    position: relative;
+}
+
+main::after {
+    content: "";
+    background-image: url(../media/images/fondo.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    opacity: 0.4;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;   
+  }

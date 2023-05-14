@@ -20,6 +20,7 @@ $dotenv-> safeLoad();
 
 session_start();
 
+
 //header
 // require_once('views/layout/header.php');
 
@@ -53,31 +54,18 @@ session_start();
 <body>
 
     <header>
-
-        <!-- aquí 
-        y en inicio, 
-        pasar 
-        por el .env 
-        base_url -->
-
-        <a href="">
+        <a href="<?=$_ENV['BASE_URL']?>">
             <img id="logo" src="fuente/media/images/logo.png" alt="logo fototrip"/>
         </a>
         
         <nav class="menu" id="menu">
             <ul>
-                <li class="active"> <a href="index.php">Inicio</a> </li>
+                <li class="active"> <a href="<?=$_ENV['BASE_URL']?>">Inicio</a> </li>
 
-                <!-- <li> <a href="< ?=base_url?>/opiniones">Opiniones </a> </li>
+                <li> <a href="<?=$_ENV['BASE_URL']?>opiniones">Opiniones </a> </li>
 
-                <li> <a href="< ?=base_url?>/galeria">Galer&iacute;a </a> </li> -->
+                <li> <a href="<?=$_ENV['BASE_URL']?>galeria">Galer&iacute;a </a> </li>
 
-                <!-- esto llama a la función del controlador no a la vista!!! -->
-
-                <!--   < ?=base_url? > (sin espacios) -->
-
-                <!-- <li><a href="  (aquí lo de base url)  comentario/index">Opiniones</a></li>
-                <li><a href="  (aquí lo de base url)  imagen/index">Galer&iacute;a</a></li> -->
             </ul>
 
         </nav> 
@@ -109,145 +97,47 @@ session_start();
         
         <br><br><br><br>
 
+        <?php
+            //RUTAS
+
+            // //ruta por defecto(listar viajes)
+            Router::add('GET', '/', function(){
+                (new ViajeController())->listar();
+            });
+
+            Router::add('GET', '/opiniones', function(){
+                (new ComentarioController())->listar();
+            });
+
+            Router::add('GET', '/galeria', function(){
+                (new ImagenController())->listar();
+            });
+
+            // para acceder al formulario
+            Router::add('GET', '/usuario/registro', function(){
+                (new UsuarioController())->registro();
+            });
+
+            // para recoger los datos del formulario
+            Router::add('POST', '/usuario/registro', function(){
+                (new UsuarioController())->registro();
+            });
+
+
+            Router::add('GET', '/login', function(){
+                (new UsuarioController())->login();
+            });
+
+
+            Router::dispatch();
+        ?>
+
     </main>
 
     
-    
 
-
-
- <?php
-
-//RUTAS
-
-// //ruta por defecto(listar viajes)
-Router::add('GET', '/', function(){
-    (new ViajeController())->listar();
-});
-
-Router::add('GET', '/opiniones', function(){
-    (new ComentarioController())->listar();
-});
-
-Router::add('GET', '/galeria', function(){
-    (new ImagenController())->listar();
-});
-
-// para acceder al formulario
-Router::add('GET', '/usuario/registro', function(){
-    (new UsuarioController())->registro();
-});
-
-// para recoger los datos del formulario
-Router::add('POST', '/usuario/registro', function(){
-    (new UsuarioController())->registro();
-});
-
-
-Router::add('GET', '/login', function(){
-    (new UsuarioController())->login();
-});
-
-
-Router::dispatch();
-
-
-
-// //si no hay un usuario logueado, se podrá hacer el registro y el login
-// if (!isset($_SESSION['usuario'])) {
-//     //registrar usuario
-//     Router::add('GET','usuario/register', function() {
-//         (new UsuarioController())->register();
-//     });
-//     Router::add('POST','usuario/register', function() {
-//         (new UsuarioController())->register();
-//     });
-
-
-//     //login usuario
-//     Router::add('GET','usuario/login', function() {
-//         (new UsuarioController())->login();
-//     });
-//     Router::add('POST', 'usuario/login', function() {
-//         (new UsuarioController())->login();
-//     });
-
-
-//     //confirmar cuenta usuario
-//     Router::add('GET', 'usuario/confirmarcuenta/:id', function($usuariotoken) {
-//         (new UsuarioController())->confirmar_cuenta($usuariotoken);
-//     });
-// }
-// //si se está logueado, se podrá ver los ponentes y cerrar sesión
-// else {
-//     //listar ponentes
-//     Router::add('GET','ponente/listar', function() {
-//         (new PonenteController())->listar();
-//     });
-
-
-//     //modificar datos usuario
-//     Router::add('POST', 'usuario/modificar/:id', function(int $usuarioid) {
-//         (new UsuarioController())->modificar($usuarioid);
-//     });
-//     Router::add('GET', 'usuario/modificar/:id', function(int $usuarioid) {
-//         (new UsuarioController())->modificar($usuarioid);
-//     });
-
-//     Router::add('GET','usuario/modificar', function() {
-//         (new UsuarioController())->modificar();
-//     });
-//     Router::add('POST','usuario/modificar', function() {
-//         (new UsuarioController())->modificar();
-//     });
-
-
-//     //cerrar sesión
-//     Router::add('GET','usuario/cerrar', function() {
-//         (new UsuarioController())->cerrar();
-//     });
-
-//     //además, si eres admin, podrás crear y modificar ponentes
-//     if (isset($_SESSION['admin'])) {
-//         //crear ponente
-//         Router::add('GET', 'ponente/crear', function() {
-//             (new PonenteController())->crear();
-//         });
-//         Router::add('POST', 'ponente/crear', function() {
-//             (new PonenteController())->crear();
-//         });
-        
-        
-//         //modificar ponente
-//         Router::add('POST', 'ponente/modificar/:id', function(int $ponenteid) {
-//             (new PonenteController())->modificar($ponenteid);
-//         });
-//         Router::add('GET', 'ponente/modificar/:id', function(int $ponenteid) {
-//             (new PonenteController())->modificar($ponenteid);
-//         });
-        
-//         Router::add('POST', 'ponente/modificar', function() {
-//             (new PonenteController())->modificar();
-//         });
-//         Router::add('GET', 'ponente/modificar', function() {
-//             (new PonenteController())->modificar();
-//         });
-        
-
-//         //borrar ponente
-//         Router::add('POST', 'ponente/delete/:id', function(int $ponenteid) {
-//             (new PonenteController())->delete($ponenteid);
-//         });
-//     }
-    
-// }
-
-// Router::dispatch(); 
-
-?>
-
-<!-- flecha para subir al inicio de la página -->
-<a onclick="subir_inicio(); return false; "href="">
+    <!-- flecha para subir al inicio de la página -->
+    <a onclick="subir_inicio(); return false; "href="">
         <img src="fuente/media/images/flecha.png" id="flecha" alt="flecha para subir al inicio">
     </a>
 
@@ -263,3 +153,6 @@ Router::dispatch();
     
 </body>
 </html>
+
+
+

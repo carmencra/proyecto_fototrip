@@ -1,0 +1,81 @@
+body {
+    text-align: justify;
+    margin: 0%;
+}
+
+/* MIRA A VER ESTO DEL BODY, QUE ESTO ES HEADER */
+
+
+header {
+    position: fixed;
+    width: 100%;
+    height: max-content;
+    background-color: rgb(0, 0, 0);  
+    opacity: 0.8;
+    color: #FFFFFF;
+    display: flex;
+    top: 0%;
+    align-items: center;
+    z-index: 3;
+}
+
+header #logo {
+    width: 90px;
+}
+
+.menu {
+    margin: auto;
+}
+
+.menu ul {
+    display: flex;
+    padding-left: 0%;
+}
+
+.menu ul li {
+    list-style: none;
+    font-size: 26px;
+    font-weight: bold;
+    text-transform: uppercase;
+    width: 8em;
+    text-align: center;
+}
+
+.menu ul li a {
+    text-decoration: none;
+    color: #FFFFFF;
+
+}
+
+.menu .active a {
+    color: #2CCBCB;
+}
+
+/* #usuario {
+    background-color: white;
+    border-radius: 100%;
+    padding: 0.5%;
+    width: 55px;
+    margin-right: 1%;
+    margin-left: auto;
+}
+
+#usuario:hover {
+    background-color: #2CCBCB;
+} */
+
+#usuario {
+    margin-right: 1%;  
+    border-radius: 100%; 
+    background-color: white;
+    padding: 0.5%;
+}
+
+#usuario img{
+    width: 45px;
+}
+
+#usuario:hover {
+    background-color: #2CCBCB;
+} 
+

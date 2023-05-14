@@ -1,0 +1,15 @@
+#flecha {
+    position: fixed;
+    z-index: 1;
+    left: auto;
+    right: 1%;
+    bottom: 2%;
+    width: 45px;
+	cursor: pointer;
+    background-color: black;
+    border-radius: 100%;
+}
+
+#flecha:hover {
+    width: 50px;
+}

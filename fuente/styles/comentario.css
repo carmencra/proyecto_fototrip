@@ -1,0 +1,49 @@
+.comentario {
+    position: relative;
+    color: white;
+    padding: 0.1% 1% 1% 1%;
+    width: 90%;
+    margin: auto;
+    margin-bottom: 2%;
+}
+
+.comentario::after {
+    content: "";
+    background-color: black;
+    opacity: 0.8;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;   
+}
+
+.comentario h4 {
+    color: #2CCBCB;
+}
+
+.comentario hr {
+    border: 2px solid white;
+}
+
+.comentario .contenido {
+    text-align: justify;
+}
+
+.comentario form {
+    display: flex;
+    justify-content: center;
+}
+
+.comentario .ver_viaje {
+    background-color: #2CCBCB;
+    border-color: #2CCBCB;
+    font-weight: bold;
+}
+
+.comentario .ver_viaje:hover {
+    padding: 0.5%;
+    font-size: small;
+    text-decoration: underline;
+}
