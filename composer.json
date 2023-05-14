@@ -1,0 +1,20 @@
+{
+    "name": "carme/fototrip",
+    "autoload": {
+        "psr-4": {
+            "Carme\\Fototrip\\": "./",
+            "Controllers\\" : "./Controllers",
+            "Repositories\\" : "./Repositories",
+            "Models\\" : "./Models",
+            "Lib\\" : "./Lib"
+        }
+    },
+    "authors": [
+        {
+            "name": "carmen"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.5"
+    }
+}
