@@ -38,11 +38,8 @@ session_start();
     <link rel="icon" href="fuente/media/images/logo.png" alt="logo fototrip">
 
     <!-- estilos -->
-    <link rel="stylesheet" href="fuente/styles/body.css">
-    <link rel="stylesheet" href="fuente/styles/header.css">
-    <link rel="stylesheet" href="fuente/styles/index.css">
-    <link rel="stylesheet" href="fuente/styles/footer.css">
-
+    <link rel="stylesheet" href="fuente/styles/fototrip.css">
+    
     <!-- margen main con video -->
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
     <script src="fuente/scripts/responsive_video_body.js"></script>
