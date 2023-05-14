@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'carme/fototrip',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => NULL,
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'reference' => 'b1fca85dd5ed18e0d22ce35611d3870ebe198371',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'carme/fototrip' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => NULL,
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => 'b1fca85dd5ed18e0d22ce35611d3870ebe198371',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

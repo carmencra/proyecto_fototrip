@@ -6,7 +6,8 @@
             "Controllers\\" : "./Controllers",
             "Repositories\\" : "./Repositories",
             "Models\\" : "./Models",
-            "Lib\\" : "./Lib"
+            "Lib\\" : "./Lib",
+            "Utils\\" : "./Utils"
         }
     },
     "authors": [
