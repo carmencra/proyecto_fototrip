@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="fuente/styles/viaje.css">
 
 <section class="buscador_viajes">
-    <form action="<?=base_url?>/viaje/buscar" method="POST" enctype="multipart/form-data">
+    <form action="<?=$_ENV['BASE_URL']?>viaje/buscar" method="POST" enctype="multipart/form-data">
         <label for="pais">Pa&iacute;s </label>
         <input type="text" name="data[pais]" id="pais"/>
 

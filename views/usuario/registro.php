@@ -14,7 +14,7 @@
  -->
 
 
-<form action="<?=$_ENV['BASE_URL']?>usuario/register" method="POST">
+<form action="<?=$_ENV['BASE_URL']?>usuario/registro" method="POST">
 
     <label for="email">Email: </label>
     <input type="email" name="data[email]" value="<?php if (isset($_POST['data']['email']))echo $_POST['data']['email'];?>" style="width:300px">

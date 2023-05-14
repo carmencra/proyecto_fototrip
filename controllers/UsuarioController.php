@@ -14,9 +14,12 @@ class UsuarioController{
     }
 
     public function registro() {
-        $this->pages->render('usuario/registro');
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            $this->pages->render('usuario/registro');
+        }
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            var_dump("desde form");die();
             $datos= $_POST['data'];
             
             //se cofidica la contraseña

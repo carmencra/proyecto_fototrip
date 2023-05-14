@@ -133,10 +133,16 @@ Router::add('GET', '/galeria', function(){
     (new ImagenController())->listar();
 });
 
-
-Router::add('GET', '/registro', function(){
+// para acceder al formulario
+Router::add('GET', '/usuario/registro', function(){
     (new UsuarioController())->registro();
 });
+
+// para recoger los datos del formulario
+Router::add('POST', '/usuario/registro', function(){
+    (new UsuarioController())->registro();
+});
+
 
 Router::add('GET', '/login', function(){
     (new UsuarioController())->login();
