@@ -87,13 +87,22 @@ session_start();
         </div> -->
 
         <div class="menu_usuario">
-            <button onclick="despliega_usuario()" class="boton_usuario">Registro/iniciar sesi&oacute;n</button>
-            <div id="lista_usuario" class="contenido_lista">
-                <a href="#">Link 1</a>
-                <a href="#">Link 2</a>
-                <a href="#">Link 3</a>
-            </div>
+            <?php if (!isset($_SESSION['usuario'])): ?>
+                <button onclick="despliega_usuario()" class="boton_usuario">Registro/iniciar sesi&oacute;n</button>
+                    <div id="lista_usuario" class="contenido_lista">
+                        <a href="<?=$_ENV['BASE_URL']?>usuario/registro">Registrarse</a>
+                        <a href="<?=$_ENV['BASE_URL']?>usuario/login">Iniciar sesi&oacute;n</a>
+                    </div>
+
+            <?php else :?>
+                <button onclick="despliega_usuario()" class="boton_usuario"> Usuario: nombre* <!--< ?=$_SESSION['usuario']?>--> </button>
+                    <div id="lista_usuario" class="contenido_lista">
+                        <a href="">Mis viajes</a>
+                        <a href="">Cerrar sesi&oacute;n</a>
+                    </div>
+            <?php endif;?>
         </div>
+
         <!-- <div class="dropdown">
             <button onclick="myFunction()" class="drop-button">Dropdown</button>
             <div id="myDropdown" class="dropdown-content">
