@@ -90,7 +90,7 @@ session_start();
             <?php if (!isset($_SESSION['usuario'])): ?>
                 <button onclick="despliega_usuario()" class="boton_usuario">Registro/iniciar sesi&oacute;n</button>
                     <div id="lista_usuario" class="contenido_lista">
-                        <a href="<?=$_ENV['BASE_URL']?>usuario/registro">Registrarse</a>
+                        <a href="<?=$_ENV['BASE_URL']?>usuario/registro">Registrarse </a>
                         <a href="<?=$_ENV['BASE_URL']?>usuario/login">Iniciar sesi&oacute;n</a>
                     </div>
 
@@ -180,8 +180,8 @@ session_start();
         (new UsuarioController())->login();
     });
     // para recoger los datos del formulario
-    Router::add('POST', '/usuario/registro', function(){
-        (new UsuarioController())->registro();
+    Router::add('POST', '/usuario/login', function(){
+        (new UsuarioController())->login();
     });
 
 

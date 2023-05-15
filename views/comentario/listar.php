@@ -1,6 +1,4 @@
 
-<link rel="stylesheet" href="fuente/styles/comentario.css">
-
 <section class="comentarios">
 
     <?php foreach($comentarios as $comentario) : ?>

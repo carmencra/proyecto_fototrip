@@ -1,6 +1,4 @@
 
-<link rel="stylesheet" href="fuente/styles/imagen.css">
-
 <section class="imagenes">
 
     <?php foreach($imagenes as $imagen) : ?>
