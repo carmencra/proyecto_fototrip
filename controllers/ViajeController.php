@@ -37,14 +37,17 @@ class ViajeController {
     public function buscar() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $filtros= $_POST['data'];
-            var_dump($filtros);die();
-            // $this->comprobar_fitros($filtros);
+            // $this->comprobar_filtros($filtros);
+            $this->repository->filtrar_viajes($filtros);
         }
 
     }
 
     public function comprobar_filtros($filtros): bool  {
-        var_dump(gettype($_SESSION));die();
+        var_dump($filtros);die();
+        if ($filtros) {
+
+        }
 
     }
 }
