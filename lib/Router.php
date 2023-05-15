@@ -1,13 +1,12 @@
 <?php
 namespace Lib;
 // para almacenar las rutas que configuremos desde el archivo indexold.php
-// use Controllers\PaginasController;
+
 
 class Router {
-
     private static array $routes = [];
     //para ir añadiendo los métodos y las rutas en el tercer parámetro.
-    public static function add(string $method, string $action, Callable $controller):void{
+    public static function add(string $method, string $action, Callable $controller):void {
         //die($action);
 
         $action = trim($action, '/');
@@ -29,14 +28,19 @@ class Router {
 
 
         $param = null;
-        $p= preg_match('/[0-9]+$/', $action, $match);
+       // $p= preg_match('/[0-9]+$/', $action, $match);  // ESTA ERA LA QUE HABIA
+        preg_match('/\/[a-z0-9A-Z._\-]+$/', $action, $match);
 
-       
         if(!empty($match)){
             
             $param = $match[0];
 
-            $action=preg_replace('/'.$match[0].'/',':id',$action);//quitamos la primera parte que se repite siempre (clinicarouter)
+            //para que coja el token
+            $param= preg_replace("/\//", '', $param);
+            if ($param != "login" && $param != "registro" && $param != "buscar" && $param != "ver"//&& $param != "algo" && $param != "cerrar" && $param != "confirmarcuenta"
+            ) {
+                $action= preg_replace('/'.$param.'/',':id',$action);//quitamos la primera parte que se repite siempre 
+            }
         }
 
           $fn = self::$routes[$method][$action] ?? null;
@@ -45,17 +49,13 @@ class Router {
             $callback = self::$routes[$method][$action];
 
             echo call_user_func($callback, $param);
-        }else {
+        }
+        else {
            //header('Location: /404');
             //header("HTTP/1.1 404 Not Found");
             echo ResponseHttp::statusMessage(404,'Pagina no encontrada');
-          
         }
     }
 
 
-
-
-
 }
-

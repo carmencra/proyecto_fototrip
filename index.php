@@ -146,7 +146,12 @@ session_start();
         (new ViajeController())->listar();
     });
 
+
+    
     Router::add('GET', '/viaje/buscar', function(){
+        (new ViajeController())->buscar();
+    });
+    Router::add('POST', '/viaje/buscar', function(){
         (new ViajeController())->buscar();
     });
 
