@@ -87,7 +87,7 @@ session_start();
         </div> -->
 
         <div class="menu_usuario">
-            <button onclick="despliega_usuario()" class="boton_usuario">Registro</button>
+            <button onclick="despliega_usuario()" class="boton_usuario">Registro/iniciar sesi&oacute;n</button>
             <div id="lista_usuario" class="contenido_lista">
                 <a href="#">Link 1</a>
                 <a href="#">Link 2</a>
