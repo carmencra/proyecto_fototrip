@@ -63,18 +63,18 @@ header #logo {
     background-color: #2CCBCB;
 } */
 
-#usuario {
+/* .boton_usuario {
     margin-right: 1%;  
     border-radius: 100%; 
     background-color: white;
     padding: 0.5%;
 }
 
-#usuario img{
+#imagen_usuario {
     width: 45px;
 }
 
-#usuario:hover {
+.boton_usuario:hover {
     background-color: #2CCBCB;
-} 
+}  */
 

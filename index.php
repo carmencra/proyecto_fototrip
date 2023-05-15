@@ -46,6 +46,10 @@ session_start();
 
     <!-- flecha para subir al inicio -->
     <script src="fuente/scripts/flecha_subir.js"></script>
+
+    <!-- menú de usuario despegable -->
+    <script src="fuente/scripts/desplegar_menu_usuario.js"></script>
+
 </head>
 
 <body>
@@ -69,9 +73,36 @@ session_start();
 
         <!-- <img id="usuario" src="fuente/media/images/persona.png" href="" /> -->
 
-        <a href="" id="usuario">
+        <!-- <a href="" id="usuario">
             <img src="fuente/media/images/persona.png" href=""  alt="icono usuario"/>
-        </a>
+        </a> -->
+
+        <!-- <button onclick="despliega_usuario()" class="boton_usuario">
+            <img src="fuente/media/images/persona.png" href=""  alt="icono usuario" width="45px"/>
+        </button>
+        <div id="menu_usuario" class="contenido_usuario">
+            <a href="">1</a>
+            <a href="">2</a>
+            <a href="">3</a>
+        </div> -->
+
+        <div class="menu_usuario">
+            <button onclick="despliega_usuario()" class="boton_usuario">Registro</button>
+            <div id="lista_usuario" class="contenido_lista">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+            </div>
+        </div>
+        <!-- <div class="dropdown">
+            <button onclick="myFunction()" class="drop-button">Dropdown</button>
+            <div id="myDropdown" class="dropdown-content">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+            </div>
+        </div> -->
+        
     </header>
 
 
