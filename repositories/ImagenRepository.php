@@ -46,22 +46,34 @@ class ImagenRepository {
         $limpios= $this->limpia_filtros($filtros);
         $consulta= $this->crea_consulta($limpios);
         
-        var_dump($consulta);die();
+        // var_dump($this->consulta_pais_viaje());die();
+
         $cons= $this->db->prepara($consulta);
-        $cons->execute();
-
-        $imagenes= $cons->fetchAll();
-
-        //pasamos todas las imágenes obtenidos a objetos Imagen
-        $objetos_imagen=[];
-        foreach($imagenes as $datos_imagen) {
-            $obj_imagen= Imagen::fromArray($datos_imagen);
-            array_push($objetos_imagen, $obj_imagen);
-        }
-
-        try{
+        
+        try {
             if ($cons->execute()) {
+                $imagenes= $cons->fetchAll();
+
+                //pasamos todas las imágenes obtenidos a objetos Imagen
+                $objetos_imagen=[];
+                foreach($imagenes as $datos_imagen) {
+                    // cogemos el id del viaje y comprobamos que el país sea el del filtro
+                    $imagen= $datos_imagen['imagen'];
+                    $id_viaje= $datos_imagen['id_viaje'];
+                    
+        
+                    $filtro_pais_correcto = $this->comprobar_pais_filtro($imagen, $id_viaje, $filtros['pais']);
+        
+                    if ($filtro_pais_correcto) {
+                        $obj_imagen= Imagen::fromArray($datos_imagen);
+                        array_push($objetos_imagen, $obj_imagen);
+                    }
+                    
+                }
                 return $objetos_imagen;
+            }
+            else {
+                return false;
             }
         }
         catch(PDOException $err){
@@ -75,11 +87,7 @@ class ImagenRepository {
         $filtros_limpios= [];
 
         foreach ($filtros as $filtro => $valor) {
-            // si el país está vacío, no lo añade
-            if ($filtro == "pais" && !empty($valor)) {
-                $filtros_limpios[$filtro]= $valor;
-            }
-
+            // el país no lo controlo porque lo hago en otra función aparte, ya que es una consulta externa al viaje de la imagen
             // si el tipo o la fecha son indiferentes, no los añade
             if ($filtro == "tipo" || $filtro == "fecha") {
                 if ($valor != "indiferente") {
@@ -104,15 +112,9 @@ class ImagenRepository {
  
         foreach ($filtros_limpios as $filtro => $valor){
             if($filtro !== array_key_first($filtros_limpios)) { //si no es la primera posición añade el and a la consulta
-                if ($filtro !== "fecha")
-                // además, la fecha será distinta porque es una ordenación, no una condición añadida
-                $cons .= " AND ";
             }    
 
             switch ($filtro) {
-                case "pais":
-                    $cons .= "pais LIKE '%$valor%'";
-                    break;
                 case "tipo":
                     $cons .= "tipo = '$valor'";
                     break;
@@ -127,6 +129,31 @@ class ImagenRepository {
             }
         }
         return $cons;
+    }
+
+    public function comprobar_pais_filtro($imagen, $id_viaje, $pais) {
+        $consulta= "SELECT *
+        FROM imagenes
+        JOIN viajes ON imagenes.id_viaje = viajes.id
+        WHERE imagenes.id_viaje = $id_viaje 
+        AND imagenes.imagen = '$imagen'
+        AND viajes.pais LIKE '%$pais%'"; 
+
+        $cons= $this->db->prepara($consulta);
+        
+        try {
+            $cons->execute();
+            if ($cons && $cons->rowCount() == 1) {
+                $result= true;
+            }
+            else {
+                $result= false;
+            }
+        }
+        catch(PDOEXception $err) {
+            $result= false;
+        }
+        return $result;
     }
 
 }

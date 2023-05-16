@@ -22,7 +22,7 @@ class ImagenController{
             // si la imagen está aceptada, la añade a la lista para ser mostrada;
             if ($objeto->getAceptada() == "0") { //0 = true; 1= false 
                 $pais_viaje= $this->obtener_pais_viaje($objeto->getId_viaje());
-                $objeto->setpais_viaje($pais_viaje);
+                $objeto->setPais_viaje($pais_viaje);
                 array_push($objetos_imagenes, $objeto);
             }
         }
@@ -42,6 +42,18 @@ class ImagenController{
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $filtros= $_POST['data'];
             $imagenes_obtenidas= $this->repository->filtrar_imagenes($filtros);
+
+            // recorremos las imágenes obtenidas, y si están aceptadas, las mostrará
+            $imagenes_aceptadas= [];
+            foreach ($imagenes_obtenidas as $imagen) {
+                if ($imagen->getAceptada() == "0") {
+                    $pais_viaje= $this->obtener_pais_viaje($imagen->getId_viaje());
+                    // añadimos el pais de cada imagen
+                    $imagen->setPais_viaje($pais_viaje);
+                    array_push($imagenes_aceptadas, $imagen);
+                }
+            }
+            $this->pages->render('imagen/listar', ['imagenes' => $imagenes_aceptadas]);
         } 
 
     }
