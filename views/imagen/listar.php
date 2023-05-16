@@ -44,9 +44,9 @@
 
             <p class="imagen_imagen"> <?= $imagen->getImagen(); ?> </p>
 
-            <p> <?= $imagen->getDatos_viaje()["pais"]; ?> </p>
+            <p> <?= $imagen->getPais_viaje(); ?> </p>
             
-            <p> <?= $imagen->getDatos_viaje()["fecha_inicio"]; ?> -  <?= $imagen->getDatos_viaje()["fecha_fin"]; ?></p>
+            <p> <?= $imagen->getFecha(); ?> </p>
             
             <p> <?= $imagen->getTipo(); ?> </p>
             

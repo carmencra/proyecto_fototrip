@@ -165,8 +165,17 @@ session_start();
         (new ComentarioController())->listar();
     });
 
+
+
     Router::add('GET', '/galeria', function(){
         (new ImagenController())->listar();
+    });
+
+    Router::add('GET', '/imagen/buscar', function(){
+        (new ImagenController())->buscar();
+    });
+    Router::add('POST', '/imagen/buscar', function(){
+        (new ImagenController())->buscar();
     });
 
     // para acceder al formulario

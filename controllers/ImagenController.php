@@ -21,8 +21,8 @@ class ImagenController{
             $objeto= $this->pasar_objeto($imagen);
             // si la imagen está aceptada, la añade a la lista para ser mostrada;
             if ($objeto->getAceptada() == "0") { //0 = true; 1= false 
-                $datos_viaje= $this->obtener_datos_viaje($objeto->getId_viaje());
-                $objeto->setDatos_viaje($datos_viaje);
+                $pais_viaje= $this->obtener_pais_viaje($objeto->getId_viaje());
+                $objeto->setpais_viaje($pais_viaje);
                 array_push($objetos_imagenes, $objeto);
             }
         }
@@ -34,8 +34,16 @@ class ImagenController{
         return $this->repository->pasar_objeto($array);
     }
 
-    public function obtener_datos_viaje($id_viaje) {
-        return $this->repository->obtener_datos_viaje($id_viaje);
+    public function obtener_pais_viaje($id_viaje) {
+        return $this->repository->obtener_pais_viaje($id_viaje);
+    }
+
+    public function buscar() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $filtros= $_POST['data'];
+            $imagenes_obtenidas= $this->repository->filtrar_imagenes($filtros);
+        } 
+
     }
     
 }

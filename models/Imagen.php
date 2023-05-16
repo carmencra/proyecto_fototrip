@@ -7,15 +7,17 @@
         private string $usuario;
         private string $tipo;
         private string $aceptada;
+        private string $fecha;
 
-        private array $datos_viaje;
+        private string $pais_viaje;
 
-        public function __construct(string $id_viaje, string $imagen, string $usuario, string $tipo, string $aceptada) {
+        public function __construct(string $id_viaje, string $imagen, string $usuario, string $tipo, string $aceptada, string $fecha) {
             $this->id_viaje= $id_viaje;
             $this->imagen= $imagen;
             $this->usuario= $usuario;
             $this->tipo= $tipo;
             $this->aceptada= $aceptada;
+            $this->fecha= $fecha;
         }
         
         
@@ -121,25 +123,44 @@
         }
 
         /**
-         * Get the value of datos_viaje
+         * Get the value of pais_viaje
          */ 
-        public function getDatos_viaje()
+        public function getPais_viaje()
         {
-                return $this->datos_viaje;
+                return $this->pais_viaje;
         }
 
         /**
-         * Set the value of datos_viaje
+         * Set the value of pais_viaje
          *
          * @return  self
          */ 
-        public function setDatos_viaje($datos_viaje)
+        public function setPais_viaje($pais_viaje)
         {
-                $this->datos_viaje = $datos_viaje;
+                $this->pais_viaje = $pais_viaje;
 
                 return $this;
         }
 
+        /**
+         * Get the value of fecha
+         */ 
+        public function getFecha()
+        {
+                return $this->fecha;
+        }
+
+        /**
+         * Set the value of fecha
+         *
+         * @return  self
+         */ 
+        public function setFecha($fecha)
+        {
+                $this->fecha = $fecha;
+
+                return $this;
+        }
 
         public static function fromArray(array $data): Imagen{
             return new Imagen(
@@ -147,10 +168,12 @@
                 $data['imagen'] ?? '',
                 $data['usuario'] ?? '',
                 $data['tipo'] ?? '',
-                $data['aceptada'] ?? ''
+                $data['aceptada'] ?? '',
+                $data['fecha'] ?? ''
             );
         }
        
+
     }
 
 ?>
