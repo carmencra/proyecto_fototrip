@@ -23,6 +23,7 @@ class ViajeRepository {
         return $objeto_viaje;
     }
 
+    // obtiene la duración de cada viaje, cogiendo la diferencia entre la fecha de inicio y de fin (y sumándole uno para incluir el mismo día inicial)
     public function obtener_duracion($viaje): bool | int {
         $cons= $this->db->prepara("SELECT TIMESTAMPDIFF (DAY, fecha_inicio, fecha_fin) as diferencia FROM viajes WHERE id= :id");
 
@@ -43,63 +44,80 @@ class ViajeRepository {
         return $result;
     }
 
+    // devuelve los viajes encajan con los filtros de búsqueda introducidos
+    public function filtrar_viajes($filtros): bool | array {
+        $limpios= $this->limpia_filtros($filtros);
+        $consulta= $this->crea_consulta($limpios);
 
-    public function filtrar_viajes($filtros)//: bool | object 
-    {
-        $pais= $filtros['pais'];
-        $cons= $this->db->prepara("SELECT * FROM viajes WHERE pais LIKE '%$pais%' AND precio >= :precio_min AND precio <= :precio_max AND nivel_fisico = :exigencia AND nivel_fotografia = :nivel");
-
-        // $cons->bindParam(':pais', $filtros['pais'], PDO::PARAM_STR);
-        $cons->bindParam(':precio_min', $filtros['precio_min'], PDO::PARAM_STR);
-        $cons->bindParam(':precio_max', $filtros['precio_max'], PDO::PARAM_STR);
-        $cons->bindParam(':exigencia', $filtros['exigencia'], PDO::PARAM_STR);
-        $cons->bindParam(':nivel', $filtros['nivel'], PDO::PARAM_STR);
-
+        $cons= $this->db->prepara($consulta);
         $cons->execute();
 
         $viajes= $cons->fetchAll();
-        var_dump($viajes);die();
 
-        // try {
-        //     if ($cons && $cons->rowCount() == 1) {
-        //         $result= $cons->fetch(PDO::FETCH_OBJ);
-        //         var_dump($result);die();
-        //         return $result;
-        //     }
-        //     // $cons->execute();
-        //     // return $this->db->extraer_todos();
-        // }
-        // catch(PDOEXception $err) {
-        //     return false;
-        // }
-    }
-
-    // esto no lo puedo hacer porque si no hay país no puede ser where and; y bueno así en bucle, si no hay algo y pongo en el siguiente and, pues como que no
-    // así que npi de cómo hacer 
-    // la puta consulta esta de los cojones 
-    public function crear_consulta($filtros) {
-        $cons= "SELECT * FROM viajes WHERE";
-        if (!empty($filtros['pais'])) {
-            $cons .= " pais LIKE '%$pais%";
+        //pasamos todos los viajes obtenidos a objetos Viaje
+        $objetos_viaje=[];
+        foreach($viajes as $datos_viaje) {
+            $obj_viaje= Viaje::fromArray($datos_viaje);
+            array_push($objetos_viaje, $obj_viaje);
         }
 
-        if (!empty($filtros['precio_min'])) {
-            $cons .= " AND precio >= :precio_min";
+        try{
+            if ($cons->execute()) {
+                return $objetos_viaje;
+            }
         }
-
-        if (!empty($filtros['precio_max'])) {
-            $cons .= " AND precio <= :precio_max";
-        }
-
-        if (!empty($filtros['exigencia'])) {
-            $cons .= " AND nivel_fisico = :exigencia";
-        }
-
-        if (!empty($filtros['nivel'])) {
-            $cons .= " AND nivel_fotografia = :nivel";
+        catch(PDOException $err){
+            return false;
         }
     }
 
+    // elimina de los filtros todos aquellos que no estén rellenos
+    public function limpia_filtros($filtros): array {
+        $filtros_limpios= [];
+        foreach ($filtros as $filtro => $valor) {
+            if (!empty($valor)) {
+                $filtros_limpios[$filtro]= $valor;
+            }
+        }
+        return $filtros_limpios;
+    }
+
+    // crea la consulta dependiendo de los filtros que haya rellenos
+    public function crea_consulta($filtros_limpios): string {
+        // si no hay ningún filtro, devuelve todos los viajes
+        if (empty($filtros_limpios)) {
+            $cons= "SELECT * FROM viajes";
+        }
+        // si hay filtros, añade las condiciones de estos
+        else {
+            $cons= "SELECT * FROM viajes WHERE ";
+        }
+
+        foreach ($filtros_limpios as $filtro => $valor){
+            if($filtro !== array_key_first($filtros_limpios)) { //si no es la primera posición añade el and a la consulta
+                $cons .= " AND ";
+            }    
+
+            switch ($filtro) {
+                case "pais":
+                    $cons .= "pais LIKE '%$valor%'";
+                    break;
+                case "precio_min":
+                    $cons .= "precio >= '$valor'";
+                    break;
+                case "precio_max":
+                    $cons .= "precio <= '$valor'";
+                    break;
+                case "exigencia":
+                    $cons .= "nivel_fisico = '$valor'";
+                    break;
+                case "nivel":
+                    $cons .= "nivel_fotografia = '$valor'";
+                    break;
+            }
+        }
+        return $cons;
+    }
         
 
 }
