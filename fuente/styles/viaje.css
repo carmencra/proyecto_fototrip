@@ -1,5 +1,5 @@
-.buscador_viajes {
-    width: 85%;
+.buscador_viajes form {
+    width: 75%;
     margin: auto;
     border: 1px solid black;
     border-radius: 400px;
@@ -7,7 +7,7 @@
 
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
 

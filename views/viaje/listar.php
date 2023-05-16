@@ -1,20 +1,30 @@
 
 <section class="buscador_viajes">
     <form action="<?=$_ENV['BASE_URL']?>viaje/buscar" method="POST" enctype="multipart/form-data">
+    <section>
         <label for="pais">Pa&iacute;s </label>
         <input type="text" name="data[pais]" id="pais"/>
+    </section>
 
+    <section>
         <label for="precio_min">Precio m&iacute;n: </label>
         <input type="text" name="data[precio_min]" id="min"/>
-        
+    </section>
+
+    <section>
         <label for="precio_max">Precio m&aacute;x: </label>
         <input type="text" name="data[precio_max]" id="max"/>
-        
+    </section>
+
+    <section>
         <label for="exigencia">Exigencia f&iacute;sica: </label>
         <input type="text" name="data[exigencia]" id="fisico"/>
-        
+    </section>
+
+    <section>
         <label for="nivel">Nivel fotograf&iacute;a </label>
         <input type="text" name="data[nivel]" id="foto"/>
+    </section>
 
         <input type="submit" value="Buscar" id="boton">
     </form>
