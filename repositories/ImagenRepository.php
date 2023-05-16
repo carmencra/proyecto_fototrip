@@ -45,8 +45,6 @@ class ImagenRepository {
     public function filtrar_imagenes($filtros): bool | array {
         $limpios= $this->limpia_filtros($filtros);
         $consulta= $this->crea_consulta($limpios);
-        
-        // var_dump($this->consulta_pais_viaje());die();
 
         $cons= $this->db->prepara($consulta);
         
@@ -131,6 +129,7 @@ class ImagenRepository {
         return $cons;
     }
 
+    // comprueba que existe una imagen con el nombre e id_viaje, que se corresponde con el país filtrado
     public function comprobar_pais_filtro($imagen, $id_viaje, $pais) {
         $consulta= "SELECT *
         FROM imagenes
