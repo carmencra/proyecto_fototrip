@@ -123,6 +123,10 @@ session_start();
         (new UsuarioController())->login();
     });
 
+    Router::add('GET', '/usuario/cerrar', function(){
+        (new UsuarioController())->cerrar();
+    });
+
 
     Router::dispatch();
 ?>

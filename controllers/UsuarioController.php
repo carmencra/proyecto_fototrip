@@ -247,11 +247,19 @@ class UsuarioController{
         }
     }
 
-    public function valida_email_clave_vacios($datos) {
+    // valida que ni el email ni la clave estén vacíos
+    public function valida_email_clave_vacios($datos): bool {
         if (!empty($datos['email']) && !empty($datos['clave'])) {
             return true;
         }
         else {return false;}
+    }
+
+
+    //cierra la sesión del usuario logueado
+    public function cerrar() {
+        header("Location: ". $_ENV['BASE_URL']);
+        session_destroy();
     }
  
 
