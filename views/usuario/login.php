@@ -1,19 +1,6 @@
 
 <h2>Login</h2>
 
-<!-- 
-    aquí súper importante
-    en el action
-    cambiar -env
-    eso es con:
-    < ?=$_ENV['BASE_URL']?>usuario/register
-    (huntando < y ?)
-
-    (esto es porque así se va a la ruta tal cual,
-    con el .env, llama a la función del controller)
- -->
-
-
 <form action="<?=$_ENV['BASE_URL']?>usuario/login" method="POST">
 
     <label for="email">Email: </label>

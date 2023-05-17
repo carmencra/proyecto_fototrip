@@ -1,38 +1,29 @@
 
 <h2>Registro de usuario</h2>
 
-<!-- 
-    aquí súper importante
-    en el action
-    cambiar -env
-    eso es con:
-    < ?=$_ENV['BASE_URL']?>usuario/register
-    (huntando < y ?)
-
-    (esto es porque así se va a la ruta tal cual,
-    con el .env, llama a la función del controller)
- -->
-
-
 <form action="<?=$_ENV['BASE_URL']?>usuario/registro" method="POST">
 
     <label for="email">Email: </label>
     <input type="email" name="data[email]" value="<?php if (isset($_POST['data']['email']))echo $_POST['data']['email'];?>" style="width:300px">
+    <br><span style="color:red"> <?php if(isset($_SESSION['err_ema'])) echo  $_SESSION['err_ema']?> </span>
 
     <br><br>
 
     <label for="clave">Contraseña: </label>
-    <input type="password" name="data[clave]">
+    <input type="password" name="data[clave]" value="<?php if (isset($_POST['data']['clave']))echo $_POST['data']['clave'];?>">
+    <br><span style="color:red"> <?php if(isset($_SESSION['err_cla'])) echo  $_SESSION['err_cla']?> </span>
 
     <br><br>
 
     <label for="nombre">Nombre: </label>
     <input type="text" name="data[nombre]" value="<?php if (isset($_POST['data']['nombre']))echo $_POST['data']['nombre'];?>">
+    <br><span style="color:red"> <?php if(isset($_SESSION['err_nom'])) echo  $_SESSION['err_nom']?> </span>
 
     <br><br>
 
     <label for="apellidos">Apellidos: </label>
     <input type="text" name="data[apellidos]" value="<?php if (isset($_POST['data']['apellidos']))echo $_POST['data']['apellidos'];?>">
+    <br><span style="color:red"> <?php if(isset($_SESSION['err_ape'])) echo  $_SESSION['err_ape']?> </span>
 
     <br><br>
 
@@ -44,7 +35,7 @@
 <?php
     use Utils\Utils;
 
-    if (isset($_SESSION['registro']) && $_SESSION['registro'] == 'failed'): 
+    if (isset($_SESSION['err_reg'])): 
 ?>
         <h3 style='color:red'>REGISTRO FALLIDO</h3>
 
@@ -52,11 +43,12 @@
     endif;
     
     
-    Utils::deleteSession('registro');
+    // Utils::deleteSession('err_reg');
+    // Utils::deleteSession('err_nom');
+    // Utils::deleteSession('err_cla');
+    // Utils::deleteSession('err_ema');
+    // Utils::deleteSession('err_ape');
+    // Utils::deleteSession('err_reg');
 
-    if (isset($_SESSION['err_reg'])) {
-        echo "<span style='color:red'>".$_SESSION['err_reg']."</span>";
-        
-    Utils::deleteSession('err_reg');
-    }
+    // creo que debería borrar todas las sesiones no?
 ?>
