@@ -16,6 +16,8 @@ class UsuarioController{
 
     public function registro() {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            //borramos las sesiones de errores para que no haya anteriores
+            $this->borra_sesiones_errores();
             $this->pages->render('usuario/registro');
         }
         
@@ -35,6 +37,8 @@ class UsuarioController{
                     if ($this->repository->es_admin($datos['email'])) {
                         $_SESSION['admin']= true;
                     }
+                    // borramos sesiones de errores y redireccionamos al inicio
+                    $this->borra_sesiones_errores();
                     $this->pages->render('usuario/registro');
                 }
                 else {
@@ -131,16 +135,27 @@ class UsuarioController{
 
     // valida longitud de contraseña
     public function valida_clave($clave): bool {
-        if(strlen($clave) < 8) {
-            $_SESSION['err_cla']= "*La clave debe tener más de 7 caracteres";
-            return false;
-        }
-        else if (strlen($clave) > 20) {
-            $_SESSION['err_cla']= "*La clave debe tener menos de 21 caracteres";
-            return false;
+        if(strlen($clave) >= 8 && strlen($clave) <= 20) {
+            // se crea un pattern que requiera al menos uno de cada: mayúscula, minúscula (incluyendo ñ), número, caracter especial
+            // para incuir al carácter especial, descartamos números (d), letras (p{L};  incluyen ñ y tildes) y espacios en blanco
+            $pattern= "/^(?=.*[A-ZÑ])(?=.*[a-zñ])(?=.*[0-9])(?=.*[^\p{L}\d\s]).*$/u";
+            if (preg_match($pattern, $clave)) {
+                return true;
+            }
+            else {
+                $_SESSION['err_cla']= "*La contraseña debe tener minúscula, mayúscula, número y carácter especial";
+                return false;
+            }
         }
         else {
-            return true;
+            if(strlen($clave) < 8) {
+                $_SESSION['err_cla']= "*La clave debe tener más de 7 caracteres";
+                return false;
+            }
+            if (strlen($clave) > 20) {
+                $_SESSION['err_cla']= "*La clave debe tener menos de 21 caracteres";
+                return false;
+            }
         }
     }
 
@@ -148,7 +163,7 @@ class UsuarioController{
         // si la longitud es correcta, comprueba los caracteres introducidos
         if (strlen($nombre) >= 3 && strlen($nombre) <= 15) {
             // $pattern= "([a-zñáóíúéA-ZÑÁÉÍÓÚ])+([\s][a-zñáóíúéA-ZÑÁÉÍÓÚ]+)*";
-            $pattern = '/^[a-zñáóíúéA-ZÑÁÉÍÓÚ]+(\s[a-zñáóíúéA-ZÑÁÉÍÓÚ]+)*$/';
+            $pattern = "/^[a-zñáóíúéA-ZÑÁÉÍÓÚ]+(\s[a-zñáóíúéA-ZÑÁÉÍÓÚ]+)*$/";
             if (!preg_match($pattern, $nombre)) {
                 $_SESSION['err_nom']= "*El nombre sólo puede contener letras y espacios";
                 return false;
@@ -173,7 +188,7 @@ class UsuarioController{
         // si la longitud es correcta, comprueba los caracteres introducidos
         if (strlen($apellidos) >= 3 && strlen($apellidos) <= 25) {
             // // $pattern= "([a-zñáóíúéA-ZÑÁÉÍÓÚ])+([\s][a-zñáóíúéA-ZÑÁÉÍÓÚ]+)*";
-            $pattern = '/^[a-zñáóíúéA-ZÑÁÉÍÓÚ]+(\s[a-zñáóíúéA-ZÑÁÉÍÓÚ]+)*$/';
+            $pattern = "/^[a-zñáóíúéA-ZÑÁÉÍÓÚ]+(\s[a-zñáóíúéA-ZÑÁÉÍÓÚ]+)*$/";
             if (!preg_match($pattern, $apellidos)) {
                 $_SESSION['err_ape']= "*Los apellidos sólo pueden contener letras y espacios";
                 return false;   
