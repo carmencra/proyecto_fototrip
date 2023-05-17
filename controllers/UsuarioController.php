@@ -39,7 +39,7 @@ class UsuarioController{
                     }
                     // borramos sesiones de errores y redireccionamos al inicio
                     $this->borra_sesiones_errores();
-                    $this->pages->render('usuario/registro');
+                    header("Location: ". $_ENV['BASE_URL']);
                 }
                 else {
                     $_SESSION['err_reg']= true;

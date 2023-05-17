@@ -24,7 +24,7 @@
                 </div>
 
         <?php else :?>
-            <button onclick="despliega_usuario()" class="boton_usuario"> Usuario: nombre* <!--< ?=$_SESSION['usuario']?>--> </button>
+            <button onclick="despliega_usuario()" class="boton_usuario"> <?=$_SESSION['usuario']?> </button>
                 <div id="lista_usuario" class="contenido_lista">
                     <a href="">Mis viajes</a>
                     <a href="">Cerrar sesi&oacute;n</a>
