@@ -54,85 +54,10 @@ session_start();
 
 <body>
 
-    <header>
-        <a href="<?=$_ENV['BASE_URL']?>">
-            <img id="logo" src="fuente/media/images/logo.png" alt="logo fototrip"/>
-        </a>
-        
-        <nav class="menu" id="menu">
-            <ul>
-                <li class="active"> <a href="<?=$_ENV['BASE_URL']?>">Inicio</a> </li>
-
-                <li> <a href="<?=$_ENV['BASE_URL']?>opiniones">Opiniones </a> </li>
-
-                <li> <a href="<?=$_ENV['BASE_URL']?>galeria">Galer&iacute;a </a> </li>
-
-            </ul>
-
-        </nav> 
-
-        <!-- <img id="usuario" src="fuente/media/images/persona.png" href="" /> -->
-
-        <!-- <a href="" id="usuario">
-            <img src="fuente/media/images/persona.png" href=""  alt="icono usuario"/>
-        </a> -->
-
-        <!-- <button onclick="despliega_usuario()" class="boton_usuario">
-            <img src="fuente/media/images/persona.png" href=""  alt="icono usuario" width="45px"/>
-        </button>
-        <div id="menu_usuario" class="contenido_usuario">
-            <a href="">1</a>
-            <a href="">2</a>
-            <a href="">3</a>
-        </div> -->
-
-        <div class="menu_usuario">
-            <?php if (!isset($_SESSION['usuario'])): ?>
-                <button onclick="despliega_usuario()" class="boton_usuario">Registro/iniciar sesi&oacute;n</button>
-                    <div id="lista_usuario" class="contenido_lista">
-                        <a href="<?=$_ENV['BASE_URL']?>usuario/registro">Registrarse </a>
-                        <a href="<?=$_ENV['BASE_URL']?>usuario/login">Iniciar sesi&oacute;n</a>
-                    </div>
-
-            <?php else :?>
-                <button onclick="despliega_usuario()" class="boton_usuario"> Usuario: nombre* <!--< ?=$_SESSION['usuario']?>--> </button>
-                    <div id="lista_usuario" class="contenido_lista">
-                        <a href="">Mis viajes</a>
-                        <a href="">Cerrar sesi&oacute;n</a>
-                    </div>
-            <?php endif;?>
-        </div>
-
-        <!-- <div class="dropdown">
-            <button onclick="myFunction()" class="drop-button">Dropdown</button>
-            <div id="myDropdown" class="dropdown-content">
-                <a href="#">Link 1</a>
-                <a href="#">Link 2</a>
-                <a href="#">Link 3</a>
-            </div>
-        </div> -->
-        
-    </header>
-
-
-    <section class="portada_video">
-        <video src="fuente/media/videos/crimea_cortado.mp4" autoplay muted loop alt="video portada"></video>
-
-        <section class="titulo">
-            <h1>FOTO TRIP</h1>
-            <h3>Viajes fotográficos</h3>
-
-            <a href="">Saber más</a>
-        </section>
-    </section>
     
 
 
-    <main>
-        <p>bla bla bla </p> <br>
-
-        
-        <br><br><br><br>
+    
 
        
 
