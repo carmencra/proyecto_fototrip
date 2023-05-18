@@ -54,14 +54,6 @@ session_start();
 
 <body>
 
-    
-
-
-    
-
-       
-
-
 <?php
     //RUTAS
 
@@ -73,57 +65,57 @@ session_start();
 
 
     
-    Router::add('GET', '/viaje/buscar', function(){
+    Router::add('GET', 'viaje/buscar', function(){
         (new ViajeController())->buscar();
     });
-    Router::add('POST', '/viaje/buscar', function(){
+    Router::add('POST', 'viaje/buscar', function(){
         (new ViajeController())->buscar();
     });
 
-    Router::add('GET', '/viaje/ver:id', function(int $viaje_id) {
+    Router::add('GET', 'viaje/ver:id', function(int $viaje_id) {
         (new ViajeController())->ver($viaje_id);
     });
 
     
 
-    Router::add('GET', '/opiniones', function(){
+    Router::add('GET', 'opiniones', function(){
         (new ComentarioController())->listar();
     });
 
 
 
-    Router::add('GET', '/galeria', function(){
+    Router::add('GET', 'galeria', function(){
         (new ImagenController())->listar();
     });
 
-    Router::add('GET', '/imagen/buscar', function(){
+    Router::add('GET', 'imagen/buscar', function(){
         (new ImagenController())->buscar();
     });
-    Router::add('POST', '/imagen/buscar', function(){
+    Router::add('POST', 'imagen/buscar', function(){
         (new ImagenController())->buscar();
     });
 
     // para acceder al formulario
-    Router::add('GET', '/usuario/registro', function(){
+    Router::add('GET', 'usuario/registro', function(){
         (new UsuarioController())->registro();
     });
 
     // para recoger los datos del formulario
-    Router::add('POST', '/usuario/registro', function(){
+    Router::add('POST', 'usuario/registro', function(){
         (new UsuarioController())->registro();
     });
 
 
     // para acceder al formulario
-    Router::add('GET', '/usuario/login', function(){
+    Router::add('GET', 'usuario/login', function(){
         (new UsuarioController())->login();
     });
     // para recoger los datos del formulario
-    Router::add('POST', '/usuario/login', function(){
+    Router::add('POST', 'usuario/login', function(){
         (new UsuarioController())->login();
     });
 
-    Router::add('GET', '/usuario/cerrar', function(){
+    Router::add('GET', 'usuario/cerrar', function(){
         (new UsuarioController())->cerrar();
     });
 

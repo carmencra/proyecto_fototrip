@@ -258,8 +258,9 @@ class UsuarioController{
 
     //cierra la sesión del usuario logueado
     public function cerrar() {
-        header("Location: ". $_ENV['BASE_URL']);
         session_destroy();
+        // Utils::deleteSession('usuario');
+        header("Location: ". $_ENV['BASE_URL']);
     }
  
 
