@@ -118,6 +118,11 @@ session_start();
     Router::add('GET', 'usuario/cerrar', function(){
         (new UsuarioController())->cerrar();
     });
+    
+    Router::add('GET', 'usuario/confimar_cuenta', function(){
+        (new UsuarioController())->confimar_cuenta();
+    });
+
 
 
     Router::dispatch();

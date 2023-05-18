@@ -14,9 +14,8 @@ require 'PHPMailer/SMTP.php';
 class Email {
     public $email;
 
-    public function __construct($email, $token) {
+    public function __construct($email) {
         $this->email= $email;
-        $this->token= $token;
     }
 
 
@@ -45,7 +44,7 @@ class Email {
         //cuerpo del correo: solicitud de confirmación de correo
         $contenido= "<b style='color:red, size:24px'>Verifica tu cuenta para empezar a registrarte en los viajes de fototrip></b>";
 
-        $contenido .= "<a href='http://localhost/fototrip/usuario/confirmarcuenta/".$this->token."'>Confirmar cuenta</a>";
+        $contenido .= "<a href='http://localhost/fototrip/usuario/confirmarcuenta/".$this->email."'>Confirmar cuenta</a>";
         
         $contenido .= "<p>Bienvenido a fototrip</p>";
 

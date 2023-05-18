@@ -46,7 +46,7 @@ class ImagenController{
             // recorremos las imágenes obtenidas, y si están aceptadas, las mostrará
             $imagenes_aceptadas= [];
             foreach ($imagenes_obtenidas as $imagen) {
-                if ($imagen->getAceptada() == "0") {
+                if ($imagen->getAceptada() == "1") {
                     $pais_viaje= $this->obtener_pais_viaje($imagen->getId_viaje());
                     // añadimos el pais de cada imagen
                     $imagen->setPais_viaje($pais_viaje);

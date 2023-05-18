@@ -49,6 +49,22 @@ class UsuarioRepository {
         return $result;
     }
 
+    public function confirma_cuenta($email) {
+        $upd= $this->db->prepara("UPDATE usuarios set CONFIRMADO = 1 WHERE email = :email");
+
+        $upd->bindParam(':email', $email, PDO::PARAM_BOOL);
+
+        try{
+            $upd->execute();
+            var_dump("a");die();
+            return true;
+        }
+        catch(PDOException $err){
+            return false;
+        }
+
+    }
+
     public function valida_clave($clave, $usuario): bool {
         $result= false;
 

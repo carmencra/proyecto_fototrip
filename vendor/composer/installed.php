@@ -3,7 +3,7 @@
         'name' => 'carme/fototrip',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => 'b1fca85dd5ed18e0d22ce35611d3870ebe198371',
+        'reference' => '474d6ec36234fba2de5af9b4dd80fbd221740db1',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'carme/fototrip' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'b1fca85dd5ed18e0d22ce35611d3870ebe198371',
+            'reference' => '474d6ec36234fba2de5af9b4dd80fbd221740db1',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
