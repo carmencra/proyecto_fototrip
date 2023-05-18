@@ -119,11 +119,9 @@ session_start();
         (new UsuarioController())->cerrar();
     });
     
-    Router::add('GET', 'usuario/confimar_cuenta', function(){
-        (new UsuarioController())->confimar_cuenta();
+    Router::add('GET', 'usuario/confirmarcuenta/:id', function($email){
+        (new UsuarioController())->confirmar_cuenta($email);
     });
-
-
 
     Router::dispatch();
 ?>

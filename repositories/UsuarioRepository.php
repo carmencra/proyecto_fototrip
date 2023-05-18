@@ -14,14 +14,17 @@ class UsuarioRepository {
 
     // guarda el nuevo usario registrado en la base de datos
     public function registro($datos): bool {
-        $ins= $this->db->prepara("INSERT INTO usuarios values(:email, :clave, :nombre, :apellidos, :rol)");
+        $ins= $this->db->prepara("INSERT INTO usuarios values(:email, :clave, :nombre, :apellidos, :rol, :confirmado)");
 
         $ins->bindParam(':email', $datos['email'], PDO::PARAM_STR);
         $ins->bindParam(':clave', $datos['clave'], PDO::PARAM_STR);
         $ins->bindParam(':nombre', $datos['nombre'], PDO::PARAM_STR);
         $ins->bindParam(':apellidos', $datos['apellidos'], PDO::PARAM_STR);
         $ins->bindParam(':rol', $rol, PDO::PARAM_STR);
+        $ins->bindParam(':confirmado', $confirmado, PDO::PARAM_STR);
+
         $rol= "usuario";
+        $confirmado= 0; //al crear el usuario, faltará confirmar la cuenta
 
         try{
             $ins->execute();

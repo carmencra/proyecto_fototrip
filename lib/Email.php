@@ -5,11 +5,6 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-require 'PHPMailer/Exception.php';
-require 'PHPMailer/OAuthTokenProvider.php';
-require 'PHPMailer/PHPMailer.php';
-require 'PHPMailer/SMTP.php';
-
 
 class Email {
     public $email;
@@ -42,17 +37,19 @@ class Email {
         $mail->Subject = 'Confirma tu cuenta de fototrip';
 
         //cuerpo del correo: solicitud de confirmación de correo
-        $contenido= "<b style='color:red, size:24px'>Verifica tu cuenta para empezar a registrarte en los viajes de fototrip></b>";
-
-        $contenido .= "<a href='http://localhost/fototrip/usuario/confirmarcuenta/".$this->email."'>Confirmar cuenta</a>";
         
-        $contenido .= "<p>Bienvenido a fototrip</p>";
+        $contenido= "<p style='color: #2CCBCB'><b>BIENVENIDO A FOTOTRIP</b></p>";
 
-        $contenido .= "<p>Si no reconoces esta acción, por favor, ignora este correo</p>";
+        $contenido .= "<b>Verifica tu cuenta para empezar a inscribirte en los viajes de fototrip: </b><br>";
+
+        $contenido .= "<br><p><a href='http://localhost/fototrip/usuario/confirmarcuenta/".$this->email."'>Confirmar cuenta</a></p>";
+        
+        $contenido .= "<br><br><p>Si no reconoces esta acción, por favor, ignora este correo.</p>";
 
         $mail->Body    = $contenido; 
 
         $mail->send();
+        return ;
     }
 
 }

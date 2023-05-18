@@ -37,6 +37,7 @@ class UsuarioController{
                     $correo= new Email($datos['email']);
                     $correo->enviar_confirmacion();
                     $this->pages->render('email/enviado', ['email' => $datos['email']]);
+                    // header("Location: ". $_ENV['BASE_URL']).'email/enviado';
                 }
                 else {
                     $_SESSION['err_reg']= true;
@@ -51,11 +52,13 @@ class UsuarioController{
     }
 
     // confirma la cuenta del usuario tras clicar en el enlace del correo enviado
-    public function confirmar_cuenta($email): bool {
+    public function confirmar_cuenta($email): none | bool {
+        var_dump("entra");die();
         $confirmado= $this->repository->confirma_cuenta($email);
 
         if ($confirmado) {
             $_SESSION['usuario']= $datos['email'];
+
             if ($this->repository->es_admin($datos['email'])) {
                 $_SESSION['admin']= true;
             }
@@ -64,7 +67,7 @@ class UsuarioController{
             $this->borra_sesiones_errores();
 
             header("Location: ". $_ENV['BASE_URL']);
-            return true;
+            // return true;
         }
         else {
             return false;
@@ -278,11 +281,10 @@ class UsuarioController{
     //cierra la sesión del usuario logueado
     public function cerrar() {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            var_dump("get cerrar");die();
+            session_destroy();
+            // Utils::deleteSession('usuario');
+            header("Location: ". $_ENV['BASE_URL']);
         }
-        session_destroy();
-        // Utils::deleteSession('usuario');
-        header("Location: ". $_ENV['BASE_URL']);
     }
  
 
