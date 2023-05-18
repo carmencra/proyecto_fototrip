@@ -3,6 +3,7 @@
 namespace Controllers;
 use Repositories\UsuarioRepository;
 use Lib\Pages;
+use Lib\Email;
 use Utils\Utils;
 
 class UsuarioController{
@@ -16,7 +17,6 @@ class UsuarioController{
 
     public function registro() {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            var_dump("get registro");die();
             //borramos las sesiones de errores para que no haya anteriores
             $this->borra_sesiones_errores();
             $this->pages->render('usuario/registro');
@@ -34,6 +34,8 @@ class UsuarioController{
                 $registro= $this->repository->registro($datos);
                 
                 if ($registro) {
+                    
+                    
                     $_SESSION['usuario']= $datos['email'];
                     if ($this->repository->es_admin($datos['email'])) {
                         $_SESSION['admin']= true;

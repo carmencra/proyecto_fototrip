@@ -5,42 +5,50 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
+require 'PHPMailer/Exception.php';
+require 'PHPMailer/OAuthTokenProvider.php';
+require 'PHPMailer/PHPMailer.php';
+require 'PHPMailer/SMTP.php';
+
 
 class Email {
     public $email;
-    public $token;
 
-    public function __construct($email, $token) {
+    public function __construct($email) {
         $this->email= $email;
-        $this->token= $token;
     }
 
 
     public function enviar_confirmacion() {
-        $mail = new PHPMailer();
+        $mail = new PHPMailer(true);
 
-        $mail->isSMTP();
-        $mail->Host = 'sandbox.smtp.mailtrap.io';
-        $mail->SMTPAuth = true;
-        $mail->Port = 2525;
-        $mail->Username = '7da852c8fd379e';
-        $mail->Password = '0e5ce7df4e1fb5';
+        //Server settings
+        $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+        $mail->isSMTP();                                            //Send using SMTP
+        $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+        $mail->Username   = 'carmenpruebas.13@gmail.com';                     //SMTP username
+        $mail->Password   = 'kebsqwwjrsftzkzb';                               //SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+        $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
         //Recipients
-        $mail->setFrom('Cursos_y_talleres@gmail.com', 'Usuarios y Ponentes');
-        $mail->addAddress($this->email);
-        $mail->addAddress('Cursos_y_talleres@gmail.com');
-    
+        $mail->setFrom('carmenpruebas.13@gmail.com', 'FOTOTRIP - Viajes Fotograficos');
+        // $mail->addAddress($email);     //Add a recipient
+        $mail->addAddress('carmenpruebas.13@gmail.com');
+        
         //Content
-        $mail->isHTML(true);                   //Set email format to HTML 
-        $mail->CharSet="UTF-8";              
-        $mail->Subject = 'Confirma tu cuenta';
+        $mail->isHTML(true);                                  //Set email format to HTML
+        $mail->Subject = 'Confirma tu cuenta de fototrip';
 
-        $contenido= "<p><strong>".$this->email."</strong>, has creado tu cuenta de cursos.</p>";
+        //cuerpo del correo: solicitud de confirmación de correo
+        $contenido= "<b style='color:red, size:24px'>Verifica tu cuenta para empezar a registrarte en los viajes de fototrip></b>";
 
-        $contenido .= "<p>Ahora confírmala clicando aquí: </p>";
+        $contenido .= "<a href='http://localhost/fototrip/usuario/confirmarcuenta/".$this->email."'>Confirmar cuenta</a>";
+        
+        $contenido .= "<p>Bienvenido a fototrip</p>";
 
-        $contenido .= "<a href='http://localhost/api_proyecto/public/usuario/confirmarcuenta/".$this->token."'>Confirmar cuenta</a>";
+        $contenido .= "<p>Si no reconoces esta acción, por favor, ignora este correo</p>";
 
         $mail->Body    = $contenido; 
 
