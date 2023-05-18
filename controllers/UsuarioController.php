@@ -16,6 +16,7 @@ class UsuarioController{
 
     public function registro() {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            var_dump("get registro");die();
             //borramos las sesiones de errores para que no haya anteriores
             $this->borra_sesiones_errores();
             $this->pages->render('usuario/registro');
@@ -258,6 +259,9 @@ class UsuarioController{
 
     //cierra la sesión del usuario logueado
     public function cerrar() {
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            var_dump("get cerrar");die();
+        }
         session_destroy();
         // Utils::deleteSession('usuario');
         header("Location: ". $_ENV['BASE_URL']);
