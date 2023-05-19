@@ -17,7 +17,7 @@
 
     <div class="menu_usuario">
         <?php if (!isset($_SESSION['usuario'])): ?>
-            <button onclick="despliega_usuario()" class="boton_usuario">Registro/iniciar sesi&oacute;n</button>
+            <button onclick="despliega_usuario()" class="boton_usuario">Registro/inicio sesi&oacute;n</button>
                 <div id="lista_usuario" class="contenido_lista">
                     <a href="<?=$_ENV['BASE_URL']?>usuario/registro">Registrarse </a>
                     <a href="<?=$_ENV['BASE_URL']?>usuario/login">Iniciar sesi&oacute;n</a>
@@ -49,7 +49,7 @@
     
 
 
-<main>
+<main id="main_index">
     <section class="buscador_viajes">
         <form action="<?=$_ENV['BASE_URL']?>viaje/buscar" method="POST" enctype="multipart/form-data">
         <section>
