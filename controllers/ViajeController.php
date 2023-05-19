@@ -43,7 +43,6 @@ class ViajeController {
             foreach ($viajes_obtenidos as $viaje) {
                 $duracion= $this->obtener_duracion($viaje);
                 $viaje->setDuracion($duracion);
-                array_push($viajes_obtenidos, $viaje);
             }
 
             $this->pages->render('viaje/listar', ['viajes' => $viajes_obtenidos]);
