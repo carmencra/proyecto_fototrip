@@ -1,19 +1,33 @@
 
-<h2>Login</h2>
+<link rel="stylesheet" href="../fuente/styles/fototrip.css">
 
-<form action="<?=$_ENV['BASE_URL']?>usuario/login" method="POST">
+<?php require_once('views/layout/header_base.php'); ?>
 
-    <label for="email">Email: </label>
-    <input type="email" name="data[email]" value="<?php if (isset($_POST['data']['email']))echo $_POST['data']['email'];?>" style="width:300px">
-    <br><span style="color:red"> <?php if(isset($_SESSION['err_ema'])) echo  $_SESSION['err_ema']?> </span>
+<main>
+    <section class="contenido_main">
 
-    <br><br>
+         <fieldset>
+            <legend> <h2>Login de usuario</h2> </legend>
 
-    <label for="clave">Contraseña: </label>
-    <input type="password" name="data[clave]" value="<?php if (isset($_POST['data']['clave']))echo $_POST['data']['clave'];?>">
-    <br><span style="color:red"> <?php if(isset($_SESSION['err_cla'])) echo  $_SESSION['err_cla']?> </span>
+                <form action="<?=$_ENV['BASE_URL']?>usuario/login" method="POST">
 
-    <br><br>
+                    <label for="email">Email: </label>
+                    <input type="email" name="data[email]" value="<?php if (isset($_POST['data']['email']))echo $_POST['data']['email'];?>" style="width:300px">
+                    <br><span style="color:red"> <?php if(isset($_SESSION['err_ema'])) echo  $_SESSION['err_ema']?> </span>
 
-    <input type="submit" value="Registrarse">
-</form>
+                    <br><br>
+
+                    <label for="clave">Contraseña: </label>
+                    <input type="password" name="data[clave]" value="<?php if (isset($_POST['data']['clave']))echo $_POST['data']['clave'];?>">
+                    <br><span style="color:red"> <?php if(isset($_SESSION['err_cla'])) echo  $_SESSION['err_cla']?> </span>
+
+                    <br><br>
+
+                    <input type="submit" value="Registrarse">
+                </form>
+        </fieldset>
+
+        
+
+    </section>
+    
