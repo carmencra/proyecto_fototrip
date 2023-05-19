@@ -1,6 +1,4 @@
 
-<link rel="stylesheet" href="../fuente/styles/fototrip.css">
-
 <?php require_once('views/layout/header_base.php'); ?>
 
 <main>
