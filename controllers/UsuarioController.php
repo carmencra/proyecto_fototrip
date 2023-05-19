@@ -44,6 +44,7 @@ class UsuarioController{
                     header("Location: ". $_ENV['BASE_URL'].'email/enviado');
                 }
                 else {
+                    $this->pages->render('usuario/registro');
                     $_SESSION['err_reg']= true;
                 }
             }
@@ -243,8 +244,14 @@ class UsuarioController{
 
 
     public function login() {
-        $this->pages->render('usuario/login');
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            //borramos las sesiones de errores para que no haya anteriores
+            $this->borra_sesiones_errores();
+            $this->pages->render('usuario/login');
+        }
         if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+            //cada vez que se le da a loguearse, borramos las antiguas sesiones de errores
+            $this->borra_sesiones_errores();
             $datos= $_POST['data'];
 
             if ($this->valida_email_clave_vacios($datos)) {
@@ -253,28 +260,27 @@ class UsuarioController{
                 if ($usuario !== false) {
                     $clave= $datos['clave'];
                     
-                    if (this->repository->valida_clave($clave, $usuario)) {
+                    if ($this->repository->valida_clave($clave, $usuario)) {
+                        $_SESSION['usuario']= $datos['email'];
 
                         if ($this->repository->es_admin($datos['email'])) {
-                            // sesión de admin
+                            $_SESSION['admin']= true;
                         }
-                        // completar la sesión
-                        // llevar a inicio
-    
+                        header("Location: ". $_ENV['BASE_URL']);
                     }
                     else {
-                        // poner la sesión de contraseña incorrecta
+                        $_SESSION['err_cla']= "*Contraseña incorrecta";
+                        $this->pages->render('usuario/login');
                     }
                 }
                 else {
-                    // poner la sesión de que ese correo no existe
+                    $_SESSION['err_ema']= "*Ese correo no está registrado";
+                    $this->pages->render('usuario/login');
                 }
             }
-            else {
-                // poner sesión de campos vacío
+            else {                
+                $this->pages->render('usuario/login');
             }
-
-            // $this->repository->login();
         }
     }
 
@@ -283,7 +289,15 @@ class UsuarioController{
         if (!empty($datos['email']) && !empty($datos['clave'])) {
             return true;
         }
-        else {return false;}
+        else {
+            if (empty($datos['email'])) {
+                $_SESSION['err_ema']= "*El email debe estar relleno";
+            }
+            if (empty($datos['clave'])) {
+                $_SESSION['err_cla']= "*La clave debe estar rellena";
+            }
+            return false;
+        }
     }
 
 

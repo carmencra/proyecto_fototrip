@@ -49,7 +49,6 @@ class UsuarioRepository {
                 $result = $id;
             }
             else {
-                var_dump("a");die();
                 $result= false;
             }
         }
@@ -92,13 +91,18 @@ class UsuarioRepository {
     }
 
     public function valida_clave($clave, $usuario): bool {
-        $result= false;
-
         if ($usuario !== false) {
             $verify= password_verify($clave, $usuario->clave);
-            $result= true;
+            if ($verify) {
+                return true;
+            }
+            else {
+                return false;
+            }
         }
-        return $result;
+        else {
+            return false;
+        }
     }
 
     public function es_admin($email) {

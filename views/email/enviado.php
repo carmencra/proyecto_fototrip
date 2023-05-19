@@ -1,4 +1,4 @@
 
 <p>Se ha enviado un correo de confirmaci&oacute;n a <b><?= $_SESSION['correo_a_confirmar'] ?></b></p>
 
-<p>Una vez se confirme la cuenta, podr&aacute; cerrar esta pestaña y se le abrir&aacute; una nueva redirigida al inicio con la sesi&oacute;n iniciada. </p>
+<p>Puede cerrar esta pestaña. Una vez confirme su cuenta, se le abrir&aacute; una nueva con la sesi&oacute;n ya iniciada.</p>

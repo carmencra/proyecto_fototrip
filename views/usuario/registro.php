@@ -41,14 +41,4 @@
 
 <?php 
     endif;
-    
-    
-    // Utils::deleteSession('err_reg');
-    // Utils::deleteSession('err_nom');
-    // Utils::deleteSession('err_cla');
-    // Utils::deleteSession('err_ema');
-    // Utils::deleteSession('err_ape');
-    // Utils::deleteSession('err_reg');
-
-    // creo que debería borrar todas las sesiones no?
 ?>
