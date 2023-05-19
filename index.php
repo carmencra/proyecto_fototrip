@@ -119,9 +119,17 @@ session_start();
         (new UsuarioController())->cerrar();
     });
     
-    Router::add('GET', 'usuario/confirmarcuenta/:id', function($email){
-        (new UsuarioController())->confirmar_cuenta($email);
-    });
+    if (isset($_SESSION['id_a_confirmar'])) {
+        $id_usuario= $_SESSION['id_a_confirmar'];
+
+        Router::add('GET', 'usuario/confirmarcuenta/:id', function($id_usuario){
+            (new UsuarioController())->confirmar_cuenta($id_usuario);
+        });
+
+        Router::add('GET', 'email/enviado', function(){
+            (new UsuarioController())->llevar_email_enviado();
+        });
+    }
 
     Router::dispatch();
 ?>

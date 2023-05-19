@@ -1,13 +1,13 @@
 <?php
 namespace Lib;
+// para almacenar las rutas que configuremos desde el archivo indexold.php
+// use Controllers\PaginasController;
 
 class Router {
 
     private static array $routes = [];
     //para ir añadiendo los métodos y las rutas en el tercer parámetro.
     public static function add(string $method, string $action, Callable $controller):void{
-        //die($action);
-
         $action = trim($action, '/');
        
         self::$routes[$method][$action] = $controller;

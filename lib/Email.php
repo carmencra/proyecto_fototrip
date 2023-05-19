@@ -14,7 +14,7 @@ class Email {
     }
 
 
-    public function enviar_confirmacion() {
+    public function enviar_confirmacion($id) {
         $mail = new PHPMailer(true);
 
         //Server settings
@@ -42,7 +42,7 @@ class Email {
 
         $contenido .= "<b>Verifica tu cuenta para empezar a inscribirte en los viajes de fototrip: </b><br>";
 
-        $contenido .= "<br><p><a href='http://localhost/fototrip/usuario/confirmarcuenta/".$this->email."'>Confirmar cuenta</a></p>";
+        $contenido .= "<br><p><a href='http://localhost/fototrip/usuario/confirmarcuenta/".$id."'>Confirmar cuenta</a></p>";
         
         $contenido .= "<br><br><p>Si no reconoces esta acción, por favor, ignora este correo.</p>";
 

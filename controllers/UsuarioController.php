@@ -35,9 +35,13 @@ class UsuarioController{
                 
                 if ($registro) {
                     $correo= new Email($datos['email']);
-                    $correo->enviar_confirmacion();
-                    $this->pages->render('email/enviado', ['email' => $datos['email']]);
-                    // header("Location: ". $_ENV['BASE_URL']).'email/enviado';
+                    $id_correo= $this->repository->obtener_id($datos['email']);
+                    $correo->enviar_confirmacion($id_correo);
+                    $_SESSION['id_a_confirmar']= $id_correo;
+                    $_SESSION['correo_a_confirmar']= $datos['email'];
+                    // $this->pages->render('email/enviado', ['email' => $datos['email']]);
+                    
+                    header("Location: ". $_ENV['BASE_URL'].'email/enviado');
                 }
                 else {
                     $_SESSION['err_reg']= true;
@@ -51,20 +55,25 @@ class UsuarioController{
 
     }
 
+    public function llevar_email_enviado() {
+        $this->pages->render('email/enviado');
+    }
+
     // confirma la cuenta del usuario tras clicar en el enlace del correo enviado
-    public function confirmar_cuenta($email): none | bool {
-        var_dump("entra");die();
-        $confirmado= $this->repository->confirma_cuenta($email);
+    public function confirmar_cuenta($id): none | bool {
+        $confirmado= $this->repository->confirma_cuenta($id);
 
         if ($confirmado) {
-            $_SESSION['usuario']= $datos['email'];
+            $_SESSION['usuario']= $_SESSION['correo_a_confirmar'];
 
-            if ($this->repository->es_admin($datos['email'])) {
+            if ($this->repository->es_admin($_SESSION['correo_a_confirmar'])) {
                 $_SESSION['admin']= true;
             }
 
             // borramos sesiones de errores y redireccionamos al inicio
             $this->borra_sesiones_errores();
+            Utils::deleteSession('correo_a_confirmar');
+            Utils::deleteSession('id_a_confirmar');
 
             header("Location: ". $_ENV['BASE_URL']);
             // return true;

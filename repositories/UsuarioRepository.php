@@ -14,7 +14,7 @@ class UsuarioRepository {
 
     // guarda el nuevo usario registrado en la base de datos
     public function registro($datos): bool {
-        $ins= $this->db->prepara("INSERT INTO usuarios values(:email, :clave, :nombre, :apellidos, :rol, :confirmado)");
+        $ins= $this->db->prepara("INSERT INTO usuarios values(:email, :clave, :nombre, :apellidos, :rol, :confirmado, :id)");
 
         $ins->bindParam(':email', $datos['email'], PDO::PARAM_STR);
         $ins->bindParam(':clave', $datos['clave'], PDO::PARAM_STR);
@@ -22,9 +22,11 @@ class UsuarioRepository {
         $ins->bindParam(':apellidos', $datos['apellidos'], PDO::PARAM_STR);
         $ins->bindParam(':rol', $rol, PDO::PARAM_STR);
         $ins->bindParam(':confirmado', $confirmado, PDO::PARAM_STR);
+        $ins->bindParam(':id', $id, PDO::PARAM_STR);
 
         $rol= "usuario";
         $confirmado= 0; //al crear el usuario, faltará confirmar la cuenta
+        $id= NULL; //la base de datos coge el siguiente porque es un campo de auto incremento
 
         try{
             $ins->execute();
@@ -33,6 +35,28 @@ class UsuarioRepository {
         catch(PDOException $err){
             return false;
         }
+    }
+
+    public function obtener_id($email): int | bool {
+        $cons= $this->db->prepara("SELECT id FROM usuarios WHERE email=:email");
+
+        $cons->bindParam(':email', $email);
+
+        try {
+            $cons->execute();
+            if ($cons && $cons->rowCount() == 1) {
+                $id= $cons->fetch()['id'];
+                $result = $id;
+            }
+            else {
+                var_dump("a");die();
+                $result= false;
+            }
+        }
+        catch(PDOEXception $err) {
+            $result= false;
+        }
+        return $result;
     }
 
     public function busca_mail($email): bool | object {
@@ -52,14 +76,13 @@ class UsuarioRepository {
         return $result;
     }
 
-    public function confirma_cuenta($email) {
-        $upd= $this->db->prepara("UPDATE usuarios set CONFIRMADO = 1 WHERE email = :email");
+    public function confirma_cuenta($id) {
+        $upd= $this->db->prepara("UPDATE usuarios set CONFIRMADO = 1 WHERE id = :id");
 
-        $upd->bindParam(':email', $email, PDO::PARAM_BOOL);
+        $upd->bindParam(':id', $id, PDO::PARAM_BOOL);
 
         try{
             $upd->execute();
-            var_dump("a");die();
             return true;
         }
         catch(PDOException $err){

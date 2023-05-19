@@ -37,6 +37,9 @@ class ViajeRepository {
                 $diferencia= $cons->fetch()["diferencia"];
                 $result = $diferencia + 1; //al ser la diferencia, no incluye el mismo día
             }
+            else {
+                $result= false;
+            }
         }
         catch(PDOEXception $err) {
             $result= false;
