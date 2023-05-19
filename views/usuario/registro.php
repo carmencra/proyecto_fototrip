@@ -6,8 +6,10 @@
 
     
         <fieldset>
-            <legend> <h2>Registro de usuario</h2> </legend>
+                
+            <h2>Registro de usuario</h2>
         
+            <hr> <br>
 
             <form action="<?=$_ENV['BASE_URL']?>usuario/registro" method="POST">
 
@@ -35,22 +37,25 @@
 
                 <br><br>
 
-                <input type="submit" value="Registrarse">
+                <section class="submit">
+                    <input type="submit" value="Registrarse">
+                </section>    
             </form>
 
+            <?php
+                use Utils\Utils;
+
+                if (isset($_SESSION['err_reg'])): 
+            ?>
+                    <h3 style='color:red'>REGISTRO FALLIDO</h3>
+
+            <?php 
+                endif;
+            ?>
         </fieldset>
 
     </section>
 
 
 
-    <?php
-        use Utils\Utils;
-
-        if (isset($_SESSION['err_reg'])): 
-    ?>
-            <h3 style='color:red'>REGISTRO FALLIDO</h3>
-
-    <?php 
-        endif;
-    ?>
+   

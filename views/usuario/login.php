@@ -6,25 +6,29 @@
 <main>
     <section class="contenido_main">
 
-         <fieldset>
-            <legend> <h2>Login de usuario</h2> </legend>
+        <fieldset>
+            <h2>Login de usuario</h2>
 
-                <form action="<?=$_ENV['BASE_URL']?>usuario/login" method="POST">
+            <hr> <br>
 
-                    <label for="email">Email: </label>
-                    <input type="email" name="data[email]" value="<?php if (isset($_POST['data']['email']))echo $_POST['data']['email'];?>" style="width:300px">
-                    <br><span style="color:red"> <?php if(isset($_SESSION['err_ema'])) echo  $_SESSION['err_ema']?> </span>
+            <form action="<?=$_ENV['BASE_URL']?>usuario/login" method="POST">
 
-                    <br><br>
+                <label for="email">Email: </label>
+                <input type="email" name="data[email]" value="<?php if (isset($_POST['data']['email']))echo $_POST['data']['email'];?>" style="width:300px">
+                <br><span style="color:red"> <?php if(isset($_SESSION['err_ema'])) echo  $_SESSION['err_ema']?> </span>
 
-                    <label for="clave">Contraseña: </label>
-                    <input type="password" name="data[clave]" value="<?php if (isset($_POST['data']['clave']))echo $_POST['data']['clave'];?>">
-                    <br><span style="color:red"> <?php if(isset($_SESSION['err_cla'])) echo  $_SESSION['err_cla']?> </span>
+                <br><br>
 
-                    <br><br>
+                <label for="clave">Contraseña: </label>
+                <input type="password" name="data[clave]" value="<?php if (isset($_POST['data']['clave']))echo $_POST['data']['clave'];?>">
+                <br><span style="color:red"> <?php if(isset($_SESSION['err_cla'])) echo  $_SESSION['err_cla']?> </span>
 
-                    <input type="submit" value="Registrarse">
-                </form>
+                <br><br>
+
+                <section class="submit">
+                    <input type="submit" value="Iniciar sesión">
+                </section>
+            </form>
         </fieldset>
 
         
