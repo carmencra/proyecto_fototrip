@@ -1,6 +1,6 @@
 main {
     position: relative;
-    padding: 3% 0% 3% 0%;
+    padding: 3%;
 }
 
 main::after {

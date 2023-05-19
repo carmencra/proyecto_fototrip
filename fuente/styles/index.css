@@ -1,4 +1,4 @@
-video {
+.portada_video video {
     width: 100%;
     position: absolute;
     z-index: -1;
@@ -6,14 +6,14 @@ video {
 }
 
 
-.titulo {
+.portada_video .titulo {
     position: relative;
     z-index: 1;
     margin-top: 11%;
     text-align: center;
 }
 
-.titulo h1 {
+.portada_video .titulo h1 {
     color: #2CCBCB;
     font-size: 60px;
     background-color: black;
@@ -24,7 +24,7 @@ video {
     margin-bottom: 1.5%;
 }
 
-.titulo h3 {
+.portada_video .titulo h3 {
     color: white;
     font-size: 22px;
     background-color: black;
@@ -35,7 +35,7 @@ video {
     margin-bottom: 4%;
 }
 
-.titulo a {
+.portada_video .titulo a {
     background-color: #2CCBCB;
     padding: 0.7%;
     text-decoration: none;

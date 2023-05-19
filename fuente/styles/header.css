@@ -49,32 +49,3 @@ header #logo {
 .menu .active a {
     color: #2CCBCB;
 }
-
-/* #usuario {
-    background-color: white;
-    border-radius: 100%;
-    padding: 0.5%;
-    width: 55px;
-    margin-right: 1%;
-    margin-left: auto;
-}
-
-#usuario:hover {
-    background-color: #2CCBCB;
-} */
-
-/* .boton_usuario {
-    margin-right: 1%;  
-    border-radius: 100%; 
-    background-color: white;
-    padding: 0.5%;
-}
-
-#imagen_usuario {
-    width: 45px;
-}
-
-.boton_usuario:hover {
-    background-color: #2CCBCB;
-}  */
-
