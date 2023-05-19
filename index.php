@@ -58,13 +58,14 @@ session_start();
     //RUTAS
 
 // RUTAS VIAJE
-    // //ruta por defecto(listar viajes)
+    //ruta por defecto(listar viajes)
     Router::add('GET', '/', function(){
         (new ViajeController())->listar();
     });
 
 
-    
+
+    // rutas accesibles para todos
     Router::add('GET', 'viaje/buscar', function(){
         (new ViajeController())->buscar();
     });
@@ -76,12 +77,10 @@ session_start();
         (new ViajeController())->ver($viaje_id);
     });
 
-    
 
     Router::add('GET', 'opiniones', function(){
         (new ComentarioController())->listar();
     });
-
 
 
     Router::add('GET', 'galeria', function(){
@@ -99,12 +98,10 @@ session_start();
     Router::add('GET', 'usuario/registro', function(){
         (new UsuarioController())->registro();
     });
-
     // para recoger los datos del formulario
     Router::add('POST', 'usuario/registro', function(){
         (new UsuarioController())->registro();
     });
-
 
     // para acceder al formulario
     Router::add('GET', 'usuario/login', function(){
@@ -115,10 +112,18 @@ session_start();
         (new UsuarioController())->login();
     });
 
-    Router::add('GET', 'usuario/cerrar', function(){
-        (new UsuarioController())->cerrar();
-    });
+
+
+    // rutas accesibles para los usuarios logueados
+    if (isset($_SESSION['usuario'])) {
+        Router::add('GET', 'usuario/cerrar', function(){
+            (new UsuarioController())->cerrar();
+        });
+    }
     
+   
+   
+    // ruta accesible solo cuando el usuario esté pendiente de confirmar su cuenta
     if (isset($_SESSION['id_a_confirmar'])) {
         $id_usuario= $_SESSION['id_a_confirmar'];
 
