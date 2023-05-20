@@ -121,6 +121,11 @@ class ViajeRepository {
         }
         return $cons;
     }
+
+    public function obtener_viaje($id) {
+        $this->db->consulta("SELECT * FROM viajes WHERE id= $id");
+        return $this->db->extraer_registro();
+    }
         
 
 }

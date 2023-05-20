@@ -73,8 +73,18 @@ session_start();
             (new ViajeController())->buscar();
         });
 
-        Router::add('GET', 'viaje/ver:id', function(int $viaje_id) {
+        // ver los viajes, reccogiendo el id y llevando a la vista
+        Router::add('POST', 'viaje/ver/:id', function(int $viaje_id) {
             (new ViajeController())->ver($viaje_id);
+        }); 
+        Router::add('GET', 'viaje/ver/:id', function(int $viaje_id) {
+            (new ViajeController())->ver($viaje_id);
+        });
+        Router::add('POST', 'viaje/ver', function() {
+            (new ViajeController())->ver();
+        }); 
+        Router::add('GET', 'viaje/ver', function() {
+            (new ViajeController())->ver();
         });
 
 

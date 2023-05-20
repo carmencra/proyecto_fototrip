@@ -50,12 +50,19 @@ class ViajeController {
 
     }
 
-    public function comprobar_filtros($filtros): bool  {
-        var_dump($filtros);die();
-        if ($filtros) {
+    public function ver($id) {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $datos_viaje= $this->repository->obtener_viaje($id);
+            $viaje= $this->pasar_objeto($datos_viaje);
+            $duracion= $this->obtener_duracion($viaje);
+            $viaje->setDuracion($duracion);            
 
+            $this->pages->render('viaje/ver', ['viaje' => $viaje]);
         }
-
+        
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            var_dump("GET");die();
+        }
     }
 }
 
