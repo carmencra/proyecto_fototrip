@@ -1,0 +1,29 @@
+
+.detalle_viaje {
+    color: white;
+}
+
+.detalle_viaje h1, h2 {
+    color: #2CCBCB;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.detalle_viaje h1 {
+    padding: 2%;
+    background-color: rgba(0, 0, 0, 0.8); 
+}
+
+.general {
+    padding: 2%;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.general table {
+    margin: auto;
+}
+
+.general table th {
+    padding: 1em 10em 1em 1em;
+}
+

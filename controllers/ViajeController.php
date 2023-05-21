@@ -50,21 +50,28 @@ class ViajeController {
 
     }
 
+
+    // aquí tengo que controlar que si el id existe te lleve al viaje y sino nada o que de un error o algo
+
     public function ver($id) {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $viaje= $this->obtener_viaje($id);
-              
 
             $this->pages->render('viaje/ver', ['viaje' => $viaje]);
         }
         
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            var_dump("GET");die();
+            $viaje= $this->obtener_viaje($id);
+            
+            $this->pages->render('viaje/ver', ['viaje' => $viaje]);
         }
     }
 
     public function obtener_viaje($id) {
         $datos_viaje= $this->repository->obtener_viaje($id);
+        if ($datos_viaje == false) {
+            return false;
+        }
         $viaje= $this->pasar_objeto($datos_viaje);
         $duracion= $this->obtener_duracion($viaje);
         $viaje->setDuracion($duracion);  

@@ -75,15 +75,12 @@ session_start();
 
         // ver los viajes, reccogiendo el id y llevando a la vista
         Router::add('POST', 'viaje/ver?id=:id', function($id) {
-            $id_viaje= $_GET['id'];
-            // var_dump("post", $id_viaje);die();
-            (new ViajeController())->ver($id_viaje);
+            (new ViajeController())->ver($id);
+            
         }); 
-        // Router::add('GET', 'viaje/ver?id=:id', function() {
-        //     $id_viaje= $_GET['id'];
-        //     var_dump("get", $id_viaje);die();
-        //     (new ViajeController())->ver($id_viaje);
-        // });
+        Router::add('GET', 'viaje/ver?id=:id', function($id) {
+            (new ViajeController())->ver($id);
+        }); 
         // Router::add('POST', 'viaje/ver', function() {
         //     (new ViajeController())->ver();
         // }); 

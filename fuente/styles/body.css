@@ -17,6 +17,9 @@ main::after {
     z-index: -1;   
 }
 
+hr {
+    border: 2px solid white;
+}
 
 #flecha {
     position: fixed;

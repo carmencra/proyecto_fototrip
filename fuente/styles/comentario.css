@@ -13,10 +13,6 @@
     color: #2CCBCB;
 }
 
-.comentario hr {
-    border: 2px solid white;
-}
-
 .comentario .contenido {
     text-align: justify;
 }
