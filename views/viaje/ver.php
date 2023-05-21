@@ -38,6 +38,13 @@
                     </tr>
                 </table>
             </section>
+
+
+            <section class="itinerario">
+                <?php var_dump($itinerario);die();?>
+            </section>
+
+
         </section>
 
 

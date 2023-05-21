@@ -3,14 +3,17 @@
 namespace Controllers;
 use Repositories\ViajeRepository;
 use Lib\Pages;
+use Controllers\ItinerarioController;
 
 class ViajeController {
     private Pages $pages;
     private ViajeRepository $repository;
+    private ItinerarioController $itinerarioController;
 
     public function __construct() {
         $this->pages= new Pages();
         $this->repository= new ViajeRepository();
+        $this->itinerarioController= new ItinerarioController();
     }
 
     public function listar() {
@@ -54,17 +57,11 @@ class ViajeController {
     // aquí tengo que controlar que si el id existe te lleve al viaje y sino nada o que de un error o algo
 
     public function ver($id) {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $viaje= $this->obtener_viaje($id);
+        $viaje= $this->obtener_viaje($id);
 
-            $this->pages->render('viaje/ver', ['viaje' => $viaje]);
-        }
-        
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $viaje= $this->obtener_viaje($id);
-            
-            $this->pages->render('viaje/ver', ['viaje' => $viaje]);
-        }
+        $itinerario= $this->itinerarioController->obtener_itinerario($id);
+
+        $this->pages->render('viaje/ver', ['viaje' => $viaje, 'itinerario' => $itinerario ]);
     }
 
     public function obtener_viaje($id) {
@@ -78,7 +75,6 @@ class ViajeController {
         
         return $viaje;
     }
-
 
 }
 
