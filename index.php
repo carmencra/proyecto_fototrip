@@ -135,10 +135,13 @@ session_start();
     
         // ruta accesible solo cuando el usuario esté pendiente de confirmar su cuenta
         if (isset($_SESSION['id_a_confirmar'])) {
-            $id_usuario= $_SESSION['id_a_confirmar'];
-
-            Router::add('GET', 'usuario/confirmarcuenta/:id', function($id_usuario){
-                (new UsuarioController())->confirmar_cuenta($id_usuario);
+            Router::add('GET', 'usuario/confirmarcuenta/:id', function($id) {
+                if ($id == $_SESSION['id_a_confirmar']){
+                    (new UsuarioController())->confirmar_cuenta($id);
+                }
+                else {
+                    (new UsuarioController())->llevar_email_enviado();
+                }
             });
 
             Router::add('GET', 'email/enviado', function(){
