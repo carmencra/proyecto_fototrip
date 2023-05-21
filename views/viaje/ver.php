@@ -4,7 +4,7 @@
 <main>
     <section class="contenido_main">
         <?php if (empty($viaje)): ?>
-            <p>No se ha encontrado ning&uacute;n viaje</p>
+            <p>No se ha encontrado ning&uacute;n viaje.</p> <br><br><br>
         <?php else:?>
         
         <section class="detalle_viaje">
