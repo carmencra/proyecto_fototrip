@@ -14,9 +14,10 @@
     background-color: rgba(0, 0, 0, 0.8); 
 }
 
-.general {
+.general, .itinerario {
     padding: 2%;
     background-color: rgba(0, 0, 0, 0.8);
+    margin-bottom: 4%;
 }
 
 .general table {
@@ -27,3 +28,8 @@
     padding: 1em 10em 1em 1em;
 }
 
+
+.itinerario li {
+    color: #2CCBCB;
+    text-transform: uppercase;
+}
