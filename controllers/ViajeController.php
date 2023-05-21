@@ -52,10 +52,8 @@ class ViajeController {
 
     public function ver($id) {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $datos_viaje= $this->repository->obtener_viaje($id);
-            $viaje= $this->pasar_objeto($datos_viaje);
-            $duracion= $this->obtener_duracion($viaje);
-            $viaje->setDuracion($duracion);            
+            $viaje= $this->obtener_viaje($id);
+              
 
             $this->pages->render('viaje/ver', ['viaje' => $viaje]);
         }
@@ -64,6 +62,17 @@ class ViajeController {
             var_dump("GET");die();
         }
     }
+
+    public function obtener_viaje($id) {
+        $datos_viaje= $this->repository->obtener_viaje($id);
+        $viaje= $this->pasar_objeto($datos_viaje);
+        $duracion= $this->obtener_duracion($viaje);
+        $viaje->setDuracion($duracion);  
+        
+        return $viaje;
+    }
+
+
 }
 
 ?>
