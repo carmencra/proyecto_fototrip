@@ -1,5 +1,5 @@
 
-<!-- < ?php require_once('views/layout/header_base.php'); ?> -->
+<?php require_once('views/layout/header_base.php'); ?>
 
 <main>
     <section class="contenido_main">
