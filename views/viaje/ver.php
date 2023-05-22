@@ -66,8 +66,68 @@
                 <h2>Gastos incluidos</h2>
                 <hr>
 
-                <?php var_dump($gastos)?>
+                <table>
+                    <tr>
+                        <td class="icono">
+                            <?php if ($gastos->getComida() == true): ?>
+                                <img src="../fuente/media/images/icono_si.png" alt="sí"/> 
+                            <?php else :?>
+                                <img src="../fuente/media/images/icono_no.png" alt="no"/> 
+                            <?php endif;?> 
+                        </td>
+                        <td> Comida </td>
 
+                        <td class="icono">
+                            <?php if ($gastos->getTransportes() == true): ?>
+                                <img src="../fuente/media/images/icono_si.png" alt="sí"/> 
+                            <?php else :?>
+                                <img src="../fuente/media/images/icono_no.png" alt="no"/> 
+                            <?php endif;?> 
+                        </td>
+                        <td> Transportes </td>
+                    </tr>
+
+                    <tr>
+                        <td class="icono">
+                            <?php if ($gastos->getAlojamiento() == true): ?>
+                                <img src="../fuente/media/images/icono_si.png" alt="sí"/> 
+                            <?php else :?>
+                                <img src="../fuente/media/images/icono_no.png" alt="no"/> 
+                            <?php endif;?> 
+                        </td>
+                        <td> Alojamiento </td>
+
+                        <td class="icono">
+                            <?php if ($gastos->getSeguro() == true): ?>
+                                <img src="../fuente/media/images/icono_si.png" alt="sí"/> 
+                            <?php else :?>
+                                <img src="../fuente/media/images/icono_no.png" alt="no"/> 
+                            <?php endif;?> 
+                        </td>
+                        <td> Seguro </td>
+                    </tr>
+
+                    <tr>
+                        <td class="icono">
+                            <?php if ($gastos->getVuelos() == true): ?>
+                                <img src="../fuente/media/images/icono_si.png" alt="sí"/> 
+                            <?php else :?>
+                                <img src="../fuente/media/images/icono_no.png" alt="no"/> 
+                            <?php endif;?> 
+                        </td>
+                        <td> Vuelos </td>
+
+                        <td class="icono">
+                            <?php if ($gastos->getGastos() == true): ?>
+                                <img src="../fuente/media/images/icono_si.png" alt="sí"/> 
+                            <?php else :?>
+                                <img src="../fuente/media/images/icono_no.png" alt="no"/> 
+                            <?php endif;?> 
+                        </td>
+                        <td> Gastos aparte </td>
+                    </tr>                    
+                    
+                </table>
             </section>
 
 
