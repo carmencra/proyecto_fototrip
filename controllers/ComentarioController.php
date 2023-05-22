@@ -34,6 +34,16 @@ class ComentarioController{
         return $this->repository->obtener_nombre_viaje($id_viaje);
     }
 
+    public function obtener_comentarios($id_viaje) {
+        $lista_comentarios= $this->repository->obtener_comentarios($id_viaje);
+
+        $objetos_comentarios= [];
+        foreach ($lista_comentarios as $comentario) {
+            $objeto= $this->pasar_objeto($comentario);
+            array_push($objetos_comentarios, $objeto);
+        }
+        return $objetos_comentarios;
+    }
     
 }
 

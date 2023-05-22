@@ -1,4 +1,3 @@
-
 .detalle_viaje {
     color: white;
 }
@@ -52,7 +51,7 @@
 
 
 
-.galeria {
+.galeria, .opiniones {
     padding: 2%;
     background-color: rgba(0, 0, 0, 0.8);
     margin-bottom: 1%;
@@ -60,4 +59,14 @@
 
 .detalle_viaje .usuario {
     color: #2CCBCB;
+}
+
+.imagenes {
+    margin-bottom: 4%;
+}
+
+
+
+#opinion {
+    width: 98%;
 }

@@ -138,7 +138,6 @@
             </section>
 
             <section class="imagenes">
-
                 <?php foreach($imagenes as $imagen) : ?>
                     <section class="imagen">
                         <p class="imagen_imagen"> <?= $imagen->getImagen(); ?> </p>
@@ -147,7 +146,26 @@
                     </section>
 
                 <?php endforeach; ?>
+            </section>
 
+
+
+            <section class="opiniones">
+                <h2>Comentarios</h2>
+                <hr>
+            </section>
+
+            <section class="comentarios">
+                <?php foreach($comentarios as $comentario) : ?>
+                    <section class="comentario" id="opinion">
+                        <h4> <?= $comentario->getUsuario(); ?> </h4>
+
+                        <hr>
+
+                        <p class="contenido"> <?= $comentario->getContenido(); ?> </p>
+
+                    </section>
+                <?php endforeach; ?>
             </section>
 
 

@@ -38,6 +38,12 @@ class ComentarioRepository {
         }
         return $result;
     }
+
+    public function obtener_comentarios($id_viaje): ?array {
+        $this->db->consulta("SELECT * FROM comentarios WHERE id_viaje= $id_viaje");
+        return $this->db->extraer_todos();
+    }
+
 }
 
 ?>

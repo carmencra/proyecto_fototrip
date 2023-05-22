@@ -6,6 +6,7 @@ use Lib\Pages;
 use Controllers\ItinerarioController;
 use Controllers\GastosController;
 use Controllers\ImagenController;
+use Controllers\ComentarioController;
 
 class ViajeController {
     private Pages $pages;
@@ -13,6 +14,7 @@ class ViajeController {
     private ItinerarioController $itinerarioController;
     private GastosController $gastosController;
     private ImagenController $imagenController;
+    private ComentarioController $comentarioController;
 
     public function __construct() {
         $this->pages= new Pages();
@@ -20,6 +22,7 @@ class ViajeController {
         $this->itinerarioController= new ItinerarioController();
         $this->gastosController= new GastosController();
         $this->imagenController= new ImagenController();
+        $this->comentarioController= new ComentarioController();
     }
 
     public function listar() {
@@ -73,7 +76,9 @@ class ViajeController {
 
             $imagenes= $this->imagenController->obtener_imagenes($id);
             
-            $this->pages->render('viaje/ver', ['viaje' => $viaje, 'itinerario' => $itinerario, 'gastos' => $gastos, 'imagenes' => $imagenes ]);
+            $comentarios= $this->comentarioController->obtener_comentarios($id);
+            
+            $this->pages->render('viaje/ver', ['viaje' => $viaje, 'itinerario' => $itinerario, 'gastos' => $gastos, 'imagenes' => $imagenes, 'comentarios' => $comentarios ]);
         }
         // sino, manda solo el viaje vacío y la vista devuelve que no se ha encontrado
         else {
