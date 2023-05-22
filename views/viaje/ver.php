@@ -131,6 +131,15 @@
             </section>
 
 
+            
+            <section class="galeria">
+                <h2>Galer&iacute;a</h2>
+                <hr>
+
+                <?php var_dump($imagenes); die(); ?>
+            </section>
+
+
         </section>
 
 

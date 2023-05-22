@@ -55,7 +55,20 @@ class ImagenController{
             }
             $this->pages->render('imagen/listar', ['imagenes' => $imagenes_aceptadas]);
         } 
+    }
 
+    public function obtener_imagenes($id_viaje) {
+        $lista_imagenes= $this->repository->listar($id_viaje);
+
+        $objetos_imagenes= [];
+        foreach ($lista_imagenes as $imagen) {
+            $objeto= $this->pasar_objeto($imagen);
+            // si la imagen está aceptada por el admin, la añade
+            if ($objeto->getAceptada() == true) {
+                array_push($objetos_imagenes, $objeto);
+            }
+        }
+        return $objetos_imagenes;
     }
     
 }
