@@ -3,7 +3,7 @@
 
 <main>
     <section class="contenido_main">
-        <?php if (empty($viaje) && empty($itinerario) && empty($gastos)): ?>
+        <?php if (empty($viaje)): ?>
             <p>No se ha encontrado ning&uacute;n viaje.</p> <br><br><br>
         <?php else:?>
         

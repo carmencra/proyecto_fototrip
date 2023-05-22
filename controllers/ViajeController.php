@@ -62,11 +62,20 @@ class ViajeController {
     public function ver($id) {
         $viaje= $this->obtener_viaje($id);
 
-        $itinerario= $this->itinerarioController->obtener_itinerario($id);
+        //  si se encuentra un viaje, obtiene los datos relacionados con este y los manda a la vista
+        if ($viaje) {
+            $itinerario= $this->itinerarioController->obtener_itinerario($id);
 
-        $gastos= $this->gastosController->obtener_gastos($id);
+            $gastos= $this->gastosController->obtener_gastos($id);
+            
+            $this->pages->render('viaje/ver', ['viaje' => $viaje, 'itinerario' => $itinerario, 'gastos' => $gastos ]);
+        }
+        // sino, manda solo el viaje vacío y la vista devuelve que no se ha encontrado
+        else {
+            $this->pages->render('viaje/ver', ['viaje' => $viaje]);
+        }
+       
 
-        $this->pages->render('viaje/ver', ['viaje' => $viaje, 'itinerario' => $itinerario, 'gastos' => $gastos ]);
     }
 
     public function obtener_viaje($id) {
