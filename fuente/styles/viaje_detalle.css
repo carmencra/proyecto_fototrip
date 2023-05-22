@@ -20,16 +20,31 @@
     margin-bottom: 4%;
 }
 
-.general table {
+.general table, .gastos table {
     margin: auto;
 }
 
+.general table .izquierda {
+    padding: 1em 10em 1em 0.7em;
+}
+
 .general table th {
-    padding: 1em 10em 1em 1em;
+    padding-left: 0.7em;
 }
 
 
 .itinerario li {
     color: #2CCBCB;
     text-transform: uppercase;
+}
+
+
+
+.gastos table .izquierda {
+    padding: 1em 10em 1em 0.5em;
+
+}
+.gastos table th {
+    padding-left: 0.5em;
+    
 }
