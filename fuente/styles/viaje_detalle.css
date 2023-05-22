@@ -14,7 +14,7 @@
     background-color: rgba(0, 0, 0, 0.8); 
 }
 
-.general, .itinerario, .gastos, .galeria {
+.general, .itinerario, .gastos {
     padding: 2%;
     background-color: rgba(0, 0, 0, 0.8);
     margin-bottom: 4%;
@@ -33,6 +33,7 @@
 }
 
 
+
 .itinerario li {
     color: #2CCBCB;
     text-transform: uppercase;
@@ -47,4 +48,16 @@
 .gastos table th {
     padding-left: 0.5em;
     
+}
+
+
+
+.galeria {
+    padding: 2%;
+    background-color: rgba(0, 0, 0, 0.8);
+    margin-bottom: 1%;
+}
+
+.detalle_viaje .usuario {
+    color: #2CCBCB;
 }

@@ -135,8 +135,19 @@
             <section class="galeria">
                 <h2>Galer&iacute;a</h2>
                 <hr>
+            </section>
 
-                <?php var_dump($imagenes); die(); ?>
+            <section class="imagenes">
+
+                <?php foreach($imagenes as $imagen) : ?>
+                    <section class="imagen">
+                        <p class="imagen_imagen"> <?= $imagen->getImagen(); ?> </p>
+
+                        <p class="usuario"> <?= $imagen->getUsuario(); ?> </p>                        
+                    </section>
+
+                <?php endforeach; ?>
+
             </section>
 
 
