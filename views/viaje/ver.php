@@ -61,6 +61,15 @@
                 
             </section>
 
+            
+            <section class="gastos">
+                <h2>Gastos incluidos</h2>
+                <hr>
+
+                <?php var_dump($gastos)?>
+
+            </section>
+
 
         </section>
 

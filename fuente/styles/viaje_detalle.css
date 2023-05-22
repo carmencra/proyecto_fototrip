@@ -14,7 +14,7 @@
     background-color: rgba(0, 0, 0, 0.8); 
 }
 
-.general, .itinerario {
+.general, .itinerario, .gastos {
     padding: 2%;
     background-color: rgba(0, 0, 0, 0.8);
     margin-bottom: 4%;

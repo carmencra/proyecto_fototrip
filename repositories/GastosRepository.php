@@ -12,6 +12,16 @@ class GastosRepository {
         $this->db= new BaseDatos();
     }
 
+    public function obtener_gastos($id_viaje) {
+        $this->db->consulta("SELECT * FROM gastos WHERE id_viaje= $id_viaje");
+        return $this->db->extraer_registro();
+    }
+
+    public function pasar_objeto($array): object {
+        $objeto_gastos= Gastos::fromArray($array);
+        return $objeto_gastos;
+    }
+
 }
 
 ?>
