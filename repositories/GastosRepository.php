@@ -12,7 +12,7 @@ class GastosRepository {
         $this->db= new BaseDatos();
     }
 
-    public function obtener_gastos($id_viaje) {
+    public function obtener_gastos($id_viaje): array | bool {
         $this->db->consulta("SELECT * FROM gastos WHERE id_viaje= $id_viaje");
         return $this->db->extraer_registro();
     }
