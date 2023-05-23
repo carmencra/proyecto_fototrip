@@ -1,14 +1,20 @@
 .buscador_viajes form {
     width: 75%;
     margin: auto;
-    border: 1px solid black;
+    border: 3px solid black;
     border-radius: 400px;
     padding: 1%;
-
+    font-weight: bold;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
     margin-bottom: 2%;
+}
+
+.buscador_viajes form input {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: none;
 }
 
 
@@ -28,6 +34,7 @@
     background-color: #2CCBCB;
     border-color: #2CCBCB;
     font-weight: bold;
+    color: black;
 }
 
 .buscador_viajes #boton:hover {
