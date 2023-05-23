@@ -81,9 +81,8 @@
                 <section class="imagen">
                     <h4> <?= $imagen->getUsuario(); ?> </h4>
 
-                    <hr>
-
-                    <p class="imagen_imagen"> <?= $imagen->getImagen(); ?> </p>
+                    <hr> <br>
+                    <img src="fuente/media/images/galeria/<?= $imagen->getImagen(); ?>" width="380px" height="260px"/> <br>
 
                     <p> <?= $imagen->getPais_viaje(); ?> </p>
                     
