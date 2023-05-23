@@ -82,13 +82,25 @@
                     <h4> <?= $imagen->getUsuario(); ?> </h4>
 
                     <hr> <br>
-                    <img src="fuente/media/images/galeria/<?= $imagen->getImagen(); ?>" width="380px" height="260px"/> <br>
+                    <img src="fuente/media/images/galeria/<?= $imagen->getImagen(); ?>" width="380px" height="260px"/> <br><br>
 
-                    <p> <?= $imagen->getPais_viaje(); ?> </p>
+                    <section class="datos_imagen">
+                        <section> 
+                            <img src="fuente/media/images/ubicacion.png" />
+                            <?= $imagen->getPais_viaje(); ?> 
+                        </section>
+                        
+                        <section> 
+                            <img src="fuente/media/images/calendario.png" />
+                            <?= $imagen->getFecha(); ?> 
+                        </section>
+                        
+                        <section> 
+                            <img src="fuente/media/images/imagen.png" />
+                            <?= $imagen->getTipo(); ?> 
+                        </section>
+                    </section>
                     
-                    <p> <?= $imagen->getFecha(); ?> </p>
-                    
-                    <p> <?= $imagen->getTipo(); ?> </p>
                     
                 </section>
 

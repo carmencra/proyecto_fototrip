@@ -46,11 +46,29 @@
 .imagen {
     position: relative;
     color: white;
-    padding: 0.1% 1% 1% 1%;
+    padding: 0.1% 2% 2% 2%;
     background-color: rgba(0, 0, 0, 0.8);
 }
 
 
 .imagen h4 {
     color: #2CCBCB;
+}
+
+
+.imagen .datos_imagen {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15%;
+    justify-content: space-evenly;
+}
+
+.imagen .datos_imagen img {
+    width: 30px;
+}
+
+.imagen .datos_imagen section {
+    display: flex;
+    align-items: center;
+    gap: 10%;
 }
