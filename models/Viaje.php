@@ -11,10 +11,11 @@
         private string $nivel_fotografia;
         private string $nivel_fisico;
         private string $activo;
+        private string $imagen_principal;
 
         private int $duracion;
 
-        public function __construct(string $id, string $pais, string $fecha_inicio, string $fecha_fin, string $precio, string $descripcion, string $nivel_fotografia, string $nivel_fisico, string $activo) {
+        public function __construct(string $id, string $pais, string $fecha_inicio, string $fecha_fin, string $precio, string $descripcion, string $nivel_fotografia, string $nivel_fisico, string $activo, string $imagen_principal) {
             $this->id= $id;
             $this->pais= $pais;
             $this->fecha_inicio= $fecha_inicio;
@@ -24,6 +25,7 @@
             $this->nivel_fotografia= $nivel_fotografia;
             $this->nivel_fisico= $nivel_fisico;
             $this->activo= $activo;
+            $this->imagen_principal= $imagen_principal;
         }
 
 
@@ -220,7 +222,8 @@
                 $data['descripcion'] ?? '',
                 $data['nivel_fotografia'] ?? '',
                 $data['nivel_fisico'] ?? '',
-                $data['activo'] ?? ''
+                $data['activo'] ?? '',
+                $data['imagen_principal'] ?? ''
             );
         }
 
@@ -241,6 +244,26 @@
         public function setDuracion($duracion)
         {
                 $this->duracion = $duracion;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of imagen_principal
+         */ 
+        public function getImagen_principal()
+        {
+                return $this->imagen_principal;
+        }
+
+        /**
+         * Set the value of imagen_principal
+         *
+         * @return  self
+         */ 
+        public function setImagen_principal($imagen_principal)
+        {
+                $this->imagen_principal = $imagen_principal;
 
                 return $this;
         }

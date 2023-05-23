@@ -87,7 +87,9 @@
 
         <?php foreach($viajes as $viaje) : ?>
             <section class="viaje">
-                <p class="precio"> <?= $viaje->getPrecio(); ?> €</p>
+                <img src="fuente/media/images/galeria/<?= $viaje->getImagen_principal(); ?>" width="320px" height="200px"/> <br>
+
+                <p class="precio"><b> <?= $viaje->getPrecio(); ?> € </b></p>
 
                 <h1 class="pais"> <?= $viaje->getPais(); ?> </h1>
 

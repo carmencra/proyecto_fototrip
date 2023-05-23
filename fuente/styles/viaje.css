@@ -42,21 +42,26 @@
     display: flex;
     flex-wrap: wrap;
     text-align: center;
-    gap: 1%;
+    gap: 2%;
     justify-content: center;
 }
 
 .viaje {
     position: relative;
     color: white;
-    padding: 1%;
+    padding: 2%;
     background-color: rgba(0, 0, 0, 0.8);
 }
 
+.viaje .precio {
+    text-align: right;
+    margin: 0%;
+}
 
 .viaje .pais {
     color: #2CCBCB;
     text-transform: uppercase;
+    margin-top: 0%;
 }
 
 .viaje .ver_mas {
