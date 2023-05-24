@@ -82,6 +82,7 @@
                     <h4> <?= $imagen->getUsuario(); ?> </h4>
 
                     <hr> <br>
+
                     <img src="fuente/media/images/galeria/<?= $imagen->getImagen(); ?>" width="380px" height="260px"/> <br><br>
 
                     <section class="datos_imagen">
@@ -100,7 +101,6 @@
                             <?= $imagen->getTipo(); ?> 
                         </section>
                     </section>
-                    
                     
                 </section>
 

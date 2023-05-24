@@ -17,10 +17,11 @@ class ImagenController{
     public function listar() {
         $lista_imagenes= $this->repository->listar();
         $objetos_imagenes= [];
+        // var_dump($lista_imagenes);die();
         foreach ($lista_imagenes as $imagen) {
             $objeto= $this->pasar_objeto($imagen);
             // si la imagen está aceptada, la añade a la lista para ser mostrada;
-            if ($objeto->getAceptada() == "0") { //0 = true; 1= false 
+            if ($objeto->getAceptada() == true) { //0 = true; 1= false 
                 $pais_viaje= $this->obtener_pais_viaje($objeto->getId_viaje());
                 $objeto->setPais_viaje($pais_viaje);
                 array_push($objetos_imagenes, $objeto);
