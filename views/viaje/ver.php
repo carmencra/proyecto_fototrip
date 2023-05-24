@@ -1,14 +1,26 @@
 
 <?php require_once('views/layout/header_base.php'); ?>
 
-<main>
-    <section class="contenido_main">
-        <?php if (empty($viaje)): ?>
-            <p>No se ha encontrado ning&uacute;n viaje.</p> <br><br><br>
-        <?php else:?>
-        
+
+<?php if (empty($viaje)): ?>
+    <p>No se ha encontrado ning&uacute;n viaje.</p> <br><br><br>
+<?php else:?>
+
+<section class="portada">
+    <img src="../fuente/media/images/galeria/<?= $viaje->getImagen_principal();?>" alt="imagen pais" />
+
+    <section class="titulo">
+        <h1> <?= $viaje->getPais() ?> </h1>
+    </section>
+</section>
+
+
+<main id="main_ver">
+    <section id="contenido_main_ver">        
         <section class="detalle_viaje">
-            <h1> <?= $viaje->getPais() ?></h1>
+            <!-- <h1> <?= $viaje->getPais() ?></h1>
+
+            <img class="img_pri" src="../fuente/media/images/galeria/<?= $viaje->getImagen_principal();?>" width="900px" height="500px" /> -->
 
             <section class="general">
                 <h2>Informaci&oacute;n general</h2>
@@ -139,8 +151,8 @@
 
             <section class="imagenes">
                 <?php foreach($imagenes as $imagen) : ?>
-                    <section class="imagen">
-                        <p class="imagen_imagen"> <?= $imagen->getImagen(); ?> </p>
+                    <section class="imagen_viaje">
+                        <img src="../fuente/media/images/galeria/<?= $imagen->getImagen();?>" width="400px" height="260px" />
 
                         <p class="usuario"> <?= $imagen->getUsuario(); ?> </p>                        
                     </section>

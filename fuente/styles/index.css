@@ -6,14 +6,17 @@
 }
 
 
-.portada_video .titulo {
+.titulo {
     position: relative;
     z-index: 1;
-    margin-top: 11%;
     text-align: center;
 }
 
-.portada_video .titulo h1 {
+.portada_video .titulo {
+    margin-top: 11%;
+}
+
+.titulo h1 {
     color: #2CCBCB;
     font-size: 60px;
     background-color: black;

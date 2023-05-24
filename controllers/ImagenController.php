@@ -59,7 +59,7 @@ class ImagenController{
     }
 
     public function obtener_imagenes($id_viaje) {
-        $lista_imagenes= $this->repository->listar($id_viaje);
+        $lista_imagenes= $this->repository->obtener_imagenes($id_viaje);
 
         $objetos_imagenes= [];
         foreach ($lista_imagenes as $imagen) {

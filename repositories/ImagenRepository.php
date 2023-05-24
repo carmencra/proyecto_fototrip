@@ -155,6 +155,11 @@ class ImagenRepository {
         return $result;
     }
 
+    public function obtener_imagenes($id_viaje): ?array {
+        $this->db->consulta("SELECT * FROM imagenes WHERE id_viaje= $id_viaje");
+        return $this->db->extraer_todos();
+    }
+
 }
 
 ?>
