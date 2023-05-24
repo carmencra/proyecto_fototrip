@@ -45,8 +45,28 @@ class ImagenRepository {
     public function filtrar_imagenes($filtros): bool | array {
         $limpios= $this->limpia_filtros($filtros);
         $consulta= $this->crea_consulta($limpios);
-
+// var_dump($consulta);die();
         $cons= $this->db->prepara($consulta);
+        // $cons->execute();
+        
+        // $imagenes= $cons->fetchAll();
+        // var_dump($imagenes);die();
+        //  //pasamos todos los imagenes obtenidos a objetos Viaje
+        //  $objetos_imagen=[];
+        //  foreach($imagenes as $datos_imagen) {
+        //      $obj_imagen= Imagen::fromArray($datos_imagen);
+        //      array_push($objetos_imagen, $obj_imagen);
+        //  }
+ 
+        //  try{
+        //      if ($cons->execute()) {
+        //         var_dump($objetos_imagen);die();
+        //          return $objetos_imagen;
+        //      }
+        //  }
+        //  catch(PDOException $err){
+        //      return false;
+        //  }
         
         try {
             if ($cons->execute()) {
@@ -100,13 +120,14 @@ class ImagenRepository {
     // crea la consulta dependiendo de los filtros que haya rellenos
     public function crea_consulta($filtros_limpios): string {
         // si no hay ningún filtro, devuelve todas las imágenes
-        if (empty($filtros_limpios)) {
-            $cons= "SELECT * FROM imagenes";
-        }
-        // si hay filtros, añade las condiciones de estos
-        else {
-            $cons= "SELECT * FROM imagenes WHERE ";
-        }
+        // if (empty($filtros_limpios)) {
+        //     $cons= "SELECT * FROM imagenes";
+        // }
+        // // si hay filtros, añade las condiciones de estos
+        // else {
+            $cons= "SELECT * FROM imagenes ";
+            // var_dump($filtros_limpios);die();
+        // }
  
         foreach ($filtros_limpios as $filtro => $valor){
             if($filtro !== array_key_first($filtros_limpios)) { //si no es la primera posición añade el and a la consulta
@@ -114,18 +135,18 @@ class ImagenRepository {
 
             switch ($filtro) {
                 case "tipo":
-                    $cons .= "tipo = '$valor'";
+                    $cons .= " WHERE tipo = '$valor'";
                     break;
                 case "fecha":
-                    if ($valor= "recientes") {
+                    if ($valor == "recientes") {
                         $cons .= " ORDER BY fecha DESC";
-                        break;
                     }
-                    else if ($valor= "antiguas") {
+                    if ($valor == "antiguas") {
                         $cons .= " ORDER BY fecha ASC";
                     }
             }
         }
+        // var_dump($cons);die();
         return $cons;
     }
 

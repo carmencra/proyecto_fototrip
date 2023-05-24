@@ -51,7 +51,7 @@
 
 <main id="main_index">
     <section class="buscador_viajes">
-        <form action="<?=$_ENV['BASE_URL']?>viaje/buscar" method="POST" enctype="multipart/form-data">
+        <form action="<?=$_ENV['BASE_URL']?>viaje_buscar" method="POST" enctype="multipart/form-data">
         <section>
             <label for="pais">Pa&iacute;s: </label>
             <input type="text" name="data[pais]" id="pais"/>

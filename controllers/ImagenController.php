@@ -45,15 +45,17 @@ class ImagenController{
             $imagenes_obtenidas= $this->repository->filtrar_imagenes($filtros);
 
             // recorremos las imágenes obtenidas, y si están aceptadas, las mostrará
+            // var_dump($imagenes_obtenidas);die();
             $imagenes_aceptadas= [];
             foreach ($imagenes_obtenidas as $imagen) {
-                if ($imagen->getAceptada() == "1") {
+                if ($imagen->getAceptada() == true) {
                     $pais_viaje= $this->obtener_pais_viaje($imagen->getId_viaje());
                     // añadimos el pais de cada imagen
                     $imagen->setPais_viaje($pais_viaje);
                     array_push($imagenes_aceptadas, $imagen);
                 }
             }
+            // var_dump($imagenes_aceptadas);die();
             $this->pages->render('imagen/listar', ['imagenes' => $imagenes_aceptadas]);
         } 
     }

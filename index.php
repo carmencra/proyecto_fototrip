@@ -66,10 +66,10 @@ session_start();
 
 
         // rutas accesibles para todos
-        Router::add('GET', 'viaje/buscar', function(){
+        Router::add('GET', 'viaje_buscar', function(){
             (new ViajeController())->buscar();
         });
-        Router::add('POST', 'viaje/buscar', function(){
+        Router::add('POST', 'viaje_buscar', function(){
             (new ViajeController())->buscar();
         });
 
@@ -98,10 +98,10 @@ session_start();
             (new ImagenController())->listar();
         });
 
-        Router::add('GET', 'imagen/buscar', function(){
+        Router::add('GET', 'imagen_buscar', function(){
             (new ImagenController())->buscar();
         });
-        Router::add('POST', 'imagen/buscar', function(){
+        Router::add('POST', 'imagen_buscar', function(){
             (new ImagenController())->buscar();
         });
 

@@ -40,7 +40,7 @@
     <section class="contenido_main">
 
         <section class="buscador_imagenes">
-            <form action="<?=$_ENV['BASE_URL']?>imagen/buscar" method="POST" enctype="multipart/form-data">
+            <form action="<?=$_ENV['BASE_URL']?>imagen_buscar" method="POST" enctype="multipart/form-data">
 
             <section>
                 <label for="pais">Pa&iacute;s </label>

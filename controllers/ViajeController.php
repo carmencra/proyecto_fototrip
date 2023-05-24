@@ -56,7 +56,7 @@ class ViajeController {
                 $duracion= $this->obtener_duracion($viaje);
                 $viaje->setDuracion($duracion);
             }
-
+            var_dump($viajes_obtenidos);die();
             $this->pages->render('viaje/listar', ['viajes' => $viajes_obtenidos]);
         }
 
