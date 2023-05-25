@@ -17,6 +17,12 @@
     border: none;
 }
 
+.buscador_viajes form input, .buscador_viajes form select {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: none;
+}
+
 
 .buscador_viajes #pais  {
     width: 95px;

@@ -78,8 +78,13 @@ class ViajeRepository {
     public function limpia_filtros($filtros): array {
         $filtros_limpios= [];
         foreach ($filtros as $filtro => $valor) {
-            if (!empty($valor)) {
+            if (!empty($valor) && $filtro != "exigencia" && $filtro != "nivel") {
                 $filtros_limpios[$filtro]= $valor;
+            }            
+            if ($filtro == "exigencia" || $filtro == "nivel") {
+                if ($valor != "indiferente") {
+                    $filtros_limpios[$filtro]= $valor;
+                }
             }
         }
         return $filtros_limpios;

@@ -40,32 +40,30 @@
     <section class="contenido_main">
 
         <section class="buscador_imagenes">
-
-        <?php
-            // recogemos si hay alguna cookie de filtros existente
-            if (isset($_COOKIE['data_tipo'])) {
-                $opcion_tipo= $_COOKIE['data_tipo'];
-                // var_dump($opcion_tipo);die();
-            } else {
-                $opcion_tipo = ""; 
-                // Valor predeterminado si no hay cookie
-            } 
-            if (isset($_COOKIE['data_fecha'])) {
-                $opcion_fecha= $_COOKIE['data_fecha'];
-            } else {
-                $opcion_fecha = ""; 
-                // Valor predeterminado si no hay cookie
-            }
-            
-            // guardamos los valores de filtros en las cookies
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                $opcion_tipo = $_POST['data']['tipo'];
-                setcookie("data_tipo", $opcion_tipo);
+            <?php
+                // recogemos si hay alguna cookie de filtros existente
+                if (isset($_COOKIE['data_tipo'])) {
+                    $opcion_tipo= $_COOKIE['data_tipo'];
+                } else {
+                    $opcion_tipo = ""; 
+                    // Valor predeterminado si no hay cookie
+                } 
+                if (isset($_COOKIE['data_fecha'])) {
+                    $opcion_fecha= $_COOKIE['data_fecha'];
+                } else {
+                    $opcion_fecha = ""; 
+                    // Valor predeterminado si no hay cookie
+                }
                 
-                $opcion_fecha = $_POST['data']['fecha'];
-                setcookie("data_fecha", $opcion_fecha);
-            }
-        ?>
+                // guardamos los valores de filtros en las cookies
+                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    $opcion_tipo = $_POST['data']['tipo'];
+                    setcookie("data_tipo", $opcion_tipo);
+                    
+                    $opcion_fecha = $_POST['data']['fecha'];
+                    setcookie("data_fecha", $opcion_fecha);
+                }
+            ?>
             <form action="<?=$_ENV['BASE_URL']?>imagen_buscar" method="POST" enctype="multipart/form-data">
 
             <section>
