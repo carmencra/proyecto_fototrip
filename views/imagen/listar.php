@@ -44,13 +44,13 @@
 
             <section>
                 <label for="pais">Pa&iacute;s </label>
-                <input type="text" name="data[pais]" id="pais"/>
+                <input type="text" name="data[pais]" id="pais" value="<?php if (isset($_POST['data']['pais']))echo $_POST['data']['pais'];?>"/>
             </section>
 
             <section>
                 <label for="tipo">Tipo: </label>
 
-                <select name="data[tipo]" value="<?php if (isset($_COOKIE['data']['tipo']))echo $_COOKIE['data']['tipo'];?>">
+                <select name="data[tipo]" value="<?php if (isset($_SESSION['data']['tipo']))echo $_SESSION['data']['tipo'];?>">
                     <option value="indiferente"> Indiferente </option>
                     <option value="naturaleza"> Naturaleza </option>
                     <option value="construcciones"> Construcciones </option>
@@ -62,7 +62,7 @@
             <section>
                 <label for="fecha">Fecha </label>
             
-                <select name="data[fecha]" value="<?php if (isset($_COOKIE['data']['fecha']))echo $_COOKIE['data']['fecha'];?>">
+                <select name="data[fecha]" value="<?php if (isset($_SESSION['data']['fecha']))echo $_SESSION['data']['fecha'];?>">
                     <option value="indiferente"> Indiferente </option>
                     <option value="recientes"> M&aacute;s recientes </option>
                     <option value="antiguas"> M&aacute;s antiguas </option>

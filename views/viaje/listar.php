@@ -54,27 +54,27 @@
         <form action="<?=$_ENV['BASE_URL']?>viaje_buscar" method="POST" enctype="multipart/form-data">
         <section>
             <label for="pais">Pa&iacute;s: </label>
-            <input type="text" name="data[pais]" id="pais"/>
+            <input type="text" name="data[pais]" id="pais" value="<?php if (isset($_POST['data']['pais']))echo $_POST['data']['pais'];?>"/>
         </section>
 
         <section>
             <label for="precio_min">Precio m&iacute;n: </label>
-            <input type="text" name="data[precio_min]" id="min"/>
+            <input type="text" name="data[precio_min]" id="min" value="<?php if (isset($_POST['data']['precio_min']))echo $_POST['data']['precio_min'];?>"/>
         </section>
 
         <section>
             <label for="precio_max">Precio m&aacute;x: </label>
-            <input type="text" name="data[precio_max]" id="max"/>
+            <input type="text" name="data[precio_max]" id="max" value="<?php if (isset($_POST['data']['precio_max']))echo $_POST['data']['precio_max'];?>"/>
         </section>
 
         <section>
             <label for="exigencia">Exigencia f&iacute;sica: </label>
-            <input type="text" name="data[exigencia]" id="fisico"/>
+            <input type="text" name="data[exigencia]" id="fisico" value="<?php if (isset($_POST['data']['exigencia']))echo $_POST['data']['exigencia'];?>"/>
         </section>
 
         <section>
             <label for="nivel">Nivel fotograf&iacute;a:  </label>
-            <input type="text" name="data[nivel]" id="foto"/>
+            <input type="text" name="data[nivel]" id="foto" value="<?php if (isset($_POST['data']['nivel']))echo $_POST['data']['nivel'];?>"/>
         </section>
 
             <input type="submit" value="Buscar" id="boton">
