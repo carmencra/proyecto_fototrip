@@ -40,6 +40,32 @@
     <section class="contenido_main">
 
         <section class="buscador_imagenes">
+
+        <?php
+            // recogemos si hay alguna cookie de filtros existente
+            if (isset($_COOKIE['data_tipo'])) {
+                $opcion_tipo= $_COOKIE['data_tipo'];
+                // var_dump($opcion_tipo);die();
+            } else {
+                $opcion_tipo = ""; 
+                // Valor predeterminado si no hay cookie
+            } 
+            if (isset($_COOKIE['data_fecha'])) {
+                $opcion_fecha= $_COOKIE['data_fecha'];
+            } else {
+                $opcion_fecha = ""; 
+                // Valor predeterminado si no hay cookie
+            }
+            
+            // guardamos los valores de filtros en las cookies
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $opcion_tipo = $_POST['data']['tipo'];
+                setcookie("data_tipo", $opcion_tipo);
+                
+                $opcion_fecha = $_POST['data']['fecha'];
+                setcookie("data_fecha", $opcion_fecha);
+            }
+        ?>
             <form action="<?=$_ENV['BASE_URL']?>imagen_buscar" method="POST" enctype="multipart/form-data">
 
             <section>
@@ -50,22 +76,22 @@
             <section>
                 <label for="tipo">Tipo: </label>
 
-                <select name="data[tipo]" value="<?php if (isset($_SESSION['data']['tipo']))echo $_SESSION['data']['tipo'];?>">
-                    <option value="indiferente"> Indiferente </option>
-                    <option value="naturaleza"> Naturaleza </option>
-                    <option value="construcciones"> Construcciones </option>
-                    <option value="animales"> Animales </option>
-                    <option value="personas"> Personas </option>
+                <select name="data[tipo]">
+                    <option value="indiferente" <?php if ($opcion_tipo == "indiferente") echo "selected"; ?>> Indiferente </option>
+                    <option value="naturaleza" <?php if ($opcion_tipo == "naturaleza") echo "selected"; ?>> Naturaleza </option>
+                    <option value="construcciones" <?php if ($opcion_tipo == "construcciones") echo "selected"; ?>> Construcciones </option>
+                    <option value="animales" <?php if ($opcion_tipo == "animales") echo "selected"; ?>> Animales </option>
+                    <option value="personas" <?php if ($opcion_tipo == "personas") echo "selected"; ?>> Personas </option>
                 </select>
             </section>
                 
             <section>
                 <label for="fecha">Fecha </label>
             
-                <select name="data[fecha]" value="<?php if (isset($_SESSION['data']['fecha']))echo $_SESSION['data']['fecha'];?>">
-                    <option value="indiferente"> Indiferente </option>
-                    <option value="recientes"> M&aacute;s recientes </option>
-                    <option value="antiguas"> M&aacute;s antiguas </option>
+                <select name="data[fecha]" value="<?php if (isset($_COOKIE['data']['fecha']))echo $_COOKIE['data']['fecha'];?>">
+                    <option value="indiferente" <?php if ($opcion_fecha == "indiferente") echo "selected"; ?>> Indiferente </option>
+                    <option value="recientes" <?php if ($opcion_fecha == "recientes") echo "selected"; ?>> M&aacute;s recientes </option>
+                    <option value="antiguas" <?php if ($opcion_fecha == "antiguas") echo "selected"; ?>> M&aacute;s antiguas </option>
                 </select>
             </section>
 

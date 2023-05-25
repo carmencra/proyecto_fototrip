@@ -42,10 +42,10 @@ class ImagenController{
     public function buscar() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $filtros= $_POST['data'];
+
             $imagenes_obtenidas= $this->repository->filtrar_imagenes($filtros);
 
             // recorremos las imágenes obtenidas, y si están aceptadas, las mostrará
-            // var_dump($imagenes_obtenidas);die();
             $imagenes_aceptadas= [];
             foreach ($imagenes_obtenidas as $imagen) {
                 if ($imagen->getAceptada() == true) {
