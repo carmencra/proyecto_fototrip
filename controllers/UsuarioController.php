@@ -41,7 +41,7 @@ class UsuarioController{
                     $_SESSION['correo_a_confirmar']= $datos['email'];
                     // $this->pages->render('email/enviado', ['email' => $datos['email']]);
                     
-                    header("Location: ". $_ENV['BASE_URL'].'email/enviado');
+                    header("Location: ". $_ENV['BASE_URL'].'email_enviado');
                 }
                 else {
                     $this->pages->render('usuario/registro');
