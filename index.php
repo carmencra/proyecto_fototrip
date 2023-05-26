@@ -125,6 +125,15 @@ session_start();
             Router::add('GET', 'usuario/cerrar', function(){
                 (new UsuarioController())->cerrar();
             });
+
+            // inscribirse a un viaje
+            Router::add('POST', 'viaje/inscribirse?id=:id', function($id) {
+                (new ViajeController())->inscribirse($id);
+                
+            }); 
+            Router::add('GET', 'viaje/inscribirse?id=:id', function($id) {
+                (new ViajeController())->inscribirse($id);
+            });
         }
         
     

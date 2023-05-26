@@ -1,11 +1,6 @@
 
 <?php require_once('views/layout/header_sub_main.php'); ?>
 
-
-<?php if (empty($viaje)): ?>
-    <p>No se ha encontrado ning&uacute;n viaje.</p> <br><br><br>
-<?php else:?>
-
 <section class="portada">
     <img src="../fuente/media/images/galeria/<?= $viaje->getImagen_principal();?>" alt="imagen pais" />
 
@@ -190,7 +185,5 @@
 
 
     </section>
-
-<?php endif;?>
 
 <?php require_once('views/layout/footer_sub_main.php'); ?>

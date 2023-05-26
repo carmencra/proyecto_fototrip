@@ -79,12 +79,6 @@ class ViajeController {
             
             $this->pages->render('viaje/ver', ['viaje' => $viaje, 'itinerario' => $itinerario, 'gastos' => $gastos, 'imagenes' => $imagenes, 'comentarios' => $comentarios ]);
         }
-        // sino, manda solo el viaje vacío y la vista devuelve que no se ha encontrado
-        else {
-            $this->pages->render('viaje/ver', ['viaje' => $viaje]);
-        }
-       
-
     }
 
     public function obtener_viaje($id) {
