@@ -1,5 +1,5 @@
 
-<?php require_once('views/layout/header_base.php'); ?>
+<?php require_once('views/layout/header_sub_main.php'); ?>
 
 
 <?php if (empty($viaje)): ?>
@@ -189,3 +189,4 @@
 
 <?php endif;?>
 
+<?php require_once('views/layout/footer_sub_main.php'); ?>
