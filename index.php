@@ -105,19 +105,27 @@ session_start();
             (new ImagenController())->buscar();
         });
 
+// 
         // para acceder al formulario
-        Router::add('GET', 'usuario/registro', function(){
-            (new UsuarioController())->registro();
+        Router::add('GET', 'usuario/registrarse', function(){
+            (new UsuarioController())->registrarse();
         });
+// 
+
+
+        // para acceder al formulario
+        // Router::add('GET', 'usuario/registro', function(){
+        //     (new UsuarioController())->registro();
+        // });
         // para recoger los datos del formulario
         Router::add('POST', 'usuario/registro', function(){
             (new UsuarioController())->registro();
         });
 
         // para acceder al formulario
-        Router::add('GET', 'usuario/login', function(){
-            (new UsuarioController())->login();
-        });
+        // Router::add('GET', 'usuario/login', function(){
+        //     (new UsuarioController())->login();
+        // });
         // para recoger los datos del formulario
         Router::add('POST', 'usuario/login', function(){
             (new UsuarioController())->login();

@@ -17,11 +17,10 @@
 
     <div class="menu_usuario">
         <?php if (!isset($_SESSION['usuario'])): ?>
-            <button onclick="despliega_usuario()" class="boton_usuario">Iniciar sesi&oacute;n</button>
-                <div id="lista_usuario" class="contenido_lista">
-                    <a href="<?=$_ENV['BASE_URL']?>usuario/registro">Registrarse </a>
-                    <a href="<?=$_ENV['BASE_URL']?>usuario/login">Iniciar sesi&oacute;n</a>
-                </div>
+            <button class="boton_usuario">
+                <a href="<?=$_ENV['BASE_URL']?>usuario/registrarse">Registro</a>
+            </button>
+            
 
         <?php else :?>
             <button onclick="despliega_usuario()" class="boton_usuario"> <?=$_SESSION['usuario']?> </button>

@@ -1,11 +1,17 @@
+.tipos_registro {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
 fieldset {
-    width: 50%;
-    margin: auto;
     border: 1px solid black;
     background-color: rgba(0, 0, 0, 0.8);
     border-radius: 40px;
-    padding: 0.2% 2% 2% 2%;
+    padding: 0.3% 3% 3% 3%;
     color: white;
+    margin-bottom: 2%;
+    height: max-content;
 }
 
 fieldset form {

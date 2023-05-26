@@ -15,6 +15,14 @@ class UsuarioController{
         $this->repository= new UsuarioRepository();
     }
 
+    public function registrarse() {
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            //borramos las sesiones de errores para que no haya anteriores
+            $this->borra_sesiones_errores();
+            $this->pages->render('usuario/registrarse');
+        }
+    }
+
     public function registro() {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             //borramos las sesiones de errores para que no haya anteriores

@@ -16,6 +16,15 @@
   background-color: rgba(255, 255, 255, 0.8);
 }
 
+.boton_usuario a {
+  text-decoration: none;
+  color: black;
+}
+
+.boton_usuario a:hover {
+  text-decoration: underline;
+}
+
 /*Posición del contenedor*/
 .menu_usuario{
   position: relative;
