@@ -21,12 +21,22 @@
                 <a href="<?=$_ENV['BASE_URL']?>usuario/registrarse">Registro</a>
             </button>
 
-        <?php else :?>
-            <button onclick="despliega_usuario()" class="boton_usuario"> <?=$_SESSION['usuario']?> </button>
-                <div id="lista_usuario" class="contenido_lista">
-                    <a href="">Mis viajes</a>
-                    <a href="<?=$_ENV['BASE_URL']?>usuario/cerrar">Salir</a>
-                </div>
+            <?php elseif (isset($_SESSION['usuario'])) :
+            // si es el admin, muestra la pantalla de administrar
+            if (isset($_SESSION['admin'])): ?>
+                <button onclick="despliega_usuario()" class="boton_usuario"> <?=$_SESSION['usuario']?> </button>
+                    <div id="lista_usuario" class="contenido_lista">
+                        <a href="">Administrar</a>
+                        <a href="<?=$_ENV['BASE_URL']?>usuario/cerrar">Salir</a>
+                    </div>
+            <!-- si es un usuario normal, muestra ver sus viajes y cerrar sesión -->
+            <?php else :?>
+                <button onclick="despliega_usuario()" class="boton_usuario"> <?=$_SESSION['usuario']?> </button>
+                    <div id="lista_usuario" class="contenido_lista">
+                        <a href="">Mis viajes</a>
+                        <a href="<?=$_ENV['BASE_URL']?>usuario/cerrar">Salir</a>
+                    </div>
+            <?php endif;?>
         <?php endif;?>
     </div>
     
