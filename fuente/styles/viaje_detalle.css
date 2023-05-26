@@ -15,7 +15,7 @@
 }
 
 .portada .titulo {
-    margin-top: 16%;
+    margin-top: 13%;
 }
 
 
@@ -32,6 +32,24 @@
 .detalle_viaje h1 {
     padding: 2%;
     background-color: rgba(0, 0, 0, 0.8); 
+}
+
+.titulo form {
+    text-align: center;
+}
+
+.titulo .inscribirse {
+    background-color: #2CCBCB;
+    border-color: #2CCBCB;
+    margin: auto;
+    font-weight: bold;
+    padding: 0.5%;
+}
+
+.titulo .inscribirse:hover {
+    padding: 1%;
+    font-size: medium;
+    text-decoration: underline;
 }
 
 .general, .itinerario, .gastos {

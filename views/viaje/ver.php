@@ -11,6 +11,10 @@
 
     <section class="titulo">
         <h1> <?= $viaje->getPais() ?> </h1>
+        
+        <form action="<?=$_ENV['BASE_URL'].'viaje/inscribirse?id='.$viaje->getId()?>" method="POST">
+                <input class="inscribirse" type="submit" value="inscribirse">
+            </form>
     </section>
 </section>
 
