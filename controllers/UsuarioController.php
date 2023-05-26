@@ -75,10 +75,6 @@ class UsuarioController{
         if ($confirmado) {
             $_SESSION['usuario']= $_SESSION['correo_a_confirmar'];
 
-            if ($this->repository->es_admin($_SESSION['correo_a_confirmar'])) {
-                $_SESSION['admin']= true;
-            }
-
             // borramos sesiones de errores y redireccionamos al inicio
             $this->borra_sesiones_errores();
             Utils::deleteSession('correo_a_confirmar');
@@ -100,7 +96,7 @@ class UsuarioController{
         Utils::deleteSession('err_cla');
         Utils::deleteSession('err_ema');
         Utils::deleteSession('err_ape');
-        Utils::deleteSession('err_reg');
+        Utils::deleteSession('err_log');
     }
 
     // valida todo el formulario (vacíos, caracteres correctos...)
@@ -268,13 +264,22 @@ class UsuarioController{
                 if ($usuario !== false) {
                     $clave= $datos['clave'];
                     
+                    // comprueba que la contraseña del usuario es correcta
                     if ($this->repository->valida_clave($clave, $usuario)) {
-                        $_SESSION['usuario']= $datos['email'];
-
-                        if ($this->repository->es_admin($datos['email'])) {
-                            $_SESSION['admin']= true;
+                        // si está confirmado, podrá iniciar sesión
+                        if ($this->repository->esta_confirmado($datos['email'])) {
+                            $_SESSION['usuario']= $datos['email'];
+                            // se comprueba si es admin
+                            if ($this->repository->es_admin($datos['email'])) {
+                                $_SESSION['admin']= true;
+                            }
+                            header("Location: ". $_ENV['BASE_URL']);
                         }
-                        header("Location: ". $_ENV['BASE_URL']);
+                        else {
+                            $_SESSION['err_log']= true;
+                            $this->pages->render('usuario/registrarse');
+                        }
+
                     }
                     else {
                         $_SESSION['err_cla']= "*Contraseña incorrecta";

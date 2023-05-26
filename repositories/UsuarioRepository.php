@@ -76,13 +76,13 @@ class UsuarioRepository {
     }
 
     public function confirma_cuenta($id) {
-        $upd= $this->db->prepara("UPDATE usuarios set CONFIRMADO = 1 WHERE id = :id");
-
-        $upd->bindParam(':id', $id, PDO::PARAM_BOOL);
+        $upd= $this->db->prepara("UPDATE usuarios set CONFIRMADO = 1 WHERE id = $id");
 
         try{
-            $upd->execute();
-            return true;
+            if ($upd->execute()) {
+                return true;
+            }
+            else {return false;}
         }
         catch(PDOException $err){
             return false;
@@ -121,6 +121,27 @@ class UsuarioRepository {
             else {
                 return false;
             }
+        }
+        catch(PDOEXception $err) {
+            return false;
+        }
+    }
+
+    public function esta_confirmado($email) {
+        $cons= $this->db->prepara("SELECT confirmado FROM usuarios WHERE email= :email");
+
+        $cons->bindParam(':email', $email, PDO::PARAM_STR);
+        
+        try {
+            $cons->execute();
+            if ($cons && $cons->rowCount() == 1) {
+                $confirmado= $cons->fetch()['confirmado'];
+                if ($confirmado == "1") {
+                    return true;
+                }
+                else {return false;}
+            }
+            else {return false;}
         }
         catch(PDOEXception $err) {
             return false;

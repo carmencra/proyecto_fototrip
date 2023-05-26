@@ -35,22 +35,16 @@
                     <br><span style="color:red"> <?php if(isset($_SESSION['err_ape'])) echo  $_SESSION['err_ape']?> </span>
     
                     <br><br>
+                    
+                    <?php if (isset($_SESSION['err_reg'])): ?>
+                        <span style='color:red'>*Registro fallido</span>
+                        <br><br>
+                    <?php endif; ?>
     
                     <section class="submit">
                         <input type="submit" value="Registrarse">
                     </section>    
                 </form>
-    
-                <?php
-                    use Utils\Utils;
-    
-                    if (isset($_SESSION['err_reg'])): 
-                ?>
-                        <h3 style='color:red'>REGISTRO FALLIDO</h3>
-    
-                <?php 
-                    endif;
-                ?>
             </fieldset>
 
 
@@ -74,10 +68,16 @@
 
                 <br><br>
 
+                <?php if (isset($_SESSION['err_log'])): ?>
+                    <span style='color:red'>*Usuario no confirmado</span>
+                    <br><br>
+                <?php endif; ?>
+
                 <section class="submit">
                     <input type="submit" value="Iniciar sesión">
                 </section>
             </form>
+            
         </fieldset>
 
         </section>
