@@ -25,8 +25,8 @@
         <?php else :?>
             <button onclick="despliega_usuario()" class="boton_usuario"> <?=$_SESSION['usuario']?> </button>
                 <div id="lista_usuario" class="contenido_lista">
-                    <a href="">Mis viajes</a>
-                    <a href="<?=$_ENV['BASE_URL']?>usuario/cerrar">Cerrar sesi&oacute;n</a>
+                    <a href="">Viajes</a>
+                    <a href="<?=$_ENV['BASE_URL']?>usuario/cerrar">Salir</a>
                 </div>
         <?php endif;?>
     </div>
