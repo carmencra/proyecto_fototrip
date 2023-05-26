@@ -37,8 +37,8 @@
 .contenido_lista{
   display: none;
   position: absolute;
-  min-width: 100px;
   z-index: 1;
+  max-width: 95px;
   text-align: center;
   margin: auto;
   left: 10%;
@@ -48,7 +48,7 @@
 .contenido_lista a{
   border-radius: 7px 7px 7px 7px;
   color: black;
-  padding: 12px 16px;
+  padding: 9px 13px;
   display: block;
   background-color: rgba(44, 203, 203, 0.8);
   border: 1px solid black;

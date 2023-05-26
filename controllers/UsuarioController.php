@@ -27,7 +27,7 @@ class UsuarioController{
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             //borramos las sesiones de errores para que no haya anteriores
             $this->borra_sesiones_errores();
-            $this->pages->render('usuario/registro');
+            $this->pages->render('usuario/registrarse');
         }
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -52,12 +52,12 @@ class UsuarioController{
                     header("Location: ". $_ENV['BASE_URL'].'email_enviado');
                 }
                 else {
-                    $this->pages->render('usuario/registro');
+                    $this->pages->render('usuario/registrarse');
                     $_SESSION['err_reg']= true;
                 }
             }
             else {
-                $this->pages->render('usuario/registro');
+                $this->pages->render('usuario/registrarse');
             }
 
         }
@@ -255,7 +255,7 @@ class UsuarioController{
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             //borramos las sesiones de errores para que no haya anteriores
             $this->borra_sesiones_errores();
-            $this->pages->render('usuario/login');
+            $this->pages->render('usuario/registrarse');
         }
         if ($_SERVER['REQUEST_METHOD'] === 'POST'){
             //cada vez que se le da a loguearse, borramos las antiguas sesiones de errores
@@ -278,16 +278,16 @@ class UsuarioController{
                     }
                     else {
                         $_SESSION['err_cla']= "*Contraseña incorrecta";
-                        $this->pages->render('usuario/login');
+                        $this->pages->render('usuario/registrarse');
                     }
                 }
                 else {
                     $_SESSION['err_ema']= "*Ese correo no está registrado";
-                    $this->pages->render('usuario/login');
+                    $this->pages->render('usuario/registrarse');
                 }
             }
             else {                
-                $this->pages->render('usuario/login');
+                $this->pages->render('usuario/registrarse');
             }
         }
     }
