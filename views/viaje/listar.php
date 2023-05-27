@@ -46,7 +46,7 @@
     
 </header>
   
-<section class="portada_video">
+<!-- <section class="portada_video">
     <video src="fuente/media/videos/crimea_cortado.mp4" autoplay muted loop alt="video portada"></video>
 
     <section class="titulo">
@@ -55,11 +55,22 @@
 
         <a href="">Saber más</a>
     </section>
-</section>
+</section> -->
     
 
 
-<main id="main_index">
+<section class="portada" style="background-image:url('fuente/media/images/portada.jpg')">
+    <section>
+        <h1 class="titulo_portada">FOTO TRIP</h1>
+        <h3>Viajes fotográficos</h3>
+
+        <a href="">Saber más</a>
+    </section>
+</section>
+
+
+<main>
+
     <section class="buscador_viajes">
             <?php
                 // recogemos si hay alguna cookie de filtros existente

@@ -1,0 +1,49 @@
+.portada {
+    /* padding: 5%; */
+    /* background-image: url(../media/images/galeria/galicia.jpg); */
+    background-size: cover;
+    background-attachment: fixed;
+    text-align: center;
+}
+
+.portada section {
+    padding: 8%;
+}
+
+.portada h1 {
+    color: #2CCBCB;
+    font-size: 60px;
+    background-color: black;
+    padding: 1%;
+    width: max-content;
+    margin: auto; 
+    opacity: 0.8;
+    margin-bottom: 1.5%;
+}
+
+.portada h3 {
+    color: white;
+    font-size: 22px;
+    background-color: black;
+    padding: 0.5%;
+    width: max-content;
+    margin: auto; 
+    opacity: 0.8;
+    margin-bottom: 4%;
+}
+
+.portada input, .portada a {
+    background-color: #2CCBCB;
+    border-color: #2CCBCB;
+    font-weight: bold;
+    padding: 0.5%;
+    margin-top: 2%;
+    text-decoration: none;
+    color: black;
+}
+
+.portada input:hover, .portada a:hover {
+    padding: 1%;
+    font-size: medium;
+    text-decoration: underline;
+}

@@ -1,21 +1,19 @@
 
 <?php require_once('views/layout/header_sub_main.php'); ?>
 
-<section class="portada">
-    <img src="../fuente/media/images/galeria/<?= $viaje->getImagen_principal();?>" alt="imagen pais" />
-
-    <section class="titulo">
-        <h1> <?= $viaje->getPais() ?> </h1>
+<section class="portada" style="background-image:url('../fuente/media/images/galeria/<?= $viaje->getImagen_principal();?>')">
+    <section>
+        <h1 class="titulo_portada"> <?= $viaje->getPais() ?> </h1>
         
         <form action="<?=$_ENV['BASE_URL'].'viaje/inscribirse?id='.$viaje->getId()?>" method="POST">
-                <input class="inscribirse" type="submit" value="inscribirse">
-            </form>
+            <input class="inscribirse" type="submit" value="inscribirse">
+        </form>
     </section>
 </section>
 
 
-<main id="main_ver">
-    <section id="contenido_main_ver">        
+<main>
+    <!-- <section id="contenido_main_ver">         -->
         <section class="detalle_viaje">
             <!-- <h1> <?= $viaje->getPais() ?></h1>
 
@@ -184,6 +182,6 @@
 
 
 
-    </section>
+    <!-- </section> -->
 
 <?php require_once('views/layout/footer_sub_main.php'); ?>
