@@ -137,10 +137,13 @@ session_start();
             });
 
             if (isset($_SESSION['admin'])) {
-                Router::add('GET', 'admin/administrar', function(){
-                    (new AdminController())->administrar();
+                Router::add('GET', 'administrar', function(){
+                    (new UsuarioController())->administrar();
                 });
+
+                
             }
+
         }
         
     

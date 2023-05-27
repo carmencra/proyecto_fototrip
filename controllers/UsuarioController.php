@@ -322,6 +322,12 @@ class UsuarioController{
             header("Location: ". $_ENV['BASE_URL']);
         }
     }
+
+
+    // lleva al índice de administrar (solo para el admin de la página)
+    public function administrar() {
+        $this->pages->render('usuario/administrar');
+    }
  
 
 }

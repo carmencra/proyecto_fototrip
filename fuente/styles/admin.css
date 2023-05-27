@@ -1,0 +1,27 @@
+.admin{
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    gap: 2%;
+    justify-content: center;
+    margin-top: 2%;
+}
+
+.admin section {
+    position: relative;
+    color: white;
+    padding: 1% 2% 2% 2%;
+    background-color: rgba(0, 0, 0, 0.8);
+    margin-bottom: 2%;
+    min-width: 20vw;
+    /* max-width: 45vw; */
+}
+
+.admin section a {
+    color: white;
+    text-decoration: none;
+}
+
+.admin section a:hover {
+    text-decoration: underline;
+}
