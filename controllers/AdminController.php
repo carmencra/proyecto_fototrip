@@ -13,6 +13,9 @@ class AdminController{
         $this->repository= new AdminRepository();
     }
 
+    public function administrar() {
+        $this->pages->render('admin/index');
+    }
     
 }
 

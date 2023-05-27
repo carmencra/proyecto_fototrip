@@ -30,7 +30,7 @@
             if (isset($_SESSION['admin'])): ?>
                 <button onclick="despliega_usuario()" class="boton_usuario"> <?=$_SESSION['usuario']?> </button>
                     <div id="lista_usuario" class="contenido_lista">
-                        <a href="">Administrar</a>
+                        <a href="<?=$_ENV['BASE_URL']?>admin/administrar">Administrar</a>
                         <a href="<?=$_ENV['BASE_URL']?>usuario/cerrar">Salir</a>
                     </div>
             <!-- si es un usuario normal, muestra ver sus viajes y cerrar sesión -->

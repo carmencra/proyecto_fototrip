@@ -11,6 +11,7 @@ use Controllers\ViajeController;
 use Controllers\ComentarioController;
 use Controllers\ImagenController;
 use Controllers\UsuarioController;
+use Controllers\AdminController;
 use Lib\Router;
 use Dotenv\Dotenv;
 
@@ -134,6 +135,12 @@ session_start();
             Router::add('GET', 'viaje/inscribirse?id=:id', function($id) {
                 (new ViajeController())->inscribirse($id);
             });
+
+            if (isset($_SESSION['admin'])) {
+                Router::add('GET', 'admin/administrar', function(){
+                    (new AdminController())->administrar();
+                });
+            }
         }
         
     
