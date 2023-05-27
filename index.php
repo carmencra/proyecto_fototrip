@@ -136,12 +136,34 @@ session_start();
                 (new ViajeController())->inscribirse($id);
             });
 
+            
+            // rutas del administrador
             if (isset($_SESSION['admin'])) {
                 Router::add('GET', 'administrar', function(){
                     (new UsuarioController())->administrar();
                 });
 
+                Router::add('GET', 'viaje/crear', function(){
+                    (new ViajeController())->crear();
+                });
                 
+                Router::add('GET', 'viaje/mostrar', function(){
+                    (new ViajeController())->mostrar();
+                });
+
+
+                Router::add('GET', 'imagen/crear', function(){
+                    (new ImagenController())->crear();
+                });
+
+                Router::add('GET', 'imagen/mostrar', function(){
+                    (new ImagenController())->mostrar();
+                });
+
+                
+                Router::add('GET', 'comentario/mostrar', function(){
+                    (new ComentarioController())->mostrar();
+                });                
             }
 
         }
