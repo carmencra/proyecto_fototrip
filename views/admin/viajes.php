@@ -14,15 +14,6 @@
                     <section class="seccion_viaje">
                         <img src="../fuente/media/images/galeria/<?= $viaje->getImagen_principal(); ?>" width="250px" height="150px" />
                         
-                        <section class="contenido">
-                            <span> <?= $viaje->getDescripcion(); ?> </span>
-                            <span> <?= $viaje->getPrecio(); ?> € </span>
-                            <span> <?= $viaje->getFecha_inicio(); ?> / <?= $viaje->getFecha_fin(); ?></span>
-                            
-                            <span> Fotograf&iacute;a: <?= $viaje->getNivel_fotografia(); ?> </span>
-                            <span> F&iacute;sico: <?= $viaje->getNivel_fisico(); ?> </span>
-                        </section>
-    
                         <section class="forms">
                             <form action="<?=$_ENV['BASE_URL'].'viaje/modificar&id='.$viaje->getId() ?>" method="GET">
                                 <input type="submit" value="Modificar">
@@ -33,6 +24,15 @@
                             </form>
                         </section>
 
+                    </section>
+
+                    <section class="contenido">
+                            <span> <?= $viaje->getDescripcion(); ?> </span>
+                            <span> <?= $viaje->getPrecio(); ?> € </span>
+                            <span> <?= $viaje->getFecha_inicio(); ?> / <?= $viaje->getFecha_fin(); ?></span>
+                            
+                            <span> Fotograf&iacute;a: <?= $viaje->getNivel_fotografia(); ?> </span>
+                            <span> F&iacute;sico: <?= $viaje->getNivel_fisico(); ?> </span>
                     </section>
                     
                 </section>
