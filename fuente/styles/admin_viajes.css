@@ -35,13 +35,13 @@
     margin: auto;
 }
 
-.admin_viajes .viaje_admin .forms input {
+.admin_viajes .viaje_admin .forms input, .admin_viajes .viaje_admin .forms button {
     background-color: #2CCBCB;
     border-color: #2CCBCB;
     font-weight: bold;
 }
 
-.admin_viajes .viaje_admin .forms input:hover {
+.admin_viajes .viaje_admin .forms input:hover, .admin_viajes .viaje_admin .forms button:hover {
     /* padding: 30%; */
     font-size: medium;
     text-decoration: underline;

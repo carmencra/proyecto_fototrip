@@ -146,16 +146,22 @@ session_start();
                 Router::add('GET', 'viaje/crear', function(){
                     (new ViajeController())->crear();
                 });
-                
                 Router::add('GET', 'administrar/viaje', function(){
                     (new ViajeController())->mostrar();
+                });
+                // Router::add('GET', 'viaje/borrar?id=:id', function($id){
+                //     var_dump($_SESSION['viaje_a_borrar'], $_GET['id']);die();
+                //     (new ViajeController())->borrar($id);
+                // });
+                Router::add('POST', 'viaje/borrar', function(){
+                    // var_dump("a");die();
+                    (new ViajeController())->borrar();
                 });
 
 
                 Router::add('GET', 'imagen/crear', function(){
                     (new ImagenController())->crear();
                 });
-
                 Router::add('GET', 'administrar/imagen', function(){
                     (new ImagenController())->mostrar();
                 });

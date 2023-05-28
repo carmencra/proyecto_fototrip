@@ -1,6 +1,23 @@
 
 <?php require_once('views/layout/header_sub_main.php'); ?>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+  $("#form_borrar_viaje").submit(function(e) {
+    e.preventDefault(); // Evita el envío del formulario
+    
+    var id_viaje = $("#id_viaje_a_borrar").val();
+    
+    var result = confirm("¿Quieres borrar este viaje?");
+
+    if (result) {
+        this.submit();
+    } 
+  });
+});
+</script>
+
 
 <main>
     <section class="contenido_main">
@@ -18,10 +35,14 @@
                             <form action="<?=$_ENV['BASE_URL'].'viaje/modificar&id='.$viaje->getId() ?>" method="GET">
                                 <input type="submit" value="Modificar">
                             </form> <br>
-    
-                            <form action="<?=$_ENV['BASE_URL'].'viaje/borrar&id='.$viaje->getId() ?>" method="GET">
+
+                            <form id="form_borrar_viaje" action="<?=$_ENV['BASE_URL']?>viaje/borrar" method="POST">
+                                <input type="hidden" id="id_viaje_a_borrar" name="id_viaje_a_borrar" value="<?= $viaje->getId()?>">
                                 <input type="submit" value="Borrar">
                             </form>
+
+                            <!-- <button id="borrar_viaje" data-id="< ?= $viaje->getId();?>">Borrar viaje</button> -->
+
                         </section>
 
                     </section>

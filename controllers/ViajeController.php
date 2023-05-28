@@ -107,6 +107,11 @@ class ViajeController {
         $this->pages->render('admin/viajes', ['viajes' => $objetos_viajes]);
     }
 
+    public function borrar() {
+        var_dump($_POST['id_viaje_a_borrar']);die();
+        var_dump("a", $id);die();
+    }
+
 }
 
 ?>
