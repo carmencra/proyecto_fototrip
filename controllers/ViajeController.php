@@ -27,15 +27,21 @@ class ViajeController {
 
     public function listar() {
         $lista_viajes= $this->repository->listar();
+        // convertimos los viajes obtenidos en objetos de la clase Viaje
+        $objetos_viajes= $this->obtener_objetos($lista_viajes);
+        
+        $this->pages->render('viaje/listar', ['viajes' => $objetos_viajes]);
+    }
+
+    public function obtener_objetos($viajes) {
         $objetos_viajes= [];
-        foreach ($lista_viajes as $viaje) {
+        foreach ($viajes as $viaje) {
             $objeto= $this->pasar_objeto($viaje);
             $duracion= $this->obtener_duracion($objeto);
             $objeto->setDuracion($duracion);
             array_push($objetos_viajes, $objeto);
         }
-        // return $objetos_viajes;
-        $this->pages->render('viaje/listar', ['viajes' => $objetos_viajes]);
+        return $objetos_viajes;
     }
 
     public function pasar_objeto($array) {
@@ -91,6 +97,14 @@ class ViajeController {
         $viaje->setDuracion($duracion);  
         
         return $viaje;
+    }
+
+    public function mostrar() {
+        $lista_viajes= $this->repository->listar();
+        // convertimos los viajes obtenidos en objetos de la clase Viaje
+        $objetos_viajes= $this->obtener_objetos($lista_viajes);
+
+        $this->pages->render('admin/viajes', ['viajes' => $objetos_viajes]);
     }
 
 }

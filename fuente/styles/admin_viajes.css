@@ -1,0 +1,80 @@
+.admin_viajes {
+    /* display: flex;
+    flex-wrap: wrap;     */
+}
+
+.admin_viajes .viaje_admin {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 2%;
+    margin: 2%;
+}
+
+.admin_viajes .viaje_admin h1 {
+    color: #2CCBCB;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.admin_viajes .viaje_admin .seccion_viaje {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.admin_viajes .viaje_admin .contenido {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8%;    
+    justify-content: center;
+    align-content: center;
+    margin-bottom: 2%;
+}
+/* .viajes {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    gap: 2%;
+    justify-content: center; */
+
+.admin_viajes .viaje_admin .contenido span {
+    /* margin-bottom: 5%; */
+} 
+
+
+.admin_viajes .viaje_admin .forms {
+    text-align: center;
+    margin: auto;
+}
+
+
+.admin_viajes .viaje_admin .forms input {
+    background-color: #2CCBCB;
+    border-color: #2CCBCB;
+    font-weight: bold;
+    /* padding: 20%; */
+    /* margin: 20%; */
+}
+
+.admin_viajes .viaje_admin .forms input:hover {
+    /* padding: 30%; */
+    font-size: medium;
+    text-decoration: underline;
+}
+
+
+.admin_viajes .viaje_admin img {
+    margin: auto;
+    margin-bottom: 2% !important;
+}
+
+/* 
+text-decoration: underline;
+}
+
+
+.admin_viajes .contenido {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8%;    
+}
+*/
