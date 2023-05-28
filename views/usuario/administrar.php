@@ -9,20 +9,20 @@
                 <h2>Viajes</h2>
                 <hr><br>
                 <a href="<?=$_ENV['BASE_URL']?>viaje/crear">Añadir</a> <br><br>
-                <a href="<?=$_ENV['BASE_URL']?>viaje/mostrar">Editar/borrar</a>
+                <a href="<?=$_ENV['BASE_URL']?>administrar/viaje">Editar/borrar</a>
             </section>
 
             <section>
                 <h2>Im&aacute;genes</h2>
                 <hr><br>
                 <a href="<?=$_ENV['BASE_URL']?>imagen/crear">Añadir</a> <br><br>
-                <a href="<?=$_ENV['BASE_URL']?>imagen/mostrar">Editar/borrar</a>
+                <a href="<?=$_ENV['BASE_URL']?>administrar/imagen">Editar/borrar</a>
             </section>
 
             <section>
                 <h2>Comentarios</h2>
                 <hr><br>
-                <a href="<?=$_ENV['BASE_URL']?>comentario/mostrar">Borrar</a>
+                <a href="<?=$_ENV['BASE_URL']?>administrar/comentario">Borrar</a>
             </section>
 
         </section>

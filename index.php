@@ -147,7 +147,7 @@ session_start();
                     (new ViajeController())->crear();
                 });
                 
-                Router::add('GET', 'viaje/mostrar', function(){
+                Router::add('GET', 'administrar/viaje', function(){
                     (new ViajeController())->mostrar();
                 });
 
@@ -156,12 +156,12 @@ session_start();
                     (new ImagenController())->crear();
                 });
 
-                Router::add('GET', 'imagen/mostrar', function(){
+                Router::add('GET', 'administrar/imagen', function(){
                     (new ImagenController())->mostrar();
                 });
 
                 
-                Router::add('GET', 'comentario/mostrar', function(){
+                Router::add('GET', 'administrar/comentario', function(){
                     (new ComentarioController())->mostrar();
                 });                
             }
