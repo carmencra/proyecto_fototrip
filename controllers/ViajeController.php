@@ -108,8 +108,10 @@ class ViajeController {
     }
 
     public function borrar() {
-        var_dump($_POST['id_viaje_a_borrar']);die();
-        var_dump("a", $id);die();
+        $id= $_POST['id_viaje_a_borrar'];
+        $this->repository->borrar($id);
+        // redirige a la administración de viajes
+        $this->mostrar();
     }
 
 }

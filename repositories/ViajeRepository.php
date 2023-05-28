@@ -35,16 +35,15 @@ class ViajeRepository {
             $cons->execute();
             if ($cons && $cons->rowCount() == 1) {
                 $diferencia= $cons->fetch()["diferencia"];
-                $result = $diferencia + 1; //al ser la diferencia, no incluye el mismo día
+                return $diferencia + 1; //al ser la diferencia, no incluye el mismo día
             }
             else {
-                $result= false;
+                return false;
             }
         }
         catch(PDOEXception $err) {
-            $result= false;
+            return false;
         }
-        return $result;
     }
 
     // devuelve los viajes encajan con los filtros de búsqueda introducidos
@@ -131,7 +130,23 @@ class ViajeRepository {
         $this->db->consulta("SELECT * FROM viajes WHERE id= $id");
         return $this->db->extraer_registro();
     }
+    
+    public function borrar($id) {
+        $del= $this->db->prepara("DELETE FROM viajes WHERE id= $id");
         
+        try {
+            $del->execute();
+            if ($del && $del->rowCount() == 1) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        catch(PDOEXception $err) {
+            return false;
+        }
+    }
 
 }
 
