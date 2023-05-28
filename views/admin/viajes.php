@@ -4,15 +4,16 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
-  $("#form_borrar_viaje").submit(function(e) {
+    // recoge de qué viaje ha sido el formulario que se ha activado
+  $("form[id^='form_borrar_viaje']").submit(function(e) {
     e.preventDefault(); // Evita el envío del formulario
     
-    var id_viaje = $("#id_viaje_a_borrar").val();
+    var id_viaje = $(this).find("input[name='id_viaje_a_borrar']").val();
     
     var result = confirm("¿Quieres borrar este viaje?");
-
+  
     if (result) {
-        this.submit();
+        this.submit(); // Envía el formulario
     } 
   });
 });
@@ -36,13 +37,11 @@ $(document).ready(function() {
                                 <input type="submit" value="Modificar">
                             </form> <br>
 
-                            <form id="form_borrar_viaje" action="<?=$_ENV['BASE_URL']?>viaje/borrar" method="POST">
+                            <!-- creamos un formulario para borrar el viaje, que recoge el id por post; cada formulario tiene un id distinto, dependiendo del id del viaje -->
+                            <form id="form_borrar_viaje_<?= $viaje->getId() ?>" action="<?=$_ENV['BASE_URL']?>viaje/borrar" method="POST">
                                 <input type="hidden" id="id_viaje_a_borrar" name="id_viaje_a_borrar" value="<?= $viaje->getId()?>">
                                 <input type="submit" value="Borrar">
                             </form>
-
-                            <!-- <button id="borrar_viaje" data-id="< ?= $viaje->getId();?>">Borrar viaje</button> -->
-
                         </section>
 
                     </section>
