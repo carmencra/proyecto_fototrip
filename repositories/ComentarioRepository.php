@@ -30,18 +30,42 @@ class ComentarioRepository {
         try {
             $cons->execute();
             if ($cons && $cons->rowCount() == 1) {
-                $result= $cons->fetch()["pais"];
+                return $cons->fetch()["pais"];
+            }
+            else {
+                return false;
             }
         }
         catch(PDOEXception $err) {
-            $result= false;
+            return false;
         }
-        return $result;
     }
 
     public function obtener_comentarios($id_viaje): ?array {
         $this->db->consulta("SELECT * FROM comentarios WHERE id_viaje= $id_viaje");
         return $this->db->extraer_todos();
+    }
+
+    public function obtener_comentario($id) {
+        $this->db->consulta("SELECT * FROM comentarios WHERE id= $id");
+        return $this->db->extraer_registro();
+    }
+    
+    public function borrar($id) {
+        $del= $this->db->prepara("DELETE FROM comentarios WHERE id= $id");
+        
+        try {
+            $del->execute();
+            if ($del && $del->rowCount() == 1) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        catch(PDOEXception $err) {
+            return false;
+        }
     }
 
 }

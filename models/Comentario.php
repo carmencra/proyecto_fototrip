@@ -2,19 +2,40 @@
     namespace Models;
 
     class Comentario {
+        private string $id;
         private string $id_viaje;
         private string $usuario;
         private string $contenido;
 
         private string $nombre_viaje;
 
-        public function __construct(string $id_viaje, string $usuario, string $contenido) {
+        public function __construct(string $id, string $id_viaje, string $usuario, string $contenido) {
+            $this->id= $id;
             $this->id_viaje= $id_viaje;
             $this->usuario= $usuario;
             $this->contenido= $contenido;
         }
 
         
+        /**
+         * Get the value of id
+         */ 
+        public function getId()
+        {
+                return $this->id;
+        }
+
+        /**
+         * Set the value of id
+         *
+         * @return  self
+         */ 
+        public function setId($id)
+        {
+                $this->id = $id;
+
+                return $this;
+        }
 
         /**
          * Get the value of id_viaje
@@ -99,6 +120,7 @@
         
         public static function fromArray(array $data): Comentario{
             return new Comentario(
+                $data['id'] ?? '',
                 $data['id_viaje'] ?? '',
                 $data['usuario'] ?? '',
                 $data['contenido'] ?? ''

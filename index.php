@@ -173,7 +173,7 @@ session_start();
                     (new ComentarioController())->mostrar();
                 });   
                 Router::add('POST', 'comentario/borrar', function(){
-                    (new ComentarioController())->mostrar();
+                    (new ComentarioController())->borrar();
                 });             
             }
 

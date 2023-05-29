@@ -60,15 +60,14 @@ class ComentarioController{
     }
 
     public function borrar() {
-        var_dump("aquí en el controlador, en el post tiene que ser id_viaje e id_usuario");die();
-        $id= $_POST['id_viaje_a_borrar'];
+        $id= $_POST['id_comentario_a_borrar'];
         $borrado= $this->repository->borrar($id);
 
         if ($borrado) {
-            $_SESSION['viaje_borrado']= true;
+            $_SESSION['comentario_borrado']= true;
         } 
         else {
-            $_SESSION['viaje_borrado']= false;
+            $_SESSION['comentario_borrado']= false;
         }
         $this->mostrar();
     }
