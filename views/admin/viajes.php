@@ -2,26 +2,21 @@
 <?php require_once('views/layout/header_sub_main.php'); ?>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$(document).ready(function() {
-    // recoge de qué viaje ha sido el formulario que se ha activado
-  $("form[id^='form_borrar_viaje']").submit(function(e) {
-    e.preventDefault(); // Evita el envío del formulario
-    
-    var id_viaje = $(this).find("input[name='id_viaje_a_borrar']").val();
-    
-    var result = confirm("¿Quieres borrar este viaje?");
-  
-    if (result) {
-        this.submit(); // Envía el formulario
-    } 
-  });
-});
-</script>
+<script src="../fuente/scripts/recoger_id_viaje_borrar.js"></script>
 
 
 <main>
     <section class="contenido_main">
+
+        <?php if(isset($_SESSION['viaje_borrado'])):
+            if ($_SESSION['viaje_borrado'] == true) : ?>
+                <section class="borrado"> Viaje borrado correctamente </section>
+                
+            <?php else : ?>
+                <section class="borrado"> Error al borrar el viaje </section>   
+                   
+            <?php endif;?>     
+        <?php endif;?>
         
         <section class="admin_viajes">
             <?php foreach ($viajes as $viaje) :?>
@@ -39,7 +34,7 @@ $(document).ready(function() {
 
                             <!-- creamos un formulario para borrar el viaje, que recoge el id por post; cada formulario tiene un id distinto, dependiendo del id del viaje -->
                             <form id="form_borrar_viaje_<?= $viaje->getId() ?>" action="<?=$_ENV['BASE_URL']?>viaje/borrar" method="POST">
-                                <input type="hidden" id="id_viaje_a_borrar" name="id_viaje_a_borrar" value="<?= $viaje->getId()?>">
+                                <input type="hidden" name="id_viaje_a_borrar" value="<?= $viaje->getId()?>">
                                 <input type="submit" value="Borrar">
                             </form>
                         </section>
@@ -63,4 +58,10 @@ $(document).ready(function() {
     </section>
 </main>
 
-<?php require_once('views/layout/footer_sub_main.php'); ?>
+
+<?php  
+    use Utils\Utils;
+    Utils::deleteSession('viaje_borrado');
+
+    require_once('views/layout/footer_sub_main.php'); 
+?>

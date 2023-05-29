@@ -154,7 +154,6 @@ session_start();
                 //     (new ViajeController())->borrar($id);
                 // });
                 Router::add('POST', 'viaje/borrar', function(){
-                    // var_dump("a");die();
                     (new ViajeController())->borrar();
                 });
 

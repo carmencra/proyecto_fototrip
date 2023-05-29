@@ -109,8 +109,14 @@ class ViajeController {
 
     public function borrar() {
         $id= $_POST['id_viaje_a_borrar'];
-        $this->repository->borrar($id);
-        // redirige a la administración de viajes
+        $borrado= $this->repository->borrar($id);
+
+        if ($borrado) {
+            $_SESSION['viaje_borrado']= true;
+        } 
+        else {
+            $_SESSION['viaje_borrado']= false;
+        }
         $this->mostrar();
     }
 
