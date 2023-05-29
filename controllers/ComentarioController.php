@@ -15,15 +15,21 @@ class ComentarioController{
 
     public function listar() {
         $lista_coments= $this->repository->listar();
+        // convertimos los comentarios obtenidos en objetos de la clase Comentario
+        $objetos_coments= $this->obtener_objetos($lista_coments);
+        
+        $this->pages->render('comentario/listar', ['comentarios' => $objetos_coments]);
+    }
+
+    public function obtener_objetos($comentarios) {
         $objetos_coments= [];
-        foreach ($lista_coments as $coment) {
+        foreach ($comentarios as $coment) {
             $objeto= $this->pasar_objeto($coment);
             $nombre_viaje= $this->obtener_nombre_viaje($objeto->getId_viaje());
             $objeto->setNombre_viaje($nombre_viaje);
             array_push($objetos_coments, $objeto);
         }
-        // return $objetos_coments;
-        $this->pages->render('comentario/listar', ['comentarios' => $objetos_coments]);
+        return $objetos_coments;
     }
 
     public function pasar_objeto($array) {
@@ -43,6 +49,28 @@ class ComentarioController{
             array_push($objetos_comentarios, $objeto);
         }
         return $objetos_comentarios;
+    }
+
+    public function mostrar() {
+        $lista_comentarios= $this->repository->listar();
+        // convertimos los comentarios obtenidos en objetos de la clase comentario
+        $objetos_comentarios= $this->obtener_objetos($lista_comentarios);
+
+        $this->pages->render('admin/comentarios', ['comentarios' => $objetos_comentarios]);
+    }
+
+    public function borrar() {
+        var_dump("aquí en el controlador, en el post tiene que ser id_viaje e id_usuario");die();
+        $id= $_POST['id_viaje_a_borrar'];
+        $borrado= $this->repository->borrar($id);
+
+        if ($borrado) {
+            $_SESSION['viaje_borrado']= true;
+        } 
+        else {
+            $_SESSION['viaje_borrado']= false;
+        }
+        $this->mostrar();
     }
     
 }

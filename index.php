@@ -164,11 +164,17 @@ session_start();
                 Router::add('GET', 'administrar/imagen', function(){
                     (new ImagenController())->mostrar();
                 });
+                Router::add('POST', 'imagen/borrar', function(){
+                    (new ImagenController())->borrar();
+                });
 
                 
                 Router::add('GET', 'administrar/comentario', function(){
                     (new ComentarioController())->mostrar();
-                });                
+                });   
+                Router::add('POST', 'comentario/borrar', function(){
+                    (new ComentarioController())->mostrar();
+                });             
             }
 
         }
