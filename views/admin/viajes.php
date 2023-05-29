@@ -10,11 +10,16 @@
 
         <?php if(isset($_SESSION['viaje_borrado'])):
             if ($_SESSION['viaje_borrado'] == true) : ?>
-                <section class="borrado"> Viaje borrado correctamente </section>
+                <script type="text/javascript">
+                    alert("Se ha borrado el viaje.");
+                    window.close();
+                </script>
                 
-            <?php else : ?>
-                <section class="borrado"> Error al borrar el viaje </section>   
-                   
+            <?php else: ?>
+                <script type="text/javascript">
+                    alert("No se ha borrado el viaje.");
+                    window.close();
+                </script>
             <?php endif;?>     
         <?php endif;?>
         
