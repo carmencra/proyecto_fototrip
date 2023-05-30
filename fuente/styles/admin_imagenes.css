@@ -2,7 +2,6 @@
     display: flex;
     margin: auto;
     gap: 10%;
-    /* width: max-content; */
     justify-content: center;
 }
 
@@ -29,4 +28,14 @@
 }
 
 
+.imagen .borrar form input {
+    background-color: rgb(228, 95, 95);
+    border-color: rgb(228, 95, 95);
+    font-weight: bold;
+}
+
+.imagen .borrar form input:hover {
+    font-size: medium;
+    text-decoration: underline;
+}
 

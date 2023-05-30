@@ -29,10 +29,12 @@
 
                     <hr> <br>
 
-                    <form id="form_borrar_imagen_<?= $imagen->getImagen() ?>" action="<?=$_ENV['BASE_URL']?>imagen/borrar" method="POST">
-                        <input type="hidden" name="imagen_a_borrar" value="<?= $imagen->getImagen()?>">
-                        <input type="submit" value="Borrar">
-                    </form> <br>
+                    <section class="borrar">
+                        <form id="form_borrar_imagen_<?= $imagen->getImagen() ?>" action="<?=$_ENV['BASE_URL']?>imagen/borrar" method="POST">
+                            <input type="hidden" name="imagen_a_borrar" value="<?= $imagen->getImagen()?>">
+                            <input type="submit" value="Borrar">
+                        </form> 
+                    </section><br>
 
                     <img src="../fuente/media/images/galeria/<?= $imagen->getImagen(); ?>" width="380px" height="260px"/> <br><br>
 
