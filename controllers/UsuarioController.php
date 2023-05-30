@@ -272,8 +272,12 @@ class UsuarioController{
                             // se comprueba si es admin
                             if ($this->repository->es_admin($datos['email'])) {
                                 $_SESSION['admin']= true;
+                                header("Location: ". $_ENV['BASE_URL'].'administrar');
+                            
                             }
-                            header("Location: ". $_ENV['BASE_URL']);
+                            else {
+                                header("Location: ". $_ENV['BASE_URL']);
+                            }
                         }
                         else {
                             $_SESSION['err_log']= true;
