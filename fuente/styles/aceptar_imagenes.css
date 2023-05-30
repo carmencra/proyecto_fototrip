@@ -1,0 +1,32 @@
+.forms_imagen {
+    display: flex;
+    margin: auto;
+    gap: 10%;
+    /* width: max-content; */
+    justify-content: center;
+}
+
+.forms_imagen form input {
+    font-weight: bold;
+}
+
+/* aceptar */
+.forms_imagen form:first-child input {
+    background-color: rgb(106, 213, 106);
+    border-color: rgb(106, 213, 106);
+}
+
+/* descartar */
+.forms_imagen form:last-child input {
+    background-color: rgb(228, 95, 95);
+    border-color: rgb(228, 95, 95);
+}
+
+
+.forms_imagen form input:hover {
+    font-size: medium;
+    text-decoration: underline;
+}
+
+
+

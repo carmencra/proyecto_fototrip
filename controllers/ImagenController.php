@@ -36,7 +36,6 @@ class ImagenController{
         return $objetos_imagenes;
     }
 
-
     public function pasar_objeto($array) {
         return $this->repository->pasar_objeto($array);
     }
@@ -101,6 +100,26 @@ class ImagenController{
         $this->mostrar();
     }
     
+    public function listar_para_aceptar() {
+        $imagenes= $this->repository->listar();
+        $imagenes_no_aceptadas= $this->obtener_no_aceptadas($imagenes);
+        $this->pages->render('admin/aceptar_imagenes', ['imagenes' => $imagenes_no_aceptadas]);
+    }
+
+    public function obtener_no_aceptadas($imagenes) {
+        $objetos_imagenes= [];
+        foreach ($imagenes as $imagen) {
+            $objeto= $this->pasar_objeto($imagen);
+            // añade las imágenes que todavía no han sido aceptadas
+            if ($objeto->getAceptada() == false) { //0 = true; 1= false 
+                $pais_viaje= $this->obtener_pais_viaje($objeto->getId_viaje());
+                $objeto->setPais_viaje($pais_viaje);
+                array_push($objetos_imagenes, $objeto);
+            }
+        }
+        return $objetos_imagenes;
+    }
+
 }
 
 ?>

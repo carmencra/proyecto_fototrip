@@ -164,6 +164,9 @@ session_start();
                 Router::add('GET', 'administrar/imagen', function(){
                     (new ImagenController())->mostrar();
                 });
+                Router::add('GET', 'aceptar/imagen', function(){
+                    (new ImagenController())->listar_para_aceptar();
+                });
                 Router::add('POST', 'imagen/borrar', function(){
                     (new ImagenController())->borrar();
                 });
