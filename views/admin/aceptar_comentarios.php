@@ -42,7 +42,7 @@
                         
                         <form id="form_descartar_comentario_<?= $comentario->getId() ?>" action="<?=$_ENV['BASE_URL']?>comentario/descartar" method="POST">
                             <input type="hidden" name="comentario_a_descartar" value="<?= $comentario->getId()?>">
-                            <input type="submit" value="descartar">
+                            <input type="submit" value="Descartar">
                         </form>
                     </section> 
 

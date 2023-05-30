@@ -68,14 +68,14 @@ $(document).ready(function() {
   });
 
   // recoge el formulario de DESCARTAR IMAGEN
-  $("form[id='^form_descartar_imagen_']").submit(function(e) {
+  $("form[id^='form_descartar_imagen_']").submit(function(e) {
     e.preventDefault(); // Evita el envío del formulario
     
     var form = this;
     
     // Verificar si se ha confirmado anteriormente
     if (!$(form).data('confirmed')) {
-      var result = confirm("¿Quieres descartar(borrar) esta imagen?");
+      var result = confirm("¿Quieres descartar(publicar) esta imagen?");
       if (result) {
         $(form).data('confirmed', true); // Marcar como confirmado para evitar futuras ventanas emergentes
         form.submit(); // Enviar el formulario para redirigir al controlador
