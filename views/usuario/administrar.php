@@ -24,7 +24,7 @@
                 <a href="<?=$_ENV['BASE_URL']?>imagen/crear">Añadir</a> <br><br>
                 <a href="<?=$_ENV['BASE_URL']?>administrar/imagen">Editar/borrar</a>
                 <br><br>
-                <a href="<?=$_ENV['BASE_URL']?>aceptar/imagen">Aceptar/descartar</a>
+                <a href="<?=$_ENV['BASE_URL']?>seleccionar/imagenes">Aceptar/descartar</a>
             </section>
 
         </section>

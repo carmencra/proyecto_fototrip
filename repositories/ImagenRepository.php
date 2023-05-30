@@ -157,7 +157,7 @@ class ImagenRepository {
     }
     
     public function borrar($imagen) {
-        $del= $this->db->prepara("DELETE FROM imagenes WHERE imagen= $imagen");
+        $del= $this->db->prepara("DELETE FROM imagenes WHERE imagen= '$imagen'");
         
         try {
             $del->execute();
@@ -169,6 +169,20 @@ class ImagenRepository {
             }
         }
         catch(PDOEXception $err) {
+            return false;
+        }
+    }
+
+    public function aceptar($imagen) {
+        $upd= $this->db->prepara("UPDATE imagenes SET aceptada = true WHERE imagen = '$imagen'");
+
+        try{
+            if ($upd->execute()) {
+                return true;
+            }
+            else {return false;}
+        }
+        catch(PDOException $err){
             return false;
         }
     }

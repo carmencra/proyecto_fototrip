@@ -164,8 +164,14 @@ session_start();
                 Router::add('GET', 'administrar/imagen', function(){
                     (new ImagenController())->mostrar();
                 });
-                Router::add('GET', 'aceptar/imagen', function(){
+                Router::add('GET', 'seleccionar/imagenes', function(){
                     (new ImagenController())->listar_para_aceptar();
+                });
+                Router::add('POST', 'imagen/aceptar', function(){
+                    (new ImagenController())->aceptar();
+                });
+                Router::add('POST', 'imagen/descartar', function(){
+                    (new ImagenController())->descartar();
                 });
                 Router::add('POST', 'imagen/borrar', function(){
                     (new ImagenController())->borrar();

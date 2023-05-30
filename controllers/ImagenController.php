@@ -120,6 +120,18 @@ class ImagenController{
         return $objetos_imagenes;
     }
 
+    public function aceptar() {
+        $imagen= $_POST['imagen_a_aceptar'];
+        $this->repository->aceptar($imagen);
+        $this->listar_para_aceptar();
+    }
+
+    public function descartar() {
+        $imagen= $_POST['imagen_a_descartar'];
+        $this->repository->borrar($imagen);
+        $this->listar_para_aceptar();
+    }
+
 }
 
 ?>
