@@ -6,14 +6,16 @@
         private string $id_viaje;
         private string $usuario;
         private string $contenido;
+        private string $aceptado;
 
         private string $nombre_viaje;
 
-        public function __construct(string $id, string $id_viaje, string $usuario, string $contenido) {
+        public function __construct(string $id, string $id_viaje, string $usuario, string $contenido, string $aceptado) {
             $this->id= $id;
             $this->id_viaje= $id_viaje;
             $this->usuario= $usuario;
             $this->contenido= $contenido;
+            $this->aceptado= $aceptado;
         }
 
         
@@ -116,17 +118,38 @@
 
                 return $this;
         }
+        
+        /**
+         * Get the value of aceptado
+         */ 
+        public function getAceptado()
+        {
+                return $this->aceptado;
+        }
 
+        /**
+         * Set the value of aceptado
+         *
+         * @return  self
+         */ 
+        public function setAceptado($aceptado)
+        {
+                $this->aceptado = $aceptado;
+
+                return $this;
+        }
+        
         
         public static function fromArray(array $data): Comentario{
             return new Comentario(
                 $data['id'] ?? '',
                 $data['id_viaje'] ?? '',
                 $data['usuario'] ?? '',
-                $data['contenido'] ?? ''
+                $data['contenido'] ?? '',
+                $data['aceptado'] ?? ''
             );
         }
-       
+
     }
 
 ?>

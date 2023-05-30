@@ -83,4 +83,37 @@ $(document).ready(function() {
     }
   });
 
+
+  // recoge el formulario de ACEPTAR COMENTARIO
+  $("form[id^='form_aceptar_comentario_']").submit(function(e) {
+    e.preventDefault(); // Evita el envío del formulario
+    
+    var form = this;
+    
+    // Verificar si se ha confirmado anteriormente
+    if (!$(form).data('confirmed')) {
+      var result = confirm("¿Quieres aceptar(publicar) este comentario?");
+      if (result) {
+        $(form).data('confirmed', true); // Marcar como confirmado para evitar futuras ventanas emergentes
+        form.submit(); // Enviar el formulario para redirigir al controlador
+      }
+    }
+  });
+
+  // recoge el formulario de DESCARTAR COMENTARIO
+  $("form[id^='form_descartar_comentario_']").submit(function(e) {
+    e.preventDefault(); // Evita el envío del formulario
+    
+    var form = this;
+    
+    // Verificar si se ha confirmado anteriormente
+    if (!$(form).data('confirmed')) {
+      var result = confirm("¿Quieres descartar(borrar) este comentario?");
+      if (result) {
+        $(form).data('confirmed', true); // Marcar como confirmado para evitar futuras ventanas emergentes
+        form.submit(); // Enviar el formulario para redirigir al controlador
+      }
+    }
+  });
+
 });

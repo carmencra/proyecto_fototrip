@@ -69,9 +69,4 @@
     </section>
 
 
-    <?php  
-        use Utils\Utils;
-        Utils::deleteSession('imagen_borrada');
-
-        require_once('views/layout/footer_sub_main.php'); 
-    ?>
+    <?php require_once('views/layout/footer_sub_main.php'); ?>

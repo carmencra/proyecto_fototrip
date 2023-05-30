@@ -25,16 +25,3 @@
 .admin section a:hover {
     text-decoration: underline;
 }
-
-
-.comentarios form input {
-    background-color: rgb(228, 95, 95);;
-    border-color: rgb(228, 95, 95);;
-    font-weight: bold;
-}
-
-.comentarios form input:hover {
-    /* padding: 30%; */
-    font-size: medium;
-    text-decoration: underline;
-}

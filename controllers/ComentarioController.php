@@ -25,9 +25,11 @@ class ComentarioController{
         $objetos_coments= [];
         foreach ($comentarios as $coment) {
             $objeto= $this->pasar_objeto($coment);
-            $nombre_viaje= $this->obtener_nombre_viaje($objeto->getId_viaje());
-            $objeto->setNombre_viaje($nombre_viaje);
-            array_push($objetos_coments, $objeto);
+            if ($objeto->getAceptado() == true) {
+                $nombre_viaje= $this->obtener_nombre_viaje($objeto->getId_viaje());
+                $objeto->setNombre_viaje($nombre_viaje);
+                array_push($objetos_coments, $objeto);
+            }
         }
         return $objetos_coments;
     }
@@ -46,7 +48,9 @@ class ComentarioController{
         $objetos_comentarios= [];
         foreach ($lista_comentarios as $comentario) {
             $objeto= $this->pasar_objeto($comentario);
-            array_push($objetos_comentarios, $objeto);
+            if ($objeto->getAceptado() == true) {
+                array_push($objetos_comentarios, $objeto);
+            }
         }
         return $objetos_comentarios;
     }
@@ -72,6 +76,37 @@ class ComentarioController{
         $this->mostrar();
     }
     
+    public function listar_para_aceptar() {
+        $comentarios= $this->repository->listar();
+        $comentarios_no_aceptados= $this->obtener_no_aceptados($comentarios);
+        $this->pages->render('admin/aceptar_comentarios', ['comentarios' => $comentarios_no_aceptados]);
+    }
+
+    public function obtener_no_aceptados($comentarios) {
+        $objetos_coments= [];
+        foreach ($comentarios as $comentario) {
+            $objeto= $this->pasar_objeto($comentario);
+            // añade los comentarios que todavía no han sido aceptados
+            if ($objeto->getAceptado() == false) { 
+                $nombre_viaje= $this->obtener_nombre_viaje($objeto->getId_viaje());
+                $objeto->setNombre_viaje($nombre_viaje);
+                array_push($objetos_coments, $objeto);
+            }
+        }
+        return $objetos_coments;
+    }
+
+    public function aceptar() {
+        $comentario= $_POST['comentario_a_aceptar'];
+        $this->repository->aceptar($comentario);
+        $this->listar_para_aceptar();
+    }
+
+    public function descartar() {
+        $comentario= $_POST['comentario_a_descartar'];
+        $this->repository->borrar($comentario);
+        $this->listar_para_aceptar();
+    }
 }
 
 ?>

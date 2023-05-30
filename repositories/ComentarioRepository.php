@@ -68,6 +68,20 @@ class ComentarioRepository {
         }
     }
 
+    public function aceptar($id) {
+        $upd= $this->db->prepara("UPDATE comentarios SET aceptado = true WHERE id = $id");
+
+        try{
+            if ($upd->execute()) {
+                return true;
+            }
+            else {return false;}
+        }
+        catch(PDOException $err){
+            return false;
+        }
+    }
+
 }
 
 ?>

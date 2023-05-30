@@ -1,0 +1,43 @@
+.forms_comentario {
+    display: flex;
+    margin: auto;
+    gap: 3%;
+    justify-content: center;
+}
+
+.forms_comentario form input {
+    font-weight: bold;
+}
+
+/* aceptar */
+.forms_comentario form:first-child input {
+    background-color: rgb(106, 213, 106);
+    border-color: rgb(106, 213, 106);
+}
+
+/* descartar */
+.forms_comentario form:last-child input {
+    background-color: rgb(228, 95, 95);
+    border-color: rgb(228, 95, 95);
+}
+
+
+.forms_comentario form input:hover {
+    font-size: medium;
+    text-decoration: underline;
+}
+
+
+.comentarios form input {
+    background-color: rgb(228, 95, 95);;
+    border-color: rgb(228, 95, 95);;
+    font-weight: bold;
+}
+
+.comentarios form input:hover {
+    /* padding: 30%; */
+    font-size: medium;
+    text-decoration: underline;
+}
+
+

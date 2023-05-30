@@ -180,7 +180,16 @@ session_start();
                 
                 Router::add('GET', 'administrar/comentario', function(){
                     (new ComentarioController())->mostrar();
-                });   
+                });  
+                Router::add('GET', 'seleccionar/comentarios', function(){
+                    (new ComentarioController())->listar_para_aceptar();
+                });
+                Router::add('POST', 'comentario/aceptar', function(){
+                    (new ComentarioController())->aceptar();
+                });
+                Router::add('POST', 'comentario/descartar', function(){
+                    (new ComentarioController())->descartar();
+                });
                 Router::add('POST', 'comentario/borrar', function(){
                     (new ComentarioController())->borrar();
                 });             

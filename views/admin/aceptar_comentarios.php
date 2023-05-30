@@ -1,0 +1,60 @@
+<?php require_once('views/layout/header_sub_main.php'); ?>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="../fuente/scripts/recoger_id_elemento_borrar.js"></script>
+
+
+<main>
+    <section class="contenido_main">
+        <?php if(isset($_SESSION['comentario_borrado'])):
+            if ($_SESSION['comentario_borrado'] == true) : ?>
+                <script type="text/javascript">
+                    alert("Se ha borrado el comentario.");
+                    window.close();
+                </script>
+
+            <?php else: ?>
+                <script type="text/javascript">
+                    alert("No se ha borrado el comentario.");
+                    window.close();
+                </script>
+            <?php endif;?>     
+        <?php endif;?>
+
+        <?php if(empty($comentarios)):
+                echo "<h4>No hay comentarios</h4>" ;
+            
+            else :?>
+
+        <section class="comentarios">
+            <?php foreach($comentarios as $comentario) : ?>
+                <section class="comentario">
+                    <h4> <?= $comentario->getUsuario(); ?> </h4>
+                    <hr>
+
+                    <p class="contenido"> <?= $comentario->getContenido(); ?> </p>
+                    
+                    <section class="forms_comentario">
+                        <form id="form_aceptar_comentario_<?= $comentario->getId() ?>" action="<?=$_ENV['BASE_URL']?>comentario/aceptar" method="POST">
+                            <input type="hidden" name="comentario_a_aceptar" value="<?= $comentario->getId()?>">
+                            <input type="submit" value="Aceptar">
+                        </form>
+                        
+                        <form id="form_descartar_comentario_<?= $comentario->getId() ?>" action="<?=$_ENV['BASE_URL']?>comentario/descartar" method="POST">
+                            <input type="hidden" name="comentario_a_descartar" value="<?= $comentario->getId()?>">
+                            <input type="submit" value="descartar">
+                        </form>
+                    </section> 
+
+                </section>
+
+            <?php endforeach; ?>
+
+        </section>
+
+
+    </section>
+
+<?php endif;?>
+
+<?php require_once('views/layout/footer_sub_main.php'); ?>
