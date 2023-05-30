@@ -25,7 +25,7 @@ class UsuarioRepository {
         $ins->bindParam(':id', $id, PDO::PARAM_STR);
 
         $rol= "usuario";
-        $confirmado= 0; //al crear el usuario, faltará confirmar la cuenta
+        $confirmado= false; //al crear el usuario, faltará confirmar la cuenta
         $id= NULL; //la base de datos coge el siguiente porque es un campo de auto incremento
 
         try{
@@ -76,7 +76,7 @@ class UsuarioRepository {
     }
 
     public function confirma_cuenta($id) {
-        $upd= $this->db->prepara("UPDATE usuarios set CONFIRMADO = 1 WHERE id = $id");
+        $upd= $this->db->prepara("UPDATE usuarios set CONFIRMADO = true WHERE id = $id");
 
         try{
             if ($upd->execute()) {
@@ -136,7 +136,7 @@ class UsuarioRepository {
             $cons->execute();
             if ($cons && $cons->rowCount() == 1) {
                 $confirmado= $cons->fetch()['confirmado'];
-                if ($confirmado == "1") {
+                if ($confirmado == true) {
                     return true;
                 }
                 else {return false;}
