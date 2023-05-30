@@ -151,6 +151,27 @@ class ImagenRepository {
         return $this->db->extraer_todos();
     }
 
+    public function obtener_imagen($imagen) {
+        $this->db->consulta("SELECT * FROM imagense WHERE imagen= $imagen");
+        return $this->db->extraer_registro();
+    }
+    
+    public function borrar($imagen) {
+        $del= $this->db->prepara("DELETE FROM imagenes WHERE imagen= $imagen");
+        
+        try {
+            $del->execute();
+            if ($del && $del->rowCount() == 1) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        catch(PDOEXception $err) {
+            return false;
+        }
+    }
 }
 
 ?>

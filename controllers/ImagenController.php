@@ -13,12 +13,18 @@ class ImagenController{
         $this->repository= new ImagenRepository();
     }
 
-    // esto tendré que hacerlo con la imagen en sí, pero todavía no sé si guardarla en firebase o en local o qué cojones
+    
     public function listar() {
         $lista_imagenes= $this->repository->listar();
+        // convertimos las imagenes obtenidos en objetos de la clase Imagen
+        $objetos_imagenes= $this->obtener_objetos($lista_imagenes);
+        
+        $this->pages->render('imagen/listar', ['imagenes' => $objetos_imagenes]);
+    }
+
+    public function obtener_objetos($imagenes) {
         $objetos_imagenes= [];
-        // var_dump($lista_imagenes);die();
-        foreach ($lista_imagenes as $imagen) {
+        foreach ($imagenes as $imagen) {
             $objeto= $this->pasar_objeto($imagen);
             // si la imagen está aceptada, la añade a la lista para ser mostrada;
             if ($objeto->getAceptada() == true) { //0 = true; 1= false 
@@ -27,9 +33,9 @@ class ImagenController{
                 array_push($objetos_imagenes, $objeto);
             }
         }
-        // return $objetos_imagenes;
-        $this->pages->render('imagen/listar', ['imagenes' => $objetos_imagenes]);
+        return $objetos_imagenes;
     }
+
 
     public function pasar_objeto($array) {
         return $this->repository->pasar_objeto($array);
@@ -72,6 +78,27 @@ class ImagenController{
             }
         }
         return $objetos_imagenes;
+    }
+
+    public function mostrar() {
+        $lista_imagenes= $this->repository->listar();
+        // convertimos las imagenes obtenidos en objetos de la clase Imagen
+        $objetos_imagenes= $this->obtener_objetos($lista_imagenes);
+
+        $this->pages->render('admin/imagenes', ['imagenes' => $objetos_imagenes]);
+    }
+
+    public function borrar() {
+        $id= $_POST['imagen_a_borrar'];
+        $borrado= $this->repository->borrar($id);
+
+        if ($borrado) {
+            $_SESSION['imagen_borrada']= true;
+        } 
+        else {
+            $_SESSION['imagen_borrada']= false;
+        }
+        $this->mostrar();
     }
     
 }

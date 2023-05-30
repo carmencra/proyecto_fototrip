@@ -61,12 +61,11 @@
 
         </section>
     </section>
-</main>
 
 
-<?php  
-    use Utils\Utils;
-    Utils::deleteSession('viaje_borrado');
+    <?php  
+        use Utils\Utils;
+        Utils::deleteSession('viaje_borrado');
 
-    require_once('views/layout/footer_sub_main.php'); 
-?>
+        require_once('views/layout/footer_sub_main.php'); 
+    ?>
