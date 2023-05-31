@@ -1,3 +1,14 @@
+<!-- cargamos la ruta de la página actual por si viniera de otra ruta -->
+<script>
+    console.log(window.location.href);
+    var baseUrl = 'http://localhost/fototrip/';
+    var ruta_pagina = 'seleccionar/comentarios';
+
+    if (!window.location.href.startsWith(baseUrl) || !window.location.href.endsWith(ruta_pagina)) {
+        window.location.href = baseUrl + ruta_pagina;
+    }
+</script>
+
 <?php require_once('views/layout/header_sub_main.php'); ?>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

@@ -100,6 +100,8 @@ class ComentarioController{
         $comentario= $_POST['comentario_a_aceptar'];
         $this->repository->aceptar($comentario);
         $this->listar_para_aceptar();
+        // header("Location: ". $_ENV['BASE_URL'].'seleccionar/imagenes');
+        
     }
 
     public function descartar() {
