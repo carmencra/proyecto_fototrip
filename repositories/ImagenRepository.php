@@ -17,6 +17,11 @@ class ImagenRepository {
         return $this->db->extraer_todos();
     }
 
+    public function mostrar(): ?array {
+        $this->db->consulta("SELECT * FROM imagenes ORDER BY usuario ASC");
+        return $this->db->extraer_todos();
+    }
+
     public function pasar_objeto($array): object {
         $objeto_imagen= Imagen::fromArray($array);
         return $objeto_imagen;

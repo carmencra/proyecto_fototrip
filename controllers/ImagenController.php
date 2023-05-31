@@ -80,7 +80,7 @@ class ImagenController{
     }
 
     public function mostrar() {
-        $lista_imagenes= $this->repository->listar();
+        $lista_imagenes= $this->repository->mostrar();
         // convertimos las imagenes obtenidos en objetos de la clase Imagen
         $objetos_imagenes= $this->obtener_objetos($lista_imagenes);
 
