@@ -83,10 +83,6 @@ session_start();
             (new ViajeController())->ver($id);
         }); 
 
-        Router::add('POST', 'viaje/inscribirse', function() {
-            (new ViajeController())->inscribirse();
-        }); 
-
 
         Router::add('GET', 'opiniones', function(){
             (new ComentarioController())->listar();
@@ -104,19 +100,6 @@ session_start();
             (new ImagenController())->buscar();
         });
 
- 
-        // para acceder a los formularios
-        Router::add('GET', 'usuario/registrarse', function(){
-            (new UsuarioController())->registrarse();
-        });
-        // para recoger los datos de los  formularios
-        Router::add('POST', 'usuario/registro', function(){
-            (new UsuarioController())->registro();
-        });
-        Router::add('POST', 'usuario/login', function(){
-            (new UsuarioController())->login();
-        });
-
 
 
         // rutas accesibles para los usuarios logueados
@@ -124,16 +107,6 @@ session_start();
             Router::add('GET', 'usuario/cerrar', function(){
                 (new UsuarioController())->cerrar();
             });
-
-            // inscribirse a un viaje
-            Router::add('POST', 'viaje/inscribirse?id=:id', function($id) {
-                (new ViajeController())->inscribirse($id);
-                
-            }); 
-            Router::add('GET', 'viaje/inscribirse?id=:id', function($id) {
-                (new ViajeController())->inscribirse($id);
-            });
-
             
             // rutas del administrador
             if (isset($_SESSION['admin'])) {
@@ -193,6 +166,29 @@ session_start();
                 });             
             }
 
+            else {
+                // los usuarios que no sean admin, podrán inscribirse a viajes
+                Router::add('POST', 'viaje/inscribirse', function() {
+                    (new ViajeController())->inscribirse();
+                }); 
+            }
+
+        }
+
+        else {
+            // si no hay un usuario registrado, podrá acceder al registro
+
+            // para acceder a los formularios
+            Router::add('GET', 'usuario/registrarse', function(){
+                (new UsuarioController())->registrarse();
+            });
+            // para recoger los datos de los  formularios
+            Router::add('POST', 'usuario/registro', function(){
+                (new UsuarioController())->registro();
+            });
+            Router::add('POST', 'usuario/login', function(){
+                (new UsuarioController())->login();
+            });
         }
         
     
