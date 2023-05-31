@@ -75,7 +75,7 @@ $(document).ready(function() {
     
     // Verificar si se ha confirmado anteriormente
     if (!$(form).data('confirmed')) {
-      var result = confirm("¿Quieres descartar(publicar) esta imagen?");
+      var result = confirm("¿Quieres descartar(borrar) esta imagen?");
       if (result) {
         $(form).data('confirmed', true); // Marcar como confirmado para evitar futuras ventanas emergentes
         form.submit(); // Enviar el formulario para redirigir al controlador

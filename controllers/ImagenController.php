@@ -116,8 +116,14 @@ class ImagenController{
             $objeto= $this->repository->pasar_objeto($imagen);
             // añade las imágenes que todavía no han sido aceptadas
             if ($objeto->getAceptada() == false) { //0 = true; 1= false 
+                // obtenemos el país del viaje al que pertenece la imagen
                 $pais_viaje= $this->repository->obtener_pais_viaje($objeto->getId_viaje());
                 $objeto->setPais_viaje($pais_viaje);
+
+                //obtenemos el usuario que ha publicado la imagen
+                $usuario= $this->repository->obtener_usuario($objeto->getId_usuario());
+                $objeto->setUsuario($usuario);
+
                 array_push($objetos_imagenes, $objeto);
             }
         }
