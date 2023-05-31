@@ -142,6 +142,10 @@ class ImagenController{
         $this->listar_para_aceptar();
     }
 
+    public function crear() {
+        $this->pages->render('imagen/crear');
+    }
+
 }
 
 ?>
