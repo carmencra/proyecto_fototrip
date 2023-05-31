@@ -5,18 +5,19 @@
         private string $id;
         private string $id_viaje;
         private string $imagen;
-        private string $usuario;
+        private string $id_usuario;
         private string $tipo;
         private string $aceptada;
         private string $fecha;
 
+        private string $usuario;
         private string $pais_viaje;
 
-        public function __construct(string $id, string $id_viaje, string $imagen, string $usuario, string $tipo, string $aceptada, string $fecha) {
+        public function __construct(string $id, string $id_viaje, string $imagen, string $id_usuario, string $tipo, string $aceptada, string $fecha) {
             $this->id= $id;
             $this->id_viaje= $id_viaje;
             $this->imagen= $imagen;
-            $this->usuario= $usuario;
+            $this->id_usuario= $id_usuario;
             $this->tipo= $tipo;
             $this->aceptada= $aceptada;
             $this->fecha= $fecha;
@@ -85,21 +86,21 @@
         }
 
         /**
-         * Get the value of usuario
+         * Get the value of id_usuario
          */ 
-        public function getUsuario()
+        public function getid_Usuario()
         {
-                return $this->usuario;
+                return $this->id_usuario;
         }
 
         /**
-         * Set the value of usuario
+         * Set the value of id_usuario
          *
          * @return  self
          */ 
-        public function setUsuario($usuario)
+        public function setid_Usuario($id_usuario)
         {
-                $this->usuario = $usuario;
+                $this->id_usuario = $id_usuario;
 
                 return $this;
         }
@@ -183,13 +184,33 @@
 
                 return $this;
         }
+        
+        /**
+         * Get the value of usuario
+         */ 
+        public function getUsuario()
+        {
+                return $this->usuario;
+        }
+
+        /**
+         * Set the value of usuario
+         *
+         * @return  self
+         */ 
+        public function setUsuario($usuario)
+        {
+                $this->usuario = $usuario;
+
+                return $this;
+        }
 
         public static function fromArray(array $data): Imagen{
             return new Imagen(
                 $data['id'] ?? '',
                 $data['id_viaje'] ?? '',
                 $data['imagen'] ?? '',
-                $data['usuario'] ?? '',
+                $data['id_usuario'] ?? '',
                 $data['tipo'] ?? '',
                 $data['aceptada'] ?? '',
                 $data['fecha'] ?? ''

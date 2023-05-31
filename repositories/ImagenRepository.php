@@ -18,7 +18,7 @@ class ImagenRepository {
     }
 
     public function mostrar(): ?array {
-        $this->db->consulta("SELECT * FROM imagenes ORDER BY usuario ASC");
+        $this->db->consulta("SELECT * FROM imagenes ORDER BY id_usuario ASC");
         return $this->db->extraer_todos();
     }
 
@@ -39,6 +39,24 @@ class ImagenRepository {
         try {
             $cons->execute();
             return $datos[0]['pais'];
+        }
+        catch(PDOEXception $err) {
+            return false;
+        }
+    }
+    
+    public function obtener_usuario($id_usuario):string | bool {
+        $cons= $this->db->prepara("SELECT email FROM usuarios WHERE id=:id_usuario");
+
+        $cons->bindParam(':id_usuario', $id_usuario);
+
+        $cons->execute();
+
+        $datos= $cons->fetchAll();
+
+        try {
+            $cons->execute();
+            return $datos[0]['email'];
         }
         catch(PDOEXception $err) {
             return false;
@@ -155,11 +173,6 @@ class ImagenRepository {
         $this->db->consulta("SELECT * FROM imagenes WHERE id_viaje= $id_viaje");
         return $this->db->extraer_todos();
     }
-
-    // public function obtener_imagen($imagen) {
-    //     $this->db->consulta("SELECT * FROM imagense WHERE imagen= $imagen");
-    //     return $this->db->extraer_registro();
-    // }
     
     public function borrar($id) {
         $del= $this->db->prepara("DELETE FROM imagenes WHERE id = $id");

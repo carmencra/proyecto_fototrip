@@ -25,23 +25,22 @@ class ImagenController{
     public function obtener_objetos($imagenes) {
         $objetos_imagenes= [];
         foreach ($imagenes as $imagen) {
-            $objeto= $this->pasar_objeto($imagen);
+            $objeto= $this->repository->pasar_objeto($imagen);
             // si la imagen está aceptada, la añade a la lista para ser mostrada;
             if ($objeto->getAceptada() == true) { //0 = true; 1= false 
-                $pais_viaje= $this->obtener_pais_viaje($objeto->getId_viaje());
+                // obtenemos el país del viaje al que pertenece la imagen
+                $pais_viaje= $this->repository->obtener_pais_viaje($objeto->getId_viaje());
                 $objeto->setPais_viaje($pais_viaje);
+
+                //obtenemos el usuario que ha publicado la imagen
+                $email_usuario= $this->repository->obtener_usuario($objeto->getId_usuario());
+                $objeto->setUsuario($email_usuario);
+                
+                // guardamos la imagen
                 array_push($objetos_imagenes, $objeto);
             }
         }
         return $objetos_imagenes;
-    }
-
-    public function pasar_objeto($array) {
-        return $this->repository->pasar_objeto($array);
-    }
-
-    public function obtener_pais_viaje($id_viaje) {
-        return $this->repository->obtener_pais_viaje($id_viaje);
     }
 
     public function buscar() {
@@ -54,9 +53,14 @@ class ImagenController{
             $imagenes_aceptadas= [];
             foreach ($imagenes_obtenidas as $imagen) {
                 if ($imagen->getAceptada() == true) {
-                    $pais_viaje= $this->obtener_pais_viaje($imagen->getId_viaje());
-                    // añadimos el pais de cada imagen
-                    $imagen->setPais_viaje($pais_viaje);
+                    // obtenemos el país del viaje al que pertenece la imagen
+                    $pais_viaje= $this->repository->obtener_pais_viaje($objeto->getId_viaje());
+                    $objeto->setPais_viaje($pais_viaje);
+
+                    //obtenemos el usuario que ha publicado la imagen
+                    $usuario= $this->repository->obtener_usuario($objeto->getId_usuario());
+                    $objeto->setUsuario($usuario);
+                
                     array_push($imagenes_aceptadas, $imagen);
                 }
             }
@@ -70,7 +74,7 @@ class ImagenController{
 
         $objetos_imagenes= [];
         foreach ($lista_imagenes as $imagen) {
-            $objeto= $this->pasar_objeto($imagen);
+            $objeto= $this->repository->pasar_objeto($imagen);
             // si la imagen está aceptada por el admin, la añade
             if ($objeto->getAceptada() == true) {
                 array_push($objetos_imagenes, $objeto);
@@ -109,10 +113,10 @@ class ImagenController{
     public function obtener_no_aceptadas($imagenes) {
         $objetos_imagenes= [];
         foreach ($imagenes as $imagen) {
-            $objeto= $this->pasar_objeto($imagen);
+            $objeto= $this->repository->pasar_objeto($imagen);
             // añade las imágenes que todavía no han sido aceptadas
             if ($objeto->getAceptada() == false) { //0 = true; 1= false 
-                $pais_viaje= $this->obtener_pais_viaje($objeto->getId_viaje());
+                $pais_viaje= $this->repository->obtener_pais_viaje($objeto->getId_viaje());
                 $objeto->setPais_viaje($pais_viaje);
                 array_push($objetos_imagenes, $objeto);
             }
