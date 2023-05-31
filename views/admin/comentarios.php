@@ -11,9 +11,6 @@
 
 <?php require_once('views/layout/header_sub_main.php'); ?>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="../fuente/scripts/recoger_id_elemento_borrar.js"></script>
-
 <main>
     <section class="contenido_main">
 
