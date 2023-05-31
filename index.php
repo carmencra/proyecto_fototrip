@@ -82,12 +82,10 @@ session_start();
         Router::add('GET', 'viaje/ver?id=:id', function($id) {
             (new ViajeController())->ver($id);
         }); 
-        // Router::add('POST', 'viaje/ver', function() {
-        //     (new ViajeController())->ver();
-        // }); 
-        // Router::add('GET', 'viaje/ver', function() {
-        //     (new ViajeController())->ver();
-        // });
+
+        Router::add('POST', 'viaje/inscribirse', function() {
+            (new ViajeController())->inscribirse();
+        }); 
 
 
         Router::add('GET', 'opiniones', function(){

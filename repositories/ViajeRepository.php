@@ -148,6 +148,23 @@ class ViajeRepository {
         }
     }
 
+    public function inscribirse($id, $usuario) {
+        $ins= $this->db->prepara("INSERT INTO inscritos VALUES ($id, '$usuario')");
+
+        try {
+            $ins->execute();
+            if ($ins && $ins->rowCount() == 1) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        catch(PDOEXception $err) {
+            return false;
+        }
+    }
+
 }
 
 ?>

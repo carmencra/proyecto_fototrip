@@ -3,6 +3,7 @@
 namespace Controllers;
 use Repositories\ViajeRepository;
 use Lib\Pages;
+use Lib\Email;
 use Controllers\ItinerarioController;
 use Controllers\GastosController;
 use Controllers\ImagenController;
@@ -120,6 +121,21 @@ class ViajeController {
         $this->mostrar();
     }
 
+    public function inscribirse() {
+        $id= $_POST['viaje_a_inscribirse'];
+        $usuario= $_SESSION['usuario'];
+        $inscrito= $this->repository->inscribirse($id, $usuario);
+        
+        if ($inscrito) {
+            $_SESSION['viaje_inscrito']= true; 
+            // $correo= new Email($usuario);
+            // $correo->confirmar_inscripcion();
+        } 
+        else {
+            $_SESSION['viaje_inscrito']= false;
+        }
+    }
+    
 }
 
 ?>

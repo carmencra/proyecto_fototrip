@@ -116,4 +116,21 @@ $(document).ready(function() {
     }
   });
 
+  
+  // recoge el formulario de INSCRIBIRSE a VIAJE
+  $("form[id^='form_inscribirse_']").submit(function(e) {
+    e.preventDefault(); // Evita el envío del formulario
+    
+    var form = this;
+    
+    // Verificar si se ha confirmado anteriormente
+    if (!$(form).data('confirmed')) {
+      var result = confirm("¿Quieres inscribirte a este viaje?");
+      if (result) {
+        $(form).data('confirmed', true); // Marcar como confirmado para evitar futuras ventanas emergentes
+        form.submit(); // Enviar el formulario para redirigir al controlador
+      }
+    }
+  });
+
 });
