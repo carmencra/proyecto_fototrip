@@ -105,7 +105,7 @@ class ViajeController {
         // convertimos los viajes obtenidos en objetos de la clase Viaje
         $objetos_viajes= $this->obtener_objetos($lista_viajes);
 
-        $this->pages->render('admin/viajes', ['viajes' => $objetos_viajes]);
+        $this->pages->render('viaje/administrar', ['viajes' => $objetos_viajes]);
     }
 
     public function borrar() {

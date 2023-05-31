@@ -88,7 +88,7 @@ class ImagenController{
         // convertimos las imagenes obtenidos en objetos de la clase Imagen
         $objetos_imagenes= $this->obtener_objetos($lista_imagenes);
 
-        $this->pages->render('admin/imagenes', ['imagenes' => $objetos_imagenes]);
+        $this->pages->render('imagen/administrar', ['imagenes' => $objetos_imagenes]);
     }
 
     public function borrar() {
@@ -107,7 +107,7 @@ class ImagenController{
     public function listar_para_aceptar() {
         $imagenes= $this->repository->listar();
         $imagenes_no_aceptadas= $this->obtener_no_aceptadas($imagenes);
-        $this->pages->render('admin/aceptar_imagenes', ['imagenes' => $imagenes_no_aceptadas]);
+        $this->pages->render('imagen/aceptar', ['imagenes' => $imagenes_no_aceptadas]);
     }
 
     public function obtener_no_aceptadas($imagenes) {

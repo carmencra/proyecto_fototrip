@@ -60,7 +60,7 @@ class ComentarioController{
         // convertimos los comentarios obtenidos en objetos de la clase comentario
         $objetos_comentarios= $this->obtener_objetos($lista_comentarios);
 
-        $this->pages->render('admin/comentarios', ['comentarios' => $objetos_comentarios]);
+        $this->pages->render('comentario/administrar', ['comentarios' => $objetos_comentarios]);
     }
 
     public function borrar() {
@@ -79,7 +79,7 @@ class ComentarioController{
     public function listar_para_aceptar() {
         $comentarios= $this->repository->listar();
         $comentarios_no_aceptados= $this->obtener_no_aceptados($comentarios);
-        $this->pages->render('admin/aceptar_comentarios', ['comentarios' => $comentarios_no_aceptados]);
+        $this->pages->render('comentario/aceptar', ['comentarios' => $comentarios_no_aceptados]);
     }
 
     public function obtener_no_aceptados($comentarios) {
