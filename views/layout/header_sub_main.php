@@ -1,4 +1,7 @@
 <head>
+    <!-- añadimos el icono de la pestaña -->
+    <link rel="icon" href="../fuente/media/images/logo.png" alt="logo fototrip">
+
     <!-- añadimos los estilos y scripts -->
     <link rel="stylesheet" href="../fuente/styles/fototrip.css">
 
