@@ -1,3 +1,4 @@
+<title>Fototrip - Inicio</title>
 
 <header>
     <a href="<?=$_ENV['BASE_URL']?>">

@@ -1,3 +1,4 @@
+<title>Fototrip - Confirmar cuenta</title>
 
 <?php require_once('views/layout/header_main.php'); ?>
 

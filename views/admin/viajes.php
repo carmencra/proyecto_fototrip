@@ -1,3 +1,5 @@
+<title>Fototrip - Administrar viajes</title>
+
 <!-- cargamos la ruta de la página actual por si viniera de otra ruta -->
 <script>
     console.log(window.location.href);

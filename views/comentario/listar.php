@@ -1,3 +1,5 @@
+<title>Fototrip - Opiniones</title>
+
 <header>
     <a href="<?=$_ENV['BASE_URL']?>">
         <img id="logo" src="fuente/media/images/logo.png" alt="logo fototrip"/>

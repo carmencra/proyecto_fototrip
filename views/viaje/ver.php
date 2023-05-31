@@ -1,3 +1,4 @@
+<title>Fototrip - Ver viaje</title>
 
 <?php require_once('views/layout/header_sub_main.php'); ?>
 

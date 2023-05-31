@@ -1,3 +1,4 @@
+<title>Fototrip - Administrar</title>
 
 <?php require_once('views/layout/header_main.php'); ?>
 
