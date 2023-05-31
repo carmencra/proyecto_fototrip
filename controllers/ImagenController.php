@@ -88,10 +88,10 @@ class ImagenController{
     }
 
     public function borrar() {
-        $id= $_POST['imagen_a_borrar'];
-        $borrado= $this->repository->borrar($id);
+        $id= $_POST['id_imagen_a_borrar'];
+        $borrada= $this->repository->borrar($id);
 
-        if ($borrado) {
+        if ($borrada) {
             $_SESSION['imagen_borrada']= true;
         } 
         else {
@@ -121,13 +121,13 @@ class ImagenController{
     }
 
     public function aceptar() {
-        $imagen= $_POST['imagen_a_aceptar'];
+        $imagen= $_POST['id_imagen_a_aceptar'];
         $this->repository->aceptar($imagen);
         $this->listar_para_aceptar();
     }
 
     public function descartar() {
-        $imagen= $_POST['imagen_a_descartar'];
+        $imagen= $_POST['id_imagen_a_descartar'];
         $this->repository->borrar($imagen);
         $this->listar_para_aceptar();
     }

@@ -156,14 +156,14 @@ class ImagenRepository {
         return $this->db->extraer_todos();
     }
 
-    public function obtener_imagen($imagen) {
-        $this->db->consulta("SELECT * FROM imagense WHERE imagen= $imagen");
-        return $this->db->extraer_registro();
-    }
+    // public function obtener_imagen($imagen) {
+    //     $this->db->consulta("SELECT * FROM imagense WHERE imagen= $imagen");
+    //     return $this->db->extraer_registro();
+    // }
     
-    public function borrar($imagen) {
-        $del= $this->db->prepara("DELETE FROM imagenes WHERE imagen= '$imagen'");
-        
+    public function borrar($id) {
+        $del= $this->db->prepara("DELETE FROM imagenes WHERE id = $id");
+
         try {
             $del->execute();
             if ($del && $del->rowCount() == 1) {
@@ -178,8 +178,8 @@ class ImagenRepository {
         }
     }
 
-    public function aceptar($imagen) {
-        $upd= $this->db->prepara("UPDATE imagenes SET aceptada = true WHERE imagen = '$imagen'");
+    public function aceptar($id) {
+        $upd= $this->db->prepara("UPDATE imagenes SET aceptada = true WHERE id = $id");
 
         try{
             if ($upd->execute()) {

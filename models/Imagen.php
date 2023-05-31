@@ -2,6 +2,7 @@
     namespace Models;
 
     class Imagen {
+        private string $id;
         private string $id_viaje;
         private string $imagen;
         private string $usuario;
@@ -11,7 +12,8 @@
 
         private string $pais_viaje;
 
-        public function __construct(string $id_viaje, string $imagen, string $usuario, string $tipo, string $aceptada, string $fecha) {
+        public function __construct(string $id, string $id_viaje, string $imagen, string $usuario, string $tipo, string $aceptada, string $fecha) {
+            $this->id= $id;
             $this->id_viaje= $id_viaje;
             $this->imagen= $imagen;
             $this->usuario= $usuario;
@@ -21,6 +23,26 @@
         }
         
         
+        
+        /**
+         * Get the value of id
+         */ 
+        public function getId()
+        {
+                return $this->id;
+        }
+
+        /**
+         * Set the value of id
+         *
+         * @return  self
+         */ 
+        public function setId($id)
+        {
+                $this->id = $id;
+
+                return $this;
+        }
 
         /**
          * Get the value of id_viaje
@@ -164,6 +186,7 @@
 
         public static function fromArray(array $data): Imagen{
             return new Imagen(
+                $data['id'] ?? '',
                 $data['id_viaje'] ?? '',
                 $data['imagen'] ?? '',
                 $data['usuario'] ?? '',
@@ -173,7 +196,6 @@
             );
         }
        
-
     }
 
 ?>

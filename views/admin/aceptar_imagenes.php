@@ -41,13 +41,13 @@
                     <hr> <br>
 
                     <section class="forms_imagen">
-                        <form id="form_aceptar_imagen_<?= $imagen->getImagen() ?>" action="<?=$_ENV['BASE_URL']?>imagen/aceptar" method="POST">
-                            <input type="hidden" name="imagen_a_aceptar" value="<?= $imagen->getImagen()?>">
+                        <form id="form_aceptar_imagen_<?= $imagen->getId() ?>" action="<?=$_ENV['BASE_URL']?>imagen/aceptar" method="POST">
+                            <input type="hidden" name="id_imagen_a_aceptar" value="<?= $imagen->getId()?>">
                             <input type="submit" value="Aceptar">
                         </form>
                         
-                        <form id="form_descartar_imagen_<?= $imagen->getImagen() ?>" action="<?=$_ENV['BASE_URL']?>imagen/descartar" method="POST">
-                            <input type="hidden" name="imagen_a_descartar" value="<?= $imagen->getImagen()?>">
+                        <form id="form_descartar_imagen_<?= $imagen->getId() ?>" action="<?=$_ENV['BASE_URL']?>imagen/descartar" method="POST">
+                            <input type="hidden" name="id_imagen_a_descartar" value="<?= $imagen->getId()?>">
                             <input type="submit" value="Descartar">
                         </form>
                     </section> <br>

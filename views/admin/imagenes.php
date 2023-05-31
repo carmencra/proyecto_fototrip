@@ -48,8 +48,8 @@
                             </form> 
                         <?php endif; ?>
 
-                        <form id="form_borrar_imagen_<?= $imagen->getImagen() ?>" action="<?=$_ENV['BASE_URL']?>imagen/borrar" method="POST">
-                            <input type="hidden" name="imagen_a_borrar" value="<?= $imagen->getImagen()?>">
+                        <form id="form_borrar_imagen_<?= $imagen->getId() ?>" action="<?=$_ENV['BASE_URL']?>imagen/borrar" method="POST">
+                            <input type="hidden" name="id_imagen_a_borrar" value="<?= $imagen->getId()?>">
                             <input type="submit" value="Borrar">
                         </form> 
                     </section><br>
