@@ -39,6 +39,9 @@ class ComentarioRepository {
         catch(PDOEXception $err) {
             return false;
         }
+        finally {
+            $cons->closeCursor();
+        }
     }
 
     public function obtener_comentarios($id_viaje): ?array {
@@ -66,6 +69,9 @@ class ComentarioRepository {
         catch(PDOEXception $err) {
             return false;
         }
+        finally {
+            $del->closeCursor();
+        }
     }
 
     public function aceptar($id) {
@@ -79,6 +85,9 @@ class ComentarioRepository {
         }
         catch(PDOException $err){
             return false;
+        }
+        finally {
+            $upd->closeCursor();
         }
     }
 

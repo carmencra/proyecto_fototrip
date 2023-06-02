@@ -35,6 +35,9 @@ class UsuarioRepository {
         catch(PDOException $err){
             return false;
         }
+        finally {
+            $ins->closeCursor();
+        }
     }
 
     public function obtener_id($email): int | bool {
@@ -55,6 +58,9 @@ class UsuarioRepository {
         catch(PDOEXception $err) {
             $result= false;
         }
+        finally {
+            $cons->closeCursor();
+        }
         return $result;
     }
 
@@ -72,6 +78,9 @@ class UsuarioRepository {
         catch(PDOEXception $err) {
             $result= false;
         }
+        finally {
+            $sql->closeCursor();
+        }
         return $result;
     }
 
@@ -87,7 +96,9 @@ class UsuarioRepository {
         catch(PDOException $err){
             return false;
         }
-
+        finally {
+            $upd->closeCursor();
+        }
     }
 
     public function valida_clave($clave, $usuario): bool {
@@ -96,13 +107,9 @@ class UsuarioRepository {
             if ($verify) {
                 return true;
             }
-            else {
-                return false;
-            }
+            else {return false;}
         }
-        else {
-            return false;
-        }
+        else {return false;}
     }
 
     public function es_admin($email) {
@@ -125,6 +132,9 @@ class UsuarioRepository {
         catch(PDOEXception $err) {
             return false;
         }
+        finally {
+            $sql->closeCursor();
+        }
     }
 
     public function esta_confirmado($email) {
@@ -145,6 +155,9 @@ class UsuarioRepository {
         }
         catch(PDOEXception $err) {
             return false;
+        }
+        finally {
+            $cons->closeCursor();
         }
     }
 }

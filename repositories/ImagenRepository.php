@@ -43,6 +43,9 @@ class ImagenRepository {
         catch(PDOEXception $err) {
             return false;
         }
+        finally {
+            $cons->closeCursor();
+        }
     }
     
     public function obtener_usuario($id_usuario):string | bool {
@@ -60,6 +63,9 @@ class ImagenRepository {
         }
         catch(PDOEXception $err) {
             return false;
+        }
+        finally {
+            $cons->closeCursor();
         }
     }
 
@@ -98,6 +104,9 @@ class ImagenRepository {
         }
         catch(PDOException $err){
             return false;
+        }
+        finally {
+            $cons->closeCursor();
         }
     }
 
@@ -145,8 +154,7 @@ class ImagenRepository {
 
     // comprueba que existe una imagen con el nombre e id_viaje, que se corresponde con el país filtrado
     public function comprobar_pais_filtro($imagen, $id_viaje, $pais) {
-        $consulta= "SELECT *
-        FROM imagenes
+        $consulta= "SELECT * FROM imagenes
         JOIN viajes ON imagenes.id_viaje = viajes.id
         WHERE imagenes.id_viaje = $id_viaje 
         AND imagenes.imagen = '$imagen'
@@ -165,6 +173,9 @@ class ImagenRepository {
         }
         catch(PDOEXception $err) {
             $result= false;
+        }
+        finally {
+            $cons->closeCursor();
         }
         return $result;
     }
@@ -189,6 +200,9 @@ class ImagenRepository {
         catch(PDOEXception $err) {
             return false;
         }
+        finally {
+            $del->closeCursor();
+        }
     }
 
     public function aceptar($id) {
@@ -202,6 +216,9 @@ class ImagenRepository {
         }
         catch(PDOException $err){
             return false;
+        }
+        finally {
+            $upd->closeCursor();
         }
     }
     

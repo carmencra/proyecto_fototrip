@@ -44,6 +44,9 @@ class ViajeRepository {
         catch(PDOEXception $err) {
             return false;
         }
+        finally {
+            $cons->closeCursor();
+        }
     }
 
     // devuelve los viajes encajan con los filtros de búsqueda introducidos
@@ -70,6 +73,9 @@ class ViajeRepository {
         }
         catch(PDOException $err){
             return false;
+        }
+        finally {
+            $cons->closeCursor();
         }
     }
 
@@ -146,6 +152,9 @@ class ViajeRepository {
         catch(PDOEXception $err) {
             return false;
         }
+        finally {
+            $del->closeCursor();
+        }
     }
 
     public function inscribirse($id, $usuario) {
@@ -162,6 +171,9 @@ class ViajeRepository {
         }
         catch(PDOEXception $err) {
             return false;
+        }
+        finally {
+            $ins->closeCursor();
         }
     }
 

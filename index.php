@@ -1,9 +1,4 @@
 <?php
-// si quitas este autoloader no reconoce Lib\Router
-// pero creo que así no cge el .env (y era necesario para subir la bd creo)
-//para coger el env es con lo del DOTENV
-// require_once "autoloader.php";
-// require_once './config/config.php';
 
 require_once __DIR__.'/vendor/autoload.php';
 
@@ -15,8 +10,9 @@ use Controllers\AdminController;
 use Lib\Router;
 use Dotenv\Dotenv;
 
+
 $dotenv= Dotenv::createImmutable(__DIR__); //para acceder al .env
-$dotenv-> safeLoad();
+$dotenv->safeLoad();
 
 
 session_start();
