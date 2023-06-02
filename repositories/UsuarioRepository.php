@@ -36,7 +36,8 @@ class UsuarioRepository {
             return false;
         }
         finally {
-            $ins->closeCursor();
+            $ins= null;
+            unset($ins); 
         }
     }
 
@@ -59,7 +60,8 @@ class UsuarioRepository {
             $result= false;
         }
         finally {
-            $cons->closeCursor();
+            $cons= null;
+            unset($cons); 
         }
         return $result;
     }
@@ -79,7 +81,8 @@ class UsuarioRepository {
             $result= false;
         }
         finally {
-            $sql->closeCursor();
+            $sql= null;
+            unset($sql); 
         }
         return $result;
     }
@@ -97,7 +100,8 @@ class UsuarioRepository {
             return false;
         }
         finally {
-            $upd->closeCursor();
+            $upd= null;
+            unset($upd); 
         }
     }
 
@@ -133,7 +137,8 @@ class UsuarioRepository {
             return false;
         }
         finally {
-            $sql->closeCursor();
+            $sql= null;
+            unset($sql); 
         }
     }
 
@@ -157,7 +162,8 @@ class UsuarioRepository {
             return false;
         }
         finally {
-            $cons->closeCursor();
+            $cons= null;
+            unset($cons); 
         }
     }
 }

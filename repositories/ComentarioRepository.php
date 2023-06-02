@@ -40,7 +40,8 @@ class ComentarioRepository {
             return false;
         }
         finally {
-            $cons->closeCursor();
+            $cons= null;
+            unset($cons); 
         }
     }
 
@@ -70,7 +71,8 @@ class ComentarioRepository {
             return false;
         }
         finally {
-            $del->closeCursor();
+            $del= null;
+            unset($del); 
         }
     }
 
@@ -87,7 +89,8 @@ class ComentarioRepository {
             return false;
         }
         finally {
-            $upd->closeCursor();
+            $upd= null;
+            unset($upd); 
         }
     }
 

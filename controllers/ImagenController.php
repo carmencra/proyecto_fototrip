@@ -3,14 +3,17 @@
 namespace Controllers;
 use Repositories\ImagenRepository;
 use Lib\Pages;
+use Controllers\ViajeController;
 
 class ImagenController{
     private Pages $pages;
     private ImagenRepository $repository;
+    // private ViajeController $viaje_controller;
 
     public function __construct() {
         $this->pages= new Pages();
         $this->repository= new ImagenRepository();
+        // $this->viaje_controller= new ViajeController();
     }
 
     
@@ -142,9 +145,11 @@ class ImagenController{
         $this->listar_para_aceptar();
     }
 
-    public function crear() {
-        $this->pages->render('imagen/crear');
-    }
+    // public function crear() {
+    //     $viajes_disponibles= $this->viaje_controller->obtener_viajes_disponibles();
+    //     var_dump($viajes_disponibles);die();
+    //     $this->pages->render('imagen/crear');
+    // }
 
 }
 

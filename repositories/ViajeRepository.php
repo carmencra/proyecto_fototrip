@@ -45,7 +45,8 @@ class ViajeRepository {
             return false;
         }
         finally {
-            $cons->closeCursor();
+            $cons= null;
+            unset($cons); 
         }
     }
 
@@ -75,7 +76,8 @@ class ViajeRepository {
             return false;
         }
         finally {
-            $cons->closeCursor();
+            $cons= null;
+            unset($cons); 
         }
     }
 
@@ -153,7 +155,8 @@ class ViajeRepository {
             return false;
         }
         finally {
-            $del->closeCursor();
+            $del= null;
+            unset($del); 
         }
     }
 
@@ -173,7 +176,8 @@ class ViajeRepository {
             return false;
         }
         finally {
-            $ins->closeCursor();
+            $ins= null;
+            unset($ins); 
         }
     }
 

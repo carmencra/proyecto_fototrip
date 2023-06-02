@@ -15,6 +15,7 @@ class BaseDatos {
         $this->base_datos = $_ENV['DB_DATABASE'];
         
         $this->conexion = $this->conectar();
+
     }
 
     private function conectar(): PDO {
@@ -26,8 +27,8 @@ class BaseDatos {
 
             $conexion = new PDO("mysql:host={$this->servidor};dbname={$this->base_datos};charset=utf8",$this->usuario, $this->pass, $opciones);
 
+            var_dump("aaa");
             return $conexion;
-
         }
         catch(PDOException $e){
             echo 'No se puede conectar a la base de datos. Detalle: '.$e->getMessage();
@@ -51,5 +52,6 @@ class BaseDatos {
     public function prepara($pre) {
         return $this->conexion->prepare($pre);
     }
+
 }
 ?>

@@ -44,7 +44,8 @@ class ImagenRepository {
             return false;
         }
         finally {
-            $cons->closeCursor();
+            $cons= null;
+            unset($cons); 
         }
     }
     
@@ -65,7 +66,8 @@ class ImagenRepository {
             return false;
         }
         finally {
-            $cons->closeCursor();
+            $cons= null;
+            unset($cons); 
         }
     }
 
@@ -106,7 +108,8 @@ class ImagenRepository {
             return false;
         }
         finally {
-            $cons->closeCursor();
+            $cons= null;
+            unset($cons); 
         }
     }
 
@@ -175,7 +178,8 @@ class ImagenRepository {
             $result= false;
         }
         finally {
-            $cons->closeCursor();
+            $cons= null;
+            unset($cons); 
         }
         return $result;
     }
@@ -201,7 +205,8 @@ class ImagenRepository {
             return false;
         }
         finally {
-            $del->closeCursor();
+            $del= null;
+            unset($del); 
         }
     }
 
@@ -218,7 +223,8 @@ class ImagenRepository {
             return false;
         }
         finally {
-            $upd->closeCursor();
+            $upd= null;
+            unset($upd); 
         }
     }
     
