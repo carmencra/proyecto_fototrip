@@ -5,6 +5,21 @@
 <main>
     <section class="contenido_main">
 
+        <?php if(isset($_SESSION['imagen_creada'])):
+            if ($_SESSION['imagen_creada'] == true) : ?>
+                <script type="text/javascript">
+                    alert("Se ha guardado la imagen.");
+                    window.close();
+                </script>
+                
+            <?php else: ?>
+                <script type="text/javascript">
+                    alert("Ha habido un error al guardar la imagen.");
+                    window.close();
+                </script>
+            <?php endif;?>     
+        <?php endif;?>
+
         <?php
             // guardamos los valores de selects en las cookies
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -32,13 +47,6 @@
                 $opcion_tipo = ""; 
                 // Valor predeterminado si no hay cookie
             } 
-
-            // if (isset($_COOKIE['data_fecha'])) {
-            //     $valor_fecha= $_COOKIE['data_fecha'];
-            // } else {
-            //     $valor_fecha = ""; 
-            //     // Valor predeterminado si no hay cookie
-            // } 
         ?>
 
         <form action="<?=$_ENV['BASE_URL']?>imagen/crear" method="POST" enctype="multipart/form-data" class="form_crear">
@@ -72,7 +80,8 @@
             <br><br>
 
             <label for="imagen">Imagen: </label>
-            <input type="file" name="data[imagen]" accept="image/*">
+            <input type="file" name="imagen" accept="image/*">
+            <br><span style="color:red"> <?php if(isset($_SESSION['err_img'])) echo  $_SESSION['err_img']?> </span>
 
             <br><br><br>
 
@@ -83,7 +92,12 @@
     </section>
 
 
-<?php require_once('views/layout/footer_sub_main.php'); ?>
+<?php 
+    use Utils\Utils;
+    Utils::deleteSession('imagen_creada');
+
+    require_once('views/layout/footer_sub_main.php'); 
+?>
 
 
 <!-- para crear imagen necesito:

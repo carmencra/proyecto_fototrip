@@ -25,7 +25,7 @@
                 
             <?php else: ?>
                 <script type="text/javascript">
-                    alert("No se ha borrado el comentario.");
+                    alert("Ha ocurrido un error al borrar el comentario.");
                     window.close();
                 </script>
             <?php endif;?>     

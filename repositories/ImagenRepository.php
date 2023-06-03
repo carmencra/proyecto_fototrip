@@ -266,6 +266,40 @@ class ImagenRepository {
             unset($cons); 
         }
     }
+
+    public function guardar($datos, $imagen) {
+        $ins= $this->db->prepara("INSERT INTO imagenes values (:id, :id_viaje, :id_usuario, :imagen, :tipo,:aceptada, :fecha)");
+        
+        $ins->bindParam(':id', $id, PDO::PARAM_STR);
+        $ins->bindParam(':id_viaje', $id_viaje, PDO::PARAM_INT);
+        $ins->bindParam(':id_usuario', $id_usuario, PDO::PARAM_INT);
+        $ins->bindParam(':imagen', $imagen, PDO::PARAM_STR);
+        $ins->bindParam(':tipo', $tipo, PDO::PARAM_STR);
+        $ins->bindParam(':aceptada', $aceptada, PDO::PARAM_STR);
+        $ins->bindParam(':fecha', $fecha, PDO::PARAM_STR);
+
+        $id= NULL; //id auto_increment
+        $id_viaje= $datos['viaje'];
+        $id_usuario= "1"; //id del admin
+        $tipo= $datos['tipo'];
+        $aceptada= TRUE;
+        $fecha= $datos['fecha'];
+
+        try{
+            if ($ins->execute()) {
+                return true;
+            }
+            else {return false;}
+        }
+        catch(PDOException $err){
+            return false;
+        }
+        finally {
+            $ins= null;
+            unset($ins); 
+        }
+
+    }
     
 }
 
