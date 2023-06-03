@@ -135,15 +135,6 @@ class ViajeController {
             $_SESSION['viaje_inscrito']= false;
         }
     }
-    
-
-    public function obtener_viajes_disponibles() {
-        $lista_viajes= $this->repository->listar();
-        // convertimos los viajes obtenidos en objetos de la clase Viaje
-        $objetos_viajes= $this->obtener_objetos($lista_viajes);
-        
-        return $objetos_viajes;
-    }
 }
 
 ?>

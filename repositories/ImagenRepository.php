@@ -2,6 +2,7 @@
 namespace Repositories;
 use Lib\BaseDatos;
 use Models\Imagen;
+use Models\Viaje;
 use PDO;
 use PDOException;
 
@@ -225,6 +226,44 @@ class ImagenRepository {
         finally {
             $upd= null;
             unset($upd); 
+        }
+    }
+
+    public function obtener_viajes_disponibles(): ?array {
+        $this->db->consulta("SELECT * FROM viajes WHERE activo= true");
+        return $this->db->extraer_todos();
+    }
+
+    public function obtener_objetos_viajes($array): array {
+        $objetos_viajes= [];
+        foreach ($array as $viaje) {
+            $objeto= Viaje::fromArray($viaje);
+            array_push($objetos_viajes, $objeto);
+        }
+        return $objetos_viajes;
+    }
+
+    public function obtener_fechas_viaje($id_viaje) {
+        $cons= $this->db->prepara("SELECT fecha_inicio, fecha_fin FROM viajes WHERE id=:id_viaje");
+
+        $cons->bindParam(':id_viaje', $id_viaje);
+
+        try {
+            $cons->execute();
+            $datos= $cons->fetchAll();
+
+            $fechas=  array(
+                "inicio" => $datos[0]['fecha_inicio'],
+                "fin" => $datos[0]['fecha_fin']
+            );
+            return $fechas;
+        }
+        catch(PDOEXception $err) {
+            return false;
+        }
+        finally {
+            $cons= null;
+            unset($cons); 
         }
     }
     

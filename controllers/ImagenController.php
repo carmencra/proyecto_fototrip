@@ -3,17 +3,15 @@
 namespace Controllers;
 use Repositories\ImagenRepository;
 use Lib\Pages;
-use Controllers\ViajeController;
+use Utils\Utils;
 
 class ImagenController{
     private Pages $pages;
     private ImagenRepository $repository;
-    // private ViajeController $viaje_controller;
 
     public function __construct() {
         $this->pages= new Pages();
         $this->repository= new ImagenRepository();
-        // $this->viaje_controller= new ViajeController();
     }
 
     
@@ -145,12 +143,47 @@ class ImagenController{
         $this->listar_para_aceptar();
     }
 
-    // public function crear() {
-    //     $viajes_disponibles= $this->viaje_controller->obtener_viajes_disponibles();
-    //     var_dump($viajes_disponibles);die();
-    //     $this->pages->render('imagen/crear');
-    // }
+    public function crear() {
+        $viajes_disponibles= $this->obtener_viajes_disponibles();
+        
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $this->pages->render('imagen/crear', ['viajes' => $viajes_disponibles]);
+        }
+        
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $datos= $_POST['data'];
+            $fecha_correcta= $this->comprobar_fecha_viaje($datos['viaje'], $datos['fecha']);
 
+            if ($fecha_correcta) {
+                Utils::deleteSession('err_fec');
+
+            }
+            else {
+                $_SESSION['err_fec']= '*La fecha no se corresponde con la del viaje';
+            }
+            $this->pages->render('imagen/crear', ['viajes' => $viajes_disponibles]);
+        }
+    }
+
+
+    public function obtener_viajes_disponibles() {
+        $lista_viajes= $this->repository->obtener_viajes_disponibles();
+        // convertimos los viajes obtenidos en objetos de la clase Viaje
+        $objetos_viajes= $this->repository->obtener_objetos_viajes($lista_viajes);
+        
+        return $objetos_viajes;
+    }
+
+    public function comprobar_fecha_viaje($id_viaje, $fecha) {
+        $fechas= $this->repository->obtener_fechas_viaje($id_viaje);
+
+        if ($fecha >= $fechas['inicio'] && $fecha <= $fechas['fin']) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
 
 ?>

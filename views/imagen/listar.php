@@ -54,6 +54,15 @@
 
         <section class="buscador_imagenes">
             <?php
+                // guardamos los valores de filtros en las cookies
+                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    $opcion_tipo = $_POST['data']['tipo'];
+                    setcookie("data_tipo", $opcion_tipo);
+                    
+                    $opcion_fecha = $_POST['data']['fecha'];
+                    setcookie("data_fecha", $opcion_fecha);
+                }
+
                 // recogemos si hay alguna cookie de filtros existente
                 if (isset($_COOKIE['data_tipo'])) {
                     $opcion_tipo= $_COOKIE['data_tipo'];
@@ -68,14 +77,7 @@
                     // Valor predeterminado si no hay cookie
                 }
                 
-                // guardamos los valores de filtros en las cookies
-                if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                    $opcion_tipo = $_POST['data']['tipo'];
-                    setcookie("data_tipo", $opcion_tipo);
-                    
-                    $opcion_fecha = $_POST['data']['fecha'];
-                    setcookie("data_fecha", $opcion_fecha);
-                }
+                
             ?>
             <form action="<?=$_ENV['BASE_URL']?>imagen_buscar" method="POST" enctype="multipart/form-data">
 

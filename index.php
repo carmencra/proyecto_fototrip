@@ -124,16 +124,16 @@ session_start();
                 Router::add('GET', 'administrar/viaje', function() use ($viaje_controller){
                     ($viaje_controller)->mostrar();
                 });
-                // Router::add('GET', 'viaje/borrar?id=:id', function($id){
-                //     var_dump($_SESSION['viaje_a_borrar'], $_GET['id']);die();
-                //     ($viaje_controller)->borrar($id);
-                // });
                 Router::add('POST', 'viaje/borrar', function() use ($viaje_controller){
                     ($viaje_controller)->borrar();
                 });
 
-
+                // para llevar al formulario
                 Router::add('GET', 'imagen/crear', function() use ($imagen_controller){
+                    ($imagen_controller)->crear();
+                }); 
+                // para recoger los datos del formulario
+                Router::add('POST', 'imagen/crear', function() use ($imagen_controller){
                     ($imagen_controller)->crear();
                 });
                 Router::add('GET', 'administrar/imagen', function() use ($imagen_controller){

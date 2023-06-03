@@ -1,0 +1,30 @@
+.form_crear {
+    border: 1px solid black;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 40px;
+    padding: 0.3% 3% 3% 3%;
+    color: white;
+    margin-bottom: 2%;
+    height: max-content;
+    width: 50%;
+    margin: auto;
+    text-align: center;
+}
+
+.form_crear h1 {
+    color: #2CCBCB;
+    text-align: center;
+}
+
+.form_crear .crear  {
+    background-color: #2CCBCB;
+    border-color: #2CCBCB;
+    font-weight: bold;
+}
+
+.form_crear .crear:hover {
+    padding: 1%;
+    font-size: medium;
+    text-decoration: underline;
+}
+
