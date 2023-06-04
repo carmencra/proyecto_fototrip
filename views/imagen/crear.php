@@ -65,26 +65,11 @@ if (isset($_SESSION['viajes'])) {
 
             <label for="viaje">Viaje: </label>
             <select name="data[viaje]">
-                <?php 
-                $selected_viaje = null;
-                $selected_viaje_inicio = null;
-                $selected_viaje_fin = null;
-
-                foreach ($viajes as $viaje) :?>
-                    <!-- mostramos el valor del viaje guardado en la cookie -->
-                    <option value="<?= $viaje->getId() ?>" <?php if ($_SESSION['data_fecha'] == $viaje->getId()) echo "selected"; ?>>
-                        <?= $viaje->getPais() ?>
+                <?php foreach ($viajes as $viaje) :?>
+                    <option value="<?= $viaje->getId() ?>" <?php if (isset($_SESSION['data']['viaje']) && $_SESSION['data']['viaje'] == $viaje->getId()) echo "selected"; ?>>
+                    <?= $viaje->getPais() ?>
                     </option>
-
-                    <!-- cogemos el viaje seleccionado y guardamos las fechas del mismo  -->
-                    <!-- < ?php if ($_SESSION['data_fecha'] == $viaje->getId()) {
-                        $selected_viaje = $viaje;
-                        $selected_viaje_inicio = $viaje->getFecha_inicio();
-                        $selected_viaje_fin = $viaje->getFecha_fin();
-                    } ?>-->
-                    
                 <?php endforeach; ?> 
-
             </select> <br> <br>
 
             <label for="tipo">Tipo: </label>
@@ -162,6 +147,27 @@ if (isset($_SESSION['viajes'])) {
     });
   });
 </script>
+
+<!-- y esto para el viaje -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var selectElement = document.querySelector('select[name="data[viaje]"]');
+    var savedViaje = sessionStorage.getItem('selectedViaje');
+    if (savedViaje) {
+      selectElement.value = savedViaje;
+    }
+
+    selectElement.addEventListener('change', function() {
+      sessionStorage.setItem('selectedViaje', this.value);
+    });
+    
+    document.getElementById('myForm').addEventListener('submit', function() {
+      sessionStorage.removeItem('selectedViaje');
+    });
+  });
+</script>
+
+
 
 
 <?php
