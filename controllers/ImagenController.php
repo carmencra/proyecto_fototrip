@@ -156,6 +156,7 @@ class ImagenController{
 
             if ($fecha_correcta) {
                 Utils::deleteSession('err_fec');
+                
                 // aquí ya se guarda porque está todo correcto
                 if ($this->gestionar_foto($_FILES['imagen'])) {
                     $nombre_foto= $_FILES['imagen']['name'];
