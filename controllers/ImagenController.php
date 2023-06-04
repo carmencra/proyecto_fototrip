@@ -149,6 +149,10 @@ class ImagenController{
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $this->pages->render('imagen/crear', ['viajes' => $viajes_disponibles]);
         }
+    }
+
+    public function guardar() {
+        $viajes_disponibles= $this->obtener_viajes_disponibles();
         
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $datos= $_POST['data'];
@@ -163,7 +167,7 @@ class ImagenController{
                     $guardado= $this->repository->guardar($datos, $nombre_foto);       
                     if ($guardado) {
                         $_SESSION['imagen_creada']= true;
-                        Utils::deleteSession('err_img');
+                        $this->borrar_sesiones();
                     }    
                     else {
                         $_SESSION['imagen_creada']= false;
@@ -175,6 +179,13 @@ class ImagenController{
             }
             $this->pages->render('imagen/crear', ['viajes' => $viajes_disponibles]);
         }
+    }
+
+    public function borrar_sesiones() {
+        Utils::deleteSession('err_img');
+        Utils::deleteSession('data_tipo');
+        Utils::deleteSession('data_viaje');
+        Utils::deleteSession('data_fecha');
     }
 
 

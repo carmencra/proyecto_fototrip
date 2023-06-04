@@ -133,8 +133,8 @@ session_start();
                     ($imagen_controller)->crear();
                 }); 
                 // para recoger los datos del formulario
-                Router::add('POST', 'imagen/crear', function() use ($imagen_controller){
-                    ($imagen_controller)->crear();
+                Router::add('POST', 'imagen/guardar', function() use ($imagen_controller){
+                    ($imagen_controller)->guardar();
                 });
                 Router::add('GET', 'administrar/imagen', function() use ($imagen_controller){
                     ($imagen_controller)->mostrar();

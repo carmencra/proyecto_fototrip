@@ -1,124 +1,101 @@
 <title>Fototrip - Guardar imagen</title>
 
-<?php require_once('views/layout/header_sub_main.php'); 
+<?php require_once('views/layout/header_sub_main.php'); ?>
 
-// Retrieve the values from session variables
-if (isset($_SESSION['viajes'])) {
-    $viajes = $_SESSION['viajes'];
-}?>
+<!-- si se ha intentado guardar una imagen, nos muestra el resultado de la operación  -->
+<?php 
+    if(isset($_SESSION['imagen_creada'])):
+        if ($_SESSION['imagen_creada'] == true) : ?>
+            <script type="text/javascript">
+                alert("Se ha guardado la imagen.");
+                window.close();
+            </script>
+            
+        <?php else: ?>
+            <script type="text/javascript">
+                alert("Ha habido un error al guardar la imagen.");
+                window.close();
+            </script>
+        <?php endif;
+    endif; 
+?>
+
+<!-- cargamos la ruta de la página actual por si viniera de otra ruta -->
+<script>
+    console.log(window.location.href);
+    var baseUrl = 'http://localhost/fototrip/';
+    var ruta_pagina = 'imagen/crear';
+
+    if (!window.location.href.startsWith(baseUrl) || !window.location.href.endsWith(ruta_pagina)) {
+        window.location.href = baseUrl + ruta_pagina;
+    }
+</script>
 
 <main>
     <section class="contenido_main">
-        <!-- si se ha intentado guardar una imagen, nos muestra el resultado de la operación  -->
-        <?php if(isset($_SESSION['imagen_creada'])):
-            if ($_SESSION['imagen_creada'] == true) : ?>
-                <script type="text/javascript">
-                    alert("Se ha guardado la imagen.");
-                    window.close();
-                </script>
-                
-            <?php else: ?>
-                <script type="text/javascript">
-                    alert("Ha habido un error al guardar la imagen.");
-                    window.close();
-                </script>
-            <?php endif;
-        endif;
-
-        
-        // recogemos si hay alguna cookie de selecciones
-        // if (isset($_COOKIE['data_viaje'])) {
-        //     $opcion_viaje= $_COOKIE['data_viaje'];
-        // } else {
-        //     $opcion_viaje = ""; 
-        //     // Valor predeterminado si no hay cookie
-        // } 
-        
-        // if (isset($_COOKIE['data_tipo'])) {
-        //     $opcion_tipo= $_COOKIE['data_tipo'];
-        // } else {
-        //     $opcion_tipo = ""; 
-        //     // Valor predeterminado si no hay cookie
-        // } 
-
-        // guardamos los valores de selects en las cookies
-        // if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // $opcion_viaje = $_POST['data']['viaje'];
-            // // setcookie("data_viaje", $opcion_viaje);
-            // $_SESSION['data_viaje']= $opcion_viaje;
+        <?php        
+        // guardamos los valores del formulario
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $select_tipo= $_POST['data']['tipo'];
+            $_SESSION['data_tipo']= $select_tipo;
             
-            // // setcookie("data_tipo", $opcion_tipo);
-            // $opcion_tipo = $_POST['data']['tipo'];
-            // $_SESSION['data_tipo'] = $opcion_tipo;
-
-            // $valor_fecha = $_POST['data']['fecha'];
-            // $_SESSION['data_fecha']= $valor_fecha;
-        // }
-  ?>
+            $select_viaje= $_POST['data']['viaje'];
+            $_SESSION['data_viaje']= $select_viaje;
+            
+            $select_fecha= $_POST['data']['fecha'];
+            $_SESSION['data_fecha']= $select_fecha;
+        }    
+        ?>
   
-  
-
-
-        <form action="<?=$_ENV['BASE_URL']?>imagen/crear" method="POST" enctype="multipart/form-data" class="form_crear" id="myForm">
+        <form action="<?=$_ENV['BASE_URL']?>imagen/guardar" method="POST" enctype="multipart/form-data" class="form_crear" id="myForm">
             <h1>Guardar imagen</h1>    
             <hr> <br>
 
             <label for="viaje">Viaje: </label>
-            <select name="data[viaje]" id="viajeSelect">
-                <?php
-                $viajesData = [];
+            <select name="data[viaje]" id="viaje_seleccionado">
+                <?php $datos_viaje= [];
                 foreach ($viajes as $viaje) :
-                    $viajesData[$viaje->getId()] = [
-                    'fechaInicio' => $viaje->getFecha_inicio(),
-                    'fechaFin' => $viaje->getFecha_fin()
-                    ];
-                    ?>
-                    <option value="<?= $viaje->getId() ?>" <?php if (isset($_SESSION['data']['viaje']) && $_SESSION['data']['viaje'] == $viaje->getId()) echo "selected"; ?>>
-                    <?= $viaje->getPais() ?>
+                    // obtenemos los datos del viaje seleccionado
+                    $datos_viaje[$viaje->getId()]= [
+                        'fecha_inicio' => $viaje->getFecha_inicio(),
+                        'fecha_fin' => $viaje->getFecha_fin()
+                    ]; ?>
+                    <option value="<?= $viaje->getId() ?>" <?php if ($_SESSION['data_viaje'] == $viaje->getId()) echo "selected"; ?> >
+                        <?= $viaje->getPais() ?>
                     </option>
                 <?php endforeach; ?>
-            </select> <br> <br>
+            </select> 
+            
+            <br><br>
 
             <label for="tipo">Tipo: </label>
-            <!-- <select name="data[tipo]">
-                <option value="naturaleza" < ?php if ($opcion_tipo === 'naturaleza') echo 'selected'; ?>>Naturaleza</option>
-                <option value="construcciones" < ?php if ($opcion_tipo === 'construcciones') echo 'selected'; ?>>Construcciones</option>
-                <option value="animales" < ?php if ($opcion_tipo === 'animales') echo 'selected'; ?>>Animales</option>
-                <option value="personas" < ?php if ($opcion_tipo === 'personas') echo 'selected'; ?>>Personas</option>
-            </select> -->
-            <select name="mySelect" id="mySelect">
-                <option value="naturaleza">Naturaleza</option>
-                <option value="construcciones">Construcciones</option>
-                <option value="animales">Animales</option>
-                <option value="personas">Personas</option>
+            <select name="data[tipo]">
+                <option value="naturaleza" <?php if ($_SESSION['data_tipo'] == "naturaleza") echo "selected"; ?>>Naturaleza</option>
+                <option value="construcciones" <?php if ($_SESSION['data_tipo'] == "construcciones") echo "selected"; ?>>Construcciones</option>
+                <option value="animales" <?php if ($_SESSION['data_tipo'] == "animales") echo "selected"; ?>>Animales</option>
+                <option value="personas" <?php if ($_SESSION['data_tipo'] == "personas") echo "selected"; ?>>Personas</option>
             </select>
 
             <br><br>
 
             <label for="fecha">Fecha: </label>
-            <input type="date" name="data[fecha]" value="<?php echo isset($_SESSION['data_fecha']) ? $_SESSION['data_fecha'] : ''; ?>">
+            <input type="date" name="data[fecha]" value="<?php if (isset($_SESSION['data_fecha']))echo $_SESSION['data_fecha'];?>">
 
             <br>
             
-            <!-- imprimimos las fechas del viaje seleccionado para poder seleccionarla de manera eficiente 
-            < ?php if ($selected_viaje !== null): ?>
-                <br> (< ?= $selected_viaje_inicio ?> / < ?= $selected_viaje_fin ?>)
-            < ?php endif; ?>-->
-            ( <span id="fechaInicioDisplay">
-            <?php
-            if (isset($_SESSION['data']['viaje']) && isset($viajesData[$_SESSION['data']['viaje']])) {
-                echo $viajesData[$_SESSION['data']['viaje']]['fechaInicio'];
-            }
-            ?>
+            ( <span id="span_fecha_inicio">
+                <?php if (isset($_SESSION['data']['viaje']) && isset($datos_viaje[$_SESSION['data']['viaje']])) {
+                    echo $datos_viaje[$_SESSION['data']['viaje']]['fecha_inicio'];
+                } ?>
             </span>
             / 
-            <span id="fechaFinDisplay">
-            <?php
-            if (isset($_SESSION['data']['viaje']) && isset($viajesData[$_SESSION['data']['viaje']])) {
-                echo $viajesData[$_SESSION['data']['viaje']]['fechaFin'];
-            }
-            ?>
+            <span id="span_fecha_fin">
+                <?php if (isset($_SESSION['data']['viaje']) && isset($datos_viaje[$_SESSION['data']['viaje']])) {
+                    echo $datos_viaje[$_SESSION['data']['viaje']]['fecha_fin'];
+                } ?>
             </span> )
+
+            <br><span style="color:red"> <?php if(isset($_SESSION['err_fec'])) echo  $_SESSION['err_fec']?> </span>
 
             <br><br>
 
@@ -134,100 +111,34 @@ if (isset($_SESSION['viajes'])) {
 
     </section>
 
-    <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Manage select input
-    var selectElement = document.getElementById('mySelect');
-    var savedValue = sessionStorage.getItem('selectedValue');
-    if (savedValue) {
-      selectElement.value = savedValue;
-    }
-    selectElement.addEventListener('change', function() {
-      sessionStorage.setItem('selectedValue', this.value);
-    });
 
-    // Manage date input
-    var dateInput = document.getElementsByName('data[fecha]')[0];
-    var savedDate = sessionStorage.getItem('selectedDate');
-    if (savedDate) {
-      dateInput.value = savedDate;
-    }
-    // dateInput.addEventListener('change', function() {
-    //   sessionStorage.setItem('selectedDate', this.value);
-    // });
-    dateInput.addEventListener('input', function() {
-    sessionStorage.setItem('selectedDate', this.value);
-    });
-
-    // Manage viaje input
-    var viajeSelectElement = document.querySelector('select[name="data[viaje]"]');
-    var savedViaje = sessionStorage.getItem('selectedViaje');
-    if (savedViaje) {
-      viajeSelectElement.value = savedViaje;
-    }
-    viajeSelectElement.addEventListener('change', function() {
-      sessionStorage.setItem('selectedViaje', this.value);
-    });
-
-    // Remove saved values on form submission
-    document.getElementById('myForm').addEventListener('submit', function() {
-      sessionStorage.removeItem('selectedValue');
-      sessionStorage.removeItem('selectedDate');
-      sessionStorage.removeItem('selectedViaje');
-    });
-  });
-</script>
-
-<!-- para poner la fecha del viaje -->
+<!-- para poner la fecha del viaje seleccionado -->
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var viajeSelect = document.querySelector('select[name="data[viaje]"]');
-    var fechaInicioDisplay = document.getElementById('fechaInicioDisplay');
-    var fechaFinDisplay = document.getElementById('fechaFinDisplay');
-    var viajesData = <?= json_encode($viajesData) ?>;
+    document.addEventListener('DOMContentLoaded', function() {
+        var viaje_seleccionado= document.querySelector('select[name="data[viaje]"]');
 
-    // Initial display of selected viaje's fechas
-    updateFechasDisplay();
+        var span_fecha_inicio= document.getElementById('span_fecha_inicio');
+        var span_fecha_fin= document.getElementById('span_fecha_fin');
 
-    viajeSelect.addEventListener('change', function() {
-      updateFechasDisplay();
+        var datos_viaje= <?= json_encode($datos_viaje) ?>;
+
+        actualizar_fechas_viaje();
+
+        // coge el evento de cada vez que se cambia la opción del select de viajes
+        viaje_seleccionado.addEventListener('change', function() {
+        actualizar_fechas_viaje();
+        });
+
+        // actualiza las fechas impresas según las del viaje selecionado
+        function actualizar_fechas_viaje() {
+            var id_viaje_actual= viaje_seleccionado.value;
+            var fechas= datos_viaje[id_viaje_actual];
+
+            span_fecha_inicio.textContent= fechas.fecha_inicio;
+            span_fecha_fin.textContent= fechas.fecha_fin;
+        }
     });
-
-    function updateFechasDisplay() {
-      var selectedViajeId = viajeSelect.value;
-      var fechas = viajesData[selectedViajeId] || {};
-      fechaInicioDisplay.textContent = fechas.fechaInicio || '';
-      fechaFinDisplay.textContent = fechas.fechaFin || '';
-    }
-  });
 </script>
-
-
-
-
-<?php
-// Access the selected value using $_POST['mySelect']
-if (isset($_POST['mySelect'])) {
-    $selectedValue = $_POST['mySelect'];
-    // Rest of your code
-} 
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $_SESSION['data']['viaje'] = $_POST['data']['viaje'];
-    $_SESSION['data_fecha'] = $_POST['data']['fecha'];
-}
-
-
-$_SESSION['viajes'] = $viajes;
-
-
-// Perform any necessary actions with the selected value
-
-// Redirect back to the form page
-// header("Location: ". $_ENV['BASE_URL'].'imagen/crear');
-// exit;
-?>
-
 
 
 <?php 
@@ -236,17 +147,3 @@ $_SESSION['viajes'] = $viajes;
 
     require_once('views/layout/footer_sub_main.php'); 
 ?>
-
-
-<!-- para crear imagen necesito:
-
-pasar viajes-> opción id; value->país
-
-tipos en select
-
-coger el nombre de la imagen con extensión
-
-como es el admin estará aceptada y el usuario el 1 de admin
-
-comprobar si la fecha introducida está dentro del período del viaje
--->
