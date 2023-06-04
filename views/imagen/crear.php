@@ -42,7 +42,7 @@ if (isset($_SESSION['viajes'])) {
         // } 
 
         // guardamos los valores de selects en las cookies
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // $opcion_viaje = $_POST['data']['viaje'];
             // // setcookie("data_viaje", $opcion_viaje);
             // $_SESSION['data_viaje']= $opcion_viaje;
@@ -51,9 +51,9 @@ if (isset($_SESSION['viajes'])) {
             // $opcion_tipo = $_POST['data']['tipo'];
             // $_SESSION['data_tipo'] = $opcion_tipo;
 
-            $valor_fecha = $_POST['data']['fecha'];
-            $_SESSION['data_fecha']= $valor_fecha;
-        }
+            // $valor_fecha = $_POST['data']['fecha'];
+            // $_SESSION['data_fecha']= $valor_fecha;
+        // }
   ?>
   
   
@@ -77,12 +77,13 @@ if (isset($_SESSION['viajes'])) {
                     </option>
 
                     <!-- cogemos el viaje seleccionado y guardamos las fechas del mismo  -->
-                    <?php if ($_SESSION['data_fecha'] == $viaje->getId()) {
+                    <!-- < ?php if ($_SESSION['data_fecha'] == $viaje->getId()) {
                         $selected_viaje = $viaje;
                         $selected_viaje_inicio = $viaje->getFecha_inicio();
                         $selected_viaje_fin = $viaje->getFecha_fin();
-                    } ?>
-                <?php endforeach; ?>
+                    } ?>-->
+                    
+                <?php endforeach; ?> 
 
             </select> <br> <br>
 
@@ -124,6 +125,7 @@ if (isset($_SESSION['viajes'])) {
 
     </section>
 
+    <!-- esto es para el tipo -->
     <script>
   document.addEventListener('DOMContentLoaded', function() {
     var selectElement = document.getElementById('mySelect');
@@ -141,6 +143,26 @@ if (isset($_SESSION['viajes'])) {
     });
   });
 </script>
+
+<!-- y esto para la fecha -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var dateInput = document.getElementsByName('data[fecha]')[0];
+    var savedDate = sessionStorage.getItem('selectedDate');
+    if (savedDate) {
+      dateInput.value = savedDate;
+    }
+
+    dateInput.addEventListener('change', function() {
+      sessionStorage.setItem('selectedDate', this.value);
+    });
+    
+    document.getElementById('myForm').addEventListener('submit', function() {
+      sessionStorage.removeItem('selectedDate');
+    });
+  });
+</script>
+
 
 <?php
 // Access the selected value using $_POST['mySelect']
