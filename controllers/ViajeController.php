@@ -135,6 +135,21 @@ class ViajeController {
             $_SESSION['viaje_inscrito']= false;
         }
     }
+
+    public function crear() {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $this->pages->render('viaje/crear');
+        }
+    }
+
+    public function guardar() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $this->pages->render('viaje/crear');
+        }
+    }
+
+
 }
 
 ?>

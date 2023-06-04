@@ -118,8 +118,13 @@ session_start();
                     ($usuario_controller)->administrar();
                 });
 
+               // para llevar al formulario
                 Router::add('GET', 'viaje/crear', function() use ($viaje_controller){
                     ($viaje_controller)->crear();
+                }); 
+                // para recoger los datos del formulario
+                Router::add('POST', 'viaje/guardar', function() use ($viaje_controller){
+                    ($viaje_controller)->guardar();
                 });
                 Router::add('GET', 'administrar/viaje', function() use ($viaje_controller){
                     ($viaje_controller)->mostrar();

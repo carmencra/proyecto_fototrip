@@ -31,21 +31,24 @@
     }
 </script>
 
+<?php        
+    // guardamos los valores del formulario
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $select_tipo= $_POST['data']['tipo'];
+        $_SESSION['data_tipo']= $select_tipo;
+        
+        $select_viaje= $_POST['data']['viaje'];
+        $_SESSION['data_viaje']= $select_viaje;
+        
+        $select_fecha= $_POST['data']['fecha'];
+        $_SESSION['data_fecha']= $select_fecha;
+    }    
+?>
+
+
 <main>
     <section class="contenido_main">
-        <?php        
-        // guardamos los valores del formulario
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $select_tipo= $_POST['data']['tipo'];
-            $_SESSION['data_tipo']= $select_tipo;
-            
-            $select_viaje= $_POST['data']['viaje'];
-            $_SESSION['data_viaje']= $select_viaje;
-            
-            $select_fecha= $_POST['data']['fecha'];
-            $_SESSION['data_fecha']= $select_fecha;
-        }    
-        ?>
+        
   
         <form action="<?=$_ENV['BASE_URL']?>imagen/guardar" method="POST" enctype="multipart/form-data" class="form_crear" id="myForm">
             <h1>Guardar imagen</h1>    
@@ -103,7 +106,7 @@
             <input type="file" name="imagen" accept="image/*">
             <br><span style="color:red"> <?php if(isset($_SESSION['err_img'])) echo  $_SESSION['err_img']?> </span>
 
-            <br><br><br>
+            <br><br>
 
             <input type="submit" value="Guardar" class="crear">
         
