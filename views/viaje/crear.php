@@ -21,7 +21,7 @@
 ?>
 
 <!-- cargamos la ruta de la página actual por si viniera de otra ruta -->
-<script>
+<!-- <script>
     console.log(window.location.href);
     var baseUrl = 'http://localhost/fototrip/';
     var ruta_pagina = 'viaje/crear';
@@ -29,7 +29,7 @@
     if (!window.location.href.startsWith(baseUrl) || !window.location.href.endsWith(ruta_pagina)) {
         window.location.href = baseUrl + ruta_pagina;
     }
-</script>
+</script> -->
 
 <?php        
     // guardamos los valores del formulario
@@ -122,7 +122,7 @@
     
 <?php 
     use Utils\Utils;
-    Utils::deleteSession('imagen_creada');
+    Utils::deleteSession('viaje_creado');
 
     require_once('views/layout/footer_sub_main.php'); 
 ?>

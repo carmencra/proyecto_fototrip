@@ -8,6 +8,7 @@ use Controllers\ItinerarioController;
 use Controllers\GastosController;
 use Controllers\ImagenController;
 use Controllers\ComentarioController;
+use Utils\Utils;
 
 class ViajeController {
     private Pages $pages;
@@ -144,11 +145,121 @@ class ViajeController {
 
     public function guardar() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // borramos sesiones de errores y redireccionamos al inicio
+            $this->borra_sesiones_errores();
+
+            $datos= $_POST['data'];
+            $imagen= $_FILES['imagen'];
+
+            $validar= $this->validar_campos($datos, $imagen);
+
+            if ($validar) {
+                $guardado= $this->repository->guardar($datos, $imagen);       
+                
+                if ($guardado) {
+                    $_SESSION['imagen_creada']= true;
+                    $this->borrar_sesiones();
+                }    
+                else {
+                    $_SESSION['imagen_creada']= false;
+                }
+            }
 
             $this->pages->render('viaje/crear');
         }
     }
 
+    public function borra_sesiones_errores() {
+        Utils::deleteSession('err_pai');
+        Utils::deleteSession('err_feci');
+        Utils::deleteSession('err_fecf');
+        Utils::deleteSession('err_pre');
+        Utils::deleteSession('err_des');
+        Utils::deleteSession('err_inf');
+        Utils::deleteSession('err_img');
+    }
+
+    public function validar_campos($datos, $imagen)//: bool 
+    {
+        $no_vacios= $this->valida_vacios($datos, $imagen);
+        
+        $correctos= $this->valida_por_campo($datos, $imagen);
+        
+        // if ($no_vacios) {
+        //     $correctos= $this->valida_por_campo($datos, $imagen);
+        //     if ($correctos) {
+        //         return true;
+        //     }
+        //     else {return false;}
+        // }
+        // else {return false;}
+    }
+
+    public function valida_vacios($datos, $imagen): bool {
+        $result= false;
+        if (empty($datos['pais'])) {
+            $_SESSION['err_pai']= "*El pa&iacute;s debe estar relleno";
+            $result= false;
+        }
+        if (empty($datos['fecha_inicio'])) {
+            $_SESSION['err_feci']= "*La fecha de inicio debe estar rellena";
+            $result= false;
+        }
+        if (empty($datos['fecha_fin'])) {
+            $_SESSION['err_fecf']= "*La fecha de fin debe estar rellena";
+            $result= false;
+        }
+        if (empty($datos['precio'])) {
+            $_SESSION['err_pre']= "*El precio debe estar relleno";
+            $result= false;
+        }
+        if (empty($datos['descripcion'])) {
+            $_SESSION['err_des']= "*La descripci&oacute;n debe estar rellena";
+            $result= false;
+        }
+        if (empty($datos['informacion'])) {
+            $_SESSION['err_inf']= "*La informaci&oacute;n debe estar rellena";
+            $result= false;
+        }
+        if (!is_uploaded_file($imagen['tmp_name'])) {
+            $_SESSION['err_img']= "*Debes seleccionar una imagen";
+            $result= false;
+        }
+        else {
+            $result= true;
+        }
+        return $result;
+    }
+
+    public function valida_por_campo($datos, $imagen)//: bool 
+    {
+        $pais_validado= $this->valida_pais($datos['pais']);
+    }
+
+    public function valida_pais($pais) {
+         // si la longitud es correcta, comprueba los caracteres introducidos
+         if (strlen($pais) >= 4 && strlen($pais) <= 20) {
+            // $pattern= "([a-zñáóíúéA-ZÑÁÉÍÓÚ])+([\s][a-zñáóíúéA-ZÑÁÉÍÓÚ]+)*";
+            $pattern = "/^[a-zñáóíúéA-ZÑÁÉÍÓÚ]+(\s[a-zñáóíúéA-ZÑÁÉÍÓÚ]+)*$/";
+            if (!preg_match($pattern, $pais)) {
+                $_SESSION['err_nom']= "*El pais sólo puede contener letras y espacios";
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        else {
+            if (strlen($pais) < 4) {
+                $_SESSION['err_pai']= "*El pais debe tener mínimo 4 caracteres";
+                return false;
+            }
+            if (strlen($pais) > 20) {
+                $_SESSION['err_pai']= "*El pais debe tener máximo 20 caracteres";
+                return false;   
+            }
+        }
+    }
 
 }
 
