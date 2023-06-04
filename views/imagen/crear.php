@@ -64,12 +64,19 @@ if (isset($_SESSION['viajes'])) {
             <hr> <br>
 
             <label for="viaje">Viaje: </label>
-            <select name="data[viaje]">
-                <?php foreach ($viajes as $viaje) :?>
+            <select name="data[viaje]" id="viajeSelect">
+                <?php
+                $viajesData = [];
+                foreach ($viajes as $viaje) :
+                    $viajesData[$viaje->getId()] = [
+                    'fechaInicio' => $viaje->getFecha_inicio(),
+                    'fechaFin' => $viaje->getFecha_fin()
+                    ];
+                    ?>
                     <option value="<?= $viaje->getId() ?>" <?php if (isset($_SESSION['data']['viaje']) && $_SESSION['data']['viaje'] == $viaje->getId()) echo "selected"; ?>>
                     <?= $viaje->getPais() ?>
                     </option>
-                <?php endforeach; ?> 
+                <?php endforeach; ?>
             </select> <br> <br>
 
             <label for="tipo">Tipo: </label>
@@ -90,11 +97,28 @@ if (isset($_SESSION['viajes'])) {
 
             <label for="fecha">Fecha: </label>
             <input type="date" name="data[fecha]" value="<?php echo isset($_SESSION['data_fecha']) ? $_SESSION['data_fecha'] : ''; ?>">
+
+            <br>
             
-            <!-- imprimimos las fechas del viaje seleccionado para poder seleccionarla de manera eficiente -->
-            <?php if ($selected_viaje !== null): ?>
-                <br> (<?= $selected_viaje_inicio ?> / <?= $selected_viaje_fin ?>)
-            <?php endif; ?>
+            <!-- imprimimos las fechas del viaje seleccionado para poder seleccionarla de manera eficiente 
+            < ?php if ($selected_viaje !== null): ?>
+                <br> (< ?= $selected_viaje_inicio ?> / < ?= $selected_viaje_fin ?>)
+            < ?php endif; ?>-->
+            ( <span id="fechaInicioDisplay">
+            <?php
+            if (isset($_SESSION['data']['viaje']) && isset($viajesData[$_SESSION['data']['viaje']])) {
+                echo $viajesData[$_SESSION['data']['viaje']]['fechaInicio'];
+            }
+            ?>
+            </span>
+            / 
+            <span id="fechaFinDisplay">
+            <?php
+            if (isset($_SESSION['data']['viaje']) && isset($viajesData[$_SESSION['data']['viaje']])) {
+                echo $viajesData[$_SESSION['data']['viaje']]['fechaFin'];
+            }
+            ?>
+            </span> )
 
             <br><br>
 
@@ -128,8 +152,11 @@ if (isset($_SESSION['viajes'])) {
     if (savedDate) {
       dateInput.value = savedDate;
     }
-    dateInput.addEventListener('change', function() {
-      sessionStorage.setItem('selectedDate', this.value);
+    // dateInput.addEventListener('change', function() {
+    //   sessionStorage.setItem('selectedDate', this.value);
+    // });
+    dateInput.addEventListener('input', function() {
+    sessionStorage.setItem('selectedDate', this.value);
     });
 
     // Manage viaje input
@@ -151,6 +178,29 @@ if (isset($_SESSION['viajes'])) {
   });
 </script>
 
+<!-- para poner la fecha del viaje -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var viajeSelect = document.querySelector('select[name="data[viaje]"]');
+    var fechaInicioDisplay = document.getElementById('fechaInicioDisplay');
+    var fechaFinDisplay = document.getElementById('fechaFinDisplay');
+    var viajesData = <?= json_encode($viajesData) ?>;
+
+    // Initial display of selected viaje's fechas
+    updateFechasDisplay();
+
+    viajeSelect.addEventListener('change', function() {
+      updateFechasDisplay();
+    });
+
+    function updateFechasDisplay() {
+      var selectedViajeId = viajeSelect.value;
+      var fechas = viajesData[selectedViajeId] || {};
+      fechaInicioDisplay.textContent = fechas.fechaInicio || '';
+      fechaFinDisplay.textContent = fechas.fechaFin || '';
+    }
+  });
+</script>
 
 
 
@@ -161,6 +211,11 @@ if (isset($_POST['mySelect'])) {
     $selectedValue = $_POST['mySelect'];
     // Rest of your code
 } 
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $_SESSION['data']['viaje'] = $_POST['data']['viaje'];
+    $_SESSION['data_fecha'] = $_POST['data']['fecha'];
+}
 
 
 $_SESSION['viajes'] = $viajes;
