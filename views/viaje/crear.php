@@ -56,13 +56,13 @@
             
             <label for="fecha_inicio">Fecha inicio: </label>
             <input type="date" name="data[fecha_inicio]" value="<?php if (isset($_POST['data']['fecha_inicio']))echo $_POST['data']['fecha_inicio'];?>">
-            <br><span style="color:red"> <?php if(isset($_SESSION['err_fei'])) echo  $_SESSION['err_feci']?> </span>
+            <br><span style="color:red"> <?php if(isset($_SESSION['err_feci'])) echo  $_SESSION['err_feci']?> </span>
 
             <br><br>
             
             <label for="fecha_fin">Fecha fin: </label>
             <input type="date" name="data[fecha_fin]" value="<?php if (isset($_POST['data']['fecha_fin']))echo $_POST['data']['fecha_fin'];?>">
-            <br><span style="color:red"> <?php if(isset($_SESSION['err_fef'])) echo  $_SESSION['err_fecf']?> </span>
+            <br><span style="color:red"> <?php if(isset($_SESSION['err_fecf'])) echo  $_SESSION['err_fecf']?> </span>
 
             <br><br>
             

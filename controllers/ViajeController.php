@@ -234,6 +234,7 @@ class ViajeController {
     public function valida_por_campo($datos, $imagen)//: bool 
     {
         $pais_validado= $this->valida_pais($datos['pais']);
+        $fechas_validadas= $this->valida_fechas($datos['fecha_inicio'], $datos['fecha_fin']);
     }
 
     public function valida_pais($pais) {
@@ -260,6 +261,17 @@ class ViajeController {
             }
         }
     }
+
+    public function valida_fechas($inicio, $fin): bool {
+        if ($inicio > $fin) { 
+            $_SESSION['err_feci']= "*La fecha de inicio debe ser menor a la de fin";
+            return false;
+        }
+        else  {
+            return true;
+        }
+    }
+
 
 }
 
