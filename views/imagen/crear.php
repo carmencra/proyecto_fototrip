@@ -110,62 +110,47 @@ if (isset($_SESSION['viajes'])) {
 
     </section>
 
-    <!-- esto es para el tipo -->
     <script>
   document.addEventListener('DOMContentLoaded', function() {
+    // Manage select input
     var selectElement = document.getElementById('mySelect');
     var savedValue = sessionStorage.getItem('selectedValue');
     if (savedValue) {
       selectElement.value = savedValue;
     }
-
     selectElement.addEventListener('change', function() {
       sessionStorage.setItem('selectedValue', this.value);
     });
-    
-    document.getElementById('myForm').addEventListener('submit', function() {
-      sessionStorage.removeItem('selectedValue');
-    });
-  });
-</script>
 
-<!-- y esto para la fecha -->
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
+    // Manage date input
     var dateInput = document.getElementsByName('data[fecha]')[0];
     var savedDate = sessionStorage.getItem('selectedDate');
     if (savedDate) {
       dateInput.value = savedDate;
     }
-
     dateInput.addEventListener('change', function() {
       sessionStorage.setItem('selectedDate', this.value);
     });
-    
-    document.getElementById('myForm').addEventListener('submit', function() {
-      sessionStorage.removeItem('selectedDate');
-    });
-  });
-</script>
 
-<!-- y esto para el viaje -->
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var selectElement = document.querySelector('select[name="data[viaje]"]');
+    // Manage viaje input
+    var viajeSelectElement = document.querySelector('select[name="data[viaje]"]');
     var savedViaje = sessionStorage.getItem('selectedViaje');
     if (savedViaje) {
-      selectElement.value = savedViaje;
+      viajeSelectElement.value = savedViaje;
     }
-
-    selectElement.addEventListener('change', function() {
+    viajeSelectElement.addEventListener('change', function() {
       sessionStorage.setItem('selectedViaje', this.value);
     });
-    
+
+    // Remove saved values on form submission
     document.getElementById('myForm').addEventListener('submit', function() {
+      sessionStorage.removeItem('selectedValue');
+      sessionStorage.removeItem('selectedDate');
       sessionStorage.removeItem('selectedViaje');
     });
   });
 </script>
+
 
 
 
