@@ -51,7 +51,7 @@ class ImagenRepository {
     }
     
     public function obtener_usuario($id_usuario):string | bool {
-        $cons= $this->db->prepara("SELECT email FROM usuarios WHERE id=:id_usuario");
+        $cons= $this->db->prepara("SELECT nombre, apellidos FROM usuarios WHERE id=:id_usuario");
 
         $cons->bindParam(':id_usuario', $id_usuario);
 
@@ -61,7 +61,7 @@ class ImagenRepository {
 
         try {
             $cons->execute();
-            return $datos[0]['email'];
+            return $datos[0]['nombre']. " ". $datos[0]['apellidos'];
         }
         catch(PDOEXception $err) {
             return false;

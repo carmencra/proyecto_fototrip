@@ -78,6 +78,10 @@ class ImagenController{
             $objeto= $this->repository->pasar_objeto($imagen);
             // si la imagen está aceptada por el admin, la añade
             if ($objeto->getAceptada() == true) {
+                //obtenemos el usuario que ha publicado la imagen
+                $usuario= $this->repository->obtener_usuario($objeto->getId_usuario());
+                $objeto->setUsuario($usuario);
+
                 array_push($objetos_imagenes, $objeto);
             }
         }
