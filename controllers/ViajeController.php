@@ -66,9 +66,6 @@ class ViajeController {
 
     }
 
-
-    // aquí tengo que controlar que si el id existe te lleve al viaje y sino nada o que de un error o algo
-
     public function ver($id) {
         $viaje= $this->obtener_viaje($id);
 
@@ -289,7 +286,7 @@ class ViajeController {
         // quitamos los espacios del principio y final
         $descripcion= trim($descripcion);
         // si la longitud es correcta, comprueba los caracteres introducidos
-        if (strlen($descripcion) >= 10 && strlen($descripcion) <= 30) {
+        if (strlen($descripcion) >= 10 && strlen($descripcion) <= 50) {
             $pattern= "/^[a-zñáóíúéA-ZÑÁÉÍÓÚ]+(\s[a-zñáóíúéA-ZÑÁÉÍÓÚ]+)*$/";
             if (!preg_match($pattern, $descripcion)) {
                 $_SESSION['err_des']= "*La descripci&oacute;n s&oacute;lo puede contener letras y espacios";
@@ -304,7 +301,7 @@ class ViajeController {
                 $_SESSION['err_des']= "*La descripci&oacute;n debe tener m&iacute;nimo 10 caracteres";
                 return false;
             }
-            if (strlen($descripcion) > 30) {
+            if (strlen($descripcion) > 50) {
                 $_SESSION['err_des']= "*La descripci&oacute;n debe tener m&aacute;ximo 30 caracteres";
                 return false;   
             }
@@ -315,7 +312,7 @@ class ViajeController {
         // quitamos los espacios del principio y final
         $informacion= trim($informacion);
         // si la longitud es correcta, comprueba los caracteres introducidos
-        if (strlen($informacion) >= 20) {
+        if (strlen($informacion) >= 100) {
             $pattern= "/^[a-zñáóíúéA-ZÑÁÉÍÓÚ]+(\s[a-zñáóíúéA-ZÑÁÉÍÓÚ]+)*$/";
             if (!preg_match($pattern, $informacion)) {
                 $_SESSION['err_inf']= "*La informaci&oacute;n s&oacute;lo puede contener letras y espacios";
@@ -326,7 +323,7 @@ class ViajeController {
             }
         }
         else {
-            $_SESSION['err_inf']= "*La informaci&oacute;n debe tener m&iacute;nimo 20 caracteres";
+            $_SESSION['err_inf']= "*La informaci&oacute;n debe tener m&iacute;nimo 100 caracteres";
             return false;
         }
     }

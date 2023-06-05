@@ -54,7 +54,16 @@
                 </tr>
             </table>
         </section>
-        
+
+        <section class="descripcion">
+            <h2>Descripci&oacute;n del viaje</h2>
+            <hr> <br>
+
+            <span> <b>Resumen:</b> <?= $viaje->getDescripcion() ?> </span> <br><br>
+
+            <span> <b>Informaci&oacute;n detallada:</b> <?= $viaje->getInformacion() ?></span> <br>
+        </section>
+
         
         <section class="gastos">
             <h2>Gastos incluidos</h2>
