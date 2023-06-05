@@ -34,6 +34,7 @@
     background-color: rgba(0, 0, 0, 0.8); 
 }
 
+
 .titulo form {
     text-align: center;
 }
@@ -52,11 +53,14 @@
     text-decoration: underline;
 }
 
+
+
 .general, .descripcion, .gastos {
     padding: 2%;
     background-color: rgba(0, 0, 0, 0.8);
     margin-bottom: 4%;
 }
+
 
 .general .info {
     display: flex;
@@ -65,13 +69,13 @@
     gap: 10%;
 }
 
-
 .general .info section {
     display: flex;
     align-items: center;
     margin-bottom: 2%;
     margin-top: 2%;
 }
+
 
 
 .descripcion {
@@ -84,13 +88,18 @@
 
 
 
-.gastos table .izquierda {
-    padding: 1em 10em 1em 0.5em;
-
+.gastos .incluidos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10%;
 }
-.gastos table th {
-    padding-left: 0.5em;
-    
+
+.gastos .incluidos section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2%;
+    margin-top: 2%;
 }
 
 
