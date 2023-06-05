@@ -30,30 +30,31 @@
             <h2>Informaci&oacute;n general</h2>
             <hr>
 
-            <table>
-                <tr>
-                    <td> 
-                        <img src="../fuente/media/images/icono_precio.png" alt="precio"/> 
-                    </td>
-                    <th class="izquierda"> <?= $viaje->getPrecio() ?> € </th>
-                    <td>
-                        <img src="../fuente/media/images/icono_foto.png" alt="nivel fotográfico"/> 
-                    </td>
-                    <th> <?= $viaje->getNivel_fotografia() ?></th>
-                </tr>
+            <section class="info">
+                <section>
+                    <img src="../fuente/media/images/icono_precio.png" alt="precio"/> 
+                    <span> &nbsp;&nbsp; <?= $viaje->getPrecio() ?> € </span> 
+                </section>
 
-                <tr>
-                    <td>
-                        <img src="../fuente/media/images/icono_fecha.png" alt="fecha"/> 
-                    </td>
-                    <th class="izquierda"> <?= $viaje->getFecha_inicio() ?> - <?= $viaje->getFecha_fin() ?> </th>
-                    <td>
-                        <img src="../fuente/media/images/icono_fisico.png" alt="nivel físico"/> 
-                    </td>
-                    <th> <?= $viaje->getNivel_fisico() ?></th>
-                </tr>
-            </table>
+                <section>
+                    <img src="../fuente/media/images/icono_foto.png" alt="nivel fotográfico"/> 
+                    <span> &nbsp;&nbsp; <?= $viaje->getNivel_fotografia() ?> </span>
+                </section>
+
+                <section>
+                    <img src="../fuente/media/images/icono_fecha.png" alt="fecha"/> 
+                    <span> &nbsp;&nbsp; <?= $viaje->getFecha_inicio() ?> - <?= $viaje->getFecha_fin() ?> </span>
+                </section>
+
+                <section>
+                    <img src="../fuente/media/images/icono_fisico.png" alt="nivel físico"/> 
+                    
+                    <span> &nbsp;&nbsp; <?= $viaje->getNivel_fisico() ?> </span>
+                </section>
+            </section>
+
         </section>
+
 
         <section class="descripcion">
             <h2>Descripci&oacute;n del viaje</h2>

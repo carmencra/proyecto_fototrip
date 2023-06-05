@@ -58,18 +58,20 @@
     margin-bottom: 4%;
 }
 
-.general table, .gastos table {
-    margin: auto;
+.general .info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10%;
 }
 
-.general table .izquierda {
-    padding: 1em 10em 1em 0.7em;
-}
 
-.general table th {
-    padding-left: 0.7em;
+.general .info section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2%;
+    margin-top: 2%;
 }
-
 
 
 .descripcion {
