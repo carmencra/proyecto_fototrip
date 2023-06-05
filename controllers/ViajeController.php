@@ -154,17 +154,15 @@ class ViajeController {
             $validar= $this->validar_campos($datos, $imagen);
 
             if ($validar) {
-                $guardado= $this->repository->guardar($datos, $imagen);       
+                $guardado= $this->repository->guardar($datos, $imagen['name']);       
                 
                 if ($guardado) {
-                    $_SESSION['imagen_creada']= true;
-                    $this->borrar_sesiones();
+                    $_SESSION['viaje_creado']= true;$this->borra_sesiones_errores();
                 }    
                 else {
-                    $_SESSION['imagen_creada']= false;
+                    $_SESSION['viaje_creado']= false;
                 }
             }
-
             $this->pages->render('viaje/crear');
         }
     }
@@ -179,20 +177,17 @@ class ViajeController {
         Utils::deleteSession('err_img');
     }
 
-    public function validar_campos($datos, $imagen)//: bool 
-    {
+    public function validar_campos($datos, $imagen): bool {
         $no_vacios= $this->valida_vacios($datos, $imagen);
         
-        $correctos= $this->valida_por_campo($datos, $imagen);
-        
-        // if ($no_vacios) {
-        //     $correctos= $this->valida_por_campo($datos, $imagen);
-        //     if ($correctos) {
-        //         return true;
-        //     }
-        //     else {return false;}
-        // }
-        // else {return false;}
+        if ($no_vacios) {
+            $correctos= $this->valida_por_campo($datos, $imagen);
+            if ($correctos) {
+                return true;
+            }
+            else {return false;}
+        }
+        else {return false;}
     }
 
     public function valida_vacios($datos, $imagen): bool {
@@ -231,19 +226,27 @@ class ViajeController {
         return $result;
     }
 
-    public function valida_por_campo($datos, $imagen)//: bool 
-    {
+    public function valida_por_campo($datos, $imagen): bool {
         $pais_validado= $this->valida_pais($datos['pais']);
         $fechas_validadas= $this->valida_fechas($datos['fecha_inicio'], $datos['fecha_fin']);
+        $descripcion_validado= $this->valida_descripcion($datos['descripcion']);
+        $informacion_validado= $this->valida_informacion($datos['informacion']);
+        $imagen_validado= $this->gestionar_foto($imagen);
+
+        if ($pais_validado && $fechas_validadas && $descripcion_validado && $informacion_validado && $imagen_validado) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
-    public function valida_pais($pais) {
+    public function valida_pais($pais): bool {
          // si la longitud es correcta, comprueba los caracteres introducidos
          if (strlen($pais) >= 4 && strlen($pais) <= 20) {
-            // $pattern= "([a-zñáóíúéA-ZÑÁÉÍÓÚ])+([\s][a-zñáóíúéA-ZÑÁÉÍÓÚ]+)*";
-            $pattern = "/^[a-zñáóíúéA-ZÑÁÉÍÓÚ]+(\s[a-zñáóíúéA-ZÑÁÉÍÓÚ]+)*$/";
+            $pattern= "/^[a-zñáóíúéA-ZÑÁÉÍÓÚ]+(\s[a-zñáóíúéA-ZÑÁÉÍÓÚ]+)*$/";
             if (!preg_match($pattern, $pais)) {
-                $_SESSION['err_nom']= "*El pais sólo puede contener letras y espacios";
+                $_SESSION['err_pai']= "*El pais sólo puede contener letras y espacios";
                 return false;
             }
             else {
@@ -269,6 +272,71 @@ class ViajeController {
         }
         else  {
             return true;
+        }
+    }
+
+    public function valida_descripcion($descripcion): bool {
+        // si la longitud es correcta, comprueba los caracteres introducidos
+        if (strlen($descripcion) >= 10 && strlen($descripcion) <= 30) {
+            $pattern= "/^[a-zñáóíúéA-ZÑÁÉÍÓÚ]+(\s[a-zñáóíúéA-ZÑÁÉÍÓÚ]+)*$/";
+            if (!preg_match($pattern, $descripcion)) {
+                $_SESSION['err_des']= "*La descripci&oacute;n s&oacute;lo puede contener letras y espacios";
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        else {
+            if (strlen($descripcion) < 10) {
+                $_SESSION['err_des']= "*La descripci&oacute;n debe tener m&iacute;nimo 10 caracteres";
+                return false;
+            }
+            if (strlen($descripcion) > 30) {
+                $_SESSION['err_des']= "*La descripci&oacute;n debe tener m&aacute;ximo 30 caracteres";
+                return false;   
+            }
+        }
+    }
+
+    public function valida_informacion($informacion): bool {
+        // si la longitud es correcta, comprueba los caracteres introducidos
+        if (strlen($informacion) >= 20) {
+            $pattern= "/^[a-zñáóíúéA-ZÑÁÉÍÓÚ]+(\s[a-zñáóíúéA-ZÑÁÉÍÓÚ]+)*$/";
+            if (!preg_match($pattern, $informacion)) {
+                $_SESSION['err_inf']= "*La informaci&oacute;n s&oacute;lo puede contener letras y espacios";
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        else {
+            $_SESSION['err_inf']= "*La informaci&oacute;n debe tener m&iacute;nimo 20 caracteres";
+            return false;
+        }
+    }
+
+    public function gestionar_foto($foto): bool {
+        $nom_foto= $foto['name'];            
+        $temp_foto= $foto['tmp_name'];
+        $preruta= './fuente/media/images/galeria';
+        $ruta_foto= $preruta.'/'.$nom_foto;
+
+        // si no existe la carpeta, la crea
+        if (!is_dir($preruta)){
+            mkdir($preruta, '0777');
+        }
+
+        //si hay un fichero seleccionado, lo sube
+        if (is_uploaded_file($temp_foto)) {
+            if (move_uploaded_file($temp_foto, $ruta_foto)) {
+                return true;
+            }
+            else {
+                $_SESSION['err_img']= "*Ha habido un error al subir la foto";
+                return false;
+            }
         }
     }
 

@@ -12,10 +12,11 @@
         private string $nivel_fisico;
         private string $activo;
         private string $imagen_principal;
+        private string $informacion;
 
         private int $duracion;
 
-        public function __construct(string $id, string $pais, string $fecha_inicio, string $fecha_fin, string $precio, string $descripcion, string $nivel_fotografia, string $nivel_fisico, string $activo, string $imagen_principal) {
+        public function __construct(string $id, string $pais, string $fecha_inicio, string $fecha_fin, string $precio, string $descripcion, string $nivel_fotografia, string $nivel_fisico, string $activo, string $imagen_principal, string $informacion) {
             $this->id= $id;
             $this->pais= $pais;
             $this->fecha_inicio= $fecha_inicio;
@@ -26,6 +27,7 @@
             $this->nivel_fisico= $nivel_fisico;
             $this->activo= $activo;
             $this->imagen_principal= $imagen_principal;
+            $this->informacion= $informacion;
         }
 
 
@@ -209,24 +211,46 @@
 
                 return $this;
         }
-
-
-
-        public static function fromArray(array $data): Viaje{
-            return new Viaje(
-                $data['id'] ?? '',
-                $data['pais'] ?? '',
-                $data['fecha_inicio'] ?? '',
-                $data['fecha_fin'] ?? '',
-                $data['precio'] ?? '',
-                $data['descripcion'] ?? '',
-                $data['nivel_fotografia'] ?? '',
-                $data['nivel_fisico'] ?? '',
-                $data['activo'] ?? '',
-                $data['imagen_principal'] ?? ''
-            );
+        
+        /**
+         * Get the value of imagen_principal
+         */ 
+        public function getImagen_principal()
+        {
+                return $this->imagen_principal;
         }
 
+        /**
+         * Set the value of imagen_principal
+         *
+         * @return  self
+         */ 
+        public function setImagen_principal($imagen_principal)
+        {
+                $this->imagen_principal = $imagen_principal;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of informacion
+         */ 
+        public function getInformacion()
+        {
+                return $this->informacion;
+        }
+
+        /**
+         * Set the value of informacion
+         *
+         * @return  self
+         */ 
+        public function setInformacion($informacion)
+        {
+                $this->informacion = $informacion;
+
+                return $this;
+        }
 
         /**
          * Get the value of duracion
@@ -248,25 +272,23 @@
                 return $this;
         }
 
-        /**
-         * Get the value of imagen_principal
-         */ 
-        public function getImagen_principal()
-        {
-                return $this->imagen_principal;
+
+        public static function fromArray(array $data): Viaje{
+            return new Viaje(
+                $data['id'] ?? '',
+                $data['pais'] ?? '',
+                $data['fecha_inicio'] ?? '',
+                $data['fecha_fin'] ?? '',
+                $data['precio'] ?? '',
+                $data['descripcion'] ?? '',
+                $data['nivel_fotografia'] ?? '',
+                $data['nivel_fisico'] ?? '',
+                $data['activo'] ?? '',
+                $data['imagen_principal'] ?? '',
+                $data['informacion'] ?? ''
+            );
         }
 
-        /**
-         * Set the value of imagen_principal
-         *
-         * @return  self
-         */ 
-        public function setImagen_principal($imagen_principal)
-        {
-                $this->imagen_principal = $imagen_principal;
-
-                return $this;
-        }
     }
 
 ?>

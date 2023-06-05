@@ -7,29 +7,29 @@
     if(isset($_SESSION['viaje_creado'])):
         if ($_SESSION['viaje_creado'] == true) : ?>
             <script type="text/javascript">
-                alert("Se ha guardado la viaje.");
+                alert("Se ha guardado el viaje.");
                 window.close();
+
+                // cargamos la ruta de la página actual por si viniera de otra ruta 
+                console.log(window.location.href);
+                var baseUrl = 'http://localhost/fototrip/';
+                var ruta_pagina = 'viaje/crear';
+
+                if (!window.location.href.startsWith(baseUrl) || !window.location.href.endsWith(ruta_pagina)) {
+                    window.location.href = baseUrl + ruta_pagina;
+                }
             </script>
             
         <?php else: ?>
             <script type="text/javascript">
-                alert("Ha habido un error al guardar la viaje.");
+                alert("Ha habido un error al guardar el viaje.");
                 window.close();
             </script>
         <?php endif;
     endif; 
 ?>
 
-<!-- cargamos la ruta de la página actual por si viniera de otra ruta -->
-<!-- <script>
-    console.log(window.location.href);
-    var baseUrl = 'http://localhost/fototrip/';
-    var ruta_pagina = 'viaje/crear';
 
-    if (!window.location.href.startsWith(baseUrl) || !window.location.href.endsWith(ruta_pagina)) {
-        window.location.href = baseUrl + ruta_pagina;
-    }
-</script> -->
 
 <?php        
     // guardamos los valores del formulario
@@ -67,7 +67,7 @@
             <br><br>
             
             <label for="precio">Precio: </label>
-            <input type="number" name="data[precio]" value="<?php if (isset($_POST['data']['precio']))echo $_POST['data']['precio'];?>" style="width:60px"> €
+            <input type="number" name="data[precio]" value="<?php if (isset($_POST['data']['precio']))echo $_POST['data']['precio'];?>" style="width:60px" min="1" oninput="this.value= !!this.value && Math.abs(this.value) >= 1 ? Math.abs(this.value) : null"> €
             <br><span style="color:red"> <?php if(isset($_SESSION['err_pre'])) echo  $_SESSION['err_pre']?> </span>
 
             <br><br>
@@ -79,10 +79,8 @@
             <br><br>
             
             <label for="informacion">Informaci&oacute;n: </label> <br>
-            <textarea> 
-                <?php if (isset($_POST['data']['informacion']))echo $_POST['data']['informacion'];?>
-            </textarea>
-            <br><span style="color:red"> <?php if(isset($_SESSION['err_inf'])) echo  $_SESSION['err_inf']?> </span>
+            <textarea name="data[informacion]"><?php if (isset($_POST['data']['informacion'])) echo $_POST['data']['informacion']; ?></textarea>
+            <br><span style="color:red"> <?php if(isset($_SESSION['err_inf'])) echo $_SESSION['err_inf']?> </span>
 
             <br><br>
 
@@ -111,7 +109,7 @@
             <label for="imagen">Imagen: </label>
             <input type="file" name="imagen" accept="image/*">
             <br><span style="color:red"> <?php if(isset($_SESSION['err_img'])) echo  $_SESSION['err_img']?> </span>
-
+            
             <br><br>
 
             <input type="submit" value="Guardar" class="crear">

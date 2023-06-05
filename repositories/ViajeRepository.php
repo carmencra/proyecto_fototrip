@@ -160,7 +160,7 @@ class ViajeRepository {
         }
     }
 
-    public function inscribirse($id, $usuario) {
+    public function inscribirse($id, $usuario): bool {
         $ins= $this->db->prepara("INSERT INTO inscritos VALUES ($id, '$usuario')");
 
         try {
@@ -173,6 +173,37 @@ class ViajeRepository {
             }
         }
         catch(PDOEXception $err) {
+            return false;
+        }
+        finally {
+            $ins= null;
+            unset($ins); 
+        }
+    }
+
+    public function guardar($datos, $imagen): bool {
+        $ins= $this->db->prepara("INSERT INTO viajes values(:id, :pais, :fecha_inicio, :fecha_fin, :precio, :descripcion, :nivel_fotografia, :nivel_fisico, :activo, :imagen_principal, :informacion)");
+
+        $ins->bindParam(':id', $id, PDO::PARAM_STR);
+        $ins->bindParam(':pais', $datos['pais'], PDO::PARAM_STR);
+        $ins->bindParam(':fecha_inicio', $datos['fecha_inicio'], PDO::PARAM_STR);
+        $ins->bindParam(':fecha_fin', $datos['fecha_fin'], PDO::PARAM_STR);
+        $ins->bindParam(':precio', $datos['precio'], PDO::PARAM_STR);
+        $ins->bindParam(':descripcion', $datos['descripcion'], PDO::PARAM_STR);
+        $ins->bindParam(':nivel_fotografia', $datos['nivel'], PDO::PARAM_STR);
+        $ins->bindParam(':nivel_fisico', $datos['exigencia'], PDO::PARAM_STR);
+        $ins->bindParam(':activo', $activo, PDO::PARAM_STR);
+        $ins->bindParam(':imagen_principal', $imagen, PDO::PARAM_STR);
+        $ins->bindParam(':informacion', $datos['informacion'], PDO::PARAM_STR);
+
+        $id= NULL; //la base de datos coge el siguiente porque es un campo de auto incremento
+        $activo= TRUE; 
+
+        try {
+            $ins->execute();
+            return true;
+        }
+        catch(PDOException $err) {
             return false;
         }
         finally {
