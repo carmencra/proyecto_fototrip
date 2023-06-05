@@ -106,6 +106,7 @@
 
 .galeria, .opiniones {
     padding: 2%;
+    margin-bottom: 1%;
     background-color: rgba(0, 0, 0, 0.8);
 }
 
@@ -122,13 +123,8 @@
     color: white;
     padding: 2% 2% 2% 2%;
     background-color: rgba(0, 0, 0, 0.8);
-    margin-top: 2%;
 }
 
-
-.opiniones {
-    margin-bottom: 1%;
-}
 
 
 #opinion {

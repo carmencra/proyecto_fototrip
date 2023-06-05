@@ -55,7 +55,9 @@
 
             <?php foreach($comentarios as $comentario) : ?>
                 <section class="comentario">
-                    <h4> <?= $comentario->getUsuario(); ?> </h4>
+                    <h4> <?= $comentario->getNombre_usuario(); ?>
+                         <?= $comentario->getApellidos_usuario(); ?>
+                    </h4>
 
                     <hr>
 

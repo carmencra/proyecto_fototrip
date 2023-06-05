@@ -26,8 +26,18 @@ class ComentarioController{
         foreach ($comentarios as $coment) {
             $objeto= $this->pasar_objeto($coment);
             if ($objeto->getAceptado() == true) {
-                $nombre_viaje= $this->obtener_nombre_viaje($objeto->getId_viaje());
+                // añadimos el nombre del viaje
+                $nombre_viaje= $this->repository->obtener_nombre_viaje($objeto->getId_viaje());
                 $objeto->setNombre_viaje($nombre_viaje);
+                
+                // añadimos el nombre del usuario
+                $nombre_usuario= $this->repository->obtener_nombre_usuario($objeto->getUsuario());
+                $objeto->setNombre_usuario($nombre_usuario);
+                
+                // añadimos los apellidos del
+                $apellidos_usuario= $this->repository->obtener_apellidos_usuario($objeto->getUsuario());
+                $objeto->setApellidos_usuario($apellidos_usuario);
+
                 array_push($objetos_coments, $objeto);
             }
         }
@@ -49,6 +59,13 @@ class ComentarioController{
         foreach ($lista_comentarios as $comentario) {
             $objeto= $this->pasar_objeto($comentario);
             if ($objeto->getAceptado() == true) {
+                // añadimos el nombre del usuario
+                $nombre_usuario= $this->repository->obtener_nombre_usuario($objeto->getUsuario());
+                $objeto->setNombre_usuario($nombre_usuario);
+                
+                // añadimos los apellidos del
+                $apellidos_usuario= $this->repository->obtener_apellidos_usuario($objeto->getUsuario());
+                $objeto->setApellidos_usuario($apellidos_usuario);
                 array_push($objetos_comentarios, $objeto);
             }
         }
@@ -88,8 +105,17 @@ class ComentarioController{
             $objeto= $this->pasar_objeto($comentario);
             // añade los comentarios que todavía no han sido aceptados
             if ($objeto->getAceptado() == false) { 
-                $nombre_viaje= $this->obtener_nombre_viaje($objeto->getId_viaje());
+                // añadimos el nombre del viaje
+                $nombre_viaje= $this->repository->obtener_nombre_viaje($objeto->getId_viaje());
                 $objeto->setNombre_viaje($nombre_viaje);
+                
+                // añadimos el nombre del usuario
+                $nombre_usuario= $this->repository->obtener_nombre_usuario($objeto->getUsuario());
+                $objeto->setNombre_usuario($nombre_usuario);
+                
+                // añadimos los apellidos del
+                $apellidos_usuario= $this->repository->obtener_apellidos_usuario($objeto->getUsuario());
+                $objeto->setApellidos_usuario($apellidos_usuario);
                 array_push($objetos_coments, $objeto);
             }
         }

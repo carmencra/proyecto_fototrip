@@ -9,6 +9,8 @@
         private string $aceptado;
 
         private string $nombre_viaje;
+        private string $nombre_usuario;
+        private string $apellidos_usuario;
 
         public function __construct(string $id, string $id_viaje, string $usuario, string $contenido, string $aceptado) {
             $this->id= $id;
@@ -139,6 +141,45 @@
                 return $this;
         }
         
+        /**
+         * Get the value of nombre_usuario
+         */ 
+        public function getNombre_usuario()
+        {
+                return $this->nombre_usuario;
+        }
+
+        /**
+         * Set the value of nombre_usuario
+         *
+         * @return  self
+         */ 
+        public function setNombre_usuario($nombre_usuario)
+        {
+                $this->nombre_usuario = $nombre_usuario;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of apellidos_usuario
+         */ 
+        public function getApellidos_usuario()
+        {
+                return $this->apellidos_usuario;
+        }
+
+        /**
+         * Set the value of apellidos_usuario
+         *
+         * @return  self
+         */ 
+        public function setApellidos_usuario($apellidos_usuario)
+        {
+                $this->apellidos_usuario = $apellidos_usuario;
+
+                return $this;
+        }
         
         public static function fromArray(array $data): Comentario{
             return new Comentario(

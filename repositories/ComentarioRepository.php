@@ -45,6 +45,52 @@ class ComentarioRepository {
         }
     }
 
+    public function obtener_nombre_usuario($email): bool | string {
+        $cons= $this->db->prepara("SELECT nombre FROM usuarios WHERE email=:email");
+
+        $cons->bindParam(':email', $email);
+
+        try {
+            $cons->execute();
+            if ($cons && $cons->rowCount() == 1) {
+                return $cons->fetch()["nombre"];
+            }
+            else {
+                return false;
+            }
+        }
+        catch(PDOEXception $err) {
+            return false;
+        }
+        finally {
+            $cons= null;
+            unset($cons); 
+        }
+    }
+
+    public function obtener_apellidos_usuario($email): bool | string {
+        $cons= $this->db->prepara("SELECT apellidos FROM usuarios WHERE email=:email");
+
+        $cons->bindParam(':email', $email);
+
+        try {
+            $cons->execute();
+            if ($cons && $cons->rowCount() == 1) {
+                return $cons->fetch()["apellidos"];
+            }
+            else {
+                return false;
+            }
+        }
+        catch(PDOEXception $err) {
+            return false;
+        }
+        finally {
+            $cons= null;
+            unset($cons); 
+        }
+    }
+
     public function obtener_comentarios($id_viaje): ?array {
         $this->db->consulta("SELECT * FROM comentarios WHERE id_viaje= $id_viaje");
         return $this->db->extraer_todos();
