@@ -54,29 +54,7 @@
                 </tr>
             </table>
         </section>
-
-
-        <section class="itinerario">
-            <details>
-                <summary>
-                    <h2>Itinerario</h2>
-                    <hr>
-                </summary>
-
-                <section>
-                    <ul>
-                        <?php foreach ($itinerario as $dia ): ?>
-                            <li><h3>D&iacute;a <?= $dia->getDia(); ?> </h3></li>
-                            <p> <?= $dia->getDescripcion(); ?> </p> <br>
-
-                        <?php endforeach;?>
-                    </ul>
-                
-                </section>
-            </details>
-            
-        </section>
-
+        
         
         <section class="gastos">
             <h2>Gastos incluidos</h2>

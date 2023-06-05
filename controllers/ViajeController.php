@@ -19,7 +19,6 @@ class ViajeController {
     public function __construct() {
         $this->pages= new Pages();
         $this->repository= new ViajeRepository();
-        $this->itinerarioController= new ItinerarioController();
         $this->gastosController= new GastosController();
         $this->imagenController= new ImagenController();
         $this->comentarioController= new ComentarioController();
@@ -75,15 +74,13 @@ class ViajeController {
 
         //  si se encuentra un viaje, obtiene los datos relacionados con este y los manda a la vista
         if ($viaje) {
-            $itinerario= $this->itinerarioController->obtener_itinerario($id);
-
             $gastos= $this->gastosController->obtener_gastos($id);
 
             $imagenes= $this->imagenController->obtener_imagenes($id);
             
             $comentarios= $this->comentarioController->obtener_comentarios($id);
             
-            $this->pages->render('viaje/ver', ['viaje' => $viaje, 'itinerario' => $itinerario, 'gastos' => $gastos, 'imagenes' => $imagenes, 'comentarios' => $comentarios ]);
+            $this->pages->render('viaje/ver', ['viaje' => $viaje, 'gastos' => $gastos, 'imagenes' => $imagenes, 'comentarios' => $comentarios ]);
         }
     }
 
