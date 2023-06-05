@@ -176,12 +176,21 @@ session_start();
             }
 
             else {
-                // los usuarios que no sean admin, podrán inscribirse a viajes
+                // los usuarios que no sean admin, podrán inscribirse a viajes y añadir imágenes y comentarios sobre aquellos que ya se hayan llevado a cabo
                 Router::add('POST', 'viaje/inscribirse', function() use ($viaje_controller) {
                     ($viaje_controller)->inscribirse();
                 }); 
                 Router::add('GET', 'misviajes', function() use ($usuario_controller) {
                     ($usuario_controller)->mis_viajes();
+                }); 
+                Router::add('POST', 'viaje/comentar', function() use ($viaje_controller) {
+                    ($viaje_controller)->comentar();
+                }); 
+                Router::add('POST', 'comentario/guardar', function() use ($comentario_controller) {
+                    ($comentario_controller)->guardar();
+                }); 
+                Router::add('POST', 'viaje/imagen', function() use ($viaje_controller) {
+                    ($viaje_controller)->subir_imagen();
                 }); 
             }
 

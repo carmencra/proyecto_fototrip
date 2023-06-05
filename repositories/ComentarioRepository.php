@@ -140,6 +140,35 @@ class ComentarioRepository {
         }
     }
 
+
+    public function guardar($id_viaje, $email, $comentario):bool {
+        $ins= $this->db->prepara("INSERT INTO comentarios values (:id, :id_viaje, :usuario, :contenido, :aceptado)");
+        
+        $ins->bindParam(':id', $id, PDO::PARAM_STR);
+        $ins->bindParam(':id_viaje', $id_viaje, PDO::PARAM_INT);
+        $ins->bindParam(':usuario', $email, PDO::PARAM_STR);
+        $ins->bindParam(':contenido', $comentario, PDO::PARAM_STR);
+        $ins->bindParam(':aceptado', $aceptado, PDO::PARAM_STR);
+
+        $id= NULL; //id auto_increment
+        $aceptado= FALSE; //el comentario se queda a la espera de que el admin lo apruebe
+
+        try{
+            if ($ins->execute()) {
+                return true;
+            }
+            else {return false;}
+        }
+        catch(PDOException $err){
+            return false;
+        }
+        finally {
+            $ins= null;
+            unset($ins); 
+        }
+    }
+
+
 }
 
 ?>

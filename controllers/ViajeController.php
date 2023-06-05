@@ -351,6 +351,13 @@ class ViajeController {
         }
     }
 
+    public function comentar() {
+        $id= $_POST['id_viaje_a_comentar'];
+        $datos_viaje= $this->repository->obtener_viaje($id);
+        $viaje= $this->pasar_objeto($datos_viaje);
+        $this->pages->render('comentario/comentar', ['viaje' => $viaje]);
+    }
+
 
 }
 

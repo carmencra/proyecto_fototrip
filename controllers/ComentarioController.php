@@ -135,6 +135,45 @@ class ComentarioController{
         $this->repository->borrar($comentario);
         $this->listar_para_aceptar();
     }
+
+    public function guardar() {
+        $datos= $_POST['data'];
+        $id_viaje= $datos['id_viaje_a_comentar'];
+
+        $validar= $this->validar($datos['comentario']);
+
+        if ($validar) {
+            $guardar= $this->repository->guardar($id_viaje, $_SESSION['usuario'], $datos['comentario']);
+            if ($guardar) {
+                $_SESSION['comentario_guardado']= true;
+            }
+            else {
+                $_SESSION['comentario_guardado']= false;
+            }
+            
+            header("Location: ". $_ENV['BASE_URL'].'misviajes');
+        }
+        var_dump($data['comentario']);die();
+    }
+
+    public function validar($comentario):bool {
+        if (empty($comentario)) {
+            $_SESSION['err_com']= "*El comentario debe estar relleno";
+            return false;
+        }
+        else {
+            // quitamos los espacios del principio y final
+            $comentario= trim($comentario);
+            // comprobamos la longitud del comentario
+            if (strlen($comentario) < 4) {
+                $_SESSION['err_com']= "*El comentario debe tener m&iacute;nimo 4 caracteres";
+                return false;
+            }
+            else {return true;}
+        }
+    }
+
+
 }
 
 ?>
