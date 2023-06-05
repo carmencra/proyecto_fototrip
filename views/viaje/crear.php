@@ -20,12 +20,19 @@
                 }
             </script>
             
-        <?php else: ?>
-            <script type="text/javascript">
-                alert("Ha habido un error al guardar el viaje.");
-                window.close();
-            </script>
+        <?php else: 
+            if (isset($_SESSION['error_gastos'])): ?>
+                <script type="text/javascript">
+                    alert("Ha habido un error al guardar los gastos del viaje.");
+                    window.close();
+                </script>
+            <?php else: ?>
+                <script type="text/javascript">
+                    alert("Ha habido un error al guardar el viaje.");
+                    window.close();
+                </script>
         <?php endif;
+        endif;
     endif; 
 ?>
 
@@ -111,6 +118,29 @@
             <br><span style="color:red"> <?php if(isset($_SESSION['err_img'])) echo  $_SESSION['err_img']?> </span>
             
             <br><br>
+
+            <label for="gastos">Gastos incluidos: </label> <br>
+            <span>(Marca los que est&eacute;n incluidos)</span> <br>
+            
+                <label for="comida">Comida</label>
+                <input type="checkbox" id="comida" name="gastos[]" value="comida" <?php echo isset($_POST['gastos']) && in_array('comida', $_POST['gastos']) ? 'checked' : ''; ?>> <br>
+
+                <label for="alojamiento">Alojamiento</label>
+                <input type="checkbox" id="alojamiento" name="gastos[]" value="alojamiento" <?php echo isset($_POST['gastos']) && in_array('alojamiento', $_POST['gastos']) ? 'checked' : ''; ?>> <br>
+
+                <label for="vuelos">Vuelos</label>
+                <input type="checkbox" id="vuelos" name="gastos[]" value="vuelos" <?php echo isset($_POST['gastos']) && in_array('vuelos', $_POST['gastos']) ? 'checked' : ''; ?>> <br>
+
+                <label for="transportes">Transportes</label>
+                <input type="checkbox" id="transportes" name="gastos[]" value="transportes" <?php echo isset($_POST['gastos']) && in_array('transportes', $_POST['gastos']) ? 'checked' : ''; ?>> <br>
+
+                <label for="seguro">Seguro</label>
+                <input type="checkbox" id="seguro" name="gastos[]" value="seguro" <?php echo isset($_POST['gastos']) && in_array('seguro', $_POST['gastos']) ? 'checked' : ''; ?>> <br>
+
+                <label for="gastos">Gastos</label>
+                <input type="checkbox" id="gastos" name="gastos[]" value="gastos" <?php echo isset($_POST['gastos']) && in_array('gastos', $_POST['gastos']) ? 'checked' : ''; ?>> <br>
+
+                <br><br>
 
             <input type="submit" value="Guardar" class="crear">
         </form>

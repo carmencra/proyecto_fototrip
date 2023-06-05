@@ -212,6 +212,27 @@ class ViajeRepository {
         }
     }
 
+    public function obtener_id_ultimo_viaje() {
+        $cons= $this->db->prepara("SELECT MAX(id) FROM viajes");
+
+        try {
+            $cons->execute();
+            if ($cons && $cons->rowCount() == 1) {
+                return $cons->fetch()["MAX(id)"];
+            }
+            else {
+                return false;
+            }
+        }
+        catch(PDOEXception $err) {
+            return false;
+        }
+        finally {
+            $cons= null;
+            unset($cons); 
+        }
+    }
+
 }
 
 ?>

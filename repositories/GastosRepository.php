@@ -22,6 +22,29 @@ class GastosRepository {
         return $objeto_gastos;
     }
 
+    public function guardar($id_viaje, $gastos): bool {
+        $ins= $this->db->prepara("INSERT INTO gastos values(:id_viaje, :comida, :alojamiento, :vuelos, :transportes, :seguro, :gastos)");
+
+        $ins->bindParam(':id_viaje', $id_viaje, PDO::PARAM_STR);
+        $ins->bindParam(':comida', $gastos['comida'], PDO::PARAM_STR);
+        $ins->bindParam(':alojamiento', $gastos['alojamiento'], PDO::PARAM_STR);
+        $ins->bindParam(':vuelos', $gastos['vuelos'], PDO::PARAM_STR);
+        $ins->bindParam(':transportes', $gastos['transportes'], PDO::PARAM_STR);
+        $ins->bindParam(':seguro', $gastos['seguro'], PDO::PARAM_STR);
+        $ins->bindParam(':gastos', $gastos['gastos'], PDO::PARAM_STR);
+
+        try {
+            return true;
+        }
+        catch(PDOException $err) {
+            return false;
+        }
+        finally {
+            $ins= null;
+            unset($ins); 
+        }
+    }
+
 }
 
 ?>

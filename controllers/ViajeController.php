@@ -4,7 +4,6 @@ namespace Controllers;
 use Repositories\ViajeRepository;
 use Lib\Pages;
 use Lib\Email;
-use Controllers\ItinerarioController;
 use Controllers\GastosController;
 use Controllers\ImagenController;
 use Controllers\ComentarioController;
@@ -13,7 +12,6 @@ use Utils\Utils;
 class ViajeController {
     private Pages $pages;
     private ViajeRepository $repository;
-    private ItinerarioController $itinerarioController;
     private GastosController $gastosController;
     private ImagenController $imagenController;
     private ComentarioController $comentarioController;
@@ -153,11 +151,24 @@ class ViajeController {
 
             $validar= $this->validar_campos($datos, $imagen);
 
+            $gastos= [];
+            foreach($_POST['gastos'] as $gasto){
+                // Añadimos los gastos seleccionados
+                $gastos[$gasto]= true;
+            }
+
             if ($validar) {
-                $guardado= $this->repository->guardar($datos, $imagen['name']);       
+                $guardado= $this->repository->guardar($datos, $imagen['name']);     
                 
                 if ($guardado) {
-                    $_SESSION['viaje_creado']= true;$this->borra_sesiones_errores();
+                    $id_viaje= $this->repository->obtener_id_ultimo_viaje();
+                    $guardar_gastos= $this->gastosController->guardar($id_viaje, $gastos);
+                    if ($guardar_gastos) {
+                        $_SESSION['viaje_creado']= true;$this->borra_sesiones_errores();
+                    }
+                    else {
+                        $_SESSION['error_gastos']= true;
+                    }
                 }    
                 else {
                     $_SESSION['viaje_creado']= false;
@@ -242,8 +253,10 @@ class ViajeController {
     }
 
     public function valida_pais($pais): bool {
-         // si la longitud es correcta, comprueba los caracteres introducidos
-         if (strlen($pais) >= 4 && strlen($pais) <= 20) {
+        // quitamos los espacios del principio y final
+        $pais= trim($pais);
+        // si la longitud es correcta, comprueba los caracteres introducidos
+        if (strlen($pais) >= 4 && strlen($pais) <= 20) {
             $pattern= "/^[a-zñáóíúéA-ZÑÁÉÍÓÚ]+(\s[a-zñáóíúéA-ZÑÁÉÍÓÚ]+)*$/";
             if (!preg_match($pattern, $pais)) {
                 $_SESSION['err_pai']= "*El pais sólo puede contener letras y espacios";
@@ -276,6 +289,8 @@ class ViajeController {
     }
 
     public function valida_descripcion($descripcion): bool {
+        // quitamos los espacios del principio y final
+        $descripcion= trim($descripcion);
         // si la longitud es correcta, comprueba los caracteres introducidos
         if (strlen($descripcion) >= 10 && strlen($descripcion) <= 30) {
             $pattern= "/^[a-zñáóíúéA-ZÑÁÉÍÓÚ]+(\s[a-zñáóíúéA-ZÑÁÉÍÓÚ]+)*$/";
@@ -300,6 +315,8 @@ class ViajeController {
     }
 
     public function valida_informacion($informacion): bool {
+        // quitamos los espacios del principio y final
+        $informacion= trim($informacion);
         // si la longitud es correcta, comprueba los caracteres introducidos
         if (strlen($informacion) >= 20) {
             $pattern= "/^[a-zñáóíúéA-ZÑÁÉÍÓÚ]+(\s[a-zñáóíúéA-ZÑÁÉÍÓÚ]+)*$/";
