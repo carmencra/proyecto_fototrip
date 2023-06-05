@@ -5,6 +5,7 @@ use Repositories\UsuarioRepository;
 use Lib\Pages;
 use Lib\Email;
 use Utils\Utils;
+use Models\Viaje;
 
 class UsuarioController{
     private Pages $pages;
@@ -345,7 +346,8 @@ class UsuarioController{
         $viajes= [];
         foreach($id_viajes as $id) {
             $viaje= $this->repository->obtener_viaje($id['id_viaje']);
-            array_push($viajes, $viaje);
+            $objeto_viaje= Viaje::fromArray($viaje);
+            array_push($viajes, $objeto_viaje);
         }
         return $viajes;
     }
