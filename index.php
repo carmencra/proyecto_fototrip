@@ -177,8 +177,11 @@ session_start();
 
             else {
                 // los usuarios que no sean admin, podrán inscribirse a viajes
-                Router::add('POST', 'viaje/inscribirse', function() {
+                Router::add('POST', 'viaje/inscribirse', function() use ($viaje_controller) {
                     ($viaje_controller)->inscribirse();
+                }); 
+                Router::add('GET', 'misviajes', function() use ($usuario_controller) {
+                    ($usuario_controller)->mis_viajes();
                 }); 
             }
 

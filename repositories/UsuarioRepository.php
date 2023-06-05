@@ -166,6 +166,17 @@ class UsuarioRepository {
             unset($cons); 
         }
     }
+
+    public function obtener_id_viajes_inscritos($email): ?array {
+        $this->db->consulta("SELECT id_viaje FROM inscritos WHERE email= '$email'");
+        return $this->db->extraer_todos();
+    }
+
+    public function obtener_viaje($id) {
+        $this->db->consulta("SELECT * FROM viajes WHERE id= $id");
+        return $this->db->extraer_registro();
+    }
+    
 }
 
 ?>

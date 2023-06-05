@@ -332,6 +332,23 @@ class UsuarioController{
     public function administrar() {
         $this->pages->render('usuario/administrar');
     }
+
+    public function mis_viajes() {   
+        $viajes= $this->obtener_viajes($_SESSION['usuario']); 
+        
+        $this->pages->render('usuario/mis_viajes', ['viajes' => $viajes]);
+    }
+
+    public function obtener_viajes($email): ?array {
+        $id_viajes= $this->repository->obtener_id_viajes_inscritos($_SESSION['usuario']);  
+
+        $viajes= [];
+        foreach($id_viajes as $id) {
+            $viaje= $this->repository->obtener_viaje($id['id_viaje']);
+            array_push($viajes, $viaje);
+        }
+        return $viajes;
+    }
  
 
 }
