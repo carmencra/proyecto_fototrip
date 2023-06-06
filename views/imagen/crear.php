@@ -63,7 +63,7 @@
                         'fecha_inicio' => $viaje->getFecha_inicio(),
                         'fecha_fin' => $viaje->getFecha_fin()
                     ]; ?>
-                    <option value="<?= $viaje->getId() ?>" <?php if ($_SESSION['data_viaje'] == $viaje->getId()) echo "selected"; ?> >
+                    <option value="<?= $viaje->getId() ?>" <?php if (isset($_SESSION['data_viaje']) && $_SESSION['data_viaje'] == $viaje->getId()) echo "selected"; ?> >
                         <?= $viaje->getPais() ?>
                     </option>
                 <?php endforeach; ?>
@@ -73,10 +73,10 @@
 
             <label for="tipo">Tipo: </label>
             <select name="data[tipo]">
-                <option value="naturaleza" <?php if ($_SESSION['data_tipo'] == "naturaleza") echo "selected"; ?>>Naturaleza</option>
-                <option value="construcciones" <?php if ($_SESSION['data_tipo'] == "construcciones") echo "selected"; ?>>Construcciones</option>
-                <option value="animales" <?php if ($_SESSION['data_tipo'] == "animales") echo "selected"; ?>>Animales</option>
-                <option value="personas" <?php if ($_SESSION['data_tipo'] == "personas") echo "selected"; ?>>Personas</option>
+                <option value="naturaleza" <?php if (isset($_SESSION['data_tipo']) && $_SESSION['data_tipo']== "naturaleza") echo "selected"; ?>>Naturaleza</option>
+                <option value="construcciones" <?php if (isset($_SESSION['data_tipo']) && $_SESSION['data_tipo']== "construcciones") echo "selected"; ?>>Construcciones</option>
+                <option value="animales" <?php if (isset($_SESSION['data_tipo']) && $_SESSION['data_tipo']== "animales") echo "selected"; ?>>Animales</option>
+                <option value="personas" <?php if (isset($_SESSION['data_tipo']) && $_SESSION['data_tipo']== "personas") echo "selected"; ?>>Personas</option>
             </select>
 
             <br><br>
