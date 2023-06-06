@@ -233,11 +233,6 @@ class ViajeRepository {
         }
     }
 
-    public function obtener_id_viajes_inscritos($email): ?array {
-        $this->db->consulta("SELECT id_viaje FROM inscritos WHERE email= '$email'");
-        return $this->db->extraer_todos();
-    }
-    
 
 }
 

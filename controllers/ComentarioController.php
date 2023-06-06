@@ -55,20 +55,8 @@ class ComentarioController{
     public function obtener_comentarios($id_viaje) {
         $lista_comentarios= $this->repository->obtener_comentarios($id_viaje);
 
-        $objetos_comentarios= [];
-        foreach ($lista_comentarios as $comentario) {
-            $objeto= $this->pasar_objeto($comentario);
-            if ($objeto->getAceptado() == true) {
-                // añadimos el nombre del usuario
-                $nombre_usuario= $this->repository->obtener_nombre_usuario($objeto->getUsuario());
-                $objeto->setNombre_usuario($nombre_usuario);
-                
-                // añadimos los apellidos del
-                $apellidos_usuario= $this->repository->obtener_apellidos_usuario($objeto->getUsuario());
-                $objeto->setApellidos_usuario($apellidos_usuario);
-                array_push($objetos_comentarios, $objeto);
-            }
-        }
+        $objetos_comentarios= $this->obtener_objetos($lista_comentarios);
+        
         return $objetos_comentarios;
     }
 
@@ -171,6 +159,10 @@ class ComentarioController{
             }
             else {return true;}
         }
+    }
+
+    public function obtener_comentarios_usuario($email) {
+        return $this->repository->obtener_comentarios_usuario($email);
     }
 
 

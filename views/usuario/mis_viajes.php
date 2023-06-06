@@ -103,4 +103,9 @@
     </section>
 
 
-<?php require_once('views/layout/footer_main.php'); ?>
+<?php
+     use Utils\Utils;
+     Utils::deleteSession('comentario_guardado');
+ 
+require_once('views/layout/footer_main.php'); 
+?>

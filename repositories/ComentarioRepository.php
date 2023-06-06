@@ -167,6 +167,11 @@ class ComentarioRepository {
         }
     }
 
+    public function obtener_comentarios_usuario($email) : ?array {
+        $this->db->consulta("SELECT * FROM comentarios WHERE usuario= '$email'");
+        return $this->db->extraer_todos();
+    }
+
 
 }
 

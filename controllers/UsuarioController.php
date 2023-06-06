@@ -2,24 +2,26 @@
 
 namespace Controllers;
 use Repositories\UsuarioRepository;
-use Repositories\ComentarioRepository;
-use Repositories\ImagenRepository;
+use Controllers\ViajeController;
+use Controllers\ComentarioController;
+use Controllers\ImagenController;
 use Lib\Pages;
 use Lib\Email;
 use Utils\Utils;
-use Models\Viaje;
-use Models\Comentario;
 
 class UsuarioController{
     private Pages $pages;
     private UsuarioRepository $repository;
-    private ComentarioRepository $comentario_repository;
-    private ImagenRepository $imagen_repository;
+    private ViajeController $viaje_Controller;
+    private ComentarioController $comentario_Controller;
+    private ImagenController $imagen_Controller;
 
     public function __construct($db) {
         $this->pages= new Pages();
         $this->repository= new UsuarioRepository($db);
-        $this->imagen_repository= new ImagenRepository($db);
+        $this->viaje_controller= new ViajeController($db);
+        $this->comentario_controller= new ComentarioController($db);
+        $this->imagen_controller= new ImagenController($db);
     }
 
     public function registrarse() {
@@ -342,34 +344,32 @@ class UsuarioController{
 
     // lleva a los viajes a los que está escrito el usuario
     public function mis_viajes() {   
-        $viajes= $this->viaje_repository->obtener_viajes($_SESSION['usuario']); 
+        $viajes= $this->obtener_viajes($_SESSION['usuario']); 
         $comentarios= $this->obtener_comentarios($_SESSION['usuario']);
         
-        $this->pages->render('usuario/mis_viajes', ['viajes' => $viajes]);
+        $this->pages->render('usuario/mis_viajes', ['viajes' => $viajes, 'comentarios' => $comentarios]);
     }
 
     public function obtener_viajes(): ?array {
-        $id_viajes= $this->viaje_repository->obtener_id_viajes_inscritos($_SESSION['usuario']);  
+        $id_viajes= $this->repository->obtener_id_viajes_inscritos($_SESSION['usuario']);  
 
         $viajes= [];
-        // bueno esto en verdad seguro que ya hay algo en el controlador, así que llama al controlador y ya que él haga esto
         foreach($id_viajes as $id) {
-            $viaje= $this->viaje_repository->obtener_viaje($id['id_viaje']);
-            $objeto_viaje= Viaje::fromArray($viaje);
+            $objeto_viaje= $this->viaje_controller->obtener_viaje($id['id_viaje']);
             array_push($viajes, $objeto_viaje);
         }
         return $viajes;
     }
  
     public function obtener_comentarios($email) {
-        $datos_comentarios= $this->repository->obtener_comentarios($email);
+        $datos_comentarios= $this->comentario_controller->obtener_comentarios_usuario($email);
+
 
         $comentarios= [];
         foreach($datos_comentarios as $comentario) {
-            $objeto_comentario= Comentario::fromArray($comentario);
+            $objeto_comentario= $this->comentario_controller->pasar_objeto($comentario);
             array_push($comentarios, $objeto_comentario);
         }
-        var_dump($comentarios);die();
         return $comentarios;
     }
 
