@@ -53,6 +53,23 @@
 
         <section class="buscador_imagenes">
             <?php
+                // recogemos si hay alguna cookie de filtros existente
+                if (isset($_COOKIE['data_tipo'])) {
+                    $opcion_tipo= $_COOKIE['data_tipo'];
+                } 
+                else {
+                    $opcion_tipo = ""; 
+                    // Valor predeterminado si no hay cookie
+                } 
+                if (isset($_COOKIE['data_fecha'])) {
+                    $opcion_fecha= $_COOKIE['data_fecha'];
+                } 
+                else {
+                    $opcion_fecha = ""; 
+                    // Valor predeterminado si no hay cookie
+                }
+                
+
                 // guardamos los valores de filtros en las cookies
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $opcion_tipo = $_POST['data']['tipo'];
@@ -60,24 +77,9 @@
                     
                     $opcion_fecha = $_POST['data']['fecha'];
                     setcookie("data_fecha", $opcion_fecha);
-                }
-
-                // recogemos si hay alguna cookie de filtros existente
-                if (isset($_COOKIE['data_tipo'])) {
-                    $opcion_tipo= $_COOKIE['data_tipo'];
-                } else {
-                    $opcion_tipo = ""; 
-                    // Valor predeterminado si no hay cookie
-                } 
-                if (isset($_COOKIE['data_fecha'])) {
-                    $opcion_fecha= $_COOKIE['data_fecha'];
-                } else {
-                    $opcion_fecha = ""; 
-                    // Valor predeterminado si no hay cookie
-                }
-                
-                
+                }                
             ?>
+
             <form action="<?=$_ENV['BASE_URL']?>imagen_buscar" method="POST" enctype="multipart/form-data">
 
             <section>
@@ -100,7 +102,7 @@
             <section>
                 <label for="fecha">Fecha </label>
             
-                <select name="data[fecha]" value="<?php if (isset($_COOKIE['data']['fecha']))echo $_COOKIE['data']['fecha'];?>">
+                <select name="data[fecha]">
                     <option value="indiferente" <?php if ($opcion_fecha == "indiferente") echo "selected"; ?>> Indiferente </option>
                     <option value="recientes" <?php if ($opcion_fecha == "recientes") echo "selected"; ?>> M&aacute;s recientes </option>
                     <option value="antiguas" <?php if ($opcion_fecha == "antiguas") echo "selected"; ?>> M&aacute;s antiguas </option>

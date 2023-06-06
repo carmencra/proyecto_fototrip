@@ -58,30 +58,34 @@
 <main>
 
     <section class="buscador_viajes">
-            <?php
-                // recogemos si hay alguna cookie de filtros existente
-                if (isset($_COOKIE['data_exigencia'])) {
-                    $opcion_exigencia= $_COOKIE['data_exigencia'];
-                } else {
-                    $opcion_exigencia = ""; 
-                    // Valor predeterminado si no hay cookie
-                } 
-                if (isset($_COOKIE['data_nivel'])) {
-                    $opcion_nivel= $_COOKIE['data_nivel'];
-                } else {
-                    $opcion_nivel = ""; 
-                    // Valor predeterminado si no hay cookie
-                }
+        <?php
+            // recogemos si hay alguna cookie de filtros existente
+            if (isset($_COOKIE['data_exigencia'])) {
+                $opcion_exigencia= $_COOKIE['data_exigencia'];
+            }
+            else {
+                $opcion_exigencia = ""; 
+                // Valor predeterminado si no hay cookie
+            } 
+            if (isset($_COOKIE['data_nivel'])) {
+                $opcion_nivel= $_COOKIE['data_nivel'];
+            }
+            else {
+                $opcion_nivel = ""; 
+                // Valor predeterminado si no hay cookie
+            }
+            
+
+            // guardamos los valores de filtros en las cookies
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $opcion_exigencia = $_POST['data']['exigencia'];
+                setcookie("data_exigencia", $opcion_exigencia);
                 
-                // guardamos los valores de filtros en las cookies
-                if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                    $opcion_exigencia = $_POST['data']['exigencia'];
-                    setcookie("data_exigencia", $opcion_exigencia);
-                    
-                    $opcion_nivel = $_POST['data']['nivel'];
-                    setcookie("data_nivel", $opcion_nivel);
-                }
-            ?>
+                $opcion_nivel = $_POST['data']['nivel'];
+                setcookie("data_nivel", $opcion_nivel);
+            }
+        ?>
+
         <form action="<?=$_ENV['BASE_URL']?>viaje_buscar" method="POST" enctype="multipart/form-data">
         <section>
             <label for="pais">Pa&iacute;s: </label>
