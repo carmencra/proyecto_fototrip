@@ -1,7 +1,7 @@
 footer {
     position: absolute;
     background-color: #000000;
-    height: 45%;
+    height: max-content;
     width: 100%;
     left: 0;
     text-align: center;
@@ -13,3 +13,7 @@ footer #logo {
     margin-top: 1.5%;
     width: 190px;
 } 
+
+footer p {
+    margin-bottom: 2%;
+}
