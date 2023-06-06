@@ -101,26 +101,15 @@ class ComentarioController{
     }
 
     public function obtener_no_aceptados($comentarios) {
-        $objetos_coments= [];
-        foreach ($comentarios as $comentario) {
-            $objeto= $this->pasar_objeto($comentario);
-            // añade los comentarios que todavía no han sido aceptados
-            if ($objeto->getAceptado() == false) { 
-                // añadimos el nombre del viaje
-                $nombre_viaje= $this->repository->obtener_nombre_viaje($objeto->getId_viaje());
-                $objeto->setNombre_viaje($nombre_viaje);
-                
-                // añadimos el nombre del usuario
-                $nombre_usuario= $this->repository->obtener_nombre_usuario($objeto->getUsuario());
-                $objeto->setNombre_usuario($nombre_usuario);
-                
-                // añadimos los apellidos del
-                $apellidos_usuario= $this->repository->obtener_apellidos_usuario($objeto->getUsuario());
-                $objeto->setApellidos_usuario($apellidos_usuario);
-                array_push($objetos_coments, $objeto);
+        $objetos_comentarios= $this->obtener_objetos($comentarios);
+
+        $objetos_no_aceptados= [];
+        foreach ($objetos_comentarios as $comentario) {
+            if ($comentario->getAceptado() == FALSE) { 
+                array_push($objetos_no_aceptados, $comentario);
             }
         }
-        return $objetos_coments;
+        return $objetos_no_aceptados;
     }
 
     public function aceptar() {
@@ -128,7 +117,6 @@ class ComentarioController{
         $this->repository->aceptar($comentario);
         $this->listar_para_aceptar();
         // header("Location: ". $_ENV['BASE_URL'].'seleccionar/imagenes');
-        
     }
 
     public function descartar() {

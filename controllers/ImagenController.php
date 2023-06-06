@@ -109,23 +109,15 @@ class ImagenController{
     }
 
     public function obtener_no_aceptadas($imagenes) {
-        $objetos_imagenes= [];
-        foreach ($imagenes as $imagen) {
-            $objeto= $this->repository->pasar_objeto($imagen);
-            // añade las imágenes que todavía no han sido aceptadas
-            if ($objeto->getAceptada() == false) { //0 = true; 1= false 
-                // obtenemos el país del viaje al que pertenece la imagen
-                $pais_viaje= $this->repository->obtener_pais_viaje($objeto->getId_viaje());
-                $objeto->setPais_viaje($pais_viaje);
+        $objetos_imagenes= $this->obtener_objetos($imagenes);
 
-                //obtenemos el usuario que ha publicado la imagen
-                $usuario= $this->repository->obtener_usuario($objeto->getId_usuario());
-                $objeto->setUsuario($usuario);
-
-                array_push($objetos_imagenes, $objeto);
+        $objetos_no_aceptados= [];
+        foreach ($objetos_imagenes as $imagen) {
+            if ($imagen->getAceptada() == FALSE) { 
+                array_push($objetos_no_aceptados, $imagen);
             }
         }
-        return $objetos_imagenes;
+        return $objetos_no_aceptados;
     }
 
     public function aceptar() {
