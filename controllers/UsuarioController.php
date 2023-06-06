@@ -368,26 +368,22 @@ class UsuarioController{
         $datos_imagenes= $this->imagen_controller->obtener_imagenes_usuario($id_usuario);
 
         $imagenes= $this->imagen_controller->obtener_objetos($datos_imagenes);
-
-        // $imagenes= [];
-        // // guardamos en el array los objetos imagenes obtenidos a partir de sus datos
-        // foreach($datos_imagenes as $imagen) {
-        //     $objeto_imagen= $this->imagen_controller->pasar_objeto($imagen);
-        //     array_push($imagenes, $objeto_imagen);
-        // }
         return $imagenes;
     }
  
     public function obtener_comentarios($email): ?array {
         $datos_comentarios= $this->comentario_controller->obtener_comentarios_usuario($email);
-
-        $comentarios= [];
-        // guardamos en el array los objetos comentarios obtenidos a partir de sus datos
-        foreach($datos_comentarios as $comentario) {
-            $objeto_comentario= $this->comentario_controller->pasar_objeto($comentario);
-            array_push($comentarios, $objeto_comentario);
-        }
+        
+        $comentarios= $this->comentario_controller->obtener_objetos($datos_comentarios);
         return $comentarios;
+
+        // $comentarios= [];
+        // // guardamos en el array los objetos comentarios obtenidos a partir de sus datos
+        // foreach($datos_comentarios as $comentario) {
+        //     $objeto_comentario= $this->comentario_controller->pasar_objeto($comentario);
+        //     array_push($comentarios, $objeto_comentario);
+        // }
+        // return $comentarios;
     }
 
 }

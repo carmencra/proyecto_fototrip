@@ -28,8 +28,10 @@
                 <p>No te has inscrito a ning&uacute;n viaje</p>
                 <p>Cuando te inscribas a alguno, aparecer&aacute; aqu&iacute;</p>
             <?php else :?>
+
                 <section class="display">
                     <?php foreach($viajes as $viaje) : ?>
+
                         <section class="mi_viaje">
                             <h1> <?= $viaje->getId(); ?>. <?= $viaje->getPais(); ?> </h1> <hr> <br>  
                             
@@ -81,8 +83,10 @@
                 <p>No has publicado ninguna imagen.</p>
                 <p>Cuando publiques alguna, aparecer&aacute; aqu&iacute;</p>
             <?php else :?>
+
                 <section class="imagenes">
                     <?php foreach($imagenes as $imagen) : ?>
+
                         <section class="imagen">
                             <img src="fuente/media/images/galeria/<?= $imagen->getImagen(); ?>" width="380px" height="260px"/> <br><br>
 
@@ -122,10 +126,15 @@
                 <p>No has publicado ning&uacute;n comentario.</p>
                 <p>Cuando publiques alguno, aparecer&aacute; aqu&iacute;</p>
             <?php else :?>
-                <section class="display">
-                    <?php foreach($comentarios as $comentario) : ?>
-                    <section class="mi_comentario">
 
+                <section class="comentarios">
+                    <?php foreach($comentarios as $comentario) : ?>
+                        
+                    <section class="comentario">
+                        <h4> Viaje a: <span class="destino"> <?= $comentario->getNombre_viaje(); ?> </span></h4>
+                        <hr>
+                        
+                        <p class="contenido"> <?= $comentario->getContenido(); ?> </p>
                     </section>
 
                     <?php endforeach; ?>

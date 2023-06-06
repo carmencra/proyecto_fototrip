@@ -17,31 +17,42 @@ class ComentarioController{
         $lista_coments= $this->repository->listar();
         // convertimos los comentarios obtenidos en objetos de la clase Comentario
         $objetos_coments= $this->obtener_objetos($lista_coments);
+
+        $objetos_aceptados= $this->obtener_aceptados($objetos_imagenes);        
         
-        $this->pages->render('comentario/listar', ['comentarios' => $objetos_coments]);
+        $this->pages->render('comentario/listar', ['comentarios' => $objetos_aceptados]);
     }
 
     public function obtener_objetos($comentarios) {
         $objetos_coments= [];
         foreach ($comentarios as $coment) {
             $objeto= $this->pasar_objeto($coment);
-            if ($objeto->getAceptado() == true) {
-                // añadimos el nombre del viaje
-                $nombre_viaje= $this->repository->obtener_nombre_viaje($objeto->getId_viaje());
-                $objeto->setNombre_viaje($nombre_viaje);
-                
-                // añadimos el nombre del usuario
-                $nombre_usuario= $this->repository->obtener_nombre_usuario($objeto->getUsuario());
-                $objeto->setNombre_usuario($nombre_usuario);
-                
-                // añadimos los apellidos del
-                $apellidos_usuario= $this->repository->obtener_apellidos_usuario($objeto->getUsuario());
-                $objeto->setApellidos_usuario($apellidos_usuario);
+            
+            // añadimos el nombre del viaje
+            $nombre_viaje= $this->repository->obtener_nombre_viaje($objeto->getId_viaje());
+            $objeto->setNombre_viaje($nombre_viaje);
+            
+            // añadimos el nombre del usuario
+            $nombre_usuario= $this->repository->obtener_nombre_usuario($objeto->getUsuario());
+            $objeto->setNombre_usuario($nombre_usuario);
+            
+            // añadimos los apellidos del
+            $apellidos_usuario= $this->repository->obtener_apellidos_usuario($objeto->getUsuario());
+            $objeto->setApellidos_usuario($apellidos_usuario);
 
-                array_push($objetos_coments, $objeto);
-            }
+            array_push($objetos_coments, $objeto);
         }
         return $objetos_coments;
+    }
+
+    public function obtener_aceptados($comentarios) {
+        $aceptados= [];
+        foreach ($comentarios as $imagen) {
+            if ($imagen->getAceptado() == TRUE) {
+                array_push($aceptados, $imagen);
+            }
+        }
+        return $aceptados;
     }
 
     public function pasar_objeto($array) {

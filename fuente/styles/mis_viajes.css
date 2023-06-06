@@ -72,3 +72,9 @@
 .mis_imagenes p {
     color: rgb(222, 222, 105);
 }
+
+
+
+.mis_comentarios .destino {
+    text-transform: uppercase;
+}
