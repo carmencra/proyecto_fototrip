@@ -19,84 +19,100 @@
         <?php endif;?>
 
 
-        <?php if (empty($viajes)) : ?>
-            <p>No te has inscrito a ning&uacute;n viaje</p>
-            <p>Cuando te inscribas a alguno, aparecer&aacute; aqu&iacute;</p>
-        <?php else :?>
+        
 
-            <section class="mis_viajes">
-                <?php foreach($viajes as $viaje) : ?>
-                    <section class="mi_viaje">
-                        <h1> <?= $viaje->getId(); ?>. <?= $viaje->getPais(); ?> </h1> <hr> <br>  
-                        
-                        <section class="seccion_viaje">
-                            <img src="./fuente/media/images/galeria/<?= $viaje->getImagen_principal(); ?>" width="250px" height="150px" />
+        <section class="mis_viajes">
+            <h1>Mis viajes</h1>    
+            <hr> <br>
+            
+            <?php if (empty($viajes)) : ?>
+                <p>No te has inscrito a ning&uacute;n viaje</p>
+                <p>Cuando te inscribas a alguno, aparecer&aacute; aqu&iacute;</p>
+            <?php else :?>
+                <section class="display">
+                    <?php foreach($viajes as $viaje) : ?>
+                        <section class="mi_viaje">
+                            <h1> <?= $viaje->getId(); ?>. <?= $viaje->getPais(); ?> </h1> <hr> <br>  
                             
-                            <section class="forms">
+                            <section class="seccion_viaje">
+                                <img src="./fuente/media/images/galeria/<?= $viaje->getImagen_principal(); ?>" width="250px" height="150px" />
                                 
-                            <!-- solo se podrán añadir comentarios e imágenes si el viaje ya ha tenido lugar -->
-                                <?php if ($viaje->getActivo() == FALSE) : ?>
-                                    <form id="form_borrar_viaje_<?= $viaje->getId() ?>" action="<?=$_ENV['BASE_URL']?>viaje/comentar" method="POST">
-                                        <input type="hidden" name="id_viaje_a_comentar" value="<?= $viaje->getId()?>">
-                                        <input type="submit" value="Comentar">
-                                    </form> <br>
+                                <section class="forms">
+                                    
+                                <!-- solo se podrán añadir comentarios e imágenes si el viaje ya ha tenido lugar -->
+                                    <?php if ($viaje->getActivo() == FALSE) : ?>
+                                        <form id="form_borrar_viaje_<?= $viaje->getId() ?>" action="<?=$_ENV['BASE_URL']?>viaje/comentar" method="POST">
+                                            <input type="hidden" name="id_viaje_a_comentar" value="<?= $viaje->getId()?>">
+                                            <input type="submit" value="Comentar">
+                                        </form> <br>
 
-                                    <form id="form_borrar_viaje_<?= $viaje->getId() ?>" action="<?=$_ENV['BASE_URL']?>viaje/imagen" method="POST">
-                                        <input type="hidden" name="id_viaje_a_imagen" value="<?= $viaje->getId()?>">
-                                        <input type="submit" value="Subir imagen">
-                                    </form> <br>
-                                <?php endif; ?>
+                                        <form id="form_borrar_viaje_<?= $viaje->getId() ?>" action="<?=$_ENV['BASE_URL']?>viaje/imagen" method="POST">
+                                            <input type="hidden" name="id_viaje_a_imagen" value="<?= $viaje->getId()?>">
+                                            <input type="submit" value="Subir imagen">
+                                        </form> <br>
+                                    <?php endif; ?>
 
-                                <form action="<?=$_ENV['BASE_URL'].'viaje/ver?id='.$viaje->getId()?>" method="POST">
-                                    <input class="ver_mas" type="submit" value="ver más">
-                                </form>
+                                    <form action="<?=$_ENV['BASE_URL'].'viaje/ver?id='.$viaje->getId()?>" method="POST">
+                                        <input class="ver_mas" type="submit" value="ver más">
+                                    </form>
+                                </section>
+
                             </section>
 
+                            <section class="contenido">
+                                <span> <?= $viaje->getDescripcion(); ?> </span>
+                                <span> <?= $viaje->getPrecio(); ?> € </span>
+                                <span> <?= $viaje->getFecha_inicio(); ?> / <?= $viaje->getFecha_fin(); ?></span>
+                                
+                                <span> Fotograf&iacute;a: <?= $viaje->getNivel_fotografia(); ?> </span>
+                                <span> F&iacute;sico: <?= $viaje->getNivel_fisico(); ?> </span>
+                            </section>
+                        
                         </section>
 
-                        <section class="contenido">
-                            <span> <?= $viaje->getDescripcion(); ?> </span>
-                            <span> <?= $viaje->getPrecio(); ?> € </span>
-                            <span> <?= $viaje->getFecha_inicio(); ?> / <?= $viaje->getFecha_fin(); ?></span>
-                            
-                            <span> Fotograf&iacute;a: <?= $viaje->getNivel_fotografia(); ?> </span>
-                            <span> F&iacute;sico: <?= $viaje->getNivel_fisico(); ?> </span>
-                        </section>
-                    
-                    </section>
-
-                <?php endforeach; ?>
-            </section>
+                    <?php endforeach; ?>
+                </section>
+        </section>
 
 
-            <section class="mis_imagenes">
-                <?php if (empty($imagenes)) : ?>
-                    <p>No has publicado ninguna imagen.</p>
-                    <p>Cuando publiques alguna, aparecer&aacute; aqu&iacute;</p>
-                <?php else :?>
+        <section class="mis_imagenes">
+            <h1>Mis im&aacute;genes</h1>    
+            <hr> <br>
+
+            <?php if (empty($imagenes)) : ?>
+                <p>No has publicado ninguna imagen.</p>
+                <p>Cuando publiques alguna, aparecer&aacute; aqu&iacute;</p>
+            <?php else :?>
+                <section class="display">
                     <?php foreach($imagenes as $imagen) : ?>
                     <section class="mi_imagen">
 
                     </section>
+                </section>
 
-                    <?php endforeach; ?>
-                <?php endif; ?>
-            </section>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </section>
 
 
-            <section class="mis_comentarios">
-                <?php if (empty($comentarios)) : ?>
-                    <p>No has publicado ning&uacute;n comentario.</p>
-                    <p>Cuando publiques alguno, aparecer&aacute; aqu&iacute;</p>
-                <?php else :?>
+        <section class="mis_comentarios">
+            <h1>Mis comentarios</h1>    
+            <hr> <br>
+
+            <?php if (empty($comentarios)) : ?>
+                <p>No has publicado ning&uacute;n comentario.</p>
+                <p>Cuando publiques alguno, aparecer&aacute; aqu&iacute;</p>
+            <?php else :?>
+                <section class="display">
                     <?php foreach($comentarios as $comentario) : ?>
                     <section class="mi_comentario">
 
                     </section>
 
                     <?php endforeach; ?>
-                <?php endif; ?>
-            </section>
+                </section>
+            <?php endif; ?>
+        </section>
 
 
         <?php endif; ?>

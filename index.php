@@ -67,7 +67,6 @@ session_start();
 
         //RUTAS
 
-    // RUTAS VIAJE
         //ruta por defecto(listar viajes)
         Router::add('GET', '/', function() use ($viaje_controller){
             ($viaje_controller)->listar();
