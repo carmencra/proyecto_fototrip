@@ -63,12 +63,35 @@ class ImagenController{
 
             $imagenes_obtenidas= $this->repository->filtrar_imagenes($filtros);
 
-            $objetos_imagenes= $this->obtener_objetos($lista_imagenes);
+            if (!empty($filtros['pais'])) {
+                $imagenes_pais_comprobado= $this->comprobar_pais_imagenes($imagenes_obtenidas, $filtros['pais']);
+
+                $objetos_imagenes= $this->obtener_objetos($imagenes_pais_comprobado);
+            }
+            else {
+                $objetos_imagenes= $this->obtener_objetos($imagenes_obtenidas);
+            }
         
             $objetos_aceptados= $this->obtener_aceptadas($objetos_imagenes);
     
             $this->pages->render('imagen/listar', ['imagenes' => $objetos_aceptados]);
         } 
+    }
+
+    public function comprobar_pais_imagenes($imagenes, $filtro_pais) {
+        $objetos_imagen=[];
+        foreach($imagenes as $datos_imagen) {
+            // cogemos el id del viaje y comprobamos que el país sea el del filtro
+            $imagen= $datos_imagen['imagen'];
+            $id_viaje= $datos_imagen['id_viaje'];
+
+            $filtro_pais_correcto= $this->repository->comprobar_pais_filtro($imagen, $id_viaje, $filtro_pais);
+
+            if ($filtro_pais_correcto) {
+                array_push($objetos_imagen, $datos_imagen);
+            }
+        }
+        return $objetos_imagen;
     }
 
     public function obtener_imagenes($id_viaje) {

@@ -82,24 +82,7 @@ class ImagenRepository {
         try {
             if ($cons->execute()) {
                 $imagenes= $cons->fetchAll();
-
-                //pasamos todas las imágenes obtenidos a objetos Imagen
-                $objetos_imagen=[];
-                foreach($imagenes as $datos_imagen) {
-                    // cogemos el id del viaje y comprobamos que el país sea el del filtro
-                    $imagen= $datos_imagen['imagen'];
-                    $id_viaje= $datos_imagen['id_viaje'];
-                    
-        
-                    $filtro_pais_correcto = $this->comprobar_pais_filtro($imagen, $id_viaje, $filtros['pais']);
-        
-                    if ($filtro_pais_correcto) {
-                        $obj_imagen= Imagen::fromArray($datos_imagen);
-                        array_push($objetos_imagen, $obj_imagen);
-                    }
-                    
-                }
-                return $objetos_imagen;
+                return $imagenes;
             }
             else {
                 return false;
