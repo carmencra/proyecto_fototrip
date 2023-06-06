@@ -301,7 +301,7 @@ class ImagenRepository {
     }
 
     public function obtener_imagenes_usuario($id_usuario) : ?array {
-        $this->db->consulta("SELECT * FROM imagenes WHERE id_usuario= $id_usuario");
+        $this->db->consulta("SELECT * FROM imagenes WHERE id_usuario= $id_usuario ORDER BY aceptada DESC");
         return $this->db->extraer_todos();
     }
     

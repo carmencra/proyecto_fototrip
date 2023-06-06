@@ -19,27 +19,26 @@ class ImagenController{
         $lista_imagenes= $this->repository->listar();
         // convertimos las imagenes obtenidos en objetos de la clase Imagen
         $objetos_imagenes= $this->obtener_objetos($lista_imagenes);
+
+        $objetos_aceptadas= $this->obtener_aceptadas($objetos_imagenes);
         
-        $this->pages->render('imagen/listar', ['imagenes' => $objetos_imagenes]);
+        $this->pages->render('imagen/listar', ['imagenes' => $objetos_aceptadas]);
     }
 
     public function obtener_objetos($imagenes) {
         $objetos_imagenes= [];
         foreach ($imagenes as $imagen) {
             $objeto= $this->pasar_objeto($imagen);
-            // si la imagen está aceptada, la añade a la lista para ser mostrada;
-            if ($objeto->getAceptada() == true) { //0 = true; 1= false 
-                // obtenemos el país del viaje al que pertenece la imagen
-                $pais_viaje= $this->repository->obtener_pais_viaje($objeto->getId_viaje());
-                $objeto->setPais_viaje($pais_viaje);
+            // obtenemos el país del viaje al que pertenece la imagen
+            $pais_viaje= $this->repository->obtener_pais_viaje($objeto->getId_viaje());
+            $objeto->setPais_viaje($pais_viaje);
 
-                //obtenemos el usuario que ha publicado la imagen
-                $email_usuario= $this->repository->obtener_usuario($objeto->getId_usuario());
-                $objeto->setUsuario($email_usuario);
-                
-                // guardamos la imagen
-                array_push($objetos_imagenes, $objeto);
-            }
+            //obtenemos el usuario que ha publicado la imagen
+            $email_usuario= $this->repository->obtener_usuario($objeto->getId_usuario());
+            $objeto->setUsuario($email_usuario);
+            
+            // guardamos la imagen
+            array_push($objetos_imagenes, $objeto);
         }
         return $objetos_imagenes;
     }
@@ -48,6 +47,16 @@ class ImagenController{
         return $this->repository->pasar_objeto($array);
     }
 
+    public function obtener_aceptadas($imagenes) {
+        $aceptadas= [];
+        foreach ($imagenes as $imagen) {
+            if ($imagen->getAceptada() == TRUE) {
+                array_push($aceptadas, $imagen);
+            }
+        }
+        return $aceptadas;
+    }
+ 
     public function buscar() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $filtros= $_POST['data'];

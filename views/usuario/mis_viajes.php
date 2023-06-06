@@ -22,8 +22,7 @@
         
 
         <section class="mis_viajes">
-            <h1>Mis viajes</h1>    
-            <hr> <br>
+            <h1 class="titulo_mi">Mis viajes <br><hr> </h1>    
             
             <?php if (empty($viajes)) : ?>
                 <p>No te has inscrito a ning&uacute;n viaje</p>
@@ -76,28 +75,48 @@
 
 
         <section class="mis_imagenes">
-            <h1>Mis im&aacute;genes</h1>    
-            <hr> <br>
+            <h1 class="titulo_mi">Mis im&aacute;genes <br><hr> </h1>  
 
             <?php if (empty($imagenes)) : ?>
                 <p>No has publicado ninguna imagen.</p>
                 <p>Cuando publiques alguna, aparecer&aacute; aqu&iacute;</p>
             <?php else :?>
-                <section class="display">
+                <section class="imagenes">
                     <?php foreach($imagenes as $imagen) : ?>
-                    <section class="mi_imagen">
+                        <section class="imagen">
+                            <img src="fuente/media/images/galeria/<?= $imagen->getImagen(); ?>" width="380px" height="260px"/> <br><br>
 
-                    </section>
+                            <section class="datos_imagen">
+                                <section> 
+                                    <img src="fuente/media/images/ubicacion.png" />
+                                    <?= $imagen->getPais_viaje(); ?> 
+                                </section>
+                                
+                                <section> 
+                                    <img src="fuente/media/images/calendario.png" />
+                                    <?= $imagen->getFecha(); ?> 
+                                </section>
+                                
+                                <section> 
+                                    <img src="fuente/media/images/imagen.png" />
+                                    <?= $imagen->getTipo(); ?> 
+                                </section>
+                            </section>
+
+                            <?php if ($imagen->getAceptada() == FALSE): ?>
+                                <p>( Pendiente de aceptaci&oacute;n )</p>
+                            <?php endif; ?>
+                        </section>
+                    
+                    <?php endforeach; ?>
                 </section>
 
-                <?php endforeach; ?>
             <?php endif; ?>
         </section>
 
 
         <section class="mis_comentarios">
-            <h1>Mis comentarios</h1>    
-            <hr> <br>
+            <h1 class="titulo_mi">Mis comentarios <br><hr> </h1>
 
             <?php if (empty($comentarios)) : ?>
                 <p>No has publicado ning&uacute;n comentario.</p>

@@ -1,10 +1,22 @@
-.mis_viajes .display, .mis_imagenes .display {
+.mis_viajes, .mis_imagenes, .mis_comentarios {
+    margin-bottom: 4%;
+}
+
+.mis_viajes .titulo_mi, .mis_imagenes .titulo_mi, .mis_comentarios .titulo_mi {
+    text-align: center;
+    text-transform: uppercase;
+    color: #2CCBCB;
+    padding: 2%;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.mis_viajes .display {
     display: flex;
     flex-wrap: wrap;   
     justify-content: center;
 }
 
-.mis_viajes .display .mi_viaje, .mis_imagenes .display .mi_imagen {
+.mis_viajes .display .mi_viaje {
     color: white;
     background-color: rgba(0, 0, 0, 0.8);
     padding: 2%;
@@ -12,19 +24,19 @@
     max-width: 40%;
 }
 
-.mis_viajes .display .mi_viaje h1, .mis_imagenes .display .mi_imagen h1 {
+.mis_viajes .display .mi_viaje h1 {
     color: #2CCBCB;
     text-transform: uppercase;
     text-align: center;
 }
 
-.mis_viajes .display .mi_viaje .seccion_viaje , .mis_imagenes .display .seccion_viaje{
+.mis_viajes .display .mi_viaje .seccion_viaje {
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 4%;
 }
 
-.mis_viajes .display .mi_viaje img, .mis_imagenes .display .mi_imagen img {
+.mis_viajes .display .mi_viaje img {
     margin: auto;
 }
 
@@ -50,3 +62,13 @@
 .mis_viajes .display .mi_viaje .contenido span:first-child {
     margin-bottom: 3%;
 } 
+
+
+
+.mis_imagenes .imagen {
+    padding-top: 2%;
+}
+
+.mis_imagenes p {
+    color: rgb(222, 222, 105);
+}

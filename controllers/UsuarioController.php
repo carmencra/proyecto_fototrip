@@ -367,12 +367,14 @@ class UsuarioController{
         $id_usuario= $this->repository->obtener_id($email);
         $datos_imagenes= $this->imagen_controller->obtener_imagenes_usuario($id_usuario);
 
-        $imagenes= [];
-        // guardamos en el array los objetos imagenes obtenidos a partir de sus datos
-        foreach($datos_imagenes as $imagen) {
-            $objeto_imagen= $this->imagen_controller->pasar_objeto($imagen);
-            array_push($imagenes, $objeto_imagen);
-        }
+        $imagenes= $this->imagen_controller->obtener_objetos($datos_imagenes);
+
+        // $imagenes= [];
+        // // guardamos en el array los objetos imagenes obtenidos a partir de sus datos
+        // foreach($datos_imagenes as $imagen) {
+        //     $objeto_imagen= $this->imagen_controller->pasar_objeto($imagen);
+        //     array_push($imagenes, $objeto_imagen);
+        // }
         return $imagenes;
     }
  
