@@ -22,12 +22,16 @@
         
 
         <section class="mis_viajes">
-            <h1 class="titulo_mi">Mis viajes <br><hr> </h1>    
-            
-            <?php if (empty($viajes)) : ?>
-                <p>No te has inscrito a ning&uacute;n viaje</p>
-                <p>Cuando te inscribas a alguno, aparecer&aacute; aqu&iacute;</p>
-            <?php else :?>
+            <div class="titulo_mi">
+                <h1>Mis viajes <br><br> <hr> </h1>  
+                 
+                <?php if (empty($viajes)) : ?> <br>
+                    <div class="vacio">
+                        <p>No te has inscrito a ning&uacute;n viaje.</p>
+                        <p>Cuando te inscribas a alguno, aparecer&aacute; aqu&iacute;.</p>
+                    </div>
+                <?php else :?>
+            </div> <br>
 
                 <section class="display">
                     <?php foreach($viajes as $viaje) : ?>
@@ -77,12 +81,16 @@
 
 
         <section class="mis_imagenes">
-            <h1 class="titulo_mi">Mis im&aacute;genes <br><hr> </h1>  
-
-            <?php if (empty($imagenes)) : ?>
-                <p>No has publicado ninguna imagen.</p>
-                <p>Cuando publiques alguna, aparecer&aacute; aqu&iacute;</p>
-            <?php else :?>
+            <div class="titulo_mi">
+                <h1>Mis im&aacute;genes <br><br> <hr> </h1>  
+                 
+                <?php if (empty($imagenes)) : ?>
+                    <div class="vacio">
+                        <p>No has publicado ninguna imagen.</p>
+                        <p>Cuando publiques alguna, aparecer&aacute; aqu&iacute;.</p>
+                    </div>
+                <?php else :?>
+            </div> <br>
 
                 <section class="imagenes">
                     <?php foreach($imagenes as $imagen) : ?>
@@ -120,13 +128,17 @@
 
 
         <section class="mis_comentarios">
-            <h1 class="titulo_mi">Mis comentarios <br><hr> </h1>
-
-            <?php if (empty($comentarios)) : ?>
-                <p>No has publicado ning&uacute;n comentario.</p>
-                <p>Cuando publiques alguno, aparecer&aacute; aqu&iacute;</p>
-            <?php else :?>
-
+            <div class="titulo_mi">
+                <h1>Mis comentarios <br><br> <hr> </h1>  
+                 
+                <?php if (empty($comentarios)) : ?>
+                    <div class="vacio">
+                        <p>No has publicado ning&uacute;n comentario.</p>
+                        <p>Cuando publiques alguno, aparecer&aacute; aqu&iacute;.</p>
+                    </div>
+                <?php else :?>
+            </div> <br>
+            
                 <section class="comentarios">
                     <?php foreach($comentarios as $comentario) : ?>
                         

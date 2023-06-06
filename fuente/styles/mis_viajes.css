@@ -4,10 +4,19 @@
 
 .mis_viajes .titulo_mi, .mis_imagenes .titulo_mi, .mis_comentarios .titulo_mi {
     text-align: center;
-    text-transform: uppercase;
-    color: #2CCBCB;
     padding: 2%;
     background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+}
+
+.mis_viajes .titulo_mi h1, .mis_imagenes .titulo_mi h1, .mis_comentarios .titulo_mi h1 {
+    text-transform: uppercase;
+    color: #2CCBCB;
+}
+
+.mis_viajes .titulo_mi .vacio, .mis_imagenes .titulo_mi .vacio, .mis_comentarios .titulo_mi .vacio {
+    margin-top: 2%;
+    font-size: medium;
 }
 
 .mis_viajes .display {
