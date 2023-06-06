@@ -23,7 +23,6 @@
             <button class="boton_usuario">
                 <a href="<?=$_ENV['BASE_URL']?>usuario/registrarse">Registro</a>
             </button>
-            
 
 
         <?php elseif (isset($_SESSION['usuario'])) :
@@ -47,25 +46,11 @@
     
 </header>
   
-<!-- <section class="portada_video">
-    <video src="fuente/media/videos/crimea_cortado.mp4" autoplay muted loop alt="video portada"></video>
-
-    <section class="titulo">
-        <h1>FOTO TRIP</h1>
-        <h3>Viajes fotográficos</h3>
-
-        <a href="">Saber más</a>
-    </section>
-</section> -->
-    
-
 
 <section class="portada" style="background-image:url('fuente/media/images/portada.jpg')">
     <section>
         <h1 class="titulo_portada">FOTO TRIP</h1>
         <h3>Viajes fotográficos</h3>
-
-        <a href="">Saber más</a>
     </section>
 </section>
 
