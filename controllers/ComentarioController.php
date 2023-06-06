@@ -8,9 +8,9 @@ class ComentarioController{
     private Pages $pages;
     private ComentarioRepository $repository;
 
-    public function __construct() {
+    public function __construct($db) {
         $this->pages= new Pages();
-        $this->repository= new ComentarioRepository();
+        $this->repository= new ComentarioRepository($db);
     }
 
     public function listar() {

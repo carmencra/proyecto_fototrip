@@ -16,12 +16,12 @@ class ViajeController {
     private ImagenController $imagenController;
     private ComentarioController $comentarioController;
 
-    public function __construct() {
+    public function __construct($db) {
         $this->pages= new Pages();
-        $this->repository= new ViajeRepository();
-        $this->gastosController= new GastosController();
-        $this->imagenController= new ImagenController();
-        $this->comentarioController= new ComentarioController();
+        $this->repository= new ViajeRepository($db);
+        $this->gastosController= new GastosController($db);
+        $this->imagenController= new ImagenController($db);
+        $this->comentarioController= new ComentarioController($db);
     }
 
     public function listar() {

@@ -8,8 +8,8 @@ use PDOException;
 class GastosRepository {
     private BaseDatos $db;
 
-    function __construct() {
-        $this->db= new BaseDatos();
+    function __construct($db) {
+        $this->db= $db;
     }
 
     public function obtener_gastos($id_viaje): array | bool {

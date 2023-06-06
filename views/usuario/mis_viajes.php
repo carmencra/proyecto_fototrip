@@ -20,8 +20,8 @@
 
 
         <?php if (empty($viajes)) : ?>
-            <p>No te has inscrito a ningún viaje</p>
-            <p>Cuando te inscribas, aparecer&aacute; aqu&iacute;</p>
+            <p>No te has inscrito a ning&uacute;n viaje</p>
+            <p>Cuando te inscribas a alguno, aparecer&aacute; aqu&iacute;</p>
         <?php else :?>
 
             <section class="mis_viajes">
@@ -61,12 +61,41 @@
                             
                             <span> Fotograf&iacute;a: <?= $viaje->getNivel_fotografia(); ?> </span>
                             <span> F&iacute;sico: <?= $viaje->getNivel_fisico(); ?> </span>
-                    </section>
+                        </section>
                     
                     </section>
 
                 <?php endforeach; ?>
+            </section>
 
+
+            <section class="mis_imagenes">
+                <?php if (empty($imagenes)) : ?>
+                    <p>No has publicado ninguna imagen.</p>
+                    <p>Cuando publiques alguna, aparecer&aacute; aqu&iacute;</p>
+                <?php else :?>
+                    <?php foreach($imagenes as $imagen) : ?>
+                    <section class="mi_imagen">
+
+                    </section>
+
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </section>
+
+
+            <section class="mis_comentarios">
+                <?php if (empty($comentarios)) : ?>
+                    <p>No has publicado ning&uacute;n comentario.</p>
+                    <p>Cuando publiques alguno, aparecer&aacute; aqu&iacute;</p>
+                <?php else :?>
+                    <?php foreach($comentarios as $comentario) : ?>
+                    <section class="mi_comentario">
+
+                    </section>
+
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </section>
 
 

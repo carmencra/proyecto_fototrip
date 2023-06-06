@@ -9,8 +9,8 @@ use PDOException;
 class ViajeRepository {
     private BaseDatos $db;
 
-    public function __construct() {
-        $this->db= new BaseDatos();
+    public function __construct($db) {
+        $this->db= $db;
     }
 
     public function listar(): ?array {
@@ -232,6 +232,12 @@ class ViajeRepository {
             unset($cons); 
         }
     }
+
+    public function obtener_id_viajes_inscritos($email): ?array {
+        $this->db->consulta("SELECT id_viaje FROM inscritos WHERE email= '$email'");
+        return $this->db->extraer_todos();
+    }
+    
 
 }
 

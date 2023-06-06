@@ -2,18 +2,24 @@
 
 namespace Controllers;
 use Repositories\UsuarioRepository;
+use Repositories\ComentarioRepository;
+use Repositories\ImagenRepository;
 use Lib\Pages;
 use Lib\Email;
 use Utils\Utils;
 use Models\Viaje;
+use Models\Comentario;
 
 class UsuarioController{
     private Pages $pages;
     private UsuarioRepository $repository;
+    private ComentarioRepository $comentario_repository;
+    private ImagenRepository $imagen_repository;
 
-    public function __construct() {
+    public function __construct($db) {
         $this->pages= new Pages();
-        $this->repository= new UsuarioRepository();
+        $this->repository= new UsuarioRepository($db);
+        $this->imagen_repository= new ImagenRepository($db);
     }
 
     public function registrarse() {
@@ -334,24 +340,38 @@ class UsuarioController{
         $this->pages->render('usuario/administrar');
     }
 
+    // lleva a los viajes a los que está escrito el usuario
     public function mis_viajes() {   
-        $viajes= $this->obtener_viajes($_SESSION['usuario']); 
+        $viajes= $this->viaje_repository->obtener_viajes($_SESSION['usuario']); 
+        $comentarios= $this->obtener_comentarios($_SESSION['usuario']);
         
         $this->pages->render('usuario/mis_viajes', ['viajes' => $viajes]);
     }
 
-    public function obtener_viajes($email): ?array {
-        $id_viajes= $this->repository->obtener_id_viajes_inscritos($_SESSION['usuario']);  
+    public function obtener_viajes(): ?array {
+        $id_viajes= $this->viaje_repository->obtener_id_viajes_inscritos($_SESSION['usuario']);  
 
         $viajes= [];
+        // bueno esto en verdad seguro que ya hay algo en el controlador, así que llama al controlador y ya que él haga esto
         foreach($id_viajes as $id) {
-            $viaje= $this->repository->obtener_viaje($id['id_viaje']);
+            $viaje= $this->viaje_repository->obtener_viaje($id['id_viaje']);
             $objeto_viaje= Viaje::fromArray($viaje);
             array_push($viajes, $objeto_viaje);
         }
         return $viajes;
     }
  
+    public function obtener_comentarios($email) {
+        $datos_comentarios= $this->repository->obtener_comentarios($email);
+
+        $comentarios= [];
+        foreach($datos_comentarios as $comentario) {
+            $objeto_comentario= Comentario::fromArray($comentario);
+            array_push($comentarios, $objeto_comentario);
+        }
+        var_dump($comentarios);die();
+        return $comentarios;
+    }
 
 }
 

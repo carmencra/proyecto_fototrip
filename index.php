@@ -8,6 +8,7 @@ use Controllers\ImagenController;
 use Controllers\UsuarioController;
 use Lib\Router;
 use Dotenv\Dotenv;
+use Lib\BaseDatos;
 
 
 $dotenv= Dotenv::createImmutable(__DIR__); //para acceder al .env
@@ -54,12 +55,14 @@ session_start();
 <body>
 
     <?php
+    // creamos una única base de datos y se la pasamos a los controladores, que se la pasarán a los repositorios para que estos no creen una nueva conexión a la base de datos cada vez que se llaman
+        $db= new BaseDatos();
 
     // creamos los controladores para llamarlos en las rutas y no crear uno en cada una (optimizando memoria)
-        $viaje_controller= new ViajeController();
-        $comentario_controller= new ComentarioController();
-        $imagen_controller= new ImagenController();
-        $usuario_controller= new UsuarioController();
+        $viaje_controller= new ViajeController($db);
+        $comentario_controller= new ComentarioController($db);
+        $imagen_controller= new ImagenController($db);
+        $usuario_controller= new UsuarioController($db);
         
 
         //RUTAS

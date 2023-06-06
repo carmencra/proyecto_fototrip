@@ -8,9 +8,9 @@ class GastosController{
     private Pages $pages;
     private GastosRepository $repository;
 
-    public function __construct() {
+    public function __construct($db) {
         $this->pages= new Pages();
-        $this->repository= new GastosRepository();
+        $this->repository= new GastosRepository($db);
     }
 
     public function obtener_gastos($id_viaje) {

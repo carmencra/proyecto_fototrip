@@ -8,10 +8,9 @@ use PDOException;
 class ComentarioRepository {
     private BaseDatos $db;
 
-    function __construct() {
-        $this->db= new BaseDatos();
+    function __construct($db) {
+        $this->db= $db;
     }
-
     public function listar(): ?array {
         $this->db->consulta("SELECT * FROM comentarios");
         return $this->db->extraer_todos();

@@ -9,9 +9,9 @@ class ImagenController{
     private Pages $pages;
     private ImagenRepository $repository;
 
-    public function __construct() {
+    public function __construct($db) {
         $this->pages= new Pages();
-        $this->repository= new ImagenRepository();
+        $this->repository= new ImagenRepository($db);
     }
 
     

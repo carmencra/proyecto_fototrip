@@ -8,8 +8,8 @@ use PDOException;
 class UsuarioRepository {
     private BaseDatos $db;
 
-    function __construct() {
-        $this->db= new BaseDatos();
+    function __construct($db) {
+        $this->db= $db;
     }
 
     // guarda el nuevo usario registrado en la base de datos
@@ -167,14 +167,19 @@ class UsuarioRepository {
         }
     }
 
-    public function obtener_id_viajes_inscritos($email): ?array {
-        $this->db->consulta("SELECT id_viaje FROM inscritos WHERE email= '$email'");
-        return $this->db->extraer_todos();
-    }
+    // public function obtener_id_viajes_inscritos($email): ?array {
+    //     $this->db->consulta("SELECT id_viaje FROM inscritos WHERE email= '$email'");
+    //     return $this->db->extraer_todos();
+    // }
 
-    public function obtener_viaje($id) {
-        $this->db->consulta("SELECT * FROM viajes WHERE id= $id");
-        return $this->db->extraer_registro();
+    // public function obtener_viaje($id) {
+    //     $this->db->consulta("SELECT * FROM viajes WHERE id= $id");
+    //     return $this->db->extraer_registro();
+    // }
+
+    public function obtener_comentarios($email): ?array {
+        $this->db->consulta("SELECT * FROM comentarios WHERE usuario= '$email'");
+        return $this->db->extraer_todos();
     }
     
 }
