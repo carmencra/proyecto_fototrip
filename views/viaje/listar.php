@@ -90,12 +90,12 @@
 
         <section>
             <label for="precio_min">Precio m&iacute;n: </label>
-            <input type="text" name="data[precio_min]" id="min" value="<?php if (isset($_POST['data']['precio_min']))echo $_POST['data']['precio_min'];?>"/> €
+            <input type="number" name="data[precio_min]" id="min" value="<?php if (isset($_POST['data']['precio_min']))echo $_POST['data']['precio_min'];?>" min="1" oninput="this.value= !!this.value && Math.abs(this.value) >= 1 ? Math.abs(this.value) : null"/> €
         </section>
 
         <section>
             <label for="precio_max">Precio m&aacute;x: </label>
-            <input type="text" name="data[precio_max]" id="max" value="<?php if (isset($_POST['data']['precio_max']))echo $_POST['data']['precio_max'];?>"/> €
+            <input type="number" name="data[precio_max]" id="max" value="<?php if (isset($_POST['data']['precio_max']))echo $_POST['data']['precio_max'];?>" min="1" oninput="this.value= !!this.value && Math.abs(this.value) >= 1 ? Math.abs(this.value) : null"> €
         </section>
 
         <section>
