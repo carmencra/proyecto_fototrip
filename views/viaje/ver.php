@@ -23,6 +23,22 @@
 
 <main>
 
+    <!-- si el usuario se ha intentado inscribir al viaje y ha fallado, nos muestra el mensaje -->
+    <?php use Utils\Utils;
+        if(isset($_SESSION['viaje_inscrito'])):
+            if ($_SESSION['viaje_inscrito'] == false) : ?>
+                <script type="text/javascript">
+                    alert("Ha habido un error en la inscripción del viaje.");
+                    window.close();
+                </script>
+                
+            <?php endif;
+            // borra la sesión tanto si se ha inscrito como si no
+            Utils::deleteSession('viaje_inscrito');
+        endif;
+    ?>
+
+
     <section class="detalle_viaje">
         <?= $viaje->getPais() ?>
 

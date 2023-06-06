@@ -179,8 +179,8 @@ session_start();
 
             else {
                 // los usuarios que no sean admin, podrán inscribirse a viajes y añadir imágenes y comentarios sobre aquellos que ya se hayan llevado a cabo
-                Router::add('POST', 'viaje/inscribirse', function() use ($viaje_controller) {
-                    ($viaje_controller)->inscribirse();
+                Router::add('POST', 'viaje/inscribirse', function() use ($usuario_controller) {
+                    ($usuario_controller)->inscribirse();
                 }); 
                 Router::add('GET', 'misviajes', function() use ($usuario_controller) {
                     ($usuario_controller)->mis_viajes();
@@ -218,16 +218,27 @@ session_start();
     
         // ruta accesible solo cuando el usuario esté pendiente de confirmar su cuenta
         if (isset($_SESSION['id_a_confirmar'])) {
+            // Router::add('GET', 'email/confirmacion', function() {});
+            Router::add('GET', 'email/confirmacion', function() use ($usuario_controller){
+                ($usuario_controller)->llevar_confirmacion();
+            });
+
             Router::add('GET', 'usuario/confirmarcuenta?id=:id', function($id) use($usuario_controller) {
                 if ($id == $_SESSION['id_a_confirmar']){
                     ($usuario_controller)->confirmar_cuenta($id);
                 }
             });
+        }
 
-            Router::add('GET', 'email_enviado', function() use ($usuario_controller){
-                ($usuario_controller)->llevar_email_enviado();
+        // ruta accesible solo cuando el usuario se haya inscrito a un viaje
+        if (isset($_SESSION['viaje_inscrito'])) {
+            // Router::add('GET', 'email/inscripcion', function() {});
+            Router::add('GET', 'email/inscripcion', function() use ($usuario_controller){
+                ($usuario_controller)->llevar_inscripcion();
             });
         }
+
+
 
         Router::dispatch();
     ?>

@@ -12,9 +12,9 @@ use Utils\Utils;
 class UsuarioController{
     private Pages $pages;
     private UsuarioRepository $repository;
-    private ViajeController $viaje_Controller;
-    private ComentarioController $comentario_Controller;
-    private ImagenController $imagen_Controller;
+    private ViajeController $viaje_controller;
+    private ComentarioController $comentario_controller;
+    private ImagenController $imagen_controller;
 
     public function __construct($db) {
         $this->pages= new Pages();
@@ -56,9 +56,7 @@ class UsuarioController{
                     $correo->enviar_confirmacion($id_correo);
                     $_SESSION['id_a_confirmar']= $id_correo;
                     $_SESSION['correo_a_confirmar']= $datos['email'];
-                    // $this->pages->render('email/enviado', ['email' => $datos['email']]);
-                    
-                    header("Location: ". $_ENV['BASE_URL'].'email_enviado');
+                    $this->pages->render('email/confirmacion', ['email' => $datos['email']]);
                 }
                 else {
                     $this->pages->render('usuario/registrarse');
@@ -73,8 +71,8 @@ class UsuarioController{
 
     }
 
-    public function llevar_email_enviado() {
-        $this->pages->render('email/enviado');
+    public function llevar_confirmacion() {
+        $this->pages->render('email/confirmacion');
     }
 
     // confirma la cuenta del usuario tras clicar en el enlace del correo enviado
@@ -380,18 +378,30 @@ class UsuarioController{
 
     
     public function inscribirse() {
-        $id= $_POST['viaje_a_inscribirse'];
+        $id_viaje= $_POST['viaje_a_inscribirse'];
         $usuario= $_SESSION['usuario'];
-        $inscrito= $this->repository->inscribirse($id, $usuario);
+        $inscrito= $this->repository->inscribirse($id_viaje, $usuario);
         
         if ($inscrito) {
             $_SESSION['viaje_inscrito']= true; 
-            // $correo= new Email($usuario);
-            // $correo->confirmar_inscripcion();
+            
+            $id_correo= $this->repository->obtener_id($usuario);
+            $viaje= $this->viaje_controller->obtener_viaje($id_viaje);
+
+            $correo= new Email($usuario);
+            $correo->enviar_inscripcion($viaje);
+
+            $this->pages->render('email/inscripcion');
+            
         } 
         else {
             $_SESSION['viaje_inscrito']= false;
+            $this->viaje_controller->ver($id_viaje);
         }
+    }
+
+    public function llevar_inscripcion() {
+        $this->pages->render('email/inscripcion');
     }
 
 }

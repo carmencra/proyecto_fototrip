@@ -174,7 +174,7 @@ class UsuarioRepository {
 
     
     public function inscribirse($id, $usuario): bool {
-        $ins= $this->db->prepara("INSERT INTO inscritos VALUES ($id, '$usuario')");
+        $ins= $this->db->prepara("INSERT INTO inscritos VALUES ('$usuario', $id)");
 
         try {
             $ins->execute();
