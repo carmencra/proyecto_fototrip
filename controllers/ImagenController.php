@@ -26,7 +26,7 @@ class ImagenController{
     public function obtener_objetos($imagenes) {
         $objetos_imagenes= [];
         foreach ($imagenes as $imagen) {
-            $objeto= $this->repository->pasar_objeto($imagen);
+            $objeto= $this->pasar_objeto($imagen);
             // si la imagen está aceptada, la añade a la lista para ser mostrada;
             if ($objeto->getAceptada() == true) { //0 = true; 1= false 
                 // obtenemos el país del viaje al que pertenece la imagen
@@ -42,6 +42,10 @@ class ImagenController{
             }
         }
         return $objetos_imagenes;
+    }
+
+    public function pasar_objeto($array) {
+        return $this->repository->pasar_objeto($array);
     }
 
     public function buscar() {
@@ -232,6 +236,11 @@ class ImagenController{
             $_SESSION['err_img']= "* La imagen es obligatoria";
             return false;
         }
+    }
+
+
+    public function obtener_imagenes_usuario($id) {
+        return $this->repository->obtener_imagenes_usuario($id);
     }
 
 }

@@ -172,6 +172,7 @@ class UsuarioRepository {
         return $this->db->extraer_todos();
     }
 
+    
 }
 
 ?>

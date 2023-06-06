@@ -298,8 +298,13 @@ class ImagenRepository {
             $ins= null;
             unset($ins); 
         }
-
     }
+
+    public function obtener_imagenes_usuario($id_usuario) : ?array {
+        $this->db->consulta("SELECT * FROM imagenes WHERE id_usuario= $id_usuario");
+        return $this->db->extraer_todos();
+    }
+    
     
 }
 

@@ -345,27 +345,42 @@ class UsuarioController{
     // lleva a los viajes a los que está escrito el usuario
     public function mis_viajes() {   
         $viajes= $this->obtener_viajes($_SESSION['usuario']); 
+        $imagenes= $this->obtener_imagenes($_SESSION['usuario']);
         $comentarios= $this->obtener_comentarios($_SESSION['usuario']);
         
-        $this->pages->render('usuario/mis_viajes', ['viajes' => $viajes, 'comentarios' => $comentarios]);
+        $this->pages->render('usuario/mis_viajes', ['viajes' => $viajes, 'comentarios' => $comentarios, 'imagenes' => $imagenes]);
     }
 
-    public function obtener_viajes(): ?array {
-        $id_viajes= $this->repository->obtener_id_viajes_inscritos($_SESSION['usuario']);  
+    public function obtener_viajes($email): ?array {
+        $id_viajes= $this->repository->obtener_id_viajes_inscritos($email);  
 
         $viajes= [];
+        // guardamos en el array los viajes obtenidos a partir de su is
         foreach($id_viajes as $id) {
             $objeto_viaje= $this->viaje_controller->obtener_viaje($id['id_viaje']);
             array_push($viajes, $objeto_viaje);
         }
         return $viajes;
     }
+
+    public function obtener_imagenes($email): ?array {
+        $id_usuario= $this->repository->obtener_id($email);
+        $datos_imagenes= $this->imagen_controller->obtener_imagenes_usuario($id_usuario);
+
+        $imagenes= [];
+        // guardamos en el array los objetos imagenes obtenidos a partir de sus datos
+        foreach($datos_imagenes as $imagen) {
+            $objeto_imagen= $this->imagen_controller->pasar_objeto($imagen);
+            array_push($imagenes, $objeto_imagen);
+        }
+        return $imagenes;
+    }
  
-    public function obtener_comentarios($email) {
+    public function obtener_comentarios($email): ?array {
         $datos_comentarios= $this->comentario_controller->obtener_comentarios_usuario($email);
 
-
         $comentarios= [];
+        // guardamos en el array los objetos comentarios obtenidos a partir de sus datos
         foreach($datos_comentarios as $comentario) {
             $objeto_comentario= $this->comentario_controller->pasar_objeto($comentario);
             array_push($comentarios, $objeto_comentario);
