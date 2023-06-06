@@ -114,21 +114,6 @@ class ViajeController {
         $this->mostrar();
     }
 
-    public function inscribirse() {
-        $id= $_POST['viaje_a_inscribirse'];
-        $usuario= $_SESSION['usuario'];
-        $inscrito= $this->repository->inscribirse($id, $usuario);
-        
-        if ($inscrito) {
-            $_SESSION['viaje_inscrito']= true; 
-            // $correo= new Email($usuario);
-            // $correo->confirmar_inscripcion();
-        } 
-        else {
-            $_SESSION['viaje_inscrito']= false;
-        }
-    }
-
     public function crear() {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $this->pages->render('viaje/crear');

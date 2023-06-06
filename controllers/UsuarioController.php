@@ -376,14 +376,22 @@ class UsuarioController{
         
         $comentarios= $this->comentario_controller->obtener_objetos($datos_comentarios);
         return $comentarios;
+    }
 
-        // $comentarios= [];
-        // // guardamos en el array los objetos comentarios obtenidos a partir de sus datos
-        // foreach($datos_comentarios as $comentario) {
-        //     $objeto_comentario= $this->comentario_controller->pasar_objeto($comentario);
-        //     array_push($comentarios, $objeto_comentario);
-        // }
-        // return $comentarios;
+    
+    public function inscribirse() {
+        $id= $_POST['viaje_a_inscribirse'];
+        $usuario= $_SESSION['usuario'];
+        $inscrito= $this->repository->inscribirse($id, $usuario);
+        
+        if ($inscrito) {
+            $_SESSION['viaje_inscrito']= true; 
+            // $correo= new Email($usuario);
+            // $correo->confirmar_inscripcion();
+        } 
+        else {
+            $_SESSION['viaje_inscrito']= false;
+        }
     }
 
 }

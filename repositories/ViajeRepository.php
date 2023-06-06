@@ -160,27 +160,6 @@ class ViajeRepository {
         }
     }
 
-    public function inscribirse($id, $usuario): bool {
-        $ins= $this->db->prepara("INSERT INTO inscritos VALUES ($id, '$usuario')");
-
-        try {
-            $ins->execute();
-            if ($ins && $ins->rowCount() == 1) {
-                return true;
-            }
-            else {
-                return false;
-            }
-        }
-        catch(PDOEXception $err) {
-            return false;
-        }
-        finally {
-            $ins= null;
-            unset($ins); 
-        }
-    }
-
     public function guardar($datos, $imagen): bool {
         $ins= $this->db->prepara("INSERT INTO viajes values(:id, :pais, :fecha_inicio, :fecha_fin, :precio, :descripcion, :nivel_fotografia, :nivel_fisico, :activo, :imagen_principal, :informacion)");
 
