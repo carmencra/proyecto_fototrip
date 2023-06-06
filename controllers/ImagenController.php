@@ -63,42 +63,22 @@ class ImagenController{
 
             $imagenes_obtenidas= $this->repository->filtrar_imagenes($filtros);
 
-            // recorremos las imágenes obtenidas, y si están aceptadas, las mostrará
-            $imagenes_aceptadas= [];
-            foreach ($imagenes_obtenidas as $imagen) {
-                if ($imagen->getAceptada() == true) {
-                    // obtenemos el país del viaje al que pertenece la imagen
-                    $pais_viaje= $this->repository->obtener_pais_viaje($objeto->getId_viaje());
-                    $objeto->setPais_viaje($pais_viaje);
-
-                    //obtenemos el usuario que ha publicado la imagen
-                    $usuario= $this->repository->obtener_usuario($objeto->getId_usuario());
-                    $objeto->setUsuario($usuario);
-                
-                    array_push($imagenes_aceptadas, $imagen);
-                }
-            }
-            // var_dump($imagenes_aceptadas);die();
-            $this->pages->render('imagen/listar', ['imagenes' => $imagenes_aceptadas]);
+            $objetos_imagenes= $this->obtener_objetos($lista_imagenes);
+        
+            $objetos_aceptados= $this->obtener_aceptadas($objetos_imagenes);
+    
+            $this->pages->render('imagen/listar', ['imagenes' => $objetos_aceptados]);
         } 
     }
 
     public function obtener_imagenes($id_viaje) {
         $lista_imagenes= $this->repository->obtener_imagenes($id_viaje);
 
-        $objetos_imagenes= [];
-        foreach ($lista_imagenes as $imagen) {
-            $objeto= $this->repository->pasar_objeto($imagen);
-            // si la imagen está aceptada por el admin, la añade
-            if ($objeto->getAceptada() == true) {
-                //obtenemos el usuario que ha publicado la imagen
-                $usuario= $this->repository->obtener_usuario($objeto->getId_usuario());
-                $objeto->setUsuario($usuario);
-
-                array_push($objetos_imagenes, $objeto);
-            }
-        }
-        return $objetos_imagenes;
+        $objetos_imagenes= $this->obtener_objetos($lista_imagenes);
+        
+        $objetos_aceptados= $this->obtener_aceptadas($objetos_imagenes);
+    
+        return $objetos_aceptados;
     }
 
     public function mostrar() {

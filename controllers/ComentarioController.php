@@ -18,7 +18,7 @@ class ComentarioController{
         // convertimos los comentarios obtenidos en objetos de la clase Comentario
         $objetos_coments= $this->obtener_objetos($lista_coments);
 
-        $objetos_aceptados= $this->obtener_aceptados($objetos_imagenes);        
+        $objetos_aceptados= $this->obtener_aceptados($objetos_coments);        
         
         $this->pages->render('comentario/listar', ['comentarios' => $objetos_aceptados]);
     }
@@ -27,7 +27,7 @@ class ComentarioController{
         $objetos_coments= [];
         foreach ($comentarios as $coment) {
             $objeto= $this->pasar_objeto($coment);
-            
+
             // añadimos el nombre del viaje
             $nombre_viaje= $this->repository->obtener_nombre_viaje($objeto->getId_viaje());
             $objeto->setNombre_viaje($nombre_viaje);
@@ -68,7 +68,9 @@ class ComentarioController{
 
         $objetos_comentarios= $this->obtener_objetos($lista_comentarios);
         
-        return $objetos_comentarios;
+        $objetos_aceptados= $this->obtener_aceptados($objetos_comentarios);   
+
+        return $objetos_aceptados;
     }
 
     public function mostrar() {
