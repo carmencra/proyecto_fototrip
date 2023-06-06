@@ -27,7 +27,6 @@ class BaseDatos {
 
             $conexion = new PDO("mysql:host={$this->servidor};dbname={$this->base_datos};charset=utf8",$this->usuario, $this->pass, $opciones);
 
-            var_dump("aaa");
             return $conexion;
         }
         catch(PDOException $e){
@@ -46,7 +45,6 @@ class BaseDatos {
 
     public function extraer_todos(): array {
         return $this->resultado->fetchAll(PDO::FETCH_ASSOC);
-        
     }
 
     public function prepara($pre) {
