@@ -1,13 +1,9 @@
 <title>Fototrip - Ver viaje</title>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="../fuente/scripts/recoger_id_elemento_borrar.js"></script>
-
-
 <!-- cargamos la ruta de la página actual por si viniera de otra ruta -->
 <script>
     console.log(window.location.href);
-    var baseUrl = 'http://localhost/fototrip/';
+    var baseUrl = '<?= $_ENV['BASE_URL']?>';
     var ruta_pagina = 'detalle_viaje/'.$viaje->getId();
 
     if (!window.location.href.startsWith(baseUrl) || !window.location.href.endsWith(ruta_pagina)) {

@@ -3,7 +3,7 @@
 <!-- cargamos la ruta de la página actual por si viniera de otra ruta -->
 <script>
     console.log(window.location.href);
-    var baseUrl = 'http://localhost/fototrip/';
+    var baseUrl = '<?= $_ENV['BASE_URL']?>';
     var ruta_pagina = 'administrar/viaje';
 
     if (!window.location.href.startsWith(baseUrl) || !window.location.href.endsWith(ruta_pagina)) {
