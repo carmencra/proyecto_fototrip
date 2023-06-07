@@ -18,21 +18,26 @@
     <section>
         <h1 class="titulo_portada"> <?= $viaje->getPais() ?> </h1>
 
-        <!-- si hay un usuario, que no sea el admin -->
         <?php 
-        if(isset($_SESSION['usuario']) && !isset($_SESSION['admin'])):
-            // y no esté ya inscrito al viaje, podrá hacerlo 
-            if(!isset($_SESSION['usuario_ya_inscrito'])) : ?>
+        // si el viaje está activo;
+        if ($viaje->getActivo() == true) :
+
+            // hay un usuario, que no sea el admin;
+            if(isset($_SESSION['usuario']) && !isset($_SESSION['admin'])):
+                // y no está ya inscrito al viaje, podrá hacerlo 
+                if(!isset($_SESSION['usuario_ya_inscrito'])) : ?>
+
+                    <form id="form_inscribirse_<?= $viaje->getId() ?>" action="<?=$_ENV['BASE_URL']?>viaje/inscribirse" method="POST">
+                        <input type="hidden" name="viaje_a_inscribirse" value="<?= $viaje->getId()?>">
+                        <input type="submit" value="Inscribirse">
+                    </form>
+                <?php else :?> <br><br>
+                    <span> (Ya inscrito)</span>
+                <?php endif;
+            endif; 
+        endif; ?>
         
-                <form id="form_inscribirse_<?= $viaje->getId() ?>" action="<?=$_ENV['BASE_URL']?>viaje/inscribirse" method="POST">
-                    <input type="hidden" name="viaje_a_inscribirse" value="<?= $viaje->getId()?>">
-                    <input type="submit" value="Inscribirse">
-                </form>
-            <?php else :?> <br><br>
-                <span> (Ya inscrito)</span>
-            <?php endif;
-        endif; 
-        ?>
+       
 
     </section>
 </section>
