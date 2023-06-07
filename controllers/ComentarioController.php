@@ -148,7 +148,6 @@ class ComentarioController{
             
             header("Location: ". $_ENV['BASE_URL'].'misviajes');
         }
-        var_dump($data['comentario']);die();
     }
 
     public function validar($comentario):bool {
