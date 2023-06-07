@@ -9,15 +9,6 @@
             <script type="text/javascript">
                 alert("Se ha guardado el viaje.");
                 window.close();
-
-                // cargamos la ruta de la página actual por si viniera de otra ruta 
-                console.log(window.location.href);
-                var baseUrl = '<?= $_ENV['BASE_URL']?>';
-                var ruta_pagina = 'viaje/crear';
-
-                if (!window.location.href.startsWith(baseUrl) || !window.location.href.endsWith(ruta_pagina)) {
-                    window.location.href = baseUrl + ruta_pagina;
-                }
             </script>
             
         <?php else: 
@@ -36,6 +27,15 @@
     endif; 
 ?>
 
+<!-- cargamos la ruta de la página actual por si viniera de otra ruta  -->
+<script>
+    var base_url = '<?= $_ENV['BASE_URL']?>';
+    var ruta_pagina = 'viaje/crear';
+
+    if (!window.location.href.startsWith(base_url) || !window.location.href.endsWith(ruta_pagina)) {
+        window.location.href = base_url + ruta_pagina;
+    }
+</script>
 
 
 <?php        

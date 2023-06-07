@@ -22,12 +22,11 @@
 
 <!-- cargamos la ruta de la página actual por si viniera de otra ruta -->
 <script>
-    console.log(window.location.href);
-    var baseUrl = '<?= $_ENV['BASE_URL']?>';
+    var base_url = '<?= $_ENV['BASE_URL']?>';
     var ruta_pagina = 'imagen/crear';
 
-    if (!window.location.href.startsWith(baseUrl) || !window.location.href.endsWith(ruta_pagina)) {
-        window.location.href = baseUrl + ruta_pagina;
+    if (!window.location.href.startsWith(base_url) || !window.location.href.endsWith(ruta_pagina)) {
+        window.location.href = base_url + ruta_pagina;
     }
 </script>
 

@@ -1,16 +1,5 @@
 <title>Fototrip - Administrar viajes</title>
 
-<!-- cargamos la ruta de la página actual por si viniera de otra ruta -->
-<script>
-    console.log(window.location.href);
-    var baseUrl = '<?= $_ENV['BASE_URL']?>';
-    var ruta_pagina = 'administrar/viaje';
-
-    if (!window.location.href.startsWith(baseUrl) || !window.location.href.endsWith(ruta_pagina)) {
-        window.location.href = baseUrl + ruta_pagina;
-    }
-</script>
-
 <?php require_once('views/layout/header_sub_main.php'); ?>
 
 <main>
@@ -32,6 +21,16 @@
         <?php endif;?>
 
         
+        <!-- cargamos la ruta de la página actual por si viniera de otra ruta -->
+        <script>
+            var base_url = '<?= $_ENV['BASE_URL']?>';
+            var ruta_pagina = 'administrar/viaje';
+
+            if (!window.location.href.startsWith(base_url) || !window.location.href.endsWith(ruta_pagina)) {
+                window.location.href = base_url + ruta_pagina;
+            }
+        </script>
+
         <?php 
         if(empty($viajes)):
             echo "<h4>No hay viajes.</h4>" ;

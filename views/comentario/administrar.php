@@ -1,16 +1,5 @@
 <title>Fototrip - Administrar comentarios</title>
 
-<!-- cargamos la ruta de la página actual por si viniera de otra ruta -->
-<script>
-    console.log(window.location.href);
-    var baseUrl = 'http://localhost/fototrip/';
-    var ruta_pagina = 'administrar/comentario';
-
-    if (!window.location.href.startsWith(baseUrl) || !window.location.href.endsWith(ruta_pagina)) {
-        window.location.href = baseUrl + ruta_pagina;
-    }
-</script>
-
 <?php require_once('views/layout/header_sub_main.php'); ?>
 
 <main>
@@ -30,6 +19,16 @@
                 </script>
             <?php endif;?>     
         <?php endif;?>
+        
+        <!-- cargamos la ruta de la página actual por si viniera de otra ruta -->
+        <script>
+            var base_url = 'http://localhost/fototrip/';
+            var ruta_pagina = 'administrar/comentario';
+
+            if (!window.location.href.startsWith(base_url) || !window.location.href.endsWith(ruta_pagina)) {
+                window.location.href = base_url + ruta_pagina;
+            }
+        </script>
 
         <?php 
         if(empty($comentarios)):

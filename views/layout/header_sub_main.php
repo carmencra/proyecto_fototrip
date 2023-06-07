@@ -14,6 +14,11 @@
 
     <!-- menú de usuario despegable -->
     <script src="../fuente/scripts/desplegar_menu_usuario.js"></script>
+
+    <!-- recoger el id del elemento a cambiar (borrar, editar, aceptar, descartar)  -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../fuente/scripts/recoger_id_elemento_cambiar.js"></script>
+
 </head>
 
 
