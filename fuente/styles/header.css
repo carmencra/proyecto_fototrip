@@ -46,6 +46,6 @@ header #logo {
 
 }
 
-.menu .active a {
+.menu .active a, .menu a:hover {
     color: #2CCBCB;
 }
