@@ -31,24 +31,31 @@
             <?php endif;?>     
         <?php endif;?>
 
-        <section class="comentarios">
-            <?php foreach($comentarios as $comentario) : ?>
-                <section class="comentario">
-                    <h4> <?= $comentario->getUsuario(); ?> </h4>
-                    <hr>
+        <?php 
+        if(empty($comentarios)):
+            echo "<h4>No hay comentarios.</h4>" ;
+        else :?>
 
-                    <p class="contenido"> <?= $comentario->getContenido(); ?> </p>
-                    
-                    <!-- creamos un formulario para borrar el comentario, que recoge el id por post; cada formulario tiene un id distinto, dependiendo del id del comentario -->
-                    <form id="form_borrar_comentario_<?= $comentario->getId() ?>" action="<?=$_ENV['BASE_URL']?>comentario/borrar" method="POST">
-                        <input type="hidden" name="id_comentario_a_borrar" value="<?= $comentario->getId()?>">
-                        <input type="submit" value="Borrar">
-                    </form>
-                </section>
+            <section class="comentarios">
+                <?php foreach($comentarios as $comentario) : ?>
+                    <section class="comentario">
+                        <h4> <?= $comentario->getUsuario(); ?> </h4>
+                        <hr>
 
-            <?php endforeach; ?>
-        </section>
+                        <p class="contenido"> <?= $comentario->getContenido(); ?> </p>
+                        
+                        <!-- creamos un formulario para borrar el comentario, que recoge el id por post; cada formulario tiene un id distinto, dependiendo del id del comentario -->
+                        <form id="form_borrar_comentario_<?= $comentario->getId() ?>" action="<?=$_ENV['BASE_URL']?>comentario/borrar" method="POST">
+                            <input type="hidden" name="id_comentario_a_borrar" value="<?= $comentario->getId()?>">
+                            <input type="submit" value="Borrar">
+                        </form>
+                    </section>
 
+                <?php endforeach; ?>
+            </section>
+
+        <?php endif;?>
+        
     </section>
    
 

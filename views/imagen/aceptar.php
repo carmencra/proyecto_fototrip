@@ -30,50 +30,56 @@
             <?php endif;?>     
         <?php endif;?>
 
+        <?php 
+        if(empty($imagenes)):
+            echo "<h4>No hay im&aacute;genes.</h4>" ;
+        else :?>
 
-        <section class="imagenes">
-            <?php foreach($imagenes as $imagen) : ?>
-                <section class="imagen">
-                    <h4> <?= $imagen->getUsuario(); ?> </h4>
+            <section class="imagenes">
+                <?php foreach($imagenes as $imagen) : ?>
+                    <section class="imagen">
+                        <h4> <?= $imagen->getUsuario(); ?> </h4>
 
-                    <hr> <br>
+                        <hr> <br>
 
-                    <section class="forms_imagen">
-                        <form id="form_aceptar_imagen_<?= $imagen->getId() ?>" action="<?=$_ENV['BASE_URL']?>imagen/aceptar" method="POST">
-                            <input type="hidden" name="id_imagen_a_aceptar" value="<?= $imagen->getId()?>">
-                            <input type="submit" value="Aceptar">
-                        </form>
-                        
-                        <form id="form_descartar_imagen_<?= $imagen->getId() ?>" action="<?=$_ENV['BASE_URL']?>imagen/descartar" method="POST">
-                            <input type="hidden" name="id_imagen_a_descartar" value="<?= $imagen->getId()?>">
-                            <input type="submit" value="Descartar">
-                        </form>
-                    </section> <br>
+                        <section class="forms_imagen">
+                            <form id="form_aceptar_imagen_<?= $imagen->getId() ?>" action="<?=$_ENV['BASE_URL']?>imagen/aceptar" method="POST">
+                                <input type="hidden" name="id_imagen_a_aceptar" value="<?= $imagen->getId()?>">
+                                <input type="submit" value="Aceptar">
+                            </form>
+                            
+                            <form id="form_descartar_imagen_<?= $imagen->getId() ?>" action="<?=$_ENV['BASE_URL']?>imagen/descartar" method="POST">
+                                <input type="hidden" name="id_imagen_a_descartar" value="<?= $imagen->getId()?>">
+                                <input type="submit" value="Descartar">
+                            </form>
+                        </section> <br>
 
-                    <img src="../fuente/media/images/galeria/<?= $imagen->getImagen(); ?>" width="380px" height="260px"/> <br><br>
+                        <img src="../fuente/media/images/galeria/<?= $imagen->getImagen(); ?>" width="380px" height="260px"/> <br><br>
 
-                    <section class="datos_imagen">
-                        <section> 
-                            <img src="../fuente/media/images/ubicacion.png" />
-                            <?= $imagen->getPais_viaje(); ?> 
+                        <section class="datos_imagen">
+                            <section> 
+                                <img src="../fuente/media/images/ubicacion.png" />
+                                <?= $imagen->getPais_viaje(); ?> 
+                            </section>
+                            
+                            <section> 
+                                <img src="../fuente/media/images/calendario.png" />
+                                <?= $imagen->getFecha(); ?> 
+                            </section>
+                            
+                            <section> 
+                                <img src="../fuente/media/images/imagen.png" />
+                                <?= $imagen->getTipo(); ?> 
+                            </section>
                         </section>
                         
-                        <section> 
-                            <img src="../fuente/media/images/calendario.png" />
-                            <?= $imagen->getFecha(); ?> 
-                        </section>
-                        
-                        <section> 
-                            <img src="../fuente/media/images/imagen.png" />
-                            <?= $imagen->getTipo(); ?> 
-                        </section>
                     </section>
-                    
-                </section>
 
-            <?php endforeach; ?>
+                <?php endforeach; ?>
 
-        </section>
+            </section>
+             
+        <?php endif;?>
 
     </section>
 

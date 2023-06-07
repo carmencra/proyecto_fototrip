@@ -114,39 +114,46 @@
 
         </section>
 
+        <?php 
+        if(empty($imagenes)):
+            echo "<h4>No hay im&aacute;genes.</h4>" ;
+        else :?>
 
-        <section class="imagenes">
+            <section class="imagenes">
 
-            <?php foreach($imagenes as $imagen) : ?>
-                <section class="imagen">
-                    <h4> <?= $imagen->getUsuario(); ?> </h4>
+                <?php foreach($imagenes as $imagen) : ?>
+                    <section class="imagen">
+                        <h4> <?= $imagen->getUsuario(); ?> </h4>
 
-                    <hr> <br>
+                        <hr> <br>
 
-                    <img src="fuente/media/images/galeria/<?= $imagen->getImagen(); ?>" width="380px" height="260px"/> <br><br>
+                        <img src="fuente/media/images/galeria/<?= $imagen->getImagen(); ?>" width="380px" height="260px"/> <br><br>
 
-                    <section class="datos_imagen">
-                        <section> 
-                            <img src="fuente/media/images/ubicacion.png" />
-                            <?= $imagen->getPais_viaje(); ?> 
+                        <section class="datos_imagen">
+                            <section> 
+                                <img src="fuente/media/images/ubicacion.png" />
+                                <?= $imagen->getPais_viaje(); ?> 
+                            </section>
+                            
+                            <section> 
+                                <img src="fuente/media/images/calendario.png" />
+                                <?= $imagen->getFecha(); ?> 
+                            </section>
+                            
+                            <section> 
+                                <img src="fuente/media/images/imagen.png" />
+                                <?= $imagen->getTipo(); ?> 
+                            </section>
                         </section>
                         
-                        <section> 
-                            <img src="fuente/media/images/calendario.png" />
-                            <?= $imagen->getFecha(); ?> 
-                        </section>
-                        
-                        <section> 
-                            <img src="fuente/media/images/imagen.png" />
-                            <?= $imagen->getTipo(); ?> 
-                        </section>
                     </section>
-                    
-                </section>
 
-            <?php endforeach; ?>
+                <?php endforeach; ?>
 
-        </section>
+            </section>
+
+        <?php endif;?>
+
     </section>
     
     <?php require_once('views/layout/footer_main.php'); ?>

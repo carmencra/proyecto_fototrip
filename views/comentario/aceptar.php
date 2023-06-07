@@ -30,40 +30,40 @@
             <?php endif;?>     
         <?php endif;?>
 
-        <?php if(empty($comentarios)):
-                echo "<h4>No hay comentarios</h4>" ;
-            
-            else :?>
+        <?php 
+        if(empty($comentarios)):
+            echo "<h4>No hay comentarios.</h4>" ;
+        else :?>
 
-        <section class="comentarios">
-            <?php foreach($comentarios as $comentario) : ?>
-                <section class="comentario">
-                    <h4> <?= $comentario->getUsuario(); ?> </h4>
-                    <hr>
+            <section class="comentarios">
+                <?php foreach($comentarios as $comentario) : ?>
+                    <section class="comentario">
+                        <h4> <?= $comentario->getUsuario(); ?> </h4>
+                        <hr>
 
-                    <p class="contenido"> <?= $comentario->getContenido(); ?> </p>
-                    
-                    <section class="forms_comentario">
-                        <form id="form_aceptar_comentario_<?= $comentario->getId() ?>" action="<?=$_ENV['BASE_URL']?>comentario/aceptar" method="POST">
-                            <input type="hidden" name="comentario_a_aceptar" value="<?= $comentario->getId()?>">
-                            <input type="submit" value="Aceptar">
-                        </form>
+                        <p class="contenido"> <?= $comentario->getContenido(); ?> </p>
                         
-                        <form id="form_descartar_comentario_<?= $comentario->getId() ?>" action="<?=$_ENV['BASE_URL']?>comentario/descartar" method="POST">
-                            <input type="hidden" name="comentario_a_descartar" value="<?= $comentario->getId()?>">
-                            <input type="submit" value="Descartar">
-                        </form>
-                    </section> 
+                        <section class="forms_comentario">
+                            <form id="form_aceptar_comentario_<?= $comentario->getId() ?>" action="<?=$_ENV['BASE_URL']?>comentario/aceptar" method="POST">
+                                <input type="hidden" name="comentario_a_aceptar" value="<?= $comentario->getId()?>">
+                                <input type="submit" value="Aceptar">
+                            </form>
+                            
+                            <form id="form_descartar_comentario_<?= $comentario->getId() ?>" action="<?=$_ENV['BASE_URL']?>comentario/descartar" method="POST">
+                                <input type="hidden" name="comentario_a_descartar" value="<?= $comentario->getId()?>">
+                                <input type="submit" value="Descartar">
+                            </form>
+                        </section> 
 
-                </section>
+                    </section>
 
-            <?php endforeach; ?>
+                <?php endforeach; ?>
 
-        </section>
+            </section>
 
-
+        <?php endif;?>
+        
     </section>
 
-<?php endif;?>
 
 <?php require_once('views/layout/footer_sub_main.php'); ?>

@@ -30,45 +30,52 @@
             <?php endif;?>     
         <?php endif;?>
 
+        
+        <?php 
+        if(empty($imagenes)):
+            echo "<h4>No hay im&aacute;genes.</h4>" ;
+        else :?>
 
-        <section class="imagenes">
-            <?php foreach($imagenes as $imagen) : ?>
-                <section class="imagen">
-                    <h4> <?= $imagen->getUsuario(); ?> </h4>
+            <section class="imagenes">
+                <?php foreach($imagenes as $imagen) : ?>
+                    <section class="imagen">
+                        <h4> <?= $imagen->getUsuario(); ?> </h4>
 
-                    <hr> <br>
+                        <hr> <br>
 
-                    <form id="form_borrar_imagen_<?= $imagen->getId() ?>" action="<?=$_ENV['BASE_URL']?>imagen/borrar" method="POST" class="borrar">
-                        <input type="hidden" name="id_imagen_a_borrar" value="<?= $imagen->getId()?>">
-                        <input type="submit" value="Borrar">
-                    </form> 
-                    
-                    <br>
+                        <form id="form_borrar_imagen_<?= $imagen->getId() ?>" action="<?=$_ENV['BASE_URL']?>imagen/borrar" method="POST" class="borrar">
+                            <input type="hidden" name="id_imagen_a_borrar" value="<?= $imagen->getId()?>">
+                            <input type="submit" value="Borrar">
+                        </form> 
+                        
+                        <br>
 
-                    <img src="../fuente/media/images/galeria/<?= $imagen->getImagen(); ?>" width="380px" height="260px"/> <br><br>
+                        <img src="../fuente/media/images/galeria/<?= $imagen->getImagen(); ?>" width="380px" height="260px"/> <br><br>
 
-                    <section class="datos_imagen">
-                        <section> 
-                            <img src="../fuente/media/images/ubicacion.png" />
-                            <?= $imagen->getPais_viaje(); ?> 
+                        <section class="datos_imagen">
+                            <section> 
+                                <img src="../fuente/media/images/ubicacion.png" />
+                                <?= $imagen->getPais_viaje(); ?> 
+                            </section>
+                            
+                            <section> 
+                                <img src="../fuente/media/images/calendario.png" />
+                                <?= $imagen->getFecha(); ?> 
+                            </section>
+                            
+                            <section> 
+                                <img src="../fuente/media/images/imagen.png" />
+                                <?= $imagen->getTipo(); ?> 
+                            </section>
                         </section>
                         
-                        <section> 
-                            <img src="../fuente/media/images/calendario.png" />
-                            <?= $imagen->getFecha(); ?> 
-                        </section>
-                        
-                        <section> 
-                            <img src="../fuente/media/images/imagen.png" />
-                            <?= $imagen->getTipo(); ?> 
-                        </section>
                     </section>
-                    
-                </section>
 
-            <?php endforeach; ?>
+                <?php endforeach; ?>
 
-        </section>
+            </section>
+
+        <?php endif;?>
 
     </section>
 

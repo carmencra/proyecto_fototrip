@@ -131,31 +131,37 @@
 
     </section>
 
+    <?php 
+        if(empty($viajes)):
+            echo "<h4>No hay viajes.</h4>" ;
+        else :?>
 
-    <section class="viajes">
+        <section class="viajes">
 
-        <?php foreach($viajes as $viaje) : ?>
-            <section class="viaje">
-                <img src="fuente/media/images/galeria/<?= $viaje->getImagen_principal(); ?>" width="320px" height="200px"/> <br>
+            <?php foreach($viajes as $viaje) : ?>
+                <section class="viaje">
+                    <img src="fuente/media/images/galeria/<?= $viaje->getImagen_principal(); ?>" width="320px" height="200px"/> <br>
 
-                <p class="precio"><b> <?= $viaje->getPrecio(); ?> € </b></p>
+                    <p class="precio"><b> <?= $viaje->getPrecio(); ?> € </b></p>
 
-                <h1 class="pais"> <?= $viaje->getPais(); ?> </h1>
+                    <h1 class="pais"> <?= $viaje->getPais(); ?> </h1>
 
-                <p> <?= $viaje->getFecha_inicio(); ?> / <?= $viaje->getFecha_fin(); ?>
-                    ( <?= $viaje->getDuracion(); ?> d&iacute;as )
-                </p>
+                    <p> <?= $viaje->getFecha_inicio(); ?> / <?= $viaje->getFecha_fin(); ?>
+                        ( <?= $viaje->getDuracion(); ?> d&iacute;as )
+                    </p>
 
-                <p> <?= $viaje->getDescripcion(); ?> </p>
+                    <p> <?= $viaje->getDescripcion(); ?> </p>
 
-                <form action="<?=$_ENV['BASE_URL'].'detalle_viaje/'.$viaje->getId()?>" method="POST">
-                    <input type="submit" value="Ver más" class="ver_mas">
-                </form>
+                    <form action="<?=$_ENV['BASE_URL'].'detalle_viaje/'.$viaje->getId()?>" method="POST">
+                        <input type="submit" value="Ver más" class="ver_mas">
+                    </form>
 
-            </section>
+                </section>
 
-        <?php endforeach; ?>
+            <?php endforeach; ?>
 
-    </section>
+        </section>
+
+    <?php endif; ?>
     
     <?php require_once('views/layout/footer_main.php'); ?>

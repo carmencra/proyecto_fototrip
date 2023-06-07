@@ -30,40 +30,49 @@
                 </script>
             <?php endif;?>     
         <?php endif;?>
-        
-        <section class="admin_viajes">
-            <?php foreach ($viajes as $viaje) :?>
 
-                <section class="viaje_admin">  
-                    <h1> <?= $viaje->getId(); ?>. <?= $viaje->getPais(); ?> </h1> <hr> <br>  
-                    
-                    <section class="seccion_viaje">
-                        <img src="../fuente/media/images/galeria/<?= $viaje->getImagen_principal(); ?>" width="250px" height="150px" />
+        
+        <?php 
+        if(empty($viajes)):
+            echo "<h4>No hay viajes.</h4>" ;
+        else :?>
+        
+            <section class="admin_viajes">
+                <?php foreach ($viajes as $viaje) :?>
+
+                    <section class="viaje_admin">  
+                        <h1> <?= $viaje->getId(); ?>. <?= $viaje->getPais(); ?> </h1> <hr> <br>  
                         
-                        <section class="forms">
-                            <!-- creamos un formulario para borrar el viaje, que recoge el id por post; cada formulario tiene un id distinto, dependiendo del id del viaje -->
-                            <form id="form_borrar_viaje_<?= $viaje->getId() ?>" action="<?=$_ENV['BASE_URL']?>viaje/borrar" method="POST">
-                                <input type="hidden" name="id_viaje_a_borrar" value="<?= $viaje->getId()?>">
-                                <input type="submit" value="Borrar">
-                            </form>
+                        <section class="seccion_viaje">
+                            <img src="../fuente/media/images/galeria/<?= $viaje->getImagen_principal(); ?>" width="250px" height="150px" />
+                            
+                            <section class="forms">
+                                <!-- creamos un formulario para borrar el viaje, que recoge el id por post; cada formulario tiene un id distinto, dependiendo del id del viaje -->
+                                <form id="form_borrar_viaje_<?= $viaje->getId() ?>" action="<?=$_ENV['BASE_URL']?>viaje/borrar" method="POST">
+                                    <input type="hidden" name="id_viaje_a_borrar" value="<?= $viaje->getId()?>">
+                                    <input type="submit" value="Borrar">
+                                </form>
+                            </section>
+
                         </section>
 
-                    </section>
-
-                    <section class="contenido">
-                            <span> <?= $viaje->getDescripcion(); ?> </span>
-                            <span> <?= $viaje->getPrecio(); ?> € </span>
-                            <span> <?= $viaje->getFecha_inicio(); ?> / <?= $viaje->getFecha_fin(); ?></span>
-                            
-                            <span> Fotograf&iacute;a: <?= $viaje->getNivel_fotografia(); ?> </span>
-                            <span> F&iacute;sico: <?= $viaje->getNivel_fisico(); ?> </span>
+                        <section class="contenido">
+                                <span> <?= $viaje->getDescripcion(); ?> </span>
+                                <span> <?= $viaje->getPrecio(); ?> € </span>
+                                <span> <?= $viaje->getFecha_inicio(); ?> / <?= $viaje->getFecha_fin(); ?></span>
+                                
+                                <span> Fotograf&iacute;a: <?= $viaje->getNivel_fotografia(); ?> </span>
+                                <span> F&iacute;sico: <?= $viaje->getNivel_fisico(); ?> </span>
+                        </section>
+                        
                     </section>
                     
-                </section>
-                
-            <?php endforeach; ?>
+                <?php endforeach; ?>
 
-        </section>
+            </section>
+
+        <?php endif;?>
+
     </section>
 
 

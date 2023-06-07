@@ -50,27 +50,34 @@
 
 <main>
     <section class="contenido_main">
-        <section class="comentarios">
+        <?php 
+        if(empty($comentarios)):
+            echo "<h4>No hay comentarios.</h4>" ;
+        else :?>
+            <section class="comentarios">
 
-            <?php foreach($comentarios as $comentario) : ?>
-                <section class="comentario">
-                    <h4> <?= $comentario->getNombre_usuario(); ?>
-                         <?= $comentario->getApellidos_usuario(); ?>
-                    </h4>
+                <?php foreach($comentarios as $comentario) : ?>
+                    <section class="comentario">
+                        <h4> <?= $comentario->getNombre_usuario(); ?>
+                            <?= $comentario->getApellidos_usuario(); ?>
+                        </h4>
 
-                    <hr>
+                        <hr>
 
-                    <p class="contenido"> <?= $comentario->getContenido(); ?> </p>
+                        <p class="contenido"> <?= $comentario->getContenido(); ?> </p>
 
-                    
-                    <form action="<?=$_ENV['BASE_URL'].'viaje/ver?id='.$comentario->getId_viaje()?>" method="POST">
-                        <input class="ver_viaje" type="submit" value="ver <?php echo($comentario->getNombre_viaje());?>">
-                    </form>
-                </section>
+                        
+                        <form action="<?=$_ENV['BASE_URL'].'viaje/ver?id='.$comentario->getId_viaje()?>" method="POST">
+                            <input class="ver_viaje" type="submit" value="ver <?php echo($comentario->getNombre_viaje());?>">
+                        </form>
+                    </section>
 
-            <?php endforeach; ?>
+                <?php endforeach; ?>
 
-        </section>
+            </section>
+
+        <?php endif;?>
+
     </section>
     
 <?php require_once('views/layout/footer_main.php'); ?>
