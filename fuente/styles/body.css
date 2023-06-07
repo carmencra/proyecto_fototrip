@@ -1,6 +1,7 @@
 main {
     position: relative;
     padding: 3% 3% 4% 3%;
+    min-height: 40vh;
 }
 
 main::after {
