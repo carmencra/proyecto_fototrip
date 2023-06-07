@@ -90,3 +90,15 @@
     text-decoration: underline;
 }
 
+
+#otros_viajes {
+    margin-top: 4%;
+    text-align: center;
+    padding: 2%;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+#otros_viajes h2 {
+    text-transform: uppercase;
+    color: #2CCBCB;
+}

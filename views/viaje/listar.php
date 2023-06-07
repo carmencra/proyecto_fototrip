@@ -132,13 +132,13 @@
     </section>
 
     <?php 
-        if(empty($viajes)):
+        if(empty($viajes_activos)):
             echo "<h4>No hay viajes.</h4>" ;
         else :?>
 
         <section class="viajes">
 
-            <?php foreach($viajes as $viaje) : ?>
+            <?php foreach($viajes_activos as $viaje) : ?>
                 <section class="viaje">
                     <img src="fuente/media/images/galeria/<?= $viaje->getImagen_principal(); ?>" width="320px" height="200px"/> <br>
 
@@ -163,5 +163,36 @@
         </section>
 
     <?php endif; ?>
+
+    <?php if(!empty($viajes_no_activos)): ?>
+        <h2 id="otros_viajes">Otros viajes realizados: <br> <hr> </h2>  
+
+        <section class="viajes">
+
+            <?php foreach($viajes_no_activos as $viaje) : ?>
+                <section class="viaje">
+                    <img src="fuente/media/images/galeria/<?= $viaje->getImagen_principal(); ?>" width="320px" height="200px"/> <br>
+
+                    <p class="precio"><b> <?= $viaje->getPrecio(); ?> € </b></p>
+
+                    <h1 class="pais"> <?= $viaje->getPais(); ?> </h1>
+
+                    <p> <?= $viaje->getFecha_inicio(); ?> / <?= $viaje->getFecha_fin(); ?>
+                        ( <?= $viaje->getDuracion(); ?> d&iacute;as )
+                    </p>
+
+                    <p> <?= $viaje->getDescripcion(); ?> </p>
+
+                    <form action="<?=$_ENV['BASE_URL'].'detalle_viaje/'.$viaje->getId()?>" method="POST">
+                        <input type="submit" value="Ver más" class="ver_mas">
+                    </form>
+
+                </section>
+
+            <?php endforeach; ?>
+
+            </section>
     
+    <?php endif; ?>
+
     <?php require_once('views/layout/footer_main.php'); ?>

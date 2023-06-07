@@ -28,8 +28,11 @@ class ViajeController {
         $lista_viajes= $this->repository->listar();
         // convertimos los viajes obtenidos en objetos de la clase Viaje
         $objetos_viajes= $this->obtener_objetos($lista_viajes);
+
+        $viajes_activos= $this->obtener_activos($objetos_viajes);
+        $viajes_no_activos= $this->obtener_no_activos($objetos_viajes);
         
-        $this->pages->render('viaje/listar', ['viajes' => $objetos_viajes]);
+        $this->pages->render('viaje/listar', ['viajes_activos' => $viajes_activos, 'viajes_no_activos' => $viajes_no_activos]);
     }
 
     public function obtener_objetos($viajes) {
@@ -51,17 +54,36 @@ class ViajeController {
         return $this->repository->obtener_duracion($objeto_viaje);
     }
 
+    public function obtener_activos($objetos_viaje): array {
+        $activos= [];
+        foreach ($objetos_viaje as $viaje) {
+            if ($viaje->getActivo() == TRUE) { 
+                array_push($activos, $viaje);
+            }
+        }
+        return $activos;
+    }
+    public function obtener_no_activos($objetos_viaje): array {
+        $no_activos= [];
+        foreach ($objetos_viaje as $viaje) {
+            if ($viaje->getActivo() == FALSE) { 
+                array_push($no_activos, $viaje);
+            }
+        }
+        return $no_activos;
+    }
+
     public function buscar() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $filtros= $_POST['data'];
-            $viajes_obtenidos=$this->repository->filtrar_viajes($filtros); 
+            $viajes_obtenidos= $this->repository->filtrar_viajes($filtros); 
+            // var_dump($viajes_obtenidos);die();
+            $objetos_viajes= $this->obtener_objetos($viajes_obtenidos);
 
-            // añadimos la duración de cada viaje
-            foreach ($viajes_obtenidos as $viaje) {
-                $duracion= $this->obtener_duracion($viaje);
-                $viaje->setDuracion($duracion);
-            }
-            $this->pages->render('viaje/listar', ['viajes' => $viajes_obtenidos]);
+            $viajes_activos= $this->obtener_activos($objetos_viajes);
+            $viajes_no_activos= $this->obtener_no_activos($objetos_viajes);
+
+            $this->pages->render('viaje/listar', ['viajes_activos' => $viajes_activos, 'viajes_no_activos' => $viajes_no_activos]);
         }
 
     }

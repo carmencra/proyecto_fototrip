@@ -56,22 +56,27 @@ class ViajeRepository {
         $consulta= $this->crea_consulta($limpios);
 
         $cons= $this->db->prepara($consulta);
-        $cons->execute();
 
-        $viajes= $cons->fetchAll();
-
-        //pasamos todos los viajes obtenidos a objetos Viaje
-        $objetos_viaje=[];
-        foreach($viajes as $datos_viaje) {
-            $obj_viaje= Viaje::fromArray($datos_viaje);
-            array_push($objetos_viaje, $obj_viaje);
+        try {
+            $cons->execute();
+            return $cons->fetchAll();
         }
+        // $cons->execute();
 
-        try{
-            if ($cons->execute()) {
-                return $objetos_viaje;
-            }
-        }
+        // $viajes= $cons->fetchAll();
+
+        // //pasamos todos los viajes obtenidos a objetos Viaje
+        // $objetos_viaje=[];
+        // foreach($viajes as $datos_viaje) {
+        //     $obj_viaje= Viaje::fromArray($datos_viaje);
+        //     array_push($objetos_viaje, $obj_viaje);
+        // }
+
+        // try{
+        //     if ($cons->execute()) {
+        //         return $objetos_viaje;
+        //     }
+        // }
         catch(PDOException $err){
             return false;
         }
