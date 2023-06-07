@@ -38,19 +38,13 @@
 
                     <hr> <br>
 
-                    <section class="borrar_editar">
-                        <!-- si la imagen es del admin, la podrá modificar -->
-                        <?php if($imagen->getId_usuario() == "1") :?>
-                            <form action="<?=$_ENV['BASE_URL'].'imagen/modificar&id='.$imagen->getImagen() ?>" method="GET">
-                                <input type="submit" value="Modificar">
-                            </form> 
-                        <?php endif; ?>
-
-                        <form id="form_borrar_imagen_<?= $imagen->getId() ?>" action="<?=$_ENV['BASE_URL']?>imagen/borrar" method="POST">
+                    <!-- <section class="borrar"> -->
+                        <form id="form_borrar_imagen_<?= $imagen->getId() ?>" action="<?=$_ENV['BASE_URL']?>imagen/borrar" method="POST" class="borrar">
                             <input type="hidden" name="id_imagen_a_borrar" value="<?= $imagen->getId()?>">
                             <input type="submit" value="Borrar">
                         </form> 
-                    </section><br>
+                    <!-- </section> -->
+                    <br>
 
                     <img src="../fuente/media/images/galeria/<?= $imagen->getImagen(); ?>" width="380px" height="260px"/> <br><br>
 

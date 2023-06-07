@@ -1,4 +1,4 @@
-.forms_imagen, .borrar_editar {
+.forms_imagen, .borrar {
     display: flex;
     margin: auto;
     gap: 10%;
@@ -28,23 +28,13 @@
 }
 
 
-.imagen .borrar_editar form input {
+.imagen .borrar  input {
     font-weight: bold;
-}
-
-
-.imagen .borrar_editar form:first-child input {
-    background-color: rgb(222, 222, 105);
-    border-color: rgb(222, 222, 105);
-}
-
-.imagen .borrar_editar form:last-child input {
     background-color: rgb(228, 95, 95);
     border-color: rgb(228, 95, 95);
 }
 
-.imagen .borrar_editar form input:hover {
+.imagen .borrar  input:hover {
     font-size: medium;
     text-decoration: underline;
 }
-

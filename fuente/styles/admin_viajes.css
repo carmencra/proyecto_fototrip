@@ -39,13 +39,8 @@
     font-weight: bold;
 }
 
-/* modificar */
-.admin_viajes .viaje_admin .forms form:first-child input {
-    background-color: rgb(222, 222, 105);
-    border-color: rgb(222, 222, 105);
-}
-/* borrar */
-.admin_viajes .viaje_admin .forms form:last-child input {
+
+.admin_viajes .viaje_admin .forms form input {
     background-color: rgb(228, 95, 95);
     border-color: rgb(228, 95, 95);
 }
