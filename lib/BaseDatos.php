@@ -16,6 +16,9 @@ class BaseDatos {
         
         $this->conexion = $this->conectar();
 
+        // actualizamos los viajes si hay alguno que no esté activo
+        $this->actualizar_viajes();
+
     }
 
     private function conectar(): PDO {
@@ -49,6 +52,14 @@ class BaseDatos {
 
     public function prepara($pre) {
         return $this->conexion->prepare($pre);
+    }
+
+    public function actualizar_viajes() {
+        $fecha_hoy= date('Y-m-d');
+        var_dump($fecha_hoy);
+
+        $sql = "UPDATE viajes SET activo= false WHERE fecha_inicio <= '$fecha_hoy'";
+        $this->consulta($sql);
     }
 
 }
