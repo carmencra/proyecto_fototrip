@@ -212,6 +212,25 @@ class ImagenRepository {
         }
     }
 
+    public function getId_usuario($email) {
+        $cons= $this->db->prepara("SELECT id FROM usuarios WHERE email= :email");
+
+        $cons->bindParam(':email', $email);
+
+        try {
+            $cons->execute();
+            $datos= $cons->fetchAll();
+            return $datos[0]['id'];
+        }
+        catch(PDOEXception $err) {
+            return false;
+        }
+        finally {
+            $cons= null;
+            unset($cons); 
+        }
+    }
+
     public function obtener_viajes_disponibles(): ?array {
         $this->db->consulta("SELECT * FROM viajes WHERE activo= false");
         return $this->db->extraer_todos();

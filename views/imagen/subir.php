@@ -37,8 +37,8 @@
         $select_tipo= $_POST['data']['tipo'];
         $_SESSION['data_tipo']= $select_tipo;
         
-        $select_viaje= $_POST['data']['viaje'];
-        $_SESSION['data_viaje']= $select_viaje;
+        // $select_viaje= $_POST['data']['viaje'];
+        // $_SESSION['data_viaje']= $select_viaje;
         
         $select_fecha= $_POST['data']['fecha'];
         $_SESSION['data_fecha']= $select_fecha;
@@ -66,7 +66,7 @@
 
             <label for="fecha">Fecha: </label>
             <input type="date" name="data[fecha]" value="<?php if (isset($_SESSION['data_fecha']))echo $_SESSION['data_fecha'];?>">
-            
+
             <!-- ( <span id="span_fecha_inicio">
                 < ?php if (isset($_SESSION['data']['viaje']) && isset($datos_viaje[$_SESSION['data']['viaje']])) {
                     echo $datos_viaje[$_SESSION['data']['viaje']]['fecha_inicio'];

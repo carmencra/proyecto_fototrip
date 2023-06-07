@@ -210,10 +210,25 @@ class ImagenController{
             }
             if (isset($_POST['data'])) {
                 $datos= $_POST['data'];
-                $id_viaje= $_SESSION['id_viaje_a_imagen'];
+                $datos['viaje']= $_SESSION['id_viaje_a_imagen'];
+
+                if ($this->gestionar_foto($_FILES['imagen'])) {
+                    $nombre_foto= $_FILES['imagen']['name'];
+
+                    $id_usuario= $this->repository->getId_usuario($_SESSION['usuario']);
+
+                    $guardado= $this->repository->guardar($datos, $nombre_foto, $id_usuario);       
+                    if ($guardado) {
+                        $_SESSION['imagen_creada']= true;
+                        $this->borrar_sesiones();
+                        header("Location: ". $_ENV['BASE_URL']."misviajes");
+                    }    
+                    else {
+                        $_SESSION['imagen_creada']= false;
+                    }
+                }
+                $this->pages->render('imagen/subir');
             }
-            
-        
         }
     }
 
