@@ -141,7 +141,7 @@ session_start();
                 }); 
                 // para recoger los datos del formulario
                 Router::add('POST', 'imagen/guardar', function() use ($imagen_controller){
-                    ($imagen_controller)->guardar();
+                    ($imagen_controller)->guardar_admin();
                 });
                 Router::add('GET', 'administrar/imagen', function() use ($imagen_controller){
                     ($imagen_controller)->mostrar();

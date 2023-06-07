@@ -213,7 +213,7 @@ class ImagenRepository {
     }
 
     public function obtener_viajes_disponibles(): ?array {
-        $this->db->consulta("SELECT * FROM viajes WHERE activo= true");
+        $this->db->consulta("SELECT * FROM viajes WHERE activo= false");
         return $this->db->extraer_todos();
     }
 
@@ -250,7 +250,7 @@ class ImagenRepository {
         }
     }
 
-    public function guardar($datos, $imagen) {
+    public function guardar($datos, $imagen, $usuario) {
         $ins= $this->db->prepara("INSERT INTO imagenes values (:id, :id_viaje, :id_usuario, :imagen, :tipo,:aceptada, :fecha)");
         
         $ins->bindParam(':id', $id, PDO::PARAM_STR);
@@ -263,10 +263,18 @@ class ImagenRepository {
 
         $id= NULL; //id auto_increment
         $id_viaje= $datos['viaje'];
-        $id_usuario= "1"; //id del admin
         $tipo= $datos['tipo'];
-        $aceptada= TRUE;
         $fecha= $datos['fecha'];
+
+        // distingue si es una imagen del admin o de usuario normal
+        if ($usuario == "admin") {
+            $id_usuario= "1"; //id del admin
+            $aceptada= TRUE;
+        }
+        else {
+            $id_usuario= $usuario;
+            $aceptada= FALSE;
+        }
 
         try{
             if ($ins->execute()) {

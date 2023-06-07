@@ -163,7 +163,7 @@ class ImagenController{
         }
     }
 
-    public function guardar() {
+    public function guardar_admin() {
         $viajes_disponibles= $this->obtener_viajes_disponibles();
         
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -176,7 +176,11 @@ class ImagenController{
                 // aquí ya se guarda porque está todo correcto
                 if ($this->gestionar_foto($_FILES['imagen'])) {
                     $nombre_foto= $_FILES['imagen']['name'];
-                    $guardado= $this->repository->guardar($datos, $nombre_foto);       
+                    if (isset($_SESSION['admin'])) {
+                        $admin= "admin";
+                    }
+                    else { $admin= ""; }
+                    $guardado= $this->repository->guardar($datos, $nombre_foto, $admin);       
                     if ($guardado) {
                         $_SESSION['imagen_creada']= true;
                         $this->borrar_sesiones();
