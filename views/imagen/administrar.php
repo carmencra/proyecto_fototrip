@@ -40,7 +40,7 @@
 
                     <section class="borrar_editar">
                         <!-- si la imagen es del admin, la podrá modificar -->
-                        <?php if($imagen->getUsuario() === 'admin@gmail.com') :?>
+                        <?php if($imagen->getId_usuario() == "1") :?>
                             <form action="<?=$_ENV['BASE_URL'].'imagen/modificar&id='.$imagen->getImagen() ?>" method="GET">
                                 <input type="submit" value="Modificar">
                             </form> 
