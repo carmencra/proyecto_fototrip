@@ -380,23 +380,27 @@ class UsuarioController{
     public function inscribirse() {
         $id_viaje= $_POST['viaje_a_inscribirse'];
         $usuario= $_SESSION['usuario'];
-        $inscrito= $this->repository->inscribirse($id_viaje, $usuario);
+
+        // el usuario lógicamente no puede estar ya inscrito al viaje
+        if (!$this->repository->inscrito_a_ese_viaje($usuario, $id_viaje)) {
+            $inscrito= $this->repository->inscribirse($id_viaje, $usuario);
         
-        if ($inscrito) {
-            $_SESSION['viaje_inscrito']= true; 
-            
-            $id_correo= $this->repository->obtener_id($usuario);
-            $viaje= $this->viaje_controller->obtener_viaje($id_viaje);
-
-            $correo= new Email($usuario);
-            $correo->enviar_inscripcion($viaje);
-
-            $this->pages->render('email/inscripcion');
-            
-        } 
-        else {
-            $_SESSION['viaje_inscrito']= false;
-            $this->viaje_controller->ver($id_viaje);
+            if ($inscrito) {
+                $_SESSION['viaje_inscrito']= true; 
+                
+                $id_correo= $this->repository->obtener_id($usuario);
+                $viaje= $this->viaje_controller->obtener_viaje($id_viaje);
+    
+                $correo= new Email($usuario);
+                $correo->enviar_inscripcion($viaje);
+    
+                $this->pages->render('email/inscripcion');
+                
+            } 
+            else {
+                $_SESSION['viaje_inscrito']= false;
+                $this->viaje_controller->ver($id_viaje);
+            }
         }
     }
 
@@ -404,6 +408,9 @@ class UsuarioController{
         $this->pages->render('email/inscripcion');
     }
 
+    public function inscrito_a_ese_viaje($usuario, $id_viaje) {
+        $this->repository->inscrito_a_ese_viaje($usuario, $id_viaje);
+    }
 }
 
 

@@ -212,6 +212,31 @@ class ViajeRepository {
         }
     }
 
+    public function viaje_inscrito_usuario($usuario, $id_viaje): bool {
+        $cons= $this->db->prepara("SELECT email FROM inscritos WHERE email= :email and id_viaje= :id_viaje");
+
+        $cons->bindParam(':email', $usuario, PDO::PARAM_STR);
+        $cons->bindParam(':id_viaje', $id_viaje, PDO::PARAM_STR);
+        
+
+        try {
+            $cons->execute();
+            if ($cons && $cons->rowCount() == 1) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        catch(PDOEXception $err) {
+            return false;
+        }
+        finally {
+            $cons= null;
+            unset($cons); 
+        }
+    }
+   
 
 }
 

@@ -68,21 +68,21 @@ class UsuarioRepository {
 
     public function busca_mail($email): bool | object {
         $result= false;
-        $sql= $this->db->prepara("SELECT * FROM usuarios WHERE email= :email");
-        $sql->bindParam(':email', $email, PDO::PARAM_STR);
+        $cons= $this->db->prepara("SELECT * FROM usuarios WHERE email= :email");
+        $cons->bindParam(':email', $email, PDO::PARAM_STR);
 
         try {
-            $sql->execute();
-            if ($sql && $sql->rowCount() == 1) {
-                $result= $sql->fetch(PDO::FETCH_OBJ);
+            $cons->execute();
+            if ($cons && $cons->rowCount() == 1) {
+                $result= $cons->fetch(PDO::FETCH_OBJ);
             }
         }
         catch(PDOEXception $err) {
             $result= false;
         }
         finally {
-            $sql= null;
-            unset($sql); 
+            $cons= null;
+            unset($cons); 
         }
         return $result;
     }
@@ -117,16 +117,16 @@ class UsuarioRepository {
     }
 
     public function es_admin($email) {
-        $sql= $this->db->prepara("SELECT * FROM usuarios WHERE email= :email and rol= :rol");
+        $cons= $this->db->prepara("SELECT id FROM usuarios WHERE email= :email and rol= :rol");
 
-        $sql->bindParam(':email', $email, PDO::PARAM_STR);
-        $sql->bindParam(':rol', $rol, PDO::PARAM_STR);
+        $cons->bindParam(':email', $email, PDO::PARAM_STR);
+        $cons->bindParam(':rol', $rol, PDO::PARAM_STR);
         
         $rol= "admin";
 
         try {
-            $sql->execute();
-            if ($sql && $sql->rowCount() == 1) {
+            $cons->execute();
+            if ($cons && $cons->rowCount() == 1) {
                 return true;
             }
             else {
@@ -137,26 +137,27 @@ class UsuarioRepository {
             return false;
         }
         finally {
-            $sql= null;
-            unset($sql); 
+            $cons= null;
+            unset($cons); 
         }
     }
 
     public function esta_confirmado($email) {
-        $cons= $this->db->prepara("SELECT confirmado FROM usuarios WHERE email= :email");
+        $cons= $this->db->prepara("SELECT id FROM usuarios WHERE email= :email and confirmado= :confirmado");
 
         $cons->bindParam(':email', $email, PDO::PARAM_STR);
+        $cons->bindParam(':confirmado', $confirmado, PDO::PARAM_STR);
         
+        $confirmado= true;
+
         try {
             $cons->execute();
             if ($cons && $cons->rowCount() == 1) {
-                $confirmado= $cons->fetch()['confirmado'];
-                if ($confirmado == true) {
-                    return true;
-                }
-                else {return false;}
+                return true;
             }
-            else {return false;}
+            else {
+                return false;
+            }
         }
         catch(PDOEXception $err) {
             return false;
@@ -191,6 +192,31 @@ class UsuarioRepository {
         finally {
             $ins= null;
             unset($ins); 
+        }
+    }
+
+    public function inscrito_a_ese_viaje($usuario, $id_viaje): bool {
+        $cons= $this->db->prepara("SELECT email FROM inscritos WHERE email= :email and id_viaje= :id_viaje");
+
+        $cons->bindParam(':email', $usuario, PDO::PARAM_STR);
+        $cons->bindParam(':id_viaje', $id_viaje, PDO::PARAM_STR);
+        
+
+        try {
+            $cons->execute();
+            if ($cons && $cons->rowCount() == 1) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        catch(PDOEXception $err) {
+            return false;
+        }
+        finally {
+            $cons= null;
+            unset($cons); 
         }
     }
 }

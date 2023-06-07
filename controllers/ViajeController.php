@@ -12,16 +12,16 @@ use Utils\Utils;
 class ViajeController {
     private Pages $pages;
     private ViajeRepository $repository;
-    private GastosController $gastosController;
-    private ImagenController $imagenController;
-    private ComentarioController $comentarioController;
+    private GastosController $gastos_controller;
+    private ImagenController $imagen_controller;
+    private ComentarioController $comentario_controller;
 
     public function __construct($db) {
         $this->pages= new Pages();
         $this->repository= new ViajeRepository($db);
-        $this->gastosController= new GastosController($db);
-        $this->imagenController= new ImagenController($db);
-        $this->comentarioController= new ComentarioController($db);
+        $this->gastos_controller= new GastosController($db);
+        $this->imagen_controller= new ImagenController($db);
+        $this->comentario_controller= new ComentarioController($db);
     }
 
     public function listar() {
@@ -69,13 +69,24 @@ class ViajeController {
     public function ver($id) {
         $viaje= $this->obtener_viaje($id);
 
+        //comprobamos si el usuario actual está inscrito al viaje para poder inscribirse sólo si no
+        if (isset($_SESSION['usuario'])) {
+            $inscrito= $this->repository->viaje_inscrito_usuario($_SESSION['usuario'], $id);
+            if ($inscrito) {
+                $_SESSION['usuario_ya_inscrito']= true;
+            }
+            else {
+                Utils::deleteSession('usuario_ya_inscrito');
+            }
+        }
+
         //  si se encuentra un viaje, obtiene los datos relacionados con este y los manda a la vista
         if ($viaje) {
-            $gastos= $this->gastosController->obtener_gastos($id);
+            $gastos= $this->gastos_controller->obtener_gastos($id);
 
-            $imagenes= $this->imagenController->obtener_imagenes($id);
+            $imagenes= $this->imagen_controller->obtener_imagenes($id);
             
-            $comentarios= $this->comentarioController->obtener_comentarios($id);
+            $comentarios= $this->comentario_controller->obtener_comentarios($id);
             
             $this->pages->render('viaje/ver', ['viaje' => $viaje, 'gastos' => $gastos, 'imagenes' => $imagenes, 'comentarios' => $comentarios ]);
         }
@@ -141,7 +152,7 @@ class ViajeController {
                 
                 if ($guardado) {
                     $id_viaje= $this->repository->obtener_id_ultimo_viaje();
-                    $guardar_gastos= $this->gastosController->guardar($id_viaje, $gastos);
+                    $guardar_gastos= $this->gastos_controller->guardar($id_viaje, $gastos);
                     if ($guardar_gastos) {
                         $_SESSION['viaje_creado']= true;$this->borra_sesiones_errores();
                     }

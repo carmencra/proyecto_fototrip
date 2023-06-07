@@ -1,21 +1,42 @@
 <title>Fototrip - Ver viaje</title>
 
-<?php require_once('views/layout/header_sub_main.php'); ?>
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="../fuente/scripts/recoger_id_elemento_borrar.js"></script>
+
+
+<!-- cargamos la ruta de la página actual por si viniera de otra ruta -->
+<script>
+    console.log(window.location.href);
+    var baseUrl = 'http://localhost/fototrip/';
+    var ruta_pagina = 'detalle_viaje/'.$viaje->getId();
+
+    if (!window.location.href.startsWith(baseUrl) || !window.location.href.endsWith(ruta_pagina)) {
+        window.location.href = baseUrl + ruta_pagina;
+    }
+</script>
+
+<?php require_once('views/layout/header_sub_main.php'); ?>
+
 
 <section class="portada" style="background-image:url('../fuente/media/images/galeria/<?= $viaje->getImagen_principal();?>')">
     <section>
         <h1 class="titulo_portada"> <?= $viaje->getPais() ?> </h1>
 
-        <!-- si hay un usuario, que no sea el admin, se podrá inscribir -->
-        <?php if(isset($_SESSION['usuario']) && !isset($_SESSION['admin'])) :?>
-            <form id="form_inscribirse_<?= $viaje->getId() ?>" action="<?=$_ENV['BASE_URL']?>viaje/inscribirse" method="POST">
-                <input type="hidden" name="viaje_a_inscribirse" value="<?= $viaje->getId()?>">
-                <input type="submit" value="Inscribirse">
-            </form>
-        <?php endif; ?>
+        <!-- si hay un usuario, que no sea el admin -->
+        <?php 
+        if(isset($_SESSION['usuario']) && !isset($_SESSION['admin'])):
+            // y no esté ya inscrito al viaje, podrá hacerlo 
+            if(!isset($_SESSION['usuario_ya_inscrito'])) : ?>
+        
+                <form id="form_inscribirse_<?= $viaje->getId() ?>" action="<?=$_ENV['BASE_URL']?>viaje/inscribirse" method="POST">
+                    <input type="hidden" name="viaje_a_inscribirse" value="<?= $viaje->getId()?>">
+                    <input type="submit" value="Inscribirse">
+                </form>
+            <?php else :?> <br><br>
+                <span> (Ya inscrito)</span>
+            <?php endif;
+        endif; 
+        ?>
 
     </section>
 </section>
@@ -24,7 +45,7 @@
 <main>
 
     <!-- si el usuario se ha intentado inscribir al viaje y ha fallado, nos muestra el mensaje -->
-    <?php use Utils\Utils;
+        <?php use Utils\Utils; 
         if(isset($_SESSION['viaje_inscrito'])):
             if ($_SESSION['viaje_inscrito'] == false) : ?>
                 <script type="text/javascript">
