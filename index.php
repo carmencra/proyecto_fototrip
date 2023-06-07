@@ -191,8 +191,16 @@ session_start();
                 Router::add('POST', 'comentario/guardar', function() use ($comentario_controller) {
                     ($comentario_controller)->guardar();
                 }); 
-                Router::add('POST', 'viaje/imagen', function() use ($viaje_controller) {
-                    ($viaje_controller)->subir_imagen();
+
+                // subir imágenes (obtener id imagen a subir, vista y datos del formulario)
+                Router::add('POST', 'viaje/imagen', function() use ($imagen_controller) {
+                    ($imagen_controller)->subir_imagen();
+                }); 
+                Router::add('GET', 'imagen/subir', function() use ($imagen_controller) {
+                    ($imagen_controller)->subir_imagen();
+                }); 
+                Router::add('POST', 'imagen/subir', function() use ($imagen_controller) {
+                    ($imagen_controller)->subir_imagen();
                 }); 
             }
 

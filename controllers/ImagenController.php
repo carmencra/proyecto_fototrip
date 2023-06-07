@@ -197,6 +197,26 @@ class ImagenController{
         }
     }
 
+    public function subir_imagen() {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $this->pages->render('imagen/subir');
+        }
+       
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (isset($_POST['id_viaje_a_imagen'])) {
+                $id_viaje= $_POST['id_viaje_a_imagen'];
+                $_SESSION['id_viaje_a_imagen']= $id_viaje;
+                $this->pages->render('imagen/subir');
+            }
+            if (isset($_POST['data'])) {
+                $datos= $_POST['data'];
+                $id_viaje= $_SESSION['id_viaje_a_imagen'];
+            }
+            
+        
+        }
+    }
+
     public function borrar_sesiones() {
         Utils::deleteSession('err_img');
         Utils::deleteSession('data_tipo');
