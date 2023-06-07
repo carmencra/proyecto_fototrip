@@ -67,17 +67,19 @@
             <label for="fecha">Fecha: </label>
             <input type="date" name="data[fecha]" value="<?php if (isset($_SESSION['data_fecha']))echo $_SESSION['data_fecha'];?>">
 
-            <!-- ( <span id="span_fecha_inicio">
-                < ?php if (isset($_SESSION['data']['viaje']) && isset($datos_viaje[$_SESSION['data']['viaje']])) {
-                    echo $datos_viaje[$_SESSION['data']['viaje']]['fecha_inicio'];
+            <br>
+
+            ( <span id="span_fecha_inicio">
+                <?php if (isset($_SESSION['fechas'])) {
+                    echo $_SESSION['fechas']['inicio'];
                 } ?>
             </span>
             / 
             <span id="span_fecha_fin">
-                < ?php if (isset($_SESSION['data']['viaje']) && isset($datos_viaje[$_SESSION['data']['viaje']])) {
-                    echo $datos_viaje[$_SESSION['data']['viaje']]['fecha_fin'];
+                <?php if (isset($_SESSION['fechas'])) {
+                    echo $_SESSION['fechas']['fin'];
                 } ?>
-            </span> ) -->
+            </span> )
 
             <br><span style="color:red"> <?php if(isset($_SESSION['err_fec'])) echo  $_SESSION['err_fec']?> </span>
 
