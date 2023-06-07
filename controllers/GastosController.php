@@ -55,6 +55,11 @@ class GastosController{
         }
         return $todos;
     }
+
+    
+    public function borrar_por_viaje($id_viaje): bool {
+        return $this->repository->borrar_por_viaje($id_viaje);
+    }
     
 }
 

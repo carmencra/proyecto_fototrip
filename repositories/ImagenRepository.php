@@ -315,6 +315,26 @@ class ImagenRepository {
         return $this->db->extraer_todos();
     }
     
+    public function borrar_por_viaje($id_viaje): bool {
+        $del= $this->db->prepara("DELETE FROM imagenes WHERE id_viaje= $id_viaje");
+        
+        try {
+            $del->execute();
+            if ($del && $del->rowCount() == 1) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        catch(PDOEXception $err) {
+            return false;
+        }
+        finally {
+            $del= null;
+            unset($del); 
+        }
+    }
     
 }
 

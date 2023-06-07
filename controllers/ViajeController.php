@@ -136,6 +136,14 @@ class ViajeController {
 
     public function borrar() {
         $id= $_POST['id_viaje_a_borrar'];
+
+        // borramos los elementos que dependen del viaje
+        $this->gastos_controller->borrar_por_viaje($id);
+        $this->comentario_controller->borrar_por_viaje($id);
+        $this->imagen_controller->borrar_por_viaje($id);
+        $this->repository->borrar_inscritos_viaje($id);
+
+        // borramos el viaje en sí
         $borrado= $this->repository->borrar($id);
 
         if ($borrado) {

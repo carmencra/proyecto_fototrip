@@ -307,6 +307,11 @@ class ImagenController{
         return $this->repository->obtener_imagenes_usuario($id);
     }
 
+    
+    public function borrar_por_viaje($id_viaje): bool {
+        return $this->repository->borrar_por_viaje($id_viaje);
+    }
+
 }
 
 ?>

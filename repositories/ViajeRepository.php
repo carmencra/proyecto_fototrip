@@ -61,22 +61,6 @@ class ViajeRepository {
             $cons->execute();
             return $cons->fetchAll();
         }
-        // $cons->execute();
-
-        // $viajes= $cons->fetchAll();
-
-        // //pasamos todos los viajes obtenidos a objetos Viaje
-        // $objetos_viaje=[];
-        // foreach($viajes as $datos_viaje) {
-        //     $obj_viaje= Viaje::fromArray($datos_viaje);
-        //     array_push($objetos_viaje, $obj_viaje);
-        // }
-
-        // try{
-        //     if ($cons->execute()) {
-        //         return $objetos_viaje;
-        //     }
-        // }
         catch(PDOException $err){
             return false;
         }
@@ -239,6 +223,27 @@ class ViajeRepository {
         finally {
             $cons= null;
             unset($cons); 
+        }
+    }
+
+    public function borrar_inscritos_viaje($id_viaje): bool {
+        $del= $this->db->prepara("DELETE FROM inscritos WHERE id_viaje= $id_viaje");
+        
+        try {
+            $del->execute();
+            if ($del && $del->rowCount() == 1) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        catch(PDOEXception $err) {
+            return false;
+        }
+        finally {
+            $del= null;
+            unset($del); 
         }
     }
    

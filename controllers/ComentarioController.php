@@ -174,6 +174,10 @@ class ComentarioController{
     public function usuario_ya_comenta_viaje($email, $id_viaje): bool {
         return $this->repository->usuario_ya_comenta_viaje($email, $id_viaje);
     }
+    
+    public function borrar_por_viaje($id_viaje): bool {
+        return $this->repository->borrar_por_viaje($id_viaje);
+    }
 
 }
 

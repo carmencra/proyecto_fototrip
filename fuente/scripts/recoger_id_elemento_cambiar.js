@@ -8,7 +8,7 @@ $(document).ready(function() {
     
     // Verificar si se ha confirmado anteriormente
     if (!$(form).data('confirmed')) {
-      var result = confirm("¿Quieres borrar este viaje?");
+      var result = confirm("¿Quieres borrar este viaje (y todos los elementos que dependen de él)?");
       if (result) {
         $(form).data('confirmed', true); // Marcar como confirmado para evitar futuras ventanas emergentes
         form.submit(); // Enviar el formulario para redirigir al controlador
