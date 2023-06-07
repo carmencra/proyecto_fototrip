@@ -59,7 +59,7 @@
 
                 <section>
                     <img src="../fuente/media/images/icono_fecha.png" alt="fecha"/> 
-                    <span> &nbsp;&nbsp; <?= $viaje->getFecha_inicio() ?> - <?= $viaje->getFecha_fin() ?> </span>
+                    <span> &nbsp;&nbsp; <?= $viaje->getFecha_inicio() ?> / <?= $viaje->getFecha_fin() ?> </span>
                 </section>
 
                 <section>
