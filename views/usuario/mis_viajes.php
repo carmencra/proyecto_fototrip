@@ -46,12 +46,12 @@
                                     
                                 <!-- solo se podrán añadir comentarios e imágenes si el viaje ya ha tenido lugar -->
                                     <?php if ($viaje->getActivo() == FALSE) : ?>
-                                        <form id="form_borrar_viaje_<?= $viaje->getId() ?>" action="<?=$_ENV['BASE_URL']?>viaje/comentar" method="POST">
+                                        <form action="<?=$_ENV['BASE_URL']?>viaje/comentar" method="POST">
                                             <input type="hidden" name="id_viaje_a_comentar" value="<?= $viaje->getId()?>">
                                             <input type="submit" value="Comentar">
                                         </form> <br>
 
-                                        <form id="form_borrar_viaje_<?= $viaje->getId() ?>" action="<?=$_ENV['BASE_URL']?>viaje/imagen" method="POST">
+                                        <form action="<?=$_ENV['BASE_URL']?>viaje/imagen" method="POST">
                                             <input type="hidden" name="id_viaje_a_imagen" value="<?= $viaje->getId()?>">
                                             <input type="submit" value="Subir imagen">
                                         </form> <br>
@@ -116,7 +116,7 @@
                             </section>
 
                             <?php if ($imagen->getAceptada() == FALSE): ?>
-                                <p>( Pendiente de aceptaci&oacute;n )</p>
+                                <p class="aceptacion">( Pendiente de aceptaci&oacute;n )</p>
                             <?php endif; ?>
                         </section>
                     
@@ -143,7 +143,11 @@
                     <?php foreach($comentarios as $comentario) : ?>
                         
                     <section class="comentario">
-                        <h4> Viaje a: <span class="destino"> <?= $comentario->getNombre_viaje(); ?> </span></h4>
+                        <h4> Viaje a: <span class="destino"> <?= $comentario->getNombre_viaje(); ?> </span>
+                            <?php if ($comentario->getAceptado() == FALSE): ?>
+                                <span class="aceptacion">( Pendiente de aceptaci&oacute;n )</span>
+                            <?php endif; ?>
+                        </h4>
                         <hr>
                         
                         <p class="contenido"> <?= $comentario->getContenido(); ?> </p>
