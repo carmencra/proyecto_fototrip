@@ -10,18 +10,13 @@ use Lib\Router;
 use Dotenv\Dotenv;
 use Lib\BaseDatos;
 
-
 $dotenv= Dotenv::createImmutable(__DIR__); //para acceder al .env
 $dotenv->safeLoad();
 
-
 session_start();
 
-
-//header
-// require_once('views/layout/header.php');
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -47,10 +42,10 @@ session_start();
 
     <!-- recoger el id del elemento a cambiar (borrar, editar, aceptar, descartar)  -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../fuente/scripts/recoger_id_elemento_cambiar.js"></script>
-
+    <script src="fuente/scripts/recoger_id_elemento_cambiar.js"></script>
 
 </head>
+
 
 <body>
 
@@ -114,6 +109,15 @@ session_start();
                 ($usuario_controller)->cerrar();
             });
             
+            // tanto el usuario como el admin podrán borrar imágenes y comentarios, el usuario lógicamente sólo los suyos
+            Router::add('POST', 'imagen/borrar', function() use ($imagen_controller){
+                ($imagen_controller)->borrar();
+            });
+            Router::add('POST', 'comentario/borrar', function() use ($comentario_controller){
+                ($comentario_controller)->borrar();
+            });      
+
+            
             // rutas del administrador
             if (isset($_SESSION['admin'])) {
                 Router::add('GET', 'administrar', function() use ($usuario_controller){
@@ -155,9 +159,6 @@ session_start();
                 Router::add('POST', 'imagen/descartar', function() use ($imagen_controller){
                     ($imagen_controller)->descartar();
                 });
-                Router::add('POST', 'imagen/borrar', function() use ($imagen_controller){
-                    ($imagen_controller)->borrar();
-                });
 
                 
                 Router::add('GET', 'administrar/comentario', function() use ($comentario_controller){
@@ -171,10 +172,7 @@ session_start();
                 });
                 Router::add('POST', 'comentario/descartar', function() use ($comentario_controller){
                     ($comentario_controller)->descartar();
-                });
-                Router::add('POST', 'comentario/borrar', function() use ($comentario_controller){
-                    ($comentario_controller)->borrar();
-                });             
+                });       
             }
 
             else {

@@ -38,12 +38,11 @@
 
                     <hr> <br>
 
-                    <!-- <section class="borrar"> -->
-                        <form id="form_borrar_imagen_<?= $imagen->getId() ?>" action="<?=$_ENV['BASE_URL']?>imagen/borrar" method="POST" class="borrar">
-                            <input type="hidden" name="id_imagen_a_borrar" value="<?= $imagen->getId()?>">
-                            <input type="submit" value="Borrar">
-                        </form> 
-                    <!-- </section> -->
+                    <form id="form_borrar_imagen_<?= $imagen->getId() ?>" action="<?=$_ENV['BASE_URL']?>imagen/borrar" method="POST" class="borrar">
+                        <input type="hidden" name="id_imagen_a_borrar" value="<?= $imagen->getId()?>">
+                        <input type="submit" value="Borrar">
+                    </form> 
+                    
                     <br>
 
                     <img src="../fuente/media/images/galeria/<?= $imagen->getImagen(); ?>" width="380px" height="260px"/> <br><br>

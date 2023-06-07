@@ -122,7 +122,13 @@ class ImagenController{
         else {
             $_SESSION['imagen_borrada']= false;
         }
-        $this->mostrar();
+        // redirige a la administración o a la página de viajes del usuario
+        if (isset($_SESSION['admin'])) {
+            $this->mostrar();
+        }
+        else {
+            header("Location: ". $_ENV['BASE_URL']."misviajes");
+        }
     }
     
     public function listar_para_aceptar() {

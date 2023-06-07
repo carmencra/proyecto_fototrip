@@ -126,9 +126,17 @@
                                 </section>
                             </section>
 
+                            <br>
+
+                            <form id="form_borrar_imagen_<?= $imagen->getId() ?>" action="<?=$_ENV['BASE_URL']?>imagen/borrar" method="POST" class="borrar">
+                                <input type="hidden" name="id_imagen_a_borrar" value="<?= $imagen->getId()?>">
+                                <input type="submit" value="Borrar">
+                            </form> 
+
                             <?php if ($imagen->getAceptada() == FALSE): ?>
                                 <p class="aceptacion">( Pendiente de aceptaci&oacute;n )</p>
                             <?php endif; ?>
+                            
                         </section>
                     
                     <?php endforeach; ?>
@@ -162,7 +170,15 @@
                         <hr>
                         
                         <p class="contenido"> <?= $comentario->getContenido(); ?> </p>
-                    </section>
+                      
+                        <br>
+                    
+                        <form id="form_borrar_comentario_<?= $comentario->getId() ?>" action="<?=$_ENV['BASE_URL']?>comentario/borrar" method="POST">
+                            <input type="hidden" name="id_comentario_a_borrar" value="<?= $comentario->getId()?>">
+                            <input type="submit" value="Borrar">
+                        </form> <br>
+
+                    </section>                    
 
                     <?php endforeach; ?>
                 </section>
