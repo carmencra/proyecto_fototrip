@@ -223,11 +223,16 @@ session_start();
                 ($usuario_controller)->llevar_confirmacion();
             });
 
-            Router::add('GET', 'usuario/confirmarcuenta?id=:id', function($id) use($usuario_controller) {
+            Router::add('GET', 'confirmar_cuenta/:id', function($id) use($usuario_controller) {
                 if ($id == $_SESSION['id_a_confirmar']){
                     ($usuario_controller)->confirmar_cuenta($id);
                 }
             });
+            // Router::add('POST', 'confirmar_cuenta/:id', function($id) use($usuario_controller) {
+            //     if ($id == $_SESSION['id_a_confirmar']){
+            //         ($usuario_controller)->confirmar_cuenta($id);
+            //     }
+            // });
         }
 
         // ruta accesible solo cuando el usuario se haya inscrito a un viaje

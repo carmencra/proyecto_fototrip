@@ -37,12 +37,12 @@ class Email {
         $mail->Subject = 'Confirma tu cuenta de fototrip';
 
         //cuerpo del correo: solicitud de confirmación de correo
-        
         $contenido= "<p style='color: #2CCBCB; font-size: 24px;'><b>BIENVENIDO A FOTOTRIP</b></p>";
 
         $contenido .= "<b>Verifica tu cuenta para empezar a inscribirte en nuestros viajes: </b><br>";
 
-        $contenido .= "<p><a href='http://localhost/fototrip/usuario/confirmarcuenta?id=".$id."'>Confirmar cuenta</a></p>";
+        $contenido .= "<p><a href=".$_ENV['BASE_URL']."confirmar_cuenta/".$id.">Confirmar cuenta</a></p>";
+
         $contenido .= "<br><br><p> (Si no reconoces esta acción, por favor, ignora este correo.)</p>";
 
         $mail->Body    = $contenido; 
@@ -87,7 +87,7 @@ class Email {
 
         $contenido .= "<b>". $viaje->getFecha_inicio() ."</b> y <b>". $viaje->getFecha_fin(). "</b><br><br>";
 
-        $contenido .= "<a href='http://localhost/fototrip/misviajes'>Pulsa aquí para ver tus viajes con nosotros</a> <br><br>";
+        $contenido .= "<a href=".$_ENV['BASE_URL']."misviajes>Pulsa aquí para ver tus viajes con nosotros</a> <br><br>";
 
         $contenido .= "Gracias por elegir <b style='color: #2CCBCB; font-size: 22px;'>  FOTOTRIP</b>, <br> ¡esperamos que disfrutes tu viaje y que no se te olvide comentar y subir imágenes del mismo!";
 
