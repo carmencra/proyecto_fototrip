@@ -173,6 +173,31 @@ class ComentarioRepository {
     }
 
 
+    public function usuario_ya_comenta_viaje($email, $id_viaje): bool {
+        $cons= $this->db->prepara("SELECT id FROM comentarios WHERE usuario= :email and id_viaje= :id_viaje");
+
+        $cons->bindParam(':email', $email, PDO::PARAM_STR);
+        $cons->bindParam(':id_viaje', $id_viaje, PDO::PARAM_STR);
+        
+
+        try {
+            $cons->execute();
+            if ($cons && $cons->rowCount() == 1) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        catch(PDOEXception $err) {
+            return false;
+        }
+        finally {
+            $cons= null;
+            unset($cons); 
+        }
+    }
+
 }
 
 ?>

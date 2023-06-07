@@ -166,6 +166,9 @@ class ComentarioController{
         return $this->repository->obtener_comentarios_usuario($email);
     }
 
+    public function usuario_ya_comenta_viaje($email, $id_viaje): bool {
+        return $this->repository->usuario_ya_comenta_viaje($email, $id_viaje);
+    }
 
 }
 

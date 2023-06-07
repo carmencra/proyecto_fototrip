@@ -4,7 +4,9 @@
 
 <main>
     <section class="contenido_main">
-        <?php if(isset($_SESSION['comentario_guardado'])):
+        <?php use Utils\Utils;
+            
+            if(isset($_SESSION['comentario_guardado'])):
             if ($_SESSION['comentario_guardado'] == true) : ?>
                 <script type="text/javascript">
                     alert("Tu comentario se ha guardado y está pendiente de ser aceptado.");
@@ -18,6 +20,15 @@
             <?php endif;?>     
         <?php endif;?>
 
+        <?php if(isset($_SESSION['usuario_ya_comentario']) && $_SESSION['usuario_ya_comentario']== true) : ?>
+            <script type="text/javascript">
+                alert("¡Ya has comentado este viaje!. Puedes verlo más abajo.");
+                window.close();
+            </script>
+             
+             <?php Utils::deleteSession('usuario_ya_comentario');
+
+        endif;?>
 
         
 
@@ -164,7 +175,6 @@
 
 
 <?php
-     use Utils\Utils;
      Utils::deleteSession('comentario_guardado');
  
 require_once('views/layout/footer_main.php'); 

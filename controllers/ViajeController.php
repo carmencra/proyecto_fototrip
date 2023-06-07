@@ -349,9 +349,17 @@ class ViajeController {
 
     public function comentar() {
         $id= $_POST['id_viaje_a_comentar'];
-        $datos_viaje= $this->repository->obtener_viaje($id);
-        $viaje= $this->pasar_objeto($datos_viaje);
-        $this->pages->render('comentario/comentar', ['viaje' => $viaje]);
+        $viaje_ya_comentado= $this->comentario_controller->usuario_ya_comenta_viaje($_SESSION['usuario'], $id);
+
+        if (!$viaje_ya_comentado) {
+            $datos_viaje= $this->repository->obtener_viaje($id);
+            $viaje= $this->pasar_objeto($datos_viaje);
+            $this->pages->render('comentario/comentar', ['viaje' => $viaje]);
+        }
+        else {
+            $_SESSION['usuario_ya_comentario']= true;
+            header("Location: ". $_ENV['BASE_URL']. "misviajes");
+        }
     }
 
 
