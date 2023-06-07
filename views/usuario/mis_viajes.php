@@ -57,8 +57,8 @@
                                         </form> <br>
                                     <?php endif; ?>
 
-                                    <form action="<?=$_ENV['BASE_URL'].'viaje/ver?id='.$viaje->getId()?>" method="POST">
-                                        <input class="ver_mas" type="submit" value="ver más">
+                                    <form action="<?=$_ENV['BASE_URL'].'detalle_viaje/'.$viaje->getId()?>" method="POST">
+                                        <input type="submit" value="Ver más" class="ver_mas">
                                     </form>
                                 </section>
 
