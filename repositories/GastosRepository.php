@@ -33,8 +33,11 @@ class GastosRepository {
         $ins->bindParam(':seguro', $gastos['seguro'], PDO::PARAM_STR);
         $ins->bindParam(':gastos', $gastos['gastos'], PDO::PARAM_STR);
 
-        try {
-            return true;
+        try { 
+            if ($ins->execute()) {
+                return true;
+            }
+            else { return false; }
         }
         catch(PDOException $err) {
             return false;

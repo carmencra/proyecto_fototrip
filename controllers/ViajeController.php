@@ -323,9 +323,10 @@ class ViajeController {
         $descripcion= trim($descripcion);
         // si la longitud es correcta, comprueba los caracteres introducidos
         if (strlen($descripcion) >= 10 && strlen($descripcion) <= 50) {
-            $pattern= "/^[a-zñáóíúéA-ZÑÁÉÍÓÚ]+(\s[a-zñáóíúéA-ZÑÁÉÍÓÚ]+)*$/";
+            $pattern = "/^[\p{L}.,;:¡!¿?'\-\s]+$/u"; //letras (incluidas ñ y tildes), espacios y signos de puntuación
+
             if (!preg_match($pattern, $descripcion)) {
-                $_SESSION['err_des']= "*La descripci&oacute;n s&oacute;lo puede contener letras y espacios";
+                $_SESSION['err_des']= "*La descripci&oacute;n s&oacute;lo puede contener letras, espacios y signos de puntuaci&oacute;n";
                 return false;
             }
             else {
@@ -349,9 +350,10 @@ class ViajeController {
         $informacion= trim($informacion);
         // si la longitud es correcta, comprueba los caracteres introducidos
         if (strlen($informacion) >= 100) {
-            $pattern= "/^[a-zñáóíúéA-ZÑÁÉÍÓÚ]+(\s[a-zñáóíúéA-ZÑÁÉÍÓÚ]+)*$/";
+            $pattern = "/^[\p{L}.,;:¡!¿?'\-\s]+$/u"; //letras (incluidas ñ y tildes), espacios y signos de puntuación
             if (!preg_match($pattern, $informacion)) {
-                $_SESSION['err_inf']= "*La informaci&oacute;n s&oacute;lo puede contener letras y espacios";
+                $_SESSION['err_des']= "*La informaci&oacute;n s&oacute;lo puede contener letras, espacios y signos de puntuaci&oacute;n";
+                return false;
                 return false;
             }
             else {
