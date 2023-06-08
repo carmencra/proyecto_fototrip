@@ -3,9 +3,6 @@ body {
     margin: 0%;
 }
 
-/* MIRA A VER ESTO DEL BODY, QUE ESTO ES HEADER */
-
-
 header {
     position: fixed;
     width: 100%;
@@ -13,14 +10,18 @@ header {
     background-color: rgba(0, 0, 0, 0.8);
     color: #FFFFFF;
     display: flex;
-    top: 0%;
+    top: 0;
     align-items: center;
     z-index: 3;
+
 }
 
-header #logo {
+header #logo, header #logo_desp {
     width: 90px;
+    /* float: left; */
+    /* top: 0; */
 }
+
 
 .menu {
     margin: auto;
@@ -29,9 +30,10 @@ header #logo {
 .menu ul {
     display: flex;
     padding-left: 0%;
+			margin: 0;
 }
 
-.menu ul li {
+.menu ul li, #submenu li  {
     list-style: none;
     font-size: 26px;
     font-weight: bold;
@@ -39,13 +41,131 @@ header #logo {
     width: 8em;
     text-align: center;
 }
+#submenu li  {
+    margin: auto;   
+}
 
-.menu ul li a {
+.menu ul li a, #submenu li a {
     text-decoration: none;
     color: #FFFFFF;
 
 }
 
-.menu .active a, .menu a:hover {
+/* botón de registro / usuario */
+#submenu div .boton_usuario {
+    padding: 2%;
+    margin-bottom: 4%;
+}
+
+#submenu div .boton_usuario a {
+    margin-top: 0%;
+    height: max-content;
+}
+
+/* menú despegable */
+#pagina {
+    display: none;
+}
+
+
+.menu ul .active a, .menu ul a:hover, #submenu .active a, #submenu li a:hover {
     color: #2CCBCB;
+}
+
+/*  */
+/* 
+.pagina {
+	width: 80%;
+	margin: auto;
+} */
+/* .barra-menu {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+} */
+/* .menu {
+	display: block;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+} */
+/* .lista-menu li {
+    display: inline-block; 
+    width: 25%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+} */
+.lista-menu a {
+    display: block;
+    /* margin-top: 3%; */
+    width: 100%;
+    height: 3em;
+}
+.btn-menu {
+	display: block;
+	width: 100%;
+	height: 3em;
+}
+#btn-drop {
+	padding: 1rem;
+	/* align-items: center; */
+}
+
+.aln-centro {
+	text-align: center;
+	/* margin: 0; */
+	/* padding: 0; */
+	height: 100%;
+}
+
+@media screen and (max-width: 849px) {
+    .menu_usuario {
+        display: none;
+    }
+	.menu {
+		display: none;
+	}
+    #logo {
+        display: none;
+    }
+	/* header {
+		margin: 0;
+		padding: 0;
+	} */
+	/* #logo {
+        position: relative;
+        top: 0%;
+        left: 0%;
+	} */
+	#pagina {
+		display: inline;
+		width: 100%;
+	}
+	/* .btn-menu {
+		display: block;
+		margin: 0;
+		padding: 0;
+	} */
+	#btn-drop {
+		text-align: right;
+	}
+	.cabecera-menu {
+		display: flex;
+		/* justify-content: space-between; */
+		align-items: center;
+		/* margin: 0; */
+		/* padding: 0;  */
+	}
+	#submenu {
+		display: none;
+        padding: 0%;
+	}
+	.lista-menu li {
+        display: block;
+        /* float: none; */
+        /* width: 100%; */
+	}
 }
