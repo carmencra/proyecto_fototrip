@@ -45,7 +45,6 @@ session_start();
     <script src="fuente/scripts/recoger_id_elemento_cambiar.js"></script>
 
     <!-- header despegable -->
-    
     <script src="fuente/scripts/header_responsive.js"></script>
 
 </head>

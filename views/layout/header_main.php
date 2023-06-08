@@ -1,45 +1,43 @@
 <header>
     <a href="<?=$_ENV['BASE_URL']?>">
-        <img id="logo" src="fuente/media/images/logo.png" alt="logo fototrip"/>
+        <img id="logo_header" src="fuente/media/images/logo.png" alt="logo fototrip"/>
     </a>
     
-    <nav class="menu" id="menu">
+    <nav class="menu">
         <ul>
-            <li> <a href="<?=$_ENV['BASE_URL']?>">Inicio</a> </li>
-
+            <li class="active"> <a href="<?=$_ENV['BASE_URL']?>">Inicio</a> </li>
             <li> <a href="<?=$_ENV['BASE_URL']?>opiniones">Opiniones </a> </li>
-
             <li> <a href="<?=$_ENV['BASE_URL']?>galeria">Galer&iacute;a </a> </li>
-
         </ul>
 
+        <div class="menu_usuario">
+          <?php require('views/layout/menu_usuario.php'); ?>
+        </div>
     </nav> 
 
-    <div class="menu_usuario">
-        <!--  si no hay usuario, muestra el registro -->
-        <?php if (!isset($_SESSION['usuario'])): ?>
-            <button class="boton_usuario">
-                <a href="<?=$_ENV['BASE_URL']?>usuario/registrarse">Registro</a>
-            </button>
-            
+     <!-- menú despegable -->
+     <nav class="menu_despegable">
+        <!-- header antes de desplegar -->
+        <section class="fijo_menu">
+            <a href="<?=$_ENV['BASE_URL']?>">
+                <img id="logo_desp" src="fuente/media/images/logo.png" alt="logo fototrip"/>
+            </a>
 
-        <?php elseif (isset($_SESSION['usuario'])) :
-            // si es el admin, muestra la pantalla de administrar
-            if (isset($_SESSION['admin'])): ?>
-                <button onclick="despliega_usuario()" class="boton_usuario"> <?=$_SESSION['usuario']?> </button>
-                    <div id="lista_usuario" class="contenido_lista">
-                        <a href="<?=$_ENV['BASE_URL']?>administrar">Administrar</a>
-                        <a href="<?=$_ENV['BASE_URL']?>usuario/cerrar">Salir</a>
-                    </div>
-            <!-- si es un usuario normal, muestra ver sus viajes y cerrar sesión -->
-            <?php else :?>
-                <button onclick="despliega_usuario()" class="boton_usuario"> <?=$_SESSION['usuario']?> </button>
-                    <div id="lista_usuario" class="contenido_lista">
-                        <a href="<?=$_ENV['BASE_URL']?>misviajes">Mis viajes</a>
-                        <a href="<?=$_ENV['BASE_URL']?>usuario/cerrar">Salir</a>
-                    </div>
-            <?php endif;?>
-        <?php endif;?>
-    </div>
+            <a href="" class="boton_desplegar">
+                <img src="fuente/media/images/menu.png" alt="menu"/>
+            </a>
+        </section>
+            
+        <!-- menú desplegado -->
+        <ul class="lista_despegable centrar">
+            <li class="active"> <a href="<?=$_ENV['BASE_URL']?>">Inicio</a> </li>
+            <li> <a href="<?=$_ENV['BASE_URL']?>opiniones">Opiniones </a> </li>
+            <li> <a href="<?=$_ENV['BASE_URL']?>galeria">Galer&iacute;a </a> </li>
+
+            <div>
+                <?php require('views/layout/menu_usuario.php'); ?>
+            </div>
+        </ul>
+    </nav>    
     
 </header>
