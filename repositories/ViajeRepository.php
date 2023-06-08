@@ -13,11 +13,13 @@ class ViajeRepository {
         $this->db= $db;
     }
 
+    // obtiene todos los viajes
     public function listar(): ?array {
         $this->db->consulta("SELECT * FROM viajes");
         return $this->db->extraer_todos();
     }
 
+    // convierte los datos en un Viaje
     public function pasar_objeto($array): object {
         $objeto_viaje= Viaje::fromArray($array);
         return $objeto_viaje;
@@ -123,12 +125,14 @@ class ViajeRepository {
         return $cons;
     }
 
+    // obtiene los datos del viaje que se corresponde con el id pasado
     public function obtener_viaje($id) {
         $this->db->consulta("SELECT * FROM viajes WHERE id= $id");
         return $this->db->extraer_registro();
     }
     
-    public function borrar($id) {
+    // borra el viaje que se corresponde con el id pasado
+    public function borrar($id): bool {
         $del= $this->db->prepara("DELETE FROM viajes WHERE id= $id");
         
         try {
@@ -149,6 +153,7 @@ class ViajeRepository {
         }
     }
 
+    // guarda los datos del viaje con su imagen principal pasada
     public function guardar($datos, $imagen): bool {
         $ins= $this->db->prepara("INSERT INTO viajes values(:id, :pais, :fecha_inicio, :fecha_fin, :precio, :descripcion, :nivel_fotografia, :nivel_fisico, :activo, :imagen_principal, :informacion)");
 
@@ -180,6 +185,7 @@ class ViajeRepository {
         }
     }
 
+    // comprueba si ya hay un viaje al país pasado en las fechas pasadas
     public function viaje_pais_fechas_existe($pais, $fecha_inicio, $fecha_fin): bool {
         $cons= $this->db->prepara("SELECT id FROM viajes WHERE pais= :pais and fecha_inicio= :fecha_inicio and fecha_fin= :fecha_fin");
 
@@ -205,6 +211,7 @@ class ViajeRepository {
         }
     }
 
+    // obtiene el último viaje introducido
     public function obtener_id_ultimo_viaje() {
         $cons= $this->db->prepara("SELECT MAX(id) FROM viajes");
 
@@ -226,12 +233,12 @@ class ViajeRepository {
         }
     }
 
+    // comprueba si el usuario ya está inscrito al viaje pasado
     public function viaje_inscrito_usuario($usuario, $id_viaje): bool {
         $cons= $this->db->prepara("SELECT email FROM inscritos WHERE email= :email and id_viaje= :id_viaje");
 
         $cons->bindParam(':email', $usuario, PDO::PARAM_STR);
         $cons->bindParam(':id_viaje', $id_viaje, PDO::PARAM_STR);
-        
 
         try {
             $cons->execute();
@@ -251,6 +258,7 @@ class ViajeRepository {
         }
     }
 
+    // borra todos los inscritos al viaje indicado
     public function borrar_inscritos_viaje($id_viaje): bool {
         $del= $this->db->prepara("DELETE FROM inscritos WHERE id_viaje= $id_viaje");
         

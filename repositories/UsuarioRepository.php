@@ -41,6 +41,7 @@ class UsuarioRepository {
         }
     }
 
+    // obtiene el id del usuario que se corresponde con el id pasado
     public function obtener_id($email): int | bool {
         $cons= $this->db->prepara("SELECT id FROM usuarios WHERE email=:email");
 
@@ -66,6 +67,7 @@ class UsuarioRepository {
         return $result;
     }
 
+    // busca si el email ya está registrado
     public function busca_mail($email): bool | object {
         $result= false;
         $cons= $this->db->prepara("SELECT * FROM usuarios WHERE email= :email");
@@ -87,7 +89,8 @@ class UsuarioRepository {
         return $result;
     }
 
-    public function confirma_cuenta($id) {
+    // confirma la cuenta del usuario cuyo id se le pasa a la función
+    public function confirma_cuenta($id): bool {
         $upd= $this->db->prepara("UPDATE usuarios set CONFIRMADO = true WHERE id = $id");
 
         try{
@@ -105,6 +108,7 @@ class UsuarioRepository {
         }
     }
 
+    // verifica la clave introducida con la existente en la bd
     public function valida_clave($clave, $usuario): bool {
         if ($usuario !== false) {
             $verify= password_verify($clave, $usuario->clave);
@@ -116,7 +120,8 @@ class UsuarioRepository {
         else {return false;}
     }
 
-    public function es_admin($email) {
+    // devuelve si el usuario logueado es admin o no
+    public function es_admin($email): bool {
         $cons= $this->db->prepara("SELECT id FROM usuarios WHERE email= :email and rol= :rol");
 
         $cons->bindParam(':email', $email, PDO::PARAM_STR);
@@ -142,7 +147,8 @@ class UsuarioRepository {
         }
     }
 
-    public function esta_confirmado($email) {
+    // devuelve si el email pasado es un usuario ya confirmado o no
+    public function esta_confirmado($email): bool {
         $cons= $this->db->prepara("SELECT id FROM usuarios WHERE email= :email and confirmado= :confirmado");
 
         $cons->bindParam(':email', $email, PDO::PARAM_STR);
@@ -168,12 +174,13 @@ class UsuarioRepository {
         }
     }
 
+    // obtiene los ids de los viajes a los que el usuario pasado está inscrito
     public function obtener_id_viajes_inscritos($email): ?array {
         $this->db->consulta("SELECT id_viaje FROM inscritos WHERE email= '$email'");
         return $this->db->extraer_todos();
     }
 
-    
+    // inscribe en el viaje pasado al usuario logueado
     public function inscribirse($id, $usuario): bool {
         $ins= $this->db->prepara("INSERT INTO inscritos VALUES ('$usuario', $id)");
 
@@ -195,6 +202,7 @@ class UsuarioRepository {
         }
     }
 
+    // comprueba si el usuario está ya inscrito al viaje pasado
     public function inscrito_a_ese_viaje($usuario, $id_viaje): bool {
         $cons= $this->db->prepara("SELECT email FROM inscritos WHERE email= :email and id_viaje= :id_viaje");
 

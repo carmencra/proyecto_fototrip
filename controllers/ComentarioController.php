@@ -14,7 +14,8 @@ class ComentarioController{
         $this->repository= new ComentarioRepository($db);
     }
 
-    public function listar() {
+    // lista todos los comentarios aceptados
+    public function listar(): void {
         $lista_coments= $this->repository->listar();
         // convertimos los comentarios obtenidos en objetos de la clase Comentario
         $objetos_coments= $this->obtener_objetos($lista_coments);
@@ -24,7 +25,8 @@ class ComentarioController{
         $this->pages->render('comentario/listar', ['comentarios' => $objetos_aceptados]);
     }
 
-    public function obtener_objetos($comentarios) {
+    // obtiene los objetos comentarios y añade campos necesarios de los mismos
+    public function obtener_objetos($comentarios): array {
         $objetos_coments= [];
         foreach ($comentarios as $coment) {
             $objeto= $this->pasar_objeto($coment);
@@ -46,7 +48,8 @@ class ComentarioController{
         return $objetos_coments;
     }
 
-    public function obtener_aceptados($comentarios) {
+    // obtiene los comentarios aceptados
+    public function obtener_aceptados($comentarios): array {
         $aceptados= [];
         foreach ($comentarios as $imagen) {
             if ($imagen->getAceptado() == TRUE) {
@@ -56,15 +59,18 @@ class ComentarioController{
         return $aceptados;
     }
 
-    public function pasar_objeto($array) {
+    // convierte en un objeto Comentario los datos pasados
+    public function pasar_objeto($array): object {
         return $this->repository->pasar_objeto($array);
     }
 
+    // obtiene el destino del viaje indicado para añadirlo al comentario
     public function obtener_nombre_viaje($id_viaje) {
         return $this->repository->obtener_nombre_viaje($id_viaje);
     }
 
-    public function obtener_comentarios($id_viaje) {
+    // obtiene los comentarios publicados sobre el viaje indicado
+    public function obtener_comentarios($id_viaje): array {
         $lista_comentarios= $this->repository->obtener_comentarios($id_viaje);
 
         $objetos_comentarios= $this->obtener_objetos($lista_comentarios);
@@ -74,7 +80,8 @@ class ComentarioController{
         return $objetos_aceptados;
     }
 
-    public function mostrar() {
+    // lleva al admin a la administración de comentarios
+    public function mostrar(): void {
         $lista_comentarios= $this->repository->listar();
         // convertimos los comentarios obtenidos en objetos de la clase comentario
         $objetos_comentarios= $this->obtener_objetos($lista_comentarios);
@@ -82,7 +89,8 @@ class ComentarioController{
         $this->pages->render('comentario/administrar', ['comentarios' => $objetos_comentarios]);
     }
 
-    public function borrar() {
+    // borra el comentario selecionado y redirige según el tipo de usuario
+    public function borrar(): void {
         $id= $_POST['id_comentario_a_borrar'];
         $borrado= $this->repository->borrar($id);
 
@@ -101,12 +109,14 @@ class ComentarioController{
         }
     }
     
-    public function listar_para_aceptar() {
+    // lista los comentarios no aceptados para que el admin lo haga o los descarte
+    public function listar_para_aceptar(): void {
         $comentarios= $this->repository->listar();
         $comentarios_no_aceptados= $this->obtener_no_aceptados($comentarios);
         $this->pages->render('comentario/aceptar', ['comentarios' => $comentarios_no_aceptados]);
     }
 
+    // obtiene los comentarios que no han sido aceptados
     public function obtener_no_aceptados($comentarios) {
         $objetos_comentarios= $this->obtener_objetos($comentarios);
 
@@ -119,20 +129,23 @@ class ComentarioController{
         return $objetos_no_aceptados;
     }
 
-    public function aceptar() {
+    // acepta el comentario seleccionado (lo publica)
+    public function aceptar(): void {
         $comentario= $_POST['comentario_a_aceptar'];
         $this->repository->aceptar($comentario);
         $this->listar_para_aceptar();
         // header("Location: ". $_ENV['BASE_URL'].'seleccionar/imagenes');
     }
 
-    public function descartar() {
+    //  descarta el comentario seleccionado (lo borra)
+    public function descartar(): void {
         $comentario= $_POST['comentario_a_descartar'];
         $this->repository->borrar($comentario);
         $this->listar_para_aceptar();
     }
 
-    public function guardar() {
+    // guarda el comentario después de validarlo
+    public function guardar(): void {
         $datos= $_POST['data'];
         $id_viaje= $datos['id_viaje_a_comentar'];
         $pais_viaje= $datos['pais_viaje_a_comentar'];
@@ -155,7 +168,8 @@ class ComentarioController{
         $this->pages->render('comentario/comentar', ['viaje' => $datos]);
     }
 
-    public function validar($comentario):bool {
+    // valida que no esté vacío y tenga los caracteres correctos
+    public function validar($comentario): bool {
         if (empty($comentario)) {
             $_SESSION['err_com']= "*El comentario debe estar relleno";
             return false;
@@ -182,14 +196,17 @@ class ComentarioController{
         }
     }
 
-    public function obtener_comentarios_usuario($email) {
+    // obtiene los comentarios que el usuario ha publicado
+    public function obtener_comentarios_usuario($email): array {
         return $this->repository->obtener_comentarios_usuario($email);
     }
 
+    // devuelve si el usuario ya ha comentado sobre ese viaje
     public function usuario_ya_comenta_viaje($email, $id_viaje): bool {
         return $this->repository->usuario_ya_comenta_viaje($email, $id_viaje);
     }
     
+    // devuelve si ha podido borrar los comentarios del viaje indicado
     public function borrar_por_viaje($id_viaje): bool {
         return $this->repository->borrar_por_viaje($id_viaje);
     }

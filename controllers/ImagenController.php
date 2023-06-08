@@ -15,7 +15,8 @@ class ImagenController{
     }
 
     
-    public function listar() {
+    // lista las imágenes aceptadas para mostrarlas
+    public function listar(): void {
         $lista_imagenes= $this->repository->listar();
         // convertimos las imagenes obtenidos en objetos de la clase Imagen
         $objetos_imagenes= $this->obtener_objetos($lista_imagenes);
@@ -25,7 +26,8 @@ class ImagenController{
         $this->pages->render('imagen/listar', ['imagenes' => $objetos_aceptadas]);
     }
 
-    public function obtener_objetos($imagenes) {
+    // obtiene los objetos Imagen del array con datos de imágenes
+    public function obtener_objetos($imagenes): array {
         $objetos_imagenes= [];
         foreach ($imagenes as $imagen) {
             $objeto= $this->pasar_objeto($imagen);
@@ -43,11 +45,13 @@ class ImagenController{
         return $objetos_imagenes;
     }
 
-    public function pasar_objeto($array) {
+    // obtiene la Imagen recogida en los datos pasados
+    public function pasar_objeto($array): object {
         return $this->repository->pasar_objeto($array);
     }
 
-    public function obtener_aceptadas($imagenes) {
+    // obtiene las imágenes que el admin ha aceptado
+    public function obtener_aceptadas($imagenes): array {
         $aceptadas= [];
         foreach ($imagenes as $imagen) {
             if ($imagen->getAceptada() == TRUE) {
@@ -57,7 +61,8 @@ class ImagenController{
         return $aceptadas;
     }
  
-    public function buscar() {
+    // busca las imágenes que encaja con los filtros introducidos
+    public function buscar(): void {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $filtros= $_POST['data'];
 
@@ -78,7 +83,8 @@ class ImagenController{
         } 
     }
 
-    public function comprobar_pais_imagenes($imagenes, $filtro_pais) {
+    // comprueba que las imágenes obtenidas coincidan con el país introducido en el buscador
+    public function comprobar_pais_imagenes($imagenes, $filtro_pais): array {
         $objetos_imagen=[];
         foreach($imagenes as $datos_imagen) {
             // cogemos el id del viaje y comprobamos que el país sea el del filtro
@@ -94,7 +100,8 @@ class ImagenController{
         return $objetos_imagen;
     }
 
-    public function obtener_imagenes($id_viaje) {
+    // obtiene las imágenes que se han publicado en el viaje pasado
+    public function obtener_imagenes($id_viaje): array {
         $lista_imagenes= $this->repository->obtener_imagenes($id_viaje);
 
         $objetos_imagenes= $this->obtener_objetos($lista_imagenes);
@@ -104,7 +111,8 @@ class ImagenController{
         return $objetos_aceptados;
     }
 
-    public function mostrar() {
+    // recoge las imágenes para llevarlas a la administración
+    public function mostrar(): void {
         $lista_imagenes= $this->repository->mostrar();
         // convertimos las imagenes obtenidos en objetos de la clase Imagen
         $objetos_imagenes= $this->obtener_objetos($lista_imagenes);
@@ -112,7 +120,8 @@ class ImagenController{
         $this->pages->render('imagen/administrar', ['imagenes' => $objetos_imagenes]);
     }
 
-    public function borrar() {
+    // borra la imagen seleccionada y devuelve si hubiera un error. Redirige dependiendo del tipo de usuario.
+    public function borrar(): void {
         $id= $_POST['id_imagen_a_borrar'];
         $borrada= $this->repository->borrar($id);
 
@@ -131,13 +140,15 @@ class ImagenController{
         }
     }
     
-    public function listar_para_aceptar() {
+    // recoge las imágenes  para que el admin las acepte(publique) o las descarte(elimine)
+    public function listar_para_aceptar(): void {
         $imagenes= $this->repository->listar();
         $imagenes_no_aceptadas= $this->obtener_no_aceptadas($imagenes);
         $this->pages->render('imagen/aceptar', ['imagenes' => $imagenes_no_aceptadas]);
     }
 
-    public function obtener_no_aceptadas($imagenes) {
+    // obtiene las imágenes que no se han aceptado
+    public function obtener_no_aceptadas($imagenes): array {
         $objetos_imagenes= $this->obtener_objetos($imagenes);
 
         $objetos_no_aceptados= [];
@@ -149,19 +160,22 @@ class ImagenController{
         return $objetos_no_aceptados;
     }
 
-    public function aceptar() {
+    // acepta la imagen seleccionada(la publica)
+    public function aceptar(): void {
         $imagen= $_POST['id_imagen_a_aceptar'];
         $this->repository->aceptar($imagen);
         $this->listar_para_aceptar();
     }
 
-    public function descartar() {
+    // descarta la imagen seleccionada (la elimina)
+    public function descartar(): void {
         $imagen= $_POST['id_imagen_a_descartar'];
         $this->repository->borrar($imagen);
         $this->listar_para_aceptar();
     }
 
-    public function crear() {
+    // recoge los viajes disponibles para seleccionar en cuál subir la imagen y lleva al formulario
+    public function crear(): void {
         $viajes_disponibles= $this->obtener_viajes_disponibles();
         
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -169,7 +183,8 @@ class ImagenController{
         }
     }
 
-    public function guardar_admin() {
+    // guarda la imagen que ha publicado el admin con los datos recogidos, comprobando que las fechas encajen con el mismo
+    public function guardar_admin(): void {
         $viajes_disponibles= $this->obtener_viajes_disponibles();
         
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -203,7 +218,8 @@ class ImagenController{
         }
     }
 
-    public function subir_imagen() {
+    // publica la imagen en el viaje al que asistió el usuario, con los datos introducidos por el mismo, comprobando las fehcas 
+    public function subir_imagen(): void {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $this->pages->render('imagen/subir');
         }
@@ -253,7 +269,8 @@ class ImagenController{
         }
     }
 
-    public function borrar_sesiones() {
+    // borra las sesiones de error al crear la imagen
+    public function borrar_sesiones(): void {
         Utils::deleteSession('err_img');
         Utils::deleteSession('data_tipo');
         Utils::deleteSession('data_viaje');
@@ -261,7 +278,8 @@ class ImagenController{
     }
 
 
-    public function obtener_viajes_disponibles() {
+    // obtiene los viajes disponibles para publicar imágenes
+    public function obtener_viajes_disponibles(): array {
         $lista_viajes= $this->repository->obtener_viajes_disponibles();
         // convertimos los viajes obtenidos en objetos de la clase Viaje
         $objetos_viajes= $this->repository->obtener_objetos_viajes($lista_viajes);
@@ -269,6 +287,7 @@ class ImagenController{
         return $objetos_viajes;
     }
 
+    // comprueba que la fecha del viaje sea correcta
     public function comprobar_fecha_viaje($id_viaje, $fecha): bool {
         $fechas= $this->repository->obtener_fechas_viaje($id_viaje);
 
@@ -280,6 +299,7 @@ class ImagenController{
         }
     }
 
+    // guarda la foto subida, si hay alguna introducida, o devuelve el error producido
     public function gestionar_foto($foto): bool {
         $nom_foto= $foto['name'];            
         $temp_foto= $foto['tmp_name'];
@@ -302,12 +322,12 @@ class ImagenController{
         }
     }
 
-
-    public function obtener_imagenes_usuario($id) {
+    // obtiene las imágenes que ha publicado el usuario
+    public function obtener_imagenes_usuario($id): array {
         return $this->repository->obtener_imagenes_usuario($id);
     }
 
-    
+    // borra las imágenes pertenecientes al viaje indicado
     public function borrar_por_viaje($id_viaje): bool {
         return $this->repository->borrar_por_viaje($id_viaje);
     }

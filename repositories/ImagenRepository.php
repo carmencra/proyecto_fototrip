@@ -13,21 +13,25 @@ class ImagenRepository {
         $this->db= $db;
     }
 
+    // recoge todas las imágenes
     public function listar(): ?array {
         $this->db->consulta("SELECT * FROM imagenes");
         return $this->db->extraer_todos();
     }
 
+    // muestra las imágenes empezando por las del admin
     public function mostrar(): ?array {
         $this->db->consulta("SELECT * FROM imagenes ORDER BY id_usuario ASC");
         return $this->db->extraer_todos();
     }
 
+    // devuelve el objeto Imagen con los datos pasados
     public function pasar_objeto($array): object {
         $objeto_imagen= Imagen::fromArray($array);
         return $objeto_imagen;
     }
 
+    // obtiene el país del viaje que se corresponde con el id pasado
     public function obtener_pais_viaje($id_viaje): string | bool {
         $cons= $this->db->prepara("SELECT pais FROM viajes WHERE id=:id_viaje");
 
@@ -50,6 +54,7 @@ class ImagenRepository {
         }
     }
     
+    // obtiene el nombre del usuario que se corresponde con el id pasado
     public function obtener_usuario($id_usuario):string | bool {
         $cons= $this->db->prepara("SELECT nombre, apellidos FROM usuarios WHERE id=:id_usuario");
 
@@ -140,7 +145,7 @@ class ImagenRepository {
     }
 
     // comprueba que existe una imagen con el nombre e id_viaje, que se corresponde con el país filtrado
-    public function comprobar_pais_filtro($imagen, $id_viaje, $pais) {
+    public function comprobar_pais_filtro($imagen, $id_viaje, $pais): bool {
         $consulta= "SELECT * FROM imagenes
         JOIN viajes ON imagenes.id_viaje = viajes.id
         WHERE imagenes.id_viaje = $id_viaje 
@@ -168,6 +173,7 @@ class ImagenRepository {
         return $result;
     }
 
+    // obtiene las imágenes que pertenecen al viaje pasado
     public function obtener_imagenes($id_viaje): ?array {
         $this->db->consulta("SELECT * FROM imagenes WHERE id_viaje= $id_viaje");
         return $this->db->extraer_todos();
@@ -194,7 +200,8 @@ class ImagenRepository {
         }
     }
 
-    public function aceptar($id) {
+    // acepta la imagen que se corresponde con el id pasado
+    public function aceptar($id): bool {
         $upd= $this->db->prepara("UPDATE imagenes SET aceptada = true WHERE id = $id");
 
         try{
@@ -212,6 +219,7 @@ class ImagenRepository {
         }
     }
 
+    // obtiene el id del usuario que se corresponde con el email pasado
     public function getId_usuario($email) {
         $cons= $this->db->prepara("SELECT id FROM usuarios WHERE email= :email");
 
@@ -231,11 +239,13 @@ class ImagenRepository {
         }
     }
 
+    // obtiene los viajes disponibles
     public function obtener_viajes_disponibles(): ?array {
         $this->db->consulta("SELECT * FROM viajes WHERE activo= false");
         return $this->db->extraer_todos();
     }
 
+    // obtiene los objetos de tipo Viaje
     public function obtener_objetos_viajes($array): array {
         $objetos_viajes= [];
         foreach ($array as $viaje) {
@@ -245,7 +255,8 @@ class ImagenRepository {
         return $objetos_viajes;
     }
 
-    public function obtener_fechas_viaje($id_viaje) {
+    // obtiene las fechas del viaje pasado
+    public function obtener_fechas_viaje($id_viaje): array | bool {
         $cons= $this->db->prepara("SELECT fecha_inicio, fecha_fin FROM viajes WHERE id=:id_viaje");
 
         $cons->bindParam(':id_viaje', $id_viaje);
@@ -269,7 +280,8 @@ class ImagenRepository {
         }
     }
 
-    public function guardar($datos, $imagen, $usuario) {
+    // guarda la imagen pasada, con los datos pasados, del usuario pasado
+    public function guardar($datos, $imagen, $usuario): bool {
         $ins= $this->db->prepara("INSERT INTO imagenes values (:id, :id_viaje, :id_usuario, :imagen, :tipo,:aceptada, :fecha)");
         
         $ins->bindParam(':id', $id, PDO::PARAM_STR);
@@ -310,11 +322,13 @@ class ImagenRepository {
         }
     }
 
+    // obtiene las imágenes que el usuario pasado ha publicado
     public function obtener_imagenes_usuario($id_usuario) : ?array {
         $this->db->consulta("SELECT * FROM imagenes WHERE id_usuario= $id_usuario ORDER BY aceptada DESC");
         return $this->db->extraer_todos();
     }
     
+    // borra las imágenes que se correspondan con el viaje pasado
     public function borrar_por_viaje($id_viaje): bool {
         $del= $this->db->prepara("DELETE FROM imagenes WHERE id_viaje= $id_viaje");
         

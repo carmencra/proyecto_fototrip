@@ -24,7 +24,11 @@ class ViajeController {
         $this->comentario_controller= new ComentarioController($db);
     }
 
-    public function listar() {
+    /**
+     * This function lists active and inactive trips by converting them into objects and rendering them
+     * on a page.
+     */
+    public function listar(): void {
         $lista_viajes= $this->repository->listar();
         // convertimos los viajes obtenidos en objetos de la clase Viaje
         $objetos_viajes= $this->obtener_objetos($lista_viajes);
@@ -35,7 +39,14 @@ class ViajeController {
         $this->pages->render('viaje/listar', ['viajes_activos' => $viajes_activos, 'viajes_no_activos' => $viajes_no_activos]);
     }
 
-    public function obtener_objetos($viajes) {
+    /**
+     * This function takes an array of trips, converts them into objects, calculates their duration,
+     * sets the duration property of each object, and returns an array of the resulting objects.
+     * 
+     * @param viajes an array of data representing different trips or journeys.
+     * @return an array of objects created from the input array of "viajes".
+     */
+    public function obtener_objetos($viajes): array {
         $objetos_viajes= [];
         foreach ($viajes as $viaje) {
             $objeto= $this->pasar_objeto($viaje);
@@ -46,14 +57,17 @@ class ViajeController {
         return $objetos_viajes;
     }
 
-    public function pasar_objeto($array) {
+    // coge los datos del viaje y llama al repositorio para convertirlo a objeto de tipo Viaje
+    public function pasar_objeto($array): object {
         return $this->repository->pasar_objeto($array);
     }
     
-    public function obtener_duracion($objeto_viaje) {
+    // llama al repositorio para obtener la duración del Viaje
+    public function obtener_duracion($objeto_viaje): int {
         return $this->repository->obtener_duracion($objeto_viaje);
     }
 
+    // obtiene los viajes que estén activos (a los que se puede inscribirse)
     public function obtener_activos($objetos_viaje): array {
         $activos= [];
         foreach ($objetos_viaje as $viaje) {
@@ -63,6 +77,8 @@ class ViajeController {
         }
         return $activos;
     }
+    
+    // obtiene los viajes no activos, es decir, que ya se realizaron
     public function obtener_no_activos($objetos_viaje): array {
         $no_activos= [];
         foreach ($objetos_viaje as $viaje) {
@@ -73,7 +89,10 @@ class ViajeController {
         return $no_activos;
     }
 
-    public function buscar() {
+    /**
+     * This PHP function filters and displays a list of active and inactive trips based on user input.
+     */
+    public function buscar(): void {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $filtros= $_POST['data'];
             $viajes_obtenidos= $this->repository->filtrar_viajes($filtros); 
@@ -85,9 +104,9 @@ class ViajeController {
 
             $this->pages->render('viaje/listar', ['viajes_activos' => $viajes_activos, 'viajes_no_activos' => $viajes_no_activos]);
         }
-
     }
 
+    // ver el detalle del viaje, se distinguirá si el usuario se puede inscribir o no
     public function ver($id) {
         $viaje= $this->obtener_viaje($id);
 
@@ -114,7 +133,15 @@ class ViajeController {
         }
     }
 
-    public function obtener_viaje($id) {
+    /**
+     * This PHP function obtains a trip's data, calculates its duration, and returns the trip object.
+     * 
+     * @param id The parameter "id" is the identifier of a specific trip that needs to be retrieved
+     * from the repository.
+     * @return an object of the class "Viaje" with its duration set. If the "obtener_viaje" method of
+     * the "repository" returns false, then the function returns false.
+     */
+    public function obtener_viaje($id): object {
         $datos_viaje= $this->repository->obtener_viaje($id);
         if ($datos_viaje == false) {
             return false;
@@ -126,7 +153,8 @@ class ViajeController {
         return $viaje;
     }
 
-    public function mostrar() {
+    // muestra los viajes para el administrador
+    public function mostrar(): void {
         $lista_viajes= $this->repository->listar();
         // convertimos los viajes obtenidos en objetos de la clase Viaje
         $objetos_viajes= $this->obtener_objetos($lista_viajes);
@@ -134,7 +162,10 @@ class ViajeController {
         $this->pages->render('viaje/administrar', ['viajes' => $objetos_viajes]);
     }
 
-    public function borrar() {
+    /**
+     * This function deletes a travel and all its related elements from the database.
+     */
+    public function borrar(): void {
         $id= $_POST['id_viaje_a_borrar'];
 
         // borramos los elementos que dependen del viaje
@@ -155,13 +186,18 @@ class ViajeController {
         $this->mostrar();
     }
 
-    public function crear() {
+    // lleva al formulario de crear viaje
+    public function crear(): void {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $this->pages->render('viaje/crear');
         }
     }
 
-    public function guardar() {
+    /**
+     * This function saves data from a form submission, validates the input, saves the data to a
+     * repository, and saves associated expenses to a separate controller.
+     */
+    public function guardar(): void {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // borramos sesiones de errores y redireccionamos al inicio
             $this->borra_sesiones_errores();
@@ -186,7 +222,8 @@ class ViajeController {
                     $id_viaje= $this->repository->obtener_id_ultimo_viaje();
                     $guardar_gastos= $this->gastos_controller->guardar($id_viaje, $gastos);
                     if ($guardar_gastos) {
-                        $_SESSION['viaje_creado']= true;$this->borra_sesiones_errores();
+                        $_SESSION['viaje_creado']= true;
+                        $this->borra_sesiones_errores();
                     }
                     else {
                         $_SESSION['error_gastos']= true;
@@ -200,7 +237,8 @@ class ViajeController {
         }
     }
 
-    public function borra_sesiones_errores() {
+    // borra las sesiones de errores al guardar el viaje
+    public function borra_sesiones_errores(): void {
         Utils::deleteSession('err_pai');
         Utils::deleteSession('err_feci');
         Utils::deleteSession('err_fecf');
@@ -211,6 +249,7 @@ class ViajeController {
         Utils::deleteSession('err_img');
     }
 
+    // valida que todos los campos necesarios para la creación del viaje, estén validados correctamente
     public function validar_campos($datos, $imagen): bool {
         $no_vacios= $this->valida_vacios($datos, $imagen);
         
@@ -231,6 +270,7 @@ class ViajeController {
         else { return false; }
     }
 
+    // valida que no haya ningún campo vacío
     public function valida_vacios($datos, $imagen): bool {
         $result= false;
         if (empty($datos['pais'])) {
@@ -267,6 +307,7 @@ class ViajeController {
         return $result;
     }
 
+    // valida los valores introducidos en cada campo, según las necesidades del mismo
     public function valida_por_campo($datos, $imagen): bool {
         $pais_validado= $this->valida_pais($datos['pais']);
         $fechas_validadas= $this->valida_fechas($datos['fecha_inicio'], $datos['fecha_fin']);
@@ -282,6 +323,7 @@ class ViajeController {
         }
     }
 
+    // valida la longitud del país y, si es correcta, que solo sean letras y espacios
     public function valida_pais($pais): bool {
         // quitamos los espacios del principio y final
         $pais= trim($pais);
@@ -308,6 +350,7 @@ class ViajeController {
         }
     }
 
+    // valida que la fecha de inicio sea superior a la de hoy; y que sea menor a la de fin
     public function valida_fechas($inicio, $fin): bool {
         $fecha_hoy= new \DateTime();
 
@@ -327,6 +370,7 @@ class ViajeController {
         }
     }
 
+    // valida la longitud de la descripción y, si es correcta, que no tenga números
     public function valida_descripcion($descripcion): bool {
         // quitamos los espacios del principio y final
         $descripcion= trim($descripcion);
@@ -354,6 +398,7 @@ class ViajeController {
         }
     }
 
+    // valida la longitud de la información y, si es correcta, que no tenga números
     public function valida_informacion($informacion): bool {
         // quitamos los espacios del principio y final
         $informacion= trim($informacion);
@@ -375,6 +420,7 @@ class ViajeController {
         }
     }
 
+    // guarda la foto subida en su correspondiente carpeta. Controla si hay algún error
     public function gestionar_foto($foto): bool {
         $nom_foto= $foto['name'];            
         $temp_foto= $foto['tmp_name'];
@@ -398,6 +444,7 @@ class ViajeController {
         }
     }
 
+    // comprueba que no exista ya un viaje al destino y las dechas introducidas
     public function viaje_pais_fechas_existe($datos): bool {
         $pais= $datos['pais'];
         $fecha_inicio= $datos['fecha_inicio'];
@@ -411,7 +458,8 @@ class ViajeController {
         else { return false; }
     }
 
-    public function comentar() {
+    // recoge el id del viaje a comentar, comprueba que el usuario no lo haya comentado ya y lo lleva al formulario
+    public function comentar(): void {
         $id= $_POST['id_viaje_a_comentar'];
         $viaje_ya_comentado= $this->comentario_controller->usuario_ya_comenta_viaje($_SESSION['usuario'], $id);
 

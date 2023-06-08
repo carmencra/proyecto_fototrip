@@ -24,7 +24,8 @@ class UsuarioController{
         $this->imagen_controller= new ImagenController($db);
     }
 
-    public function registrarse() {
+    // lleva al formulario tanto de registro, como de login
+    public function registrarse(): void {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             //borramos las sesiones de errores para que no haya anteriores
             $this->borra_sesiones_errores();
@@ -32,7 +33,8 @@ class UsuarioController{
         }
     }
 
-    public function registro() {
+    // registra al usuario, obteniendo los datos introducidos, validándolos y enviando un mail de confirmación si todo es correcto
+    public function registro(): void  {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             //borramos las sesiones de errores para que no haya anteriores
             $this->borra_sesiones_errores();
@@ -71,11 +73,12 @@ class UsuarioController{
 
     }
 
-    public function llevar_confirmacion() {
+    // lleva a la página de envío de correo de confirmación de cuenta
+    public function llevar_confirmacion(): void  {
         $this->pages->render('email/confirmacion');
     }
 
-    // confirma la cuenta del usuario tras clicar en el enlace del correo enviado
+    // confirma la cuenta del usuario tras clicar en el enlace del correo enviado(solo funcionará con el enlace correcto)
     public function confirmar_cuenta($id): none | bool {
         $confirmado= $this->repository->confirma_cuenta($id);
 
@@ -97,7 +100,7 @@ class UsuarioController{
     
 
     // borra las sesiones de errores del registro
-    public function borra_sesiones_errores() {
+    public function borra_sesiones_errores(): void  {
         Utils::deleteSession('err_reg');
         Utils::deleteSession('err_nom');
         Utils::deleteSession('err_cla');
@@ -172,7 +175,7 @@ class UsuarioController{
         }
     }
 
-    // valida longitud de contraseña
+    // valida longitud de contraseña y, si es correcta, comprueba que sea segura y contenga distintos tipos de caracteres
     public function valida_clave($clave): bool {
         if(strlen($clave) >= 8 && strlen($clave) <= 20) {
             // se crea un pattern que requiera al menos uno de cada: mayúscula, minúscula (incluyendo ñ), número, caracter especial
@@ -198,10 +201,10 @@ class UsuarioController{
         }
     }
 
+    // valida que la longitud sea correcta y, si lo es, comprueba los caracteres introducidos
     public function valida_nombre($nombre): bool {
         // si la longitud es correcta, comprueba los caracteres introducidos
         if (strlen($nombre) >= 3 && strlen($nombre) <= 15) {
-            // $pattern= "([a-zñáóíúéA-ZÑÁÉÍÓÚ])+([\s][a-zñáóíúéA-ZÑÁÉÍÓÚ]+)*";
             $pattern = "/^[a-zñáóíúéA-ZÑÁÉÍÓÚ]+(\s[a-zñáóíúéA-ZÑÁÉÍÓÚ]+)*$/";
             if (!preg_match($pattern, $nombre)) {
                 $_SESSION['err_nom']= "*El nombre s&oacute;lo puede contener letras y espacios.";
@@ -223,10 +226,10 @@ class UsuarioController{
         }
     }
 
+    // valida que la longitud sea correcta y, si lo es, comprueba los caracteres introducidos
     public function valida_apellidos($apellidos): bool {
         // si la longitud es correcta, comprueba los caracteres introducidos
         if (strlen($apellidos) >= 3 && strlen($apellidos) <= 25) {
-            // // $pattern= "([a-zñáóíúéA-ZÑÁÉÍÓÚ])+([\s][a-zñáóíúéA-ZÑÁÉÍÓÚ]+)*";
             $pattern = "/^[a-zñáóíúéA-ZÑÁÉÍÓÚ]+(\s[a-zñáóíúéA-ZÑÁÉÍÓÚ]+)*$/";
             if (!preg_match($pattern, $apellidos)) {
                 $_SESSION['err_ape']= "*Los apellidos s&oacute;lo pueden contener letras y espacios.";
@@ -249,8 +252,8 @@ class UsuarioController{
     }
 
 
-
-    public function login() {
+    // el usuario inicia sesión, no sin antes comprobar que el correo esté registrado, confirmado y que haya introducido la contraseña correcta
+    public function login(): void {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             //borramos las sesiones de errores para que no haya anteriores
             $this->borra_sesiones_errores();
@@ -322,7 +325,7 @@ class UsuarioController{
 
 
     //cierra la sesión del usuario logueado
-    public function cerrar() {
+    public function cerrar(): void {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             session_destroy();
             // Utils::deleteSession('usuario');
@@ -332,12 +335,12 @@ class UsuarioController{
 
 
     // lleva al índice de administrar (solo para el admin de la página)
-    public function administrar() {
+    public function administrar(): void {
         $this->pages->render('usuario/administrar');
     }
 
     // lleva a los viajes a los que está escrito el usuario
-    public function mis_viajes() {   
+    public function mis_viajes(): void {   
         $viajes= $this->obtener_viajes($_SESSION['usuario']); 
         $imagenes= $this->obtener_imagenes($_SESSION['usuario']);
         $comentarios= $this->obtener_comentarios($_SESSION['usuario']);
@@ -345,6 +348,7 @@ class UsuarioController{
         $this->pages->render('usuario/mis_viajes', ['viajes' => $viajes, 'comentarios' => $comentarios, 'imagenes' => $imagenes]);
     }
 
+    // obtiene los viajes a los que esté inscrito el usuario logueado
     public function obtener_viajes($email): ?array {
         $id_viajes= $this->repository->obtener_id_viajes_inscritos($email);  
 
@@ -357,6 +361,7 @@ class UsuarioController{
         return $viajes;
     }
 
+    // obtiene las imágenes que haya subido el usuario logueado    
     public function obtener_imagenes($email): ?array {
         $id_usuario= $this->repository->obtener_id($email);
         $datos_imagenes= $this->imagen_controller->obtener_imagenes_usuario($id_usuario);
@@ -365,6 +370,7 @@ class UsuarioController{
         return $imagenes;
     }
  
+    // obtiene los comentarios que haya publicado el usuario logueado    
     public function obtener_comentarios($email): ?array {
         $datos_comentarios= $this->comentario_controller->obtener_comentarios_usuario($email);
         
@@ -372,8 +378,8 @@ class UsuarioController{
         return $comentarios;
     }
 
-    
-    public function inscribirse() {
+    // inscribe al usuario actual al viaje, comprobando que no esté ya inscrito y, si no es así, le manda un correo de la inscripción
+    public function inscribirse(): void {
         $id_viaje= $_POST['viaje_a_inscribirse'];
         $usuario= $_SESSION['usuario'];
 
@@ -400,11 +406,13 @@ class UsuarioController{
         }
     }
 
-    public function llevar_inscripcion() {
+    // lleva a la página de envío de correo de inscripción del viaje
+    public function llevar_inscripcion(): void {
         $this->pages->render('email/inscripcion');
     }
 
-    public function inscrito_a_ese_viaje($usuario, $id_viaje) {
+    // comprueba que el usuario no esté inscrito al viaje
+    public function inscrito_a_ese_viaje($usuario, $id_viaje): void {
         $this->repository->inscrito_a_ese_viaje($usuario, $id_viaje);
     }
 }

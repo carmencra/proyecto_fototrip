@@ -13,16 +13,19 @@ class GastosController{
         $this->repository= new GastosRepository($db);
     }
 
-    public function obtener_gastos($id_viaje) {
+    // obtiene los gastos del viaje indicados
+    public function obtener_gastos($id_viaje): object {
         $gastos= $this->repository->obtener_gastos($id_viaje);
         $objeto= $this->pasar_objeto($gastos);
         return $objeto;  
     }
 
-    public function pasar_objeto($array) {
+    // convierte los datos pasados en un objeto Gastos
+    public function pasar_objeto($array): object {
         return $this->repository->pasar_objeto($array);
     }
 
+    // guarda los gastos recogidos del viaje indicado
     public function guardar($id_viaje, $gastos): bool {
         $gastos_completos= $this->agregar_vacios($gastos);
         
@@ -56,7 +59,7 @@ class GastosController{
         return $todos;
     }
 
-    
+    // borra los gastos que pertenecen al viaje indicado
     public function borrar_por_viaje($id_viaje): bool {
         return $this->repository->borrar_por_viaje($id_viaje);
     }
