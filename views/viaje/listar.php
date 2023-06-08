@@ -17,6 +17,7 @@
         </div>
     </nav> 
 
+    <!-- menú despegable -->
     <nav class="menu_despegable">
         <!-- header antes de desplegar -->
         <section class="fijo_menu">
@@ -24,13 +25,13 @@
                 <img id="logo_desp" src="fuente/media/images/logo.png" alt="logo fototrip"/>
             </a>
 
-            <a href="" id="boton_desplegar" class="aln-centro">
-                Menú despe
+            <a href="" class="boton_desplegar">
+                <img src="fuente/media/images/menu.png" alt="menu"/>
             </a>
         </section>
             
-        <!-- Menú de navegación -->
-        <ul id="submenu" class="lista-menu aln-centro">
+        <!-- menú desplegado -->
+        <ul class="lista_despegable centrar">
             <li class="active"> <a href="<?=$_ENV['BASE_URL']?>">Inicio</a> </li>
             <li> <a href="<?=$_ENV['BASE_URL']?>opiniones">Opiniones </a> </li>
             <li> <a href="<?=$_ENV['BASE_URL']?>galeria">Galer&iacute;a </a> </li>
@@ -39,7 +40,6 @@
                 <?php require('views/layout/menu_usuario.php'); ?>
             </div>
         </ul>
-
     </nav>    
     
 </header>

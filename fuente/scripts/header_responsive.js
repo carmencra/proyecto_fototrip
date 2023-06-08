@@ -1,17 +1,15 @@
 $(document).ready(function () {
-      
-    /* Toggle menú de móviles  */
-    $('#boton_desplegar').on('click', function (e) {
+    $('.boton_desplegar').on('click', function (e) {
         e.preventDefault();
-        $('#submenu').slideToggle(500);
-    }); // fin click
+        $('.lista_despegable').slideToggle(500);
+    }); 
     
-    /* Hacer visible el menú al agrandar */
+    /* restablecer el menú predeterminado al pasar los pixeles determminados */
     $(window).resize(function () {
         if (innerWidth >= 480) {
-            if ($('#submenu').css('display') == 'none') {
-                $('#submenu').removeAttr('style');
+            if ($('.lista_despegable').css('display') == 'none') {
+                $('.lista_despegable').removeAttr('style');
             }
         }
-    }); // fin resize
-  });
+    }); 
+});
