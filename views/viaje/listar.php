@@ -8,47 +8,39 @@
     <nav class="menu">
         <ul>
             <li class="active"> <a href="<?=$_ENV['BASE_URL']?>">Inicio</a> </li>
-
             <li> <a href="<?=$_ENV['BASE_URL']?>opiniones">Opiniones </a> </li>
-
             <li> <a href="<?=$_ENV['BASE_URL']?>galeria">Galer&iacute;a </a> </li>
         </ul>
 
         <div class="menu_usuario">
           <?php require('views/layout/menu_usuario.php'); ?>
         </div>
-
     </nav> 
 
-    <div id="pagina">
-        <div class="barra-menu">
-            <!-- Boton Desplegar/Replegar menú -->
-            <div class="cabecera-menu">
-                <a href="<?=$_ENV['BASE_URL']?>">
-                    <img id="logo_desp" src="fuente/media/images/logo.png" alt="logo fototrip"/>
-                </a>
+    <nav class="menu_despegable">
+        <!-- header antes de desplegar -->
+        <section class="fijo_menu">
+            <a href="<?=$_ENV['BASE_URL']?>">
+                <img id="logo_desp" src="fuente/media/images/logo.png" alt="logo fototrip"/>
+            </a>
 
-                <a href="#" id="btn-drop" class="btn-menu aln-centro">
-                    Menú despe
-                </a>
+            <a href="" id="boton_desplegar" class="aln-centro">
+                Menú despe
+            </a>
+        </section>
+            
+        <!-- Menú de navegación -->
+        <ul id="submenu" class="lista-menu aln-centro">
+            <li class="active"> <a href="<?=$_ENV['BASE_URL']?>">Inicio</a> </li>
+            <li> <a href="<?=$_ENV['BASE_URL']?>opiniones">Opiniones </a> </li>
+            <li> <a href="<?=$_ENV['BASE_URL']?>galeria">Galer&iacute;a </a> </li>
+
+            <div>
+                <?php require('views/layout/menu_usuario.php'); ?>
             </div>
-                
-            <!-- Menú de navegación -->
-            <ul id="submenu" class="lista-menu aln-centro">
-                <li class="active"> <a href="<?=$_ENV['BASE_URL']?>">Inicio</a> </li>
-                <li> <a href="<?=$_ENV['BASE_URL']?>opiniones">Opiniones </a> </li>
-                <li> <a href="<?=$_ENV['BASE_URL']?>galeria">Galer&iacute;a </a> </li>
+        </ul>
 
-                <div>
-                    <?php require('views/layout/menu_usuario.php'); ?>
-                </div>
-            </ul>
-
-        </div>
-    </div>
-        
-
-    
+    </nav>    
     
 </header>
   

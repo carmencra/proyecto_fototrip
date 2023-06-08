@@ -1,7 +1,7 @@
 $(document).ready(function () {
       
     /* Toggle menú de móviles  */
-    $('#btn-drop').on('click', function (e) {
+    $('#boton_desplegar').on('click', function (e) {
         e.preventDefault();
         $('#submenu').slideToggle(500);
     }); // fin click
