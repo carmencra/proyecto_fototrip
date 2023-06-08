@@ -7,9 +7,9 @@
     
     <nav class="menu">
         <ul>
-            <li class="active"> <a href="<?=$_ENV['BASE_URL']?>">Inicio</a> </li>
+            <li> <a href="<?=$_ENV['BASE_URL']?>">Inicio</a> </li>
             <li> <a href="<?=$_ENV['BASE_URL']?>opiniones">Opiniones </a> </li>
-            <li> <a href="<?=$_ENV['BASE_URL']?>galeria">Galer&iacute;a </a> </li>
+            <li class="active"> <a href="<?=$_ENV['BASE_URL']?>galeria">Galer&iacute;a </a> </li>
         </ul>
 
         <div class="menu_usuario">
