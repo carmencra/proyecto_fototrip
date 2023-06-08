@@ -2,7 +2,7 @@
 
 <header>
     <a href="<?=$_ENV['BASE_URL']?>">
-        <img id="logo" src="fuente/media/images/logo.png" alt="logo fototrip"/>
+        <img id="logo_header" src="fuente/media/images/logo.png" alt="logo fototrip"/>
     </a>
     
     <nav class="menu">

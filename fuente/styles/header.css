@@ -101,7 +101,7 @@ header #logo, header #logo_desp {
 }
 
 @media screen and (max-width: 749px) {
-    #logo {
+    #logo_header {
         display: none;
     }
 	.menu {
