@@ -3,6 +3,7 @@
 namespace Controllers;
 use Repositories\ComentarioRepository;
 use Lib\Pages;
+use Utils\Utils;
 
 class ComentarioController{
     private Pages $pages;
@@ -134,6 +135,7 @@ class ComentarioController{
     public function guardar() {
         $datos= $_POST['data'];
         $id_viaje= $datos['id_viaje_a_comentar'];
+        $pais_viaje= $datos['pais_viaje_a_comentar'];
 
         $validar= $this->validar($datos['comentario']);
 
@@ -141,13 +143,16 @@ class ComentarioController{
             $guardar= $this->repository->guardar($id_viaje, $_SESSION['usuario'], $datos['comentario']);
             if ($guardar) {
                 $_SESSION['comentario_guardado']= true;
+                Utils::deleteSession('err_com');
+                header("Location: ". $_ENV['BASE_URL'].'misviajes');
             }
             else {
                 $_SESSION['comentario_guardado']= false;
             }
-            
-            header("Location: ". $_ENV['BASE_URL'].'misviajes');
         }
+        $datos= [];
+        $datos['id']= $id_viaje; $datos['pais']= $pais_viaje;
+        $this->pages->render('comentario/comentar', ['viaje' => $datos]);
     }
 
     public function validar($comentario):bool {
@@ -163,7 +168,17 @@ class ComentarioController{
                 $_SESSION['err_com']= "*El comentario debe tener m&iacute;nimo 4 caracteres";
                 return false;
             }
-            else {return true;}
+            else {
+                $pattern = "/^[\p{L}.,;:¡!¿?'\-\s]+$/u"; //letras (incluidas ñ y tildes), espacios y signos de puntuación
+
+                if (!preg_match($pattern, $comentario)) {
+                    $_SESSION['err_com']= "*El comentario s&oacute;lo puede contener letras, espacios y signos de puntuaci&oacute;n";
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
         }
     }
 
