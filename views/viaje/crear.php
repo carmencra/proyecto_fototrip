@@ -80,13 +80,13 @@
             <br><br>
             
             <label for="descripcion">Descripci&oacute;n: </label>
-            <input type="text" name="data[descripcion]" value="<?php if (isset($_POST['data']['descripcion']))echo $_POST['data']['descripcion'];?>">
+            <textarea name="data[descripcion]" rows='1'><?php if (isset($_POST['data']['descripcion'])) echo $_POST['data']['descripcion']; ?></textarea>
             <br><span style="color:red"> <?php if(isset($_SESSION['err_des'])) echo  $_SESSION['err_des']?> </span>
             
             <br><br>
             
             <label for="informacion">Informaci&oacute;n: </label> <br>
-            <textarea name="data[informacion]"><?php if (isset($_POST['data']['informacion'])) echo $_POST['data']['informacion']; ?></textarea>
+            <textarea name="data[informacion]" rows='3'><?php if (isset($_POST['data']['informacion'])) echo $_POST['data']['informacion']; ?></textarea>
             <br><span style="color:red"> <?php if(isset($_SESSION['err_inf'])) echo $_SESSION['err_inf']?> </span>
 
             <br><br>
