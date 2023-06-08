@@ -309,12 +309,21 @@ class ViajeController {
     }
 
     public function valida_fechas($inicio, $fin): bool {
-        if ($inicio > $fin) { 
-            $_SESSION['err_feci']= "*La fecha de inicio debe ser menor a la de fin";
+        $fecha_hoy= new \DateTime();
+
+        $fecha_inicio= \DateTime::createFromFormat('Y-m-d', $inicio);
+        if ($fecha_inicio <= $fecha_hoy ) {
+            $_SESSION['err_feci']= '*La fecha de inicio debe ser mayor a la fecha actual';
             return false;
         }
-        else  {
-            return true;
+        else {
+            if ($inicio > $fin) { 
+                $_SESSION['err_feci']= "*La fecha de inicio debe ser menor a la de fin";
+                return false;
+            }
+            else  {
+                return true;
+            }
         }
     }
 
