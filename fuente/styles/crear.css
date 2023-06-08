@@ -6,7 +6,7 @@
     color: white;
     margin-bottom: 2%;
     height: max-content;
-    width: 50%;
+    width: 70%;
     margin: auto;
     text-align: center;
 }
@@ -15,6 +15,36 @@
     color: #2CCBCB;
     text-align: center;
 }
+
+.form_crear .antes_desc {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6%;
+    justify-content: center;
+}
+
+.form_crear .antes_desc div, .form_crear .select div, .form_crear .crear_gastos div{
+    margin-bottom: 2%;
+}
+
+.form_crear .select {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10%;
+    justify-content: center;
+    margin-top: 4%;
+}
+
+.form_crear .crear_gastos {
+    margin: auto;
+    width: 60%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15%;
+}
+
+
 
 .form_crear .crear  {
     background-color: #2CCBCB;
