@@ -172,9 +172,11 @@ class ViajeController {
             $validar= $this->validar_campos($datos, $imagen);
 
             $gastos= [];
-            foreach($_POST['gastos'] as $gasto){
-                // Añadimos los gastos seleccionados
-                $gastos[$gasto]= true;
+            if (!empty($_POST['gastos'])) {
+                foreach($_POST['gastos'] as $gasto){
+                    // Añadimos los gastos seleccionados
+                    $gastos[$gasto]= true;
+                }
             }
 
             if ($validar) {
@@ -202,6 +204,7 @@ class ViajeController {
         Utils::deleteSession('err_pai');
         Utils::deleteSession('err_feci');
         Utils::deleteSession('err_fecf');
+        Utils::deleteSession('err_via');
         Utils::deleteSession('err_pre');
         Utils::deleteSession('err_des');
         Utils::deleteSession('err_inf');
@@ -213,12 +216,19 @@ class ViajeController {
         
         if ($no_vacios) {
             $correctos= $this->valida_por_campo($datos, $imagen);
+
             if ($correctos) {
-                return true;
+                
+                $viaje_pais_fechas_existe= $this->viaje_pais_fechas_existe($datos);
+
+                if (!$viaje_pais_fechas_existe) {
+                    return true;
+                }
+                else { return false; }
             }
-            else {return false;}
+            else { return false; }
         }
-        else {return false;}
+        else { return false; }
     }
 
     public function valida_vacios($datos, $imagen): bool {
@@ -375,6 +385,19 @@ class ViajeController {
                 return false;
             }
         }
+    }
+
+    public function viaje_pais_fechas_existe($datos): bool {
+        $pais= $datos['pais'];
+        $fecha_inicio= $datos['fecha_inicio'];
+        $fecha_fin= $datos['fecha_fin'];
+
+        $viaje_ya_existe= $this->repository->viaje_pais_fechas_existe($pais, $fecha_inicio, $fecha_fin);
+        if ($viaje_ya_existe) {
+            $_SESSION['err_via']= "*Ya hay un viaje ahí en esas fechas";
+            return true;
+        }
+        else { return false; }
     }
 
     public function comentar() {

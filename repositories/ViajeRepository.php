@@ -180,6 +180,31 @@ class ViajeRepository {
         }
     }
 
+    public function viaje_pais_fechas_existe($pais, $fecha_inicio, $fecha_fin): bool {
+        $cons= $this->db->prepara("SELECT id FROM viajes WHERE pais= :pais and fecha_inicio= :fecha_inicio and fecha_fin= :fecha_fin");
+
+        $cons->bindParam(':pais', $pais, PDO::PARAM_STR);
+        $cons->bindParam(':fecha_inicio', $fecha_inicio, PDO::PARAM_STR);
+        $cons->bindParam(':fecha_fin', $fecha_fin, PDO::PARAM_STR);
+
+        try {
+            $cons->execute();
+            if ($cons && $cons->rowCount() == 1) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        catch(PDOEXception $err) {
+            return false;
+        }
+        finally {
+            $cons= null;
+            unset($cons); 
+        }
+    }
+
     public function obtener_id_ultimo_viaje() {
         $cons= $this->db->prepara("SELECT MAX(id) FROM viajes");
 
