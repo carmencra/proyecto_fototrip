@@ -124,19 +124,19 @@ class UsuarioController{
     public function valida_vacios($datos): bool {
         $result= false;
         if (empty($datos['nombre'])) {
-            $_SESSION['err_nom']= "*El nombre debe estar relleno";
+            $_SESSION['err_nom']= "*El nombre debe estar relleno.";
             $result= false;
         }
         if (empty($datos['apellidos'])) {
-            $_SESSION['err_ape']= "*Los apellidos deben estar rellenos";
+            $_SESSION['err_ape']= "*Los apellidos deben estar rellenos.";
             $result= false;;
         }
         if (empty($datos['email'])) {
-            $_SESSION['err_ema']= "*El email debe estar relleno";
+            $_SESSION['err_ema']= "*El email debe estar relleno.";
             $result= false;
         }
         if (empty($datos['clave'])) {
-            $_SESSION['err_cla']= "*La clave debe estar rellena";
+            $_SESSION['err_cla']= "*La clave debe estar rellena.";
             $result= false;
         }
         else {
@@ -153,10 +153,6 @@ class UsuarioController{
         $nombre_validado= $this->valida_nombre($datos['nombre']);
         $apellidos_validado= $this->valida_apellidos($datos['apellidos']);
 
-        // var_dump($datos['nombre'], $nombre_validado);
-        // var_dump($datos['apellidos'], $apellidos_validado);
-        // die();
-
         if ($email_validado && $clave_validado && $nombre_validado && $apellidos_validado) {
             return true;
         }
@@ -171,7 +167,7 @@ class UsuarioController{
             return true;
         }
         else {
-            $_SESSION['err_ema']= "*El email ya está registrado";
+            $_SESSION['err_ema']= "*El email ya está registrado.";
             return false;
         }
     }
@@ -186,17 +182,17 @@ class UsuarioController{
                 return true;
             }
             else {
-                $_SESSION['err_cla']= "*La contraseña debe tener minúscula, mayúscula, número y carácter especial";
+                $_SESSION['err_cla']= "*La contraseña debe tener min&uacute;scula, may&uacute;scula, n&uacute;mero y caracter especial.";
                 return false;
             }
         }
         else {
             if(strlen($clave) < 8) {
-                $_SESSION['err_cla']= "*La clave debe tener más de 7 caracteres";
+                $_SESSION['err_cla']= "*La clave debe tener como m&iacute;nimo 8 caracteres.";
                 return false;
             }
             if (strlen($clave) > 20) {
-                $_SESSION['err_cla']= "*La clave debe tener menos de 21 caracteres";
+                $_SESSION['err_cla']= "*La clave debe tener como m&aacute;ximo 20 caracteres";
                 return false;
             }
         }
@@ -208,7 +204,7 @@ class UsuarioController{
             // $pattern= "([a-zñáóíúéA-ZÑÁÉÍÓÚ])+([\s][a-zñáóíúéA-ZÑÁÉÍÓÚ]+)*";
             $pattern = "/^[a-zñáóíúéA-ZÑÁÉÍÓÚ]+(\s[a-zñáóíúéA-ZÑÁÉÍÓÚ]+)*$/";
             if (!preg_match($pattern, $nombre)) {
-                $_SESSION['err_nom']= "*El nombre sólo puede contener letras y espacios";
+                $_SESSION['err_nom']= "*El nombre s&oacute;lo puede contener letras y espacios.";
                 return false;
             }
             else {
@@ -217,11 +213,11 @@ class UsuarioController{
         }
         else {
             if (strlen($nombre) < 3) {
-                $_SESSION['err_nom']= "*El nombre debe tener más de 2 caracteres";
+                $_SESSION['err_nom']= "*El nombre debe tener como m&iacute;nimo 3 caracteres.";
                 return false;
             }
             if (strlen($nombre) > 15) {
-                $_SESSION['err_nom']= "*El nombre debe tener menos de 16 caracteres";
+                $_SESSION['err_nom']= "*El nombre debe tener como m&aacute;ximo 15 caracteres.";
                 return false;   
             }
         }
@@ -233,7 +229,7 @@ class UsuarioController{
             // // $pattern= "([a-zñáóíúéA-ZÑÁÉÍÓÚ])+([\s][a-zñáóíúéA-ZÑÁÉÍÓÚ]+)*";
             $pattern = "/^[a-zñáóíúéA-ZÑÁÉÍÓÚ]+(\s[a-zñáóíúéA-ZÑÁÉÍÓÚ]+)*$/";
             if (!preg_match($pattern, $apellidos)) {
-                $_SESSION['err_ape']= "*Los apellidos sólo pueden contener letras y espacios";
+                $_SESSION['err_ape']= "*Los apellidos s&oacute;lo pueden contener letras y espacios.";
                 return false;   
             } 
             else {
@@ -242,11 +238,11 @@ class UsuarioController{
         }
         else {
             if (strlen($apellidos) < 3) {
-                $_SESSION['err_ape']= "*Los apellidos deben tener más de 2 caracteres";                
+                $_SESSION['err_ape']= "*Los apellidos deben tener como m&iacute;nimo 3 caracteres.";                
                 return false;   
             }
             if (strlen($apellidos) > 25) {   
-                $_SESSION['err_ape']= "*Los apellidos deben tener menos de 26 caracteres";
+                $_SESSION['err_ape']= "*Los apellidos deben tener como m&aacute;ximo 25 caracteres,";
                 return false;   
             }
         }
@@ -293,12 +289,12 @@ class UsuarioController{
 
                     }
                     else {
-                        $_SESSION['err_cla']= "*Contraseña incorrecta";
+                        $_SESSION['err_cla']= "*Contraseña incorrecta.";
                         $this->pages->render('usuario/registrarse');
                     }
                 }
                 else {
-                    $_SESSION['err_ema']= "*Ese correo no está registrado";
+                    $_SESSION['err_ema']= "*Ese correo no est&aacute; .";
                     $this->pages->render('usuario/registrarse');
                 }
             }
@@ -315,10 +311,10 @@ class UsuarioController{
         }
         else {
             if (empty($datos['email'])) {
-                $_SESSION['err_ema']= "*El email debe estar relleno";
+                $_SESSION['err_ema']= "*El email debe estar relleno.";
             }
             if (empty($datos['clave'])) {
-                $_SESSION['err_cla']= "*La clave debe estar rellena";
+                $_SESSION['err_cla']= "*La clave debe estar rellena.";
             }
             return false;
         }
