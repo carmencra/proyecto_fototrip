@@ -29,7 +29,8 @@
         </section>
             
         <!-- menú desplegado -->
-        <ul class="lista_despegable centrar">
+        <ul class="lista_despegable">
+            <div class="usuario_activo"> <?php if(isset($_SESSION['usuario'])){ echo '( '. $_SESSION['usuario'].' )'; } ?>  </div>
             <li> <a href="<?=$_ENV['BASE_URL']?>">Inicio</a> </li>
             <li> <a href="<?=$_ENV['BASE_URL']?>opiniones">Opiniones </a> </li>
             <li> <a href="<?=$_ENV['BASE_URL']?>galeria">Galer&iacute;a </a> </li>
