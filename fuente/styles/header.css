@@ -96,12 +96,18 @@ header #logo_header, header #logo_desp {
         width: 14em;
         font-size: 80px;
     }
+    header #logo_header, header #logo_desp {
+        width: 300px;
+    }
 }
 
 @media screen and (min-width: 3000px) and (max-width: 5099px) {
     .menu ul li {
         width: 12em;
         font-size: 50px;
+    }
+    header #logo_header, header #logo_desp {
+        width: 190px;
     }
 }
 
@@ -110,6 +116,9 @@ header #logo_header, header #logo_desp {
     .menu ul li {
         width: 10em;
         font-size: 37px;
+    }
+    header #logo_header, header #logo_desp {
+        width: 130px;
     }
 }
 

@@ -68,15 +68,16 @@
 
 @media screen and (min-width: 5100px) {
     .menu_usuario {
-        top: 0.5%;
-        font-size: 32px;
+        top: 4%;
+        font-size: 38px;
     }
     .boton_usuario {
-        font-size: 40px;
+        font-size: 45px;
+        padding: 30px;
     }
 
     .contenido_lista {
-        max-width: 520px;
+        max-width: 340px;
     }
 
     .contenido_lista a {
@@ -86,7 +87,7 @@
 
 @media screen and (min-width: 3000px) and (max-width: 5099px) {
     .menu_usuario {
-        top: 1%;
+        top: 4.5%;
         font-size: 24px;
     }
     .boton_usuario {
@@ -105,7 +106,7 @@
 
 @media screen and (min-width: 1900px) and (max-width: 2999px) {
     .menu_usuario {
-        top: 2.5%;
+        top: 4%;
         font-size: 18px;
     }
     .boton_usuario {
