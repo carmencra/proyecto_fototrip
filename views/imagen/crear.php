@@ -107,7 +107,7 @@
 
             <br><br>
 
-            <input type="submit" value="Guardar" class="crear">
+            <input type="submit" value="Guardar" class="crear boton_resaltar">
         
         </form>
 

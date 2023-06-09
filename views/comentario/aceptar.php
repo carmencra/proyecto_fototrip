@@ -45,12 +45,12 @@
                         <section class="forms_comentario">
                             <form id="form_aceptar_comentario_<?= $comentario->getId() ?>" action="<?=$_ENV['BASE_URL']?>comentario/aceptar" method="POST">
                                 <input type="hidden" name="comentario_a_aceptar" value="<?= $comentario->getId()?>">
-                                <input type="submit" value="Aceptar">
+                                <input type="submit" value="Aceptar" class="boton_resaltar">
                             </form>
                             
                             <form id="form_descartar_comentario_<?= $comentario->getId() ?>" action="<?=$_ENV['BASE_URL']?>comentario/descartar" method="POST">
                                 <input type="hidden" name="comentario_a_descartar" value="<?= $comentario->getId()?>">
-                                <input type="submit" value="Descartar">
+                                <input type="submit" value="Descartar" class="boton_resaltar">
                             </form>
                         </section> 
 

@@ -108,7 +108,7 @@
                 </select>
             </section>
 
-                <input type="submit" value="Buscar" id="boton">
+                <input type="submit" value="Buscar" id="boton" class="boton_resaltar">
             </form>
 
         </section>

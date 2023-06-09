@@ -130,7 +130,7 @@
             </select>
         </section>
 
-            <input type="submit" value="Buscar" id="boton">
+            <input type="submit" value="Buscar" id="boton" class="boton_resaltar">
         </form>
 
     </section>
@@ -157,7 +157,7 @@
                     <p> <?= $viaje->getDescripcion(); ?> </p>
 
                     <form action="<?=$_ENV['BASE_URL'].'detalle_viaje/'.$viaje->getId()?>" method="POST">
-                        <input type="submit" value="Ver más" class="ver_mas">
+                        <input type="submit" value="Ver más" class="ver_mas boton_resaltar">
                     </form>
 
                 </section>
@@ -188,7 +188,7 @@
                     <p> <?= $viaje->getDescripcion(); ?> </p>
 
                     <form action="<?=$_ENV['BASE_URL'].'detalle_viaje/'.$viaje->getId()?>" method="POST">
-                        <input type="submit" value="Ver más" class="ver_mas">
+                        <input type="submit" value="Ver más" class="ver_mas boton_resaltar">
                     </form>
 
                 </section>

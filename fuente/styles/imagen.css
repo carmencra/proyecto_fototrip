@@ -79,7 +79,7 @@
 }
 
 @media screen and (min-width: 5100px) {
-    .imagen .imagen_resize {
+    .imagen .imagen_resize, .mi_viaje .imagen_resize {
         width: 1200px;
         height: 800px;
     }
@@ -90,7 +90,7 @@
 
     
 @media screen and (min-width: 3000px) and (max-width: 5099px) {
-    .imagen .imagen_resize {
+    .imagen .imagen_resize, .mi_viaje .imagen_resize {
         width: 680px;
         height: 470px;
     }
@@ -101,7 +101,7 @@
 
     
 @media screen and (min-width: 1900px) and (max-width: 2999px) {
-    .imagen .imagen_resize {
+    .imagen .imagen_resize, .mi_viaje .imagen_resize {
         width: 470px;
         height: 290px;
     }

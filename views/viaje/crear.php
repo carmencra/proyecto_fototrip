@@ -81,17 +81,6 @@
                 </div>
                
             </section> <br>
-<!--            
-            <br><br>
-
-
-            <br><br>
-            
-           
-            <br><br>
-             -->
-           
-            <!-- <br><br> -->
             
             <label for="descripcion">Descripci&oacute;n: </label> <br>
             <textarea name="data[descripcion]" rows='1'><?php if (isset($_POST['data']['descripcion'])) echo $_POST['data']['descripcion']; ?></textarea>
@@ -128,13 +117,6 @@
                 </div>
 
             </section> <br>
-           
-            
-            <!-- <br><br><br>
-
-           
-
-            <br><br><br> -->
 
             <label for="imagen">Imagen: </label>
             <input type="file" name="imagen" accept="image/*">
@@ -177,22 +159,10 @@
                     </div>
 
                 </section>
-            
-                <!-- <br>
-
-                 <br>
-
-                 <br>
-
-                 <br>
-
-                <br>
-
-                 <br> -->
 
                 <br><br>
 
-            <input type="submit" value="Guardar" class="crear">
+            <input type="submit" value="Guardar" class="crear boton_resaltar">
         </form>
 
     </section>

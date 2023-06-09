@@ -46,7 +46,7 @@
                         <!-- creamos un formulario para borrar el comentario, que recoge el id por post; cada formulario tiene un id distinto, dependiendo del id del comentario -->
                         <form id="form_borrar_comentario_<?= $comentario->getId() ?>" action="<?=$_ENV['BASE_URL']?>comentario/borrar" method="POST" class="form_borrar">
                             <input type="hidden" name="id_comentario_a_borrar" value="<?= $comentario->getId()?>">
-                            <input type="submit" value="Borrar">
+                            <input type="submit" value="Borrar" class="boton_resaltar">
                         </form>
                     </section>
 

@@ -132,10 +132,6 @@
         width: 1100px;
         height: 700px;
     }
-
-    .viaje .ver_mas:hover, .buscador_viajes #boton:hover {
-        font-size: 50px;
-    }
 }
 
 @media screen and (min-width: 3000px) and (max-width: 5099px) {
@@ -160,9 +156,6 @@
         width: 680px;
         height: 450px;
     }
-    .viaje .ver_mas:hover, .buscador_viajes #boton:hover {
-        font-size: 30px;
-    }
 }
 
 @media screen and (min-width: 1900px) and (max-width: 2999px) {
@@ -186,10 +179,6 @@
     .viaje .img_viaje {
         width: 420px;
         height: 265px;
-    }
-
-    .viaje .ver_mas:hover, .buscador_viajes #boton:hover {
-        font-size: 21px;
     }
 }
 

@@ -47,6 +47,8 @@
 
 .mis_viajes .display .mi_viaje img {
     margin: auto;
+    width: 250px;
+    height: 150px;
 }
 
 .mis_viajes .display .mi_viaje .forms {
@@ -87,4 +89,40 @@
 
 .mis_comentarios .destino {
     text-transform: uppercase;
+}
+
+.mis_comentarios .comentario form input {
+    font-weight: bold;
+    background-color: rgb(228, 95, 95);
+    border-color: rgb(228, 95, 95);
+}
+
+.mis_comentarios .comentario form input:hover {
+    text-decoration: underline;
+    font-size: 15px;
+}
+
+
+
+@media screen and (min-width: 5100px) {
+    .mis_viajes .display .mi_viaje img {
+    width: 870px;
+    height: 520px;
+    }
+}
+
+    
+@media screen and (min-width: 3000px) and (max-width: 5099px) {
+    .mis_viajes .display .mi_viaje img {
+    width: 550px;
+    height: 380px;
+    }
+}
+
+    
+@media screen and (min-width: 1900px) and (max-width: 2999px) {
+    .mis_viajes .display .mi_viaje img {
+    width: 340px;
+    height: 200px;
+    }
 }

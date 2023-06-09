@@ -51,7 +51,7 @@
                             <h1> <?= $viaje->getId(); ?>. <?= $viaje->getPais(); ?> </h1> <hr> <br>  
                             
                             <section class="seccion_viaje">
-                                <img src="./fuente/media/images/galeria/<?= $viaje->getImagen_principal(); ?>" width="250px" height="150px" />
+                                <img src="./fuente/media/images/galeria/<?= $viaje->getImagen_principal(); ?>"/>
                                 
                                 <section class="forms">
                                     
@@ -59,17 +59,17 @@
                                     <?php if ($viaje->getActivo() == FALSE) : ?>
                                         <form action="<?=$_ENV['BASE_URL']?>viaje/comentar" method="POST">
                                             <input type="hidden" name="id_viaje_a_comentar" value="<?= $viaje->getId()?>">
-                                            <input type="submit" value="Comentar">
+                                            <input type="submit" value="Comentar" class="boton_resaltar">
                                         </form> <br>
 
                                         <form action="<?=$_ENV['BASE_URL']?>viaje/imagen" method="POST">
                                             <input type="hidden" name="id_viaje_a_imagen" value="<?= $viaje->getId()?>">
-                                            <input type="submit" value="Subir imagen">
+                                            <input type="submit" value="Subir imagen" class="boton_resaltar">
                                         </form> <br>
                                     <?php endif; ?>
 
                                     <form action="<?=$_ENV['BASE_URL'].'detalle_viaje/'.$viaje->getId()?>" method="POST">
-                                        <input type="submit" value="Ver más" class="ver_mas">
+                                        <input type="submit" value="Ver más" class="ver_mas boton_resaltar">
                                     </form>
                                 </section>
 
@@ -107,7 +107,7 @@
                     <?php foreach($imagenes as $imagen) : ?>
 
                         <section class="imagen">
-                            <img src="fuente/media/images/galeria/<?= $imagen->getImagen(); ?>" width="380px" height="260px"/> <br><br>
+                            <img src="fuente/media/images/galeria/<?= $imagen->getImagen(); ?>" class="imagen_resize"/> <br><br>
 
                             <section class="datos_imagen">
                                 <section> 
@@ -130,7 +130,7 @@
 
                             <form id="form_borrar_imagen_<?= $imagen->getId() ?>" action="<?=$_ENV['BASE_URL']?>imagen/borrar" method="POST" class="borrar">
                                 <input type="hidden" name="id_imagen_a_borrar" value="<?= $imagen->getId()?>">
-                                <input type="submit" value="Borrar">
+                                <input type="submit" value="Borrar" class="boton_resaltar">
                             </form> 
 
                             <?php if ($imagen->getAceptada() == FALSE): ?>
@@ -162,11 +162,11 @@
                     <?php foreach($comentarios as $comentario) : ?>
                         
                     <section class="comentario">
-                        <h4> Viaje a: <span class="destino"> <?= $comentario->getNombre_viaje(); ?> </span>
+                        <h5> Viaje a: <span class="destino"> <?= $comentario->getNombre_viaje(); ?> </span>
                             <?php if ($comentario->getAceptado() == FALSE): ?>
                                 <span class="aceptacion">( Pendiente de aceptaci&oacute;n )</span>
                             <?php endif; ?>
-                        </h4>
+                        </h5>
                         <hr>
                         
                         <p class="contenido"> <?= $comentario->getContenido(); ?> </p>
@@ -175,7 +175,7 @@
                     
                         <form id="form_borrar_comentario_<?= $comentario->getId() ?>" action="<?=$_ENV['BASE_URL']?>comentario/borrar" method="POST">
                             <input type="hidden" name="id_comentario_a_borrar" value="<?= $comentario->getId()?>">
-                            <input type="submit" value="Borrar">
+                            <input type="submit" value="Borrar" class="boton_resaltar">
                         </form> <br>
 
                     </section>                    

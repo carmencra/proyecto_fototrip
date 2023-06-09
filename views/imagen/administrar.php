@@ -45,7 +45,7 @@
 
                         <form id="form_borrar_imagen_<?= $imagen->getId() ?>" action="<?=$_ENV['BASE_URL']?>imagen/borrar" method="POST" class="borrar">
                             <input type="hidden" name="id_imagen_a_borrar" value="<?= $imagen->getId()?>">
-                            <input type="submit" value="Borrar">
+                            <input type="submit" value="Borrar" class="boton_resaltar">
                         </form> 
                         
                         <br>

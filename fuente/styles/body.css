@@ -62,6 +62,12 @@ hr {
     select {
         font-size: 45px;
     }
+    
+
+    .boton_resaltar:hover {
+        font-size: 58px !important;
+    }
+
 
     #flecha {
         width: 140px;
@@ -82,12 +88,18 @@ hr {
         font-size: 25px;
     }
 
+    
+    .boton_resaltar:hover {
+        font-size: 31px !important;
+    }
+    
+
     #flecha {
         width: 95px;
     }
     #flecha:hover {
         width: 107px;
-    }
+    }        
 }
 
 @media screen and (min-width: 1900px) and (max-width: 2999px) {
@@ -100,6 +112,12 @@ hr {
     select {
         font-size: 17px;
     }
+
+    
+    .boton_resaltar:hover {
+        font-size: 22px !important;
+    }
+
 
     #flecha {
         width: 55px;

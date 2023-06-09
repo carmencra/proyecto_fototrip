@@ -49,7 +49,7 @@
                                 <!-- creamos un formulario para borrar el viaje, que recoge el id por post; cada formulario tiene un id distinto, dependiendo del id del viaje -->
                                 <form id="form_borrar_viaje_<?= $viaje->getId() ?>" action="<?=$_ENV['BASE_URL']?>viaje/borrar" method="POST">
                                     <input type="hidden" name="id_viaje_a_borrar" value="<?= $viaje->getId()?>">
-                                    <input type="submit" value="Borrar">
+                                    <input type="submit" value="Borrar" class="boton_resaltar">
                                 </form>
                             </section>
 

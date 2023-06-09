@@ -44,7 +44,7 @@
                     <?php endif; ?>
     
                     <section class="submit">
-                        <input type="submit" value="Registrarse">
+                        <input type="submit" value="Registrarse" class="boton_resaltar">
                     </section>    
                 </form>
             </fieldset>
@@ -76,7 +76,7 @@
                 <?php endif; ?>
 
                 <section class="submit">
-                    <input type="submit" value="Iniciar sesión">
+                    <input type="submit" value="Iniciar sesión" class="boton_resaltar">
                 </section>
             </form>
             

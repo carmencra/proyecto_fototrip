@@ -66,7 +66,7 @@
                         <p class="contenido"> <?= $comentario->getContenido(); ?> </p>
                         
                         <form action="<?=$_ENV['BASE_URL'].'detalle_viaje/'.$comentario->getId_viaje()?>" method="POST">
-                            <input type="submit" value="Ver <?php echo($comentario->getNombre_viaje());?>" class="ver_viaje">
+                            <input type="submit" value="Ver <?php echo($comentario->getNombre_viaje());?>" class="ver_viaje boton_resaltar">
                         </form>
                     </section>
 

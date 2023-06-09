@@ -44,12 +44,12 @@
                         <section class="forms_imagen">
                             <form id="form_aceptar_imagen_<?= $imagen->getId() ?>" action="<?=$_ENV['BASE_URL']?>imagen/aceptar" method="POST">
                                 <input type="hidden" name="id_imagen_a_aceptar" value="<?= $imagen->getId()?>">
-                                <input type="submit" value="Aceptar">
+                                <input type="submit" value="Aceptar" class="boton_resaltar">
                             </form>
                             
                             <form id="form_descartar_imagen_<?= $imagen->getId() ?>" action="<?=$_ENV['BASE_URL']?>imagen/descartar" method="POST">
                                 <input type="hidden" name="id_imagen_a_descartar" value="<?= $imagen->getId()?>">
-                                <input type="submit" value="Descartar">
+                                <input type="submit" value="Descartar" class="boton_resaltar">
                             </form>
                         </section> <br>
 
