@@ -126,7 +126,7 @@
 
                         <hr> <br>
 
-                        <img src="fuente/media/images/galeria/<?= $imagen->getImagen(); ?>" width="380px" height="260px" class="img_viaje"/> <br><br>
+                        <img src="fuente/media/images/galeria/<?= $imagen->getImagen(); ?>" class="imagen_resize"/> <br><br>
 
                         <section class="datos_imagen">
                             <section> 

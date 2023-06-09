@@ -43,7 +43,7 @@
                         <h1> <?= $viaje->getId(); ?>. <?= $viaje->getPais(); ?> </h1> <hr> <br>  
                         
                         <section class="seccion_viaje">
-                            <img src="../fuente/media/images/galeria/<?= $viaje->getImagen_principal(); ?>" width="250px" height="150px" />
+                            <img src="../fuente/media/images/galeria/<?= $viaje->getImagen_principal(); ?>" class="img_admin_viaje" />
                             
                             <section class="forms">
                                 <!-- creamos un formulario para borrar el viaje, que recoge el id por post; cada formulario tiene un id distinto, dependiendo del id del viaje -->

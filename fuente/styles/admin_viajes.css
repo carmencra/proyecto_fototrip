@@ -28,6 +28,8 @@
 
 .admin_viajes .viaje_admin img {
     margin: auto;
+    width: 270px;
+    height: 160px;
 }
 
 .admin_viajes .viaje_admin .forms {
@@ -62,3 +64,28 @@
 .admin_viajes .viaje_admin .contenido span:first-child {
     margin-bottom: 3%;
 } 
+
+
+
+@media screen and (min-width: 5100px) {
+    .admin_viajes .viaje_admin img {
+        width: 900px;
+        height: 500px;
+    }
+}
+
+    
+@media screen and (min-width: 3000px) and (max-width: 5099px) {
+    .admin_viajes .viaje_admin img {
+        width: 500px;
+        height: 280px;
+    }
+}
+
+    
+@media screen and (min-width: 1900px) and (max-width: 2999px) {
+    .admin_viajes .viaje_admin img {
+        width: 320px;
+        height: 200px;
+    }
+}

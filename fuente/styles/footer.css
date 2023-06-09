@@ -17,3 +17,24 @@ footer #logo {
 footer p {
     margin-bottom: 2%;
 }
+
+
+@media screen and (min-width: 5100px) {
+    footer #logo {
+        width: 650px;
+    } 
+}
+
+    
+@media screen and (min-width: 3000px) and (max-width: 5099px) {
+    footer #logo {
+        width: 400px;
+    } 
+}
+
+    
+@media screen and (min-width: 1900px) and (max-width: 2999px) {
+    footer #logo {
+        width: 250px;
+    } 
+}

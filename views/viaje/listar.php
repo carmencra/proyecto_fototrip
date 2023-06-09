@@ -144,7 +144,7 @@
 
             <?php foreach($viajes_activos as $viaje) : ?>
                 <section class="viaje">
-                    <img src="fuente/media/images/galeria/<?= $viaje->getImagen_principal(); ?>" width="320px" height="200px" class="img_viaje"/> <br>
+                    <img src="fuente/media/images/galeria/<?= $viaje->getImagen_principal(); ?>"class="img_viaje"/> <br>
 
                     <p class="precio"><b> <?= $viaje->getPrecio(); ?> € </b></p>
 
@@ -175,7 +175,7 @@
 
             <?php foreach($viajes_no_activos as $viaje) : ?>
                 <section class="viaje">
-                    <img src="fuente/media/images/galeria/<?= $viaje->getImagen_principal(); ?>" width="320px" height="200px" class="img_viaje"/> <br>
+                    <img src="fuente/media/images/galeria/<?= $viaje->getImagen_principal(); ?>"class="img_viaje"/> <br>
 
                     <p class="precio"><b> <?= $viaje->getPrecio(); ?> € </b></p>
 

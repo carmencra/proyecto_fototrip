@@ -62,6 +62,13 @@ hr {
     select {
         font-size: 45px;
     }
+
+    #flecha {
+        width: 140px;
+    }
+    #flecha:hover {
+        width: 160px;
+    }
 }
 
 @media screen and (min-width: 3000px) and (max-width: 5099px) {
@@ -74,6 +81,13 @@ hr {
     select {
         font-size: 25px;
     }
+
+    #flecha {
+        width: 95px;
+    }
+    #flecha:hover {
+        width: 107px;
+    }
 }
 
 @media screen and (min-width: 1900px) and (max-width: 2999px) {
@@ -85,5 +99,12 @@ hr {
     }
     select {
         font-size: 17px;
+    }
+
+    #flecha {
+        width: 55px;
+    }
+    #flecha:hover {
+        width: 62px;
     }
 }
