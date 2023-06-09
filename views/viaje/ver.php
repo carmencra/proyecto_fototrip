@@ -203,9 +203,9 @@
         <section class="comentarios">
             <?php foreach($comentarios as $comentario) : ?>
                 <section class="comentario" id="opinion">
-                    <h4> <?= $comentario->getNombre_usuario(); ?>
+                    <h5> <?= $comentario->getNombre_usuario(); ?>
                          <?= $comentario->getApellidos_usuario(); ?>
-                    </h4>
+                    </h5>
 
                     <hr>
 

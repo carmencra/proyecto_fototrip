@@ -66,6 +66,20 @@
 }
 
 
+@media screen and (min-width: 1900px) and (max-width: 2999px) {
+    .menu_usuario {
+      top: 2.5%;
+      font-size: 15px;
+    }
+    .boton_usuario {
+      font-size: 19px;
+    }
+
+    .contenido_lista {
+      max-width: 120px;
+    }
+}
+
 @media screen and (max-width: 999px) {
     .boton_usuario {
       font-size: 12px;

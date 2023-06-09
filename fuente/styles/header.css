@@ -90,6 +90,14 @@ header #logo_header, header #logo_desp {
 }
 
 
+@media screen and (min-width: 1900px) and (max-width: 2999px) {
+    .menu ul li {
+        width: 10em;
+        font-size: 37px;
+    }
+}
+
+
 @media screen and (max-width: 999px) {
     .menu ul li {
         width: 7em;
