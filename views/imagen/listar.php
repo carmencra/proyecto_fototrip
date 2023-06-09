@@ -82,7 +82,7 @@
             <form action="<?=$_ENV['BASE_URL']?>imagen_buscar" method="POST" enctype="multipart/form-data">
 
             <section>
-                <label for="pais">Pa&iacute;s </label>
+                <label for="pais">Pa&iacute;s: </label>
                 <input type="text" name="data[pais]" id="pais" value="<?php if (isset($_POST['data']['pais']))echo $_POST['data']['pais'];?>"/>
             </section>
 
@@ -99,7 +99,7 @@
             </section>
                 
             <section>
-                <label for="fecha">Fecha </label>
+                <label for="fecha">Fecha: </label>
             
                 <select name="data[fecha]">
                     <option value="indiferente" <?php if ($opcion_fecha == "indiferente") echo "selected"; ?>> Indiferente </option>

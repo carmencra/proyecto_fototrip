@@ -55,7 +55,7 @@
     color: #2CCBCB;
 }
 
-.imagen .imagen_resize {
+.imagen .imagen_resize, .imagen_viaje .imagen_resize {
     width: 380px;
     height: 260px;
 }
@@ -79,9 +79,13 @@
 }
 
 @media screen and (min-width: 5100px) {
-    .imagen .imagen_resize, .mi_viaje .imagen_resize {
-        width: 1200px;
-        height: 800px;
+    .buscador_imagenes #pais  {
+        width: 280px;
+    }
+    
+    .imagen_resize {
+        width: 1200px !important;
+        height: 800px !important;
     }
     .imagen .datos_imagen img {
         width: 80px;
@@ -90,9 +94,13 @@
 
     
 @media screen and (min-width: 3000px) and (max-width: 5099px) {
-    .imagen .imagen_resize, .mi_viaje .imagen_resize {
-        width: 680px;
-        height: 470px;
+    .buscador_imagenes #pais  {
+        width: 150px;
+    }
+    
+    .imagen_resize {
+        width: 680px !important;
+        height: 470px !important;
     }
     .imagen .datos_imagen img {
         width: 50px;
@@ -101,9 +109,13 @@
 
     
 @media screen and (min-width: 1900px) and (max-width: 2999px) {
-    .imagen .imagen_resize, .mi_viaje .imagen_resize {
-        width: 470px;
-        height: 290px;
+    .buscador_imagenes #pais  {
+        width: 115px;
+    }
+
+    .imagen_resize {
+        width: 470px !important;
+        height: 290px !important;
     }
     .imagen .datos_imagen img {
         width: 45px;

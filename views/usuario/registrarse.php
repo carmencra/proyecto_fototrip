@@ -15,7 +15,7 @@
                 <form action="<?=$_ENV['BASE_URL']?>usuario/registro" method="POST">
     
                     <label for="email">Email: </label>
-                    <input type="email" name="data[email]" value="<?php if (isset($_POST['data']['email']))echo $_POST['data']['email'];?>" style="width:300px">
+                    <input type="email" name="data[email]" value="<?php if (isset($_POST['data']['email']))echo $_POST['data']['email'];?>" class="input_email">
                     <br><span style="color:red"> <?php if(isset($_SESSION['err_ema'])) echo  $_SESSION['err_ema']?> </span>
     
                     <br><br>
@@ -59,7 +59,7 @@
             <form action="<?=$_ENV['BASE_URL']?>usuario/login" method="POST">
 
                 <label for="email">Email: </label>
-                <input type="email" name="data[email]" value="<?php if (isset($_POST['data']['email']))echo $_POST['data']['email'];?>" style="width:300px">
+                <input type="email" name="data[email]" value="<?php if (isset($_POST['data']['email']))echo $_POST['data']['email'];?>" class="input_email">
                 <br><span style="color:red"> <?php if(isset($_SESSION['err_ema'])) echo  $_SESSION['err_ema']?> </span>
 
                 <br><br>

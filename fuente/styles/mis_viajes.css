@@ -62,6 +62,10 @@
     border-color: #2CCBCB;
 }
 
+.mis_viajes .display .mi_viaje .forms input:hover {
+    font-size: 14px;
+}
+
 .mis_viajes .display .mi_viaje .contenido {
     display: flex;
     flex-wrap: wrap;

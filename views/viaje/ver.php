@@ -185,7 +185,7 @@
         <section class="imagenes">
             <?php foreach($imagenes as $imagen) : ?>
                 <section class="imagen_viaje">
-                    <img src="../fuente/media/images/galeria/<?= $imagen->getImagen();?>" width="400px" height="260px" />
+                    <img src="../fuente/media/images/galeria/<?= $imagen->getImagen();?>" class="imagen_resize" />
 
                     <p class="usuario"> <?= $imagen->getUsuario(); ?> </p>                        
                 </section>
