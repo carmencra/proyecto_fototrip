@@ -37,7 +37,7 @@
             <section class="comentarios">
                 <?php foreach($comentarios as $comentario) : ?>
                     <section class="comentario">
-                        <h4> <?= $comentario->getUsuario(); ?> </h4>
+                        <h5> <?= $comentario->getUsuario(); ?> - <?= $comentario->getNombre_viaje(); ?> </h5>
                         <hr>
 
                         <p class="contenido"> <?= $comentario->getContenido(); ?> </p>

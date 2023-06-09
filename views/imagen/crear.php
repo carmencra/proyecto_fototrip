@@ -2,22 +2,17 @@
 
 <?php require_once('views/layout/header_sub_main.php'); ?>
 
-<!-- si se ha intentado guardar una imagen, nos muestra el resultado de la operación  -->
-<?php 
-    if(isset($_SESSION['imagen_creada'])):
-        if ($_SESSION['imagen_creada'] == true) : ?>
-            <script type="text/javascript">
-                alert("Se ha guardado la imagen.");
-                window.close();
-            </script>
-            
-        <?php else: ?>
-            <script type="text/javascript">
-                alert("Ha habido un error al guardar la imagen.");
-                window.close();
-            </script>
-        <?php endif;
-    endif; 
+<!-- si se ha intentado guardar una imagen, muestra si ha ocurrido algún error, si se completa, lo indica en la página de administrar  -->
+<?php use Utils\Utils;
+    if(isset($_SESSION['imagen_creada']) && $_SESSION['imagen_creada'] == false): ?>
+        <script type="text/javascript">
+            alert("Ha habido un error al guardar la imagen.");
+            window.close();
+        </script>
+    
+        <?php
+        Utils::deleteSession('imagen_creada');
+     endif;
 ?>
 
 <!-- cargamos la ruta de la página actual por si viniera de otra ruta -->
@@ -143,9 +138,4 @@
 </script>
 
 
-<?php 
-    use Utils\Utils;
-    Utils::deleteSession('imagen_creada');
-
-    require_once('views/layout/footer_sub_main.php'); 
-?>
+<?php require_once('views/layout/footer_sub_main.php'); ?>

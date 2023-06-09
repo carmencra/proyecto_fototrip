@@ -2,6 +2,28 @@
 
 <?php require_once('views/layout/header_main.php'); ?>
 
+<?php use Utils\Utils;
+    if(isset($_SESSION['imagen_creada']) && $_SESSION['imagen_creada'] == true): ?>
+        <script type="text/javascript">
+            alert("Se ha guardado la imagen.");
+            window.close();
+        </script>
+        
+        <?php
+        Utils::deleteSession('imagen_creada');
+    endif; 
+?>
+<?php 
+    if(isset($_SESSION['viaje_creado']) && $_SESSION['viaje_creado'] == true): ?>
+        <script type="text/javascript">
+            alert("Se ha guardado el viaje.");
+            window.close();
+        </script>
+        
+        <?php
+        Utils::deleteSession('viaje_creado');
+    endif;
+?>
 
 <main>
     <section class="contenido_main">

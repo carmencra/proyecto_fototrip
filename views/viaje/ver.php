@@ -2,12 +2,11 @@
 
 <!-- cargamos la ruta de la página actual por si viniera de otra ruta -->
 <script>
-    console.log(window.location.href);
-    var baseUrl = '<?= $_ENV['BASE_URL']?>';
+    var base_url = '<?= $_ENV['BASE_URL']?>';
     var ruta_pagina = 'detalle_viaje/'.$viaje->getId();
 
-    if (!window.location.href.startsWith(baseUrl) || !window.location.href.endsWith(ruta_pagina)) {
-        window.location.href = baseUrl + ruta_pagina;
+    if (!window.location.href.startsWith(base_url) || !window.location.href.endsWith(ruta_pagina)) {
+        window.location.href = base_url + ruta_pagina;
     }
 </script>
 
@@ -20,7 +19,7 @@
 
         <?php 
         // si el viaje está activo;
-        if ($viaje->getActivo() == true) :
+        if ($viaje->getActivo() == true) {
 
             // hay un usuario, que no sea el admin;
             if(isset($_SESSION['usuario']) && !isset($_SESSION['admin'])):
@@ -32,10 +31,15 @@
                         <input type="submit" value="Inscribirse">
                     </form>
                 <?php else :?> <br><br>
-                    <span> (Ya inscrito)</span>
+                    <span> (Ya inscrito) </span>
                 <?php endif;
             endif; 
-        endif; ?>
+        }
+        // si no está activo, lo dice
+        else if ($viaje->getActivo() == false) : ?> <br><br>
+            <span> (Viaje no activo) </span>
+
+        <?php endif; ?>
         
        
 

@@ -2,41 +2,25 @@
 
 <?php require_once('views/layout/header_sub_main.php'); ?>
 
-<!-- si se ha intentado guardar una viaje, nos muestra el resultado de la operación  -->
-<?php 
-    if(isset($_SESSION['viaje_creado'])):
-        if ($_SESSION['viaje_creado'] == true) : ?>
+<!-- si se ha intentado guardar un viaje, muestra si ha ocurrido algún error, si se completa, lo indica en la página de administrar  -->
+<?php use Utils\Utils;
+    if(isset($_SESSION['viaje_creado']) && $_SESSION['viaje_creado'] == false):
+        if (isset($_SESSION['error_gastos'])): ?>
             <script type="text/javascript">
-                alert("Se ha guardado el viaje.");
+                alert("Ha habido un error al guardar los gastos del viaje.");
                 window.close();
             </script>
-            
-        <?php else: 
-            if (isset($_SESSION['error_gastos'])): ?>
-                <script type="text/javascript">
-                    alert("Ha habido un error al guardar los gastos del viaje.");
-                    window.close();
-                </script>
-            <?php else: ?>
-                <script type="text/javascript">
-                    alert("Ha habido un error al guardar el viaje.");
-                    window.close();
-                </script>
-        <?php endif;
-        endif;
+        <?php else: ?>
+            <script type="text/javascript">
+                alert("Ha habido un error al guardar el viaje.");
+                window.close();
+            </script>
+        <?php endif; 
+
+        Utils::deleteSession('viaje_creado');
+
     endif; 
 ?>
-
-<!-- cargamos la ruta de la página actual por si viniera de otra ruta  -->
-<!-- <script>
-    var base_url = '< ?= $_ENV['BASE_URL']?>';
-    var ruta_pagina = 'viaje/crear';
-
-    if (!window.location.href.startsWith(base_url) || !window.location.href.endsWith(ruta_pagina)) {
-        window.location.href = base_url + ruta_pagina;
-    }
-</script> -->
-
 
 <?php        
     // guardamos los valores del formulario
@@ -168,9 +152,4 @@
     </section>
 
     
-<?php 
-    use Utils\Utils;
-    Utils::deleteSession('viaje_creado');
-
-    require_once('views/layout/footer_sub_main.php'); 
-?>
+<?php require_once('views/layout/footer_sub_main.php'); ?>

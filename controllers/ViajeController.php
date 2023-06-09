@@ -223,9 +223,16 @@ class ViajeController {
                     $guardar_gastos= $this->gastos_controller->guardar($id_viaje, $gastos);
                     if ($guardar_gastos) {
                         $_SESSION['viaje_creado']= true;
+                        // borra las sesiones de errores y los datos del viaje guardado
                         $this->borra_sesiones_errores();
+                        $this->borrar_datos_viaje();
+                        header("Location: ". $_ENV['BASE_URL']."administrar");
                     }
                     else {
+                        // si no se guardan bien los gastos, se borra el viaje porque está incompleto
+                        $id_viaje= $this->repository->obtener_id_ultimo_viaje();
+                        $this->repository->borrar($id);
+                        $_SESSION['viaje_creado']= false;
                         $_SESSION['error_gastos']= true;
                     }
                 }    
@@ -237,7 +244,7 @@ class ViajeController {
         }
     }
 
-    // borra las sesiones de errores al guardar el viaje
+    // borra las sesiones de errores al guardar el viaje 
     public function borra_sesiones_errores(): void {
         Utils::deleteSession('err_pai');
         Utils::deleteSession('err_feci');
@@ -247,6 +254,13 @@ class ViajeController {
         Utils::deleteSession('err_des');
         Utils::deleteSession('err_inf');
         Utils::deleteSession('err_img');
+    }
+
+    // borra los datos del viaje guardada
+    public function borrar_datos_viaje(): void {
+        if (isset($_POST['data'])) {
+            unset($_POST['data']);
+        }
     }
 
     // valida que todos los campos necesarios para la creación del viaje, estén validados correctamente
