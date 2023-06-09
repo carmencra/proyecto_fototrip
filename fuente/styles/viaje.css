@@ -163,3 +163,29 @@
     }
 }
 
+@media screen and (max-width: 1200px) {
+    .buscador_viajes form {
+        padding: 5%;
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .buscador_viajes form {
+        border-radius: 50px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .viaje .img_viaje {
+        width: 300px !important;
+        height: 180px !important;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .viaje .img_viaje {
+        width: 280px !important;
+        height: 130px !important;
+    }
+}

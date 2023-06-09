@@ -121,3 +121,31 @@
         width: 45px;
     }
 }
+
+@media screen and (max-width: 1200px) {
+    .buscador_imagenes form {
+        width: 90%;
+        padding: 5%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .buscador_imagenes form {
+        border-radius: 50px;
+    }
+}
+
+
+@media screen and (max-width: 450px) {
+    .imagen_resize {
+        width: 300px !important;
+        height: 180px !important;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .imagen_resize {
+        width: 280px !important;
+        height: 130px !important;
+    }
+}
