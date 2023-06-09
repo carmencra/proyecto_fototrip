@@ -126,3 +126,15 @@ hr {
         width: 62px;
     }
 }
+
+@media screen and (min-width: 1901px) {
+    main {
+        min-height: 60vh;
+    }
+}
+
+@media screen and (max-width: 1900px) {
+    main {
+        min-height: 50vh;
+    }
+}

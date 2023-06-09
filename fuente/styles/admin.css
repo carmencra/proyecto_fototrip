@@ -38,3 +38,18 @@
         margin-top: 7%;
     }
 }
+
+@media screen  and (max-width: 600px) {
+    .admin section {
+        min-width: 35vw;
+        padding-bottom: 5%;
+    }
+}
+
+
+@media screen  and (max-width: 400px) {
+    .admin section {
+        min-width: 45vw;
+        padding-bottom: 8%;
+    }
+}

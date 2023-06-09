@@ -136,3 +136,14 @@
     height: 200px;
     }
 }
+
+@media screen  and (max-width: 720px) {
+    .mis_viajes .display {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .mis_viajes .display .mi_viaje {
+        max-width: 90%;
+    }
+}

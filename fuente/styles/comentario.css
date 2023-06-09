@@ -33,3 +33,10 @@
     font-size: small;
     text-decoration: underline;
 }
+
+@media screen  and (max-width: 600px) {
+    .comentario {
+        padding: 0.1% 5% 5% 5%;
+    }
+
+}

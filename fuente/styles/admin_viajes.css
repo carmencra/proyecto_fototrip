@@ -89,3 +89,16 @@
         height: 200px;
     }
 }
+
+
+@media screen  and (max-width: 750px) {
+    .admin_viajes {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .admin_viajes .viaje_admin {
+        max-width: 90%;
+    }
+
+}
