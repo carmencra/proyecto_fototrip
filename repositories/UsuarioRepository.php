@@ -120,6 +120,31 @@ class UsuarioRepository {
         else {return false;}
     }
 
+    public function obtener_nombre($email): string | bool {
+        $cons= $this->db->prepara("SELECT nombre FROM usuarios WHERE email=:email");
+
+        $cons->bindParam(':email', $email);
+
+        try {
+            $cons->execute();
+            if ($cons && $cons->rowCount() == 1) {
+                $id= $cons->fetch()['nombre'];
+                $result = $id;
+            }
+            else {
+                $result= false;
+            }
+        }
+        catch(PDOEXception $err) {
+            $result= false;
+        }
+        finally {
+            $cons= null;
+            unset($cons); 
+        }
+        return $result;
+    }
+
     // devuelve si el usuario logueado es admin o no
     public function es_admin($email): bool {
         $cons= $this->db->prepara("SELECT id FROM usuarios WHERE email= :email and rol= :rol");

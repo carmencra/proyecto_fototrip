@@ -21,7 +21,7 @@
             <!-- <div id="lista_usuario" class="contenido_lista"> -->
             <div class="menu_usuario_desplegado">
                 <li> <a href="<?=$_ENV['BASE_URL']?>misviajes">Mis viajes</a> </li>
-                <li> <a href="<?=$_ENV['BASE_URL']?>usuario/cerrar">Salir</a> </li>
+                <li> <a href="<?=$_ENV['BASE_URL']?>usuario/cerrar">Salir </a> </li>
             </div>
             <!-- </div> -->
     <?php endif;?>

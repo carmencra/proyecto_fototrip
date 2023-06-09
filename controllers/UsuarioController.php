@@ -275,6 +275,7 @@ class UsuarioController{
                         // si está confirmado, podrá iniciar sesión
                         if ($this->repository->esta_confirmado($datos['email'])) {
                             $_SESSION['usuario']= $datos['email'];
+                            $this->guarda_nombre_logueado($datos['email']);
                             // se comprueba si es admin
                             if ($this->repository->es_admin($datos['email'])) {
                                 $_SESSION['admin']= true;
@@ -323,6 +324,11 @@ class UsuarioController{
         }
     }
 
+    // guarda el nombre del usuario para mostrarlo en vez del email
+    public function guarda_nombre_logueado($email): void {
+        $nombre= $this->repository->obtener_nombre($email);
+        $_SESSION['nombre_usuario']= $nombre;
+    }
 
     //cierra la sesión del usuario logueado
     public function cerrar(): void {
@@ -332,7 +338,6 @@ class UsuarioController{
             header("Location: ". $_ENV['BASE_URL']);
         }
     }
-
 
     // lleva al índice de administrar (solo para el admin de la página)
     public function administrar(): void {
