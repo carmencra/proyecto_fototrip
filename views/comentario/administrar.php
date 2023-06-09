@@ -38,13 +38,13 @@
             <section class="comentarios">
                 <?php foreach($comentarios as $comentario) : ?>
                     <section class="comentario">
-                        <h4> <?= $comentario->getUsuario(); ?> </h4>
+                        <h5> <?= $comentario->getUsuario(); ?> </h5>
                         <hr>
 
                         <p class="contenido"> <?= $comentario->getContenido(); ?> </p>
                         
                         <!-- creamos un formulario para borrar el comentario, que recoge el id por post; cada formulario tiene un id distinto, dependiendo del id del comentario -->
-                        <form id="form_borrar_comentario_<?= $comentario->getId() ?>" action="<?=$_ENV['BASE_URL']?>comentario/borrar" method="POST">
+                        <form id="form_borrar_comentario_<?= $comentario->getId() ?>" action="<?=$_ENV['BASE_URL']?>comentario/borrar" method="POST" class="form_borrar">
                             <input type="hidden" name="id_comentario_a_borrar" value="<?= $comentario->getId()?>">
                             <input type="submit" value="Borrar">
                         </form>

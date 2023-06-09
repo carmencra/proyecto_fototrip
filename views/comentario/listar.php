@@ -57,17 +57,16 @@
 
                 <?php foreach($comentarios as $comentario) : ?>
                     <section class="comentario">
-                        <h4> <?= $comentario->getNombre_usuario(); ?>
+                        <h5> <?= $comentario->getNombre_usuario(); ?>
                             <?= $comentario->getApellidos_usuario(); ?>
-                        </h4>
+                        </h5>
 
                         <hr>
 
                         <p class="contenido"> <?= $comentario->getContenido(); ?> </p>
-
                         
-                        <form action="<?=$_ENV['BASE_URL'].'viaje/ver?id='.$comentario->getId_viaje()?>" method="POST">
-                            <input class="ver_viaje" type="submit" value="ver <?php echo($comentario->getNombre_viaje());?>">
+                        <form action="<?=$_ENV['BASE_URL'].'detalle_viaje/'.$comentario->getId_viaje()?>" method="POST">
+                            <input type="submit" value="Ver <?php echo($comentario->getNombre_viaje());?>" class="ver_viaje">
                         </form>
                     </section>
 

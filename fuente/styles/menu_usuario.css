@@ -1,69 +1,73 @@
 /*Botón*/
 .boton_usuario {
-  background-color: #2CCBCB;
-  border: none;
-  font-weight: bold;
-  padding: 15px;
-  border-radius: 10px 10px 10px 10px;
-  font-size: 14px;
-  border: none;
-  cursor: pointer;
+    background-color: #2CCBCB;
+    border: none;
+    font-weight: bold;
+    padding: 15px;
+    border-radius: 10px 10px 10px 10px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
 }
 
 /*Botón hover y focus*/
 .boton_usuario:hover {
-  text-decoration: underline;
-  background-color: rgba(255, 255, 255, 0.8);
+    text-decoration: underline;
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 .boton_usuario a {
-  text-decoration: none;
-  color: black;
+    text-decoration: none;
+    color: black;
 }
 
 .boton_usuario a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 /*Posición del contenedor*/
-.menu_usuario{
-  /* position: relative;
-  display: inline-block;
-  margin-right: 1%; */
-  position: fixed;
-  left: auto;
-  right: 1%;
-  top: 3.5%;
-  font-size: 14px;
- }
+.menu_usuario {
+    position: fixed;
+    left: auto;
+    right: 1%;
+    top: 3.5%;
+    font-size: 12px;
+}
 
 /*submenu*/
-.contenido_lista{
-  display: none;
-  position: absolute;
-  z-index: 1;
-  max-width: 95px;
-  text-align: center;
-  margin: auto;
-  left: 10%;
-  right: 10%;
+.contenido_lista {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    max-width: 95px;
+    text-align: center;
+    margin: auto;
+    left: 5%;
+    right: 5%;
 }
 
-.contenido_lista a{
-  border-radius: 7px 7px 7px 7px;
-  color: black;
-  padding: 9px 13px;
-  display: block;
-  background-color: rgba(44, 203, 203, 0.8);
-  border: 1px solid black;
-  text-decoration: none;
+.contenido_lista a {
+    border-radius: 7px 7px 7px 7px;
+    color: black;
+    padding: 9px 13px;
+    display: block;
+    background-color: rgba(44, 203, 203, 0.8);
+    border: 1px solid black;
+    text-decoration: none;
 }
 
-.contenido_lista a:hover{
-  text-decoration: underline;
-  background-color: rgba(255, 255, 255, 0.8);
+.contenido_lista a:hover {
+    text-decoration: underline;
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 .show {
-  display: block;
+    display: block;
+}
+
+
+@media screen and (max-width: 999px) {
+    .boton_usuario {
+      font-size: 12px;
+    }
 }

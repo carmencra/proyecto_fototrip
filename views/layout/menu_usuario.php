@@ -9,7 +9,7 @@
     // si es el admin, muestra la pantalla de administrar
     if (isset($_SESSION['admin'])): ?>
         <button onclick="despliega_usuario()" class="boton_usuario">
-         <?php if(isset($_SESSION['usuario'])) { echo $_SESSION['nombre_usuario']; }?> 
+         <?php if(isset($_SESSION['usuario'])) { echo $_SESSION['usuario']; }?> 
         </button>
             <div id="lista_usuario" class="contenido_lista">
                 <a href="<?=$_ENV['BASE_URL']?>administrar">Administrar</a>
