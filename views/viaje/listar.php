@@ -32,9 +32,6 @@
             
         <!-- menú desplegado -->
         <ul class="lista_despegable">
-            <div class="usuario_activo"> 
-                
-            </div>
             <li class="active"> <a href="<?=$_ENV['BASE_URL']?>">Inicio</a> </li>
             <li> <a href="<?=$_ENV['BASE_URL']?>opiniones">Opiniones </a> </li>
             <li> <a href="<?=$_ENV['BASE_URL']?>galeria">Galer&iacute;a </a> </li>

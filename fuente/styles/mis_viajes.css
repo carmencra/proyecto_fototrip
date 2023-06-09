@@ -78,6 +78,12 @@
     margin-bottom: 3%;
 } 
 
+.mis_viajes .mi_viaje .info_publicar {
+    text-align: center;
+    color: rgb(222, 222, 105);
+    margin-top: 5%;
+}
+
 
 
 .mis_imagenes .imagen {

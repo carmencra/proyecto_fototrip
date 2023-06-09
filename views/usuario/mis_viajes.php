@@ -83,6 +83,10 @@
                                 <span> Fotograf&iacute;a: <?= $viaje->getNivel_fotografia(); ?> </span>
                                 <span> F&iacute;sico: <?= $viaje->getNivel_fisico(); ?> </span>
                             </section>
+
+                            <?php if ($viaje->getActivo= true) : ?>
+                                <p class="info_publicar">( Podr&aacute;s publicar im&aacute;genes y comentarios sobre el viaje cuando este se haya realizado. )</p>
+                            <?php endif; ?>
                         
                         </section>
 

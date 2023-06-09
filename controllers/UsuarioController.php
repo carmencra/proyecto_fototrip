@@ -83,7 +83,7 @@ class UsuarioController{
         $confirmado= $this->repository->confirma_cuenta($id);
 
         if ($confirmado) {
-            $_SESSION['usuario']= $_SESSION['correo_a_confirmar'];$this->guarda_nombre_logueado($datos['email']);
+            $_SESSION['usuario']= $_SESSION['correo_a_confirmar'];$this->guarda_nombre_logueado($_SESSION['usuario']);
 
             // borramos sesiones de errores y redireccionamos al inicio
             $this->borra_sesiones_errores();
@@ -327,6 +327,7 @@ class UsuarioController{
     // guarda el nombre del usuario para mostrarlo en vez del email
     public function guarda_nombre_logueado($email): void {
         $nombre= $this->repository->obtener_nombre($email);
+        
         // si el nombre es muy corto añade espacios para que el botón de usuario no quede muy pequeño
         if (strlen($nombre) < 5) {
             $_SESSION['nombre_usuario']= '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$nombre.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';

@@ -181,11 +181,4 @@ header #logo_header, header #logo_desp {
         color: rgb(171, 43, 43);
     }
 
-    .usuario_activo {
-        position: absolute;
-        top: 3em;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
 }

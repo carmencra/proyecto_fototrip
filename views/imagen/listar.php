@@ -32,13 +32,14 @@
             
         <!-- menú desplegado -->
         <ul class="lista_despegable">
-            <div class="usuario_activo"> <?php if(isset($_SESSION['usuario'])){ echo '( '. $_SESSION['usuario'].' )'; } ?>  </div>
             <li> <a href="<?=$_ENV['BASE_URL']?>">Inicio</a> </li>
             <li> <a href="<?=$_ENV['BASE_URL']?>opiniones">Opiniones </a> </li>
             <li class="active"> <a href="<?=$_ENV['BASE_URL']?>galeria">Galer&iacute;a </a> </li>
 
             <div>
                 <?php require('views/layout/menu_usuario_desplegado.php'); ?>
+                
+                <?php if(isset($_SESSION['usuario'])) { echo '( '. $_SESSION['usuario']. ' )' ; }?>  
             </div>
         </ul>
     </nav>    
