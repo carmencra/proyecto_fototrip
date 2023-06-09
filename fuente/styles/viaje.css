@@ -45,7 +45,7 @@
 
 .buscador_viajes #boton:hover {
     padding: 0.5%;
-    font-size: medium;
+    font-size: 14px;
     text-decoration: underline;
 }
 
@@ -86,7 +86,7 @@
 
 .viaje .ver_mas:hover {
     padding: 1%;
-    font-size: medium;
+    font-size: 14px;
     text-decoration: underline;
 }
 
@@ -102,3 +102,50 @@
     text-transform: uppercase;
     color: #2CCBCB;
 }
+
+
+
+@media screen and (min-width: 3000px) {
+    .buscador_viajes form {
+        border: 6px solid black;
+    }
+
+    .buscador_viajes #pais  {
+        width: 150px;
+    }
+    
+    .buscador_viajes #min , .buscador_viajes #max  {
+        width: 100px;
+    }
+    
+    .buscador_viajes #fisico , .buscador_viajes #foto {
+        width: 110px;
+    }
+
+    .viaje .ver_mas:hover, .buscador_viajes #boton:hover {
+        font-size: 30px;
+    }
+}
+
+@media screen and (min-width: 1900px) and (max-width: 2999px) {
+    .buscador_viajes form {
+        border: 4px solid black;
+    }
+
+    .buscador_viajes #pais  {
+        width: 115px;
+    }
+    
+    .buscador_viajes #min , .buscador_viajes #max  {
+        width: 80px;
+    }
+    
+    .buscador_viajes #fisico , .buscador_viajes #foto {
+        width: 85px;
+    }
+
+    .viaje .ver_mas:hover, .buscador_viajes #boton:hover {
+        font-size: 21px;
+    }
+}
+

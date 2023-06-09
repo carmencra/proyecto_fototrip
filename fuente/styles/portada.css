@@ -55,3 +55,29 @@
     font-size: medium;
     text-decoration: underline;
 }
+
+
+
+
+@media screen and (min-width: 3000px) {
+    .portada h1 {
+        font-size: 120px;
+    }
+    
+        
+    .portada h3 {
+        font-size: 50px;
+    } 
+}
+
+
+@media screen and (min-width: 1900px) and (max-width: 2999px) {
+    .portada h1 {
+        font-size: 80px;
+    }
+    
+        
+    .portada h3 {
+        font-size: 31px;
+    } 
+}
