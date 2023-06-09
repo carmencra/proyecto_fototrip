@@ -1,3 +1,15 @@
+body {
+    font-family: 'Dosis', sans-serif;
+    font-size: 16px;
+    text-align: justify;
+    margin: 0%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Headland One', serif;
+}
+
+
 main {
     position: relative;
     padding: 3% 3% 4% 3%;
