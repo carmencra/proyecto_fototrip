@@ -58,12 +58,20 @@
 
 
 
+@media screen and (min-width: 5100px) {
+    .portada h1 {
+        font-size: 210px;
+    }
+        
+    .portada h3 {
+        font-size: 70px;
+    } 
+}
 
-@media screen and (min-width: 3000px) {
+@media screen and (min-width: 3000px) and (max-width: 5099px) {
     .portada h1 {
         font-size: 120px;
     }
-    
         
     .portada h3 {
         font-size: 50px;
@@ -75,7 +83,6 @@
     .portada h1 {
         font-size: 80px;
     }
-    
         
     .portada h3 {
         font-size: 31px;

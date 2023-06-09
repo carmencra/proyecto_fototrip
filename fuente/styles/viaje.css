@@ -105,7 +105,29 @@
 
 
 
-@media screen and (min-width: 3000px) {
+@media screen and (min-width: 5100px) {
+    .buscador_viajes form {
+        border: 8px solid black;
+    }
+
+    .buscador_viajes #pais  {
+        width: 280px;
+    }
+    
+    .buscador_viajes #min , .buscador_viajes #max  {
+        width: 180px;
+    }
+    
+    .buscador_viajes #fisico , .buscador_viajes #foto {
+        width: 140px;
+    }
+
+    .viaje .ver_mas:hover, .buscador_viajes #boton:hover {
+        font-size: 50px;
+    }
+}
+
+@media screen and (min-width: 3000px) and (max-width: 5099px) {
     .buscador_viajes form {
         border: 6px solid black;
     }

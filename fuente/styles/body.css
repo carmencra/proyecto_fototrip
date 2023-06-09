@@ -51,7 +51,20 @@ hr {
 }
 
 
-@media screen and (min-width: 3000px) {
+
+@media screen and (min-width: 5100px) {
+    body {
+        font-size: 55px;
+    }
+    input {
+        font-size: 50px;
+    }
+    select {
+        font-size: 45px;
+    }
+}
+
+@media screen and (min-width: 3000px) and (max-width: 5099px) {
     body {
         font-size: 33px;
     }
