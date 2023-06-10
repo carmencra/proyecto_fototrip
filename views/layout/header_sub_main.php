@@ -32,7 +32,7 @@
     
     <nav class="menu">
         <ul>
-            <li> <a href="<?=$_ENV['BASE_URL']?>">Inicio</a> </li>
+            <li> <a href="<?=$_ENV['BASE_URL']?>">Viajes</a> </li>
             <li> <a href="<?=$_ENV['BASE_URL']?>opiniones">Opiniones </a> </li>
             <li> <a href="<?=$_ENV['BASE_URL']?>galeria">Galer&iacute;a </a> </li>
         </ul>
@@ -58,7 +58,7 @@
             
        <!-- menú desplegado -->
        <ul class="lista_despegable">
-            <li> <a href="<?=$_ENV['BASE_URL']?>">Inicio</a> </li>
+            <li> <a href="<?=$_ENV['BASE_URL']?>">Viajes</a> </li>
             <li> <a href="<?=$_ENV['BASE_URL']?>opiniones">Opiniones </a> </li>
             <li> <a href="<?=$_ENV['BASE_URL']?>galeria">Galer&iacute;a </a> </li>
 
