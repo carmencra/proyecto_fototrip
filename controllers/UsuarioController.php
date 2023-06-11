@@ -142,7 +142,7 @@ class UsuarioController{
             $_SESSION['err_cla']= "*La clave debe estar rellena.";
             $result= false;
         }
-        else {
+        else if (!empty($datos['nombre']) && !empty($datos['apellidos']) && !empty($datos['email']) && !empty($datos['clave'])){
             $result= true;
         }
         return $result;
