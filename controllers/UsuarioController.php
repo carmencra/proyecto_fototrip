@@ -298,7 +298,7 @@ class UsuarioController{
                     }
                 }
                 else {
-                    $_SESSION['err_ema']= "*Ese correo no est&aacute; .";
+                    $_SESSION['err_ema']= "*Ese correo no est&aacute; registrado.";
                     $this->pages->render('usuario/registrarse');
                 }
             }
