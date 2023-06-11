@@ -28,7 +28,7 @@ session_start();
     <link rel="icon" href="fuente/media/images/logo.png" alt="logo fototrip">
 
     <!-- estilos -->
-    <link rel="stylesheet" href="fuente/styles/fototrip.css">
+    <link rel="stylesheet" href="fuente/styles/aa_fototrip.css">
     
     <!-- margen portada y contenido respecto al header -->
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
