@@ -5,9 +5,10 @@
     <!-- añadimos los estilos y scripts -->
     <link rel="stylesheet" href="../fuente/styles/fototrip.css">
 
-     <!-- margen main con video -->
-     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
-    <script src="../fuente/scripts/responsive_video_body.js"></script>
+    
+    <!-- margen portada y contenido respecto al header -->
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+    <script src="../fuente/scripts/responsive_portada_contenido.js"></script>
 
     <!-- flecha para subir al inicio -->
     <script src="../fuente/scripts/flecha_subir.js"></script>
