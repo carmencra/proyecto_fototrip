@@ -41,45 +41,45 @@
 
             <section class="antes_desc">
                 <div>
-                    <label for="pais">Pa&iacute;s: </label>
+                    <label for="data[pais]">Pa&iacute;s: </label>
                     <input type="text" name="data[pais]" value="<?php if (isset($_POST['data']['pais']))echo $_POST['data']['pais'];?>">
                     <br><span style="color:red"> <?php if(isset($_SESSION['err_pai'])) echo  $_SESSION['err_pai']?> </span>
                 </div>
 
                 <div>
-                    <label for="precio">Precio: </label>
+                    <label for="data[precio]">Precio: </label>
                     <input type="number" name="data[precio]" value="<?php if (isset($_POST['data']['precio']))echo $_POST['data']['precio'];?>" style="width:60px" min="1" oninput="this.value= !!this.value && Math.abs(this.value) >= 1 ? Math.abs(this.value) : null"> €
                     <br><span style="color:red"> <?php if(isset($_SESSION['err_pre'])) echo  $_SESSION['err_pre']?> </span>
                 </div>
 
                 <div>
-                    <label for="fecha_inicio">Fecha inicio: </label>
+                    <label for="data[fecha_inicio]">Fecha inicio: </label>
                     <input type="date" name="data[fecha_inicio]" value="<?php if (isset($_POST['data']['fecha_inicio']))echo $_POST['data']['fecha_inicio'];?>">
                     <br><span style="color:red"> <?php if(isset($_SESSION['err_feci'])) echo $_SESSION['err_feci']?> </span>
                 </div>
 
                 <div>
-                    <label for="fecha_fin">Fecha fin: </label>
+                    <label for="data[fecha_fin]">Fecha fin: </label>
                     <input type="date" name="data[fecha_fin]" value="<?php if (isset($_POST['data']['fecha_fin']))echo $_POST['data']['fecha_fin'];?>">
                     <br><span style="color:red"> <?php if(isset($_SESSION['err_fecf'])) echo  $_SESSION['err_fecf']; if(isset($_SESSION['err_via'])) echo $_SESSION['err_via']?> </span>
                 </div>
                
             </section> <br>
             
-            <label for="descripcion">Descripci&oacute;n: </label> <br>
+            <label for="data[descripcion]">Descripci&oacute;n: </label> <br>
             <textarea name="data[descripcion]" rows='1'><?php if (isset($_POST['data']['descripcion'])) echo $_POST['data']['descripcion']; ?></textarea>
             <br><span style="color:red"> <?php if(isset($_SESSION['err_des'])) echo  $_SESSION['err_des']?> </span>
             
             <br><br>
             
-            <label for="informacion">Informaci&oacute;n: </label> <br>
+            <label for="data[informacion]">Informaci&oacute;n: </label> <br>
             <textarea name="data[informacion]" rows='3'><?php if (isset($_POST['data']['informacion'])) echo $_POST['data']['informacion']; ?></textarea>
             <br><span style="color:red"> <?php if(isset($_SESSION['err_inf'])) echo $_SESSION['err_inf']?> </span>
 
 
             <section class="select">
                 <div>
-                    <label for="exigencia">Exigencia f&iacute;sica: </label>
+                    <label for="data[exigencia]">Exigencia f&iacute;sica: </label>
                     <select name="data[exigencia]">
                         <option value="muy_facil" <?php if (isset($_POST['data']['descripcion']) && ($_SESSION['data_exigencia'] == "muy_facil")) echo "selected"; ?>> Muy f&aacute;cil </option>
                         <option value="novato" <?php if (isset($_POST['data']['descripcion']) && ($_SESSION['data_exigencia'] == "novato")) echo "selected"; ?>> Novato </option>
@@ -90,7 +90,7 @@
                 </div>
 
                 <div>
-                    <label for="nivel">Nivel fotogr&aacute;fico: </label>
+                    <label for="data[nivel]">Nivel fotogr&aacute;fico: </label>
                     <select name="data[nivel]">
                         <option value="muy_facil" <?php if (isset($_POST['data']['descripcion']) && ($_SESSION['data_nivel'] == "muy_facil")) echo "selected"; ?>> Muy f&aacute;cil </option>
                         <option value="novato" <?php if (isset($_POST['data']['descripcion']) && ($_SESSION['data_nivel'] == "novato")) echo "selected"; ?>> Novato </option>
@@ -108,7 +108,7 @@
             
             <br><br><br><br>
 
-            <label for="gastos">Gastos incluidos: </label> <br>
+            <label for="data[gastos]">Gastos incluidos: </label> <br>
             <span>(Marca los que est&eacute;n incluidos)</span> <br><br>
 
                 <section class="crear_gastos">

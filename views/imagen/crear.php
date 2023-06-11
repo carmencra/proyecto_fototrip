@@ -48,7 +48,7 @@
             <h1>Guardar imagen</h1>    
             <hr> <br>
 
-            <label for="viaje">Viaje: </label>
+            <label for="data[viaje]">Viaje: </label>
             <select name="data[viaje]" id="viaje_seleccionado">
                 <?php $datos_viaje= [];
                 foreach ($viajes as $viaje) :
@@ -65,7 +65,7 @@
             
             <br><br>
 
-            <label for="tipo">Tipo: </label>
+            <label for="data[tipo]">Tipo: </label>
             <select name="data[tipo]">
                 <option value="naturaleza" <?php if (isset($_SESSION['data_tipo']) && $_SESSION['data_tipo']== "naturaleza") echo "selected"; ?>>Naturaleza</option>
                 <option value="construcciones" <?php if (isset($_SESSION['data_tipo']) && $_SESSION['data_tipo']== "construcciones") echo "selected"; ?>>Construcciones</option>
@@ -75,7 +75,7 @@
 
             <br><br>
 
-            <label for="fecha">Fecha: </label>
+            <label for="data[fecha]">Fecha: </label>
             <input type="date" name="data[fecha]" value="<?php if (isset($_SESSION['data_fecha']))echo $_SESSION['data_fecha'];?>">
 
             <br>

@@ -89,22 +89,22 @@
 
         <form action="<?=$_ENV['BASE_URL']?>viaje_buscar" method="POST" enctype="multipart/form-data">
         <section>
-            <label for="pais">Pa&iacute;s: </label>
+            <label for="data[pais]">Pa&iacute;s: </label>
             <input type="text" name="data[pais]" id="pais" value="<?php if (isset($_POST['data']['pais']))echo $_POST['data']['pais'];?>"/>
         </section>
 
         <section>
-            <label for="precio_min">Precio m&iacute;n: </label>
+            <label for="data[precio_min]">Precio m&iacute;n: </label>
             <input type="number" name="data[precio_min]" id="min" value="<?php if (isset($_POST['data']['precio_min']))echo $_POST['data']['precio_min'];?>" min="1" oninput="this.value= !!this.value && Math.abs(this.value) >= 1 ? Math.abs(this.value) : null"/> €
         </section>
 
         <section>
-            <label for="precio_max">Precio m&aacute;x: </label>
+            <label for="data[precio_max]">Precio m&aacute;x: </label>
             <input type="number" name="data[precio_max]" id="max" value="<?php if (isset($_POST['data']['precio_max']))echo $_POST['data']['precio_max'];?>" min="1" oninput="this.value= !!this.value && Math.abs(this.value) >= 1 ? Math.abs(this.value) : null"> €
         </section>
 
         <section>
-            <label for="exigencia">Exigencia f&iacute;sica: </label>
+            <label for="data[exigencia]">Exigencia f&iacute;sica: </label>
             <select name="data[exigencia]">
                 <option value="indiferente" <?php if ($opcion_exigencia == "indiferente") echo "selected"; ?>> Indiferente </option>
                 <option value="muy_facil" <?php if ($opcion_exigencia == "muy_facil") echo "selected"; ?>> Muy f&aacute;cil </option>
@@ -116,7 +116,7 @@
         </section>
 
         <section>
-            <label for="nivel">Nivel fotograf&iacute;a:  </label>
+            <label for="data[nivel]">Nivel fotograf&iacute;a:  </label>
             <select name="data[nivel]">
                 <option value="indiferente" <?php if ($opcion_nivel == "indiferente") echo "selected"; ?>> Indiferente </option>
                 <option value="muy_facil" <?php if ($opcion_nivel == "muy_facil") echo "selected"; ?>> Muy f&aacute;cil </option>
@@ -141,7 +141,7 @@
 
             <?php foreach($viajes_activos as $viaje) : ?>
                 <section class="viaje">
-                    <img src="fuente/media/images/galeria/<?= $viaje->getImagen_principal(); ?>"class="img_viaje"/> <br>
+                    <img src="fuente/media/images/galeria/<?= $viaje->getImagen_principal(); ?>"class="img_viaje" alt='imagen principal'/> <br>
 
                     <p class="precio"><b> <?= $viaje->getPrecio(); ?> € </b></p>
 
