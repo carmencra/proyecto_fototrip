@@ -165,7 +165,7 @@
 
 @media screen and (max-width: 1200px) {
     .buscador_viajes form {
-        padding: 5%;
+        padding: 2% 5% 2% 5%;
         width: 90%;
     }
 }

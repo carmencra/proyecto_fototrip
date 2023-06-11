@@ -125,7 +125,7 @@
 @media screen and (max-width: 1200px) {
     .buscador_imagenes form {
         width: 90%;
-        padding: 5%;
+        padding: 2% 5% 2% 5%;
     }
 }
 
