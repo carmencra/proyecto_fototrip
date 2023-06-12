@@ -29,7 +29,7 @@ class Email {
 
         //Recipients
         $mail->setFrom($_ENV['EM_CORREO'], 'FOTOTRIP - Viajes Fotograficos');
-        // $mail->addAddress($email);     //Add a recipient
+        $mail->addAddress($this->email);     //Add a recipient
         $mail->addAddress($_ENV['EM_CORREO']);
         
         //Content
@@ -68,7 +68,7 @@ class Email {
 
         //Recipients
         $mail->setFrom($_ENV['EM_CORREO'], 'FOTOTRIP - Viajes Fotograficos');
-        // $mail->addAddress($this->email);     //Add a recipient
+        $mail->addAddress($this->email);     //Add a recipient
         $mail->addAddress($_ENV['EM_CORREO']);
         
         //Content
