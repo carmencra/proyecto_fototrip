@@ -22,15 +22,15 @@ class Email {
         $mail->isSMTP();                                            //Send using SMTP
         $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-        $mail->Username   = 'carmenpruebas.13@gmail.com';                     //SMTP username
-        $mail->Password   = 'kebsqwwjrsftzkzb';                               //SMTP password
+        $mail->Username   = $_ENV['EM_CORREO'];                     //SMTP username
+        $mail->Password   = $_ENV['EM_CLAVE'];                               //SMTP password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
         $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
         //Recipients
-        $mail->setFrom('carmenpruebas.13@gmail.com', 'FOTOTRIP - Viajes Fotograficos');
+        $mail->setFrom($_ENV['EM_CORREO'], 'FOTOTRIP - Viajes Fotograficos');
         // $mail->addAddress($email);     //Add a recipient
-        $mail->addAddress('carmenpruebas.13@gmail.com');
+        $mail->addAddress($_ENV['EM_CORREO']);
         
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML
@@ -61,15 +61,15 @@ class Email {
         $mail->isSMTP();                                            //Send using SMTP
         $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-        $mail->Username   = 'carmenpruebas.13@gmail.com';                     //SMTP username
-        $mail->Password   = 'kebsqwwjrsftzkzb';                               //SMTP password
+        $mail->Username   = $_ENV['EM_CORREO'];                     //SMTP username
+        $mail->Password   = $_ENV['EM_CLAVE'];                               //SMTP password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
         $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
         //Recipients
-        $mail->setFrom('carmenpruebas.13@gmail.com', 'FOTOTRIP - Viajes Fotograficos');
+        $mail->setFrom($_ENV['EM_CORREO'], 'FOTOTRIP - Viajes Fotograficos');
         // $mail->addAddress($this->email);     //Add a recipient
-        $mail->addAddress('carmenpruebas.13@gmail.com');
+        $mail->addAddress($_ENV['EM_CORREO']);
         
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML
