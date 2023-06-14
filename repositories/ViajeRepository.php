@@ -126,9 +126,33 @@ class ViajeRepository {
     }
 
     // obtiene los datos del viaje que se corresponde con el id pasado
-    public function obtener_viaje($id) {
+    public function obtener_viaje($id): array {
         $this->db->consulta("SELECT * FROM viajes WHERE id= $id");
         return $this->db->extraer_registro();
+    }
+
+    // devuelve si existe un viaje con el id pasado
+    public function existe_viaje($id): bool {
+        $cons= $this->db->prepara("SELECT id FROM viajes WHERE id= :id");
+
+        $cons->bindParam(':id', $id, PDO::PARAM_STR);
+    
+        try {
+            $cons->execute();
+            if ($cons && $cons->rowCount() == 1) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        catch(PDOEXception $err) {
+            return false;
+        }
+        finally {
+            $cons= null;
+            unset($cons); 
+        }
     }
     
     // borra el viaje que se corresponde con el id pasado

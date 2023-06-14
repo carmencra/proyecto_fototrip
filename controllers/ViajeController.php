@@ -108,21 +108,20 @@ class ViajeController {
 
     // ver el detalle del viaje, se distinguirá si el usuario se puede inscribir o no
     public function ver($id) {
-        $viaje= $this->obtener_viaje($id);
-
-        //comprobamos si el usuario actual está inscrito al viaje para poder inscribirse sólo si no
-        if (isset($_SESSION['usuario'])) {
-            $inscrito= $this->repository->viaje_inscrito_usuario($_SESSION['usuario'], $id);
-            if ($inscrito) {
-                $_SESSION['usuario_ya_inscrito']= true;
+        //  si existe el viaje, obtiene los datos del mismo, sino no muestra nada por pantalla
+        if ($this->repository->existe_viaje($id)) {
+            
+            $viaje= $this->obtener_viaje($id);
+            //comprobamos si el usuario actual está inscrito al viaje para poder inscribirse sólo si no
+            if (isset($_SESSION['usuario'])) {
+                $inscrito= $this->repository->viaje_inscrito_usuario($_SESSION['usuario'], $id);
+                if ($inscrito) {
+                    $_SESSION['usuario_ya_inscrito']= true;
+                }
+                else {
+                    Utils::deleteSession('usuario_ya_inscrito');
+                }
             }
-            else {
-                Utils::deleteSession('usuario_ya_inscrito');
-            }
-        }
-
-        //  si se encuentra un viaje, obtiene los datos relacionados con este y los manda a la vista
-        if ($viaje) {
             $gastos= $this->gastos_controller->obtener_gastos($id);
 
             $imagenes= $this->imagen_controller->obtener_imagenes($id);
@@ -130,7 +129,8 @@ class ViajeController {
             $comentarios= $this->comentario_controller->obtener_comentarios($id);
             
             $this->pages->render('viaje/ver', ['viaje' => $viaje, 'gastos' => $gastos, 'imagenes' => $imagenes, 'comentarios' => $comentarios ]);
-        }
+             
+        }     
     }
 
     /**
