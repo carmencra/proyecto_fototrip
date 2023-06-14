@@ -52,32 +52,8 @@
     <section class="contenido_main">
 
         <section class="buscador_imagenes">
-            <?php
-                // // recogemos si hay alguna cookie de filtros existente
-                // if (isset($_COOKIE['data_tipo'])) {
-                //     $opcion_tipo= $_COOKIE['data_tipo'];
-                // } 
-                // else {
-                //     $opcion_tipo = ""; 
-                //     // Valor predeterminado si no hay cookie
-                // } 
-                // if (isset($_COOKIE['data_fecha'])) {
-                //     $opcion_fecha= $_COOKIE['data_fecha'];
-                // } 
-                // else {
-                //     $opcion_fecha = ""; 
-                //     // Valor predeterminado si no hay cookie
-                // }
-                
-
-                // // guardamos los valores de filtros en las cookies
-                // if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                //     $opcion_tipo = $_POST['data']['tipo'];
-                //     setcookie("data_tipo", $opcion_tipo);
-                    
-                //     $opcion_fecha = $_POST['data']['fecha'];
-                //     setcookie("data_fecha", $opcion_fecha);
-                // }    
+            <?php   
+            // guardamos los valores del buscador
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $select_tipo= $_POST['data']['tipo'];
                     $_SESSION['data_tipo']= $select_tipo;
@@ -96,7 +72,6 @@
 
             <section>
                 <label for="data[tipo]">Tipo: </label>
-
                 <select name="data[tipo]">
                     <option value="indiferente" <?php if (isset($_SESSION['data_tipo']) && $_SESSION['data_tipo']== "indiferente") echo "selected"; ?>> Indiferente </option>
                     <option value="naturaleza" <?php if (isset($_SESSION['data_tipo']) && $_SESSION['data_tipo']== "naturaleza") echo "selected"; ?>> Naturaleza </option>
@@ -108,7 +83,6 @@
                 
             <section>
                 <label for="data[fecha]">Fecha: </label>
-            
                 <select name="data[fecha]">
                     <option value="indiferente" <?php if (isset($_SESSION['data_fecha']) && $_SESSION['data_fecha']== "indiferente") echo "selected"; ?>> Indiferente </option>
                     <option value="recientes" <?php if (isset($_SESSION['data_fecha']) && $_SESSION['data_fecha']== "recientes") echo "selected"; ?>> M&aacute;s recientes </option>
