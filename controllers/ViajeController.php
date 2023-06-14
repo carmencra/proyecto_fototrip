@@ -245,7 +245,12 @@ class ViajeController {
     }
 
     public function borrar_filtros(): void {
+        // borramos campos de texto y número
         $this->borrar_datos_post();
+        // borramos los valores de los select
+        Utils::deleteSession('data_exigencia');
+        Utils::deleteSession('data_nivel');
+                
         header("Location: ". $_ENV['BASE_URL']);
     }
 
