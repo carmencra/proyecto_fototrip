@@ -1,4 +1,5 @@
 {
+    
     "name": "carme/fototrip",
     "autoload": {
         "psr-4": {
