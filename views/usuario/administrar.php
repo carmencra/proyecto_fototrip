@@ -32,14 +32,15 @@
                 <h2>Viajes</h2>
                 <hr><br>
                 <a href="<?=$_ENV['BASE_URL']?>viaje/crear">Añadir</a> <br><br>
-                <a href="<?=$_ENV['BASE_URL']?>administrar/viaje">Borrar</a>
+                <a href="<?=$_ENV['BASE_URL']?>administrar/viaje">Borrar</a> <br><br>
+                <a> ------ </a> 
             </section>
 
             <section>
                 <h2>Comentarios</h2>
                 <hr><br>
-                <a href="<?=$_ENV['BASE_URL']?>administrar/comentario">Borrar</a>
-                <br><br>
+                <a> ------ </a> <br><br>
+                <a href="<?=$_ENV['BASE_URL']?>administrar/comentario">Borrar</a> <br><br>
                 <a href="<?=$_ENV['BASE_URL']?>seleccionar/comentarios">Aceptar/descartar</a>
             </section>
             
@@ -47,8 +48,7 @@
                 <h2>Im&aacute;genes</h2>
                 <hr><br>
                 <a href="<?=$_ENV['BASE_URL']?>imagen/crear">Añadir</a> <br><br>
-                <a href="<?=$_ENV['BASE_URL']?>administrar/imagen">Borrar</a>
-                <br><br>
+                <a href="<?=$_ENV['BASE_URL']?>administrar/imagen">Borrar</a> <br><br>
                 <a href="<?=$_ENV['BASE_URL']?>seleccionar/imagenes">Aceptar/descartar</a>
             </section>
 
