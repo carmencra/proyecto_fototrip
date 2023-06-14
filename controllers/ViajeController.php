@@ -244,6 +244,11 @@ class ViajeController {
         }
     }
 
+    public function borrar_filtros(): void {
+        $this->borrar_datos_post();
+        header("Location: ". $_ENV['BASE_URL']);
+    }
+
     // borra las sesiones de errores al guardar el viaje 
     public function borra_sesiones_errores(): void {
         Utils::deleteSession('err_pai');

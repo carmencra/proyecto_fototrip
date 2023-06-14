@@ -78,6 +78,9 @@ session_start();
         Router::add('POST', 'viaje_buscar', function()use ($viaje_controller){
             ($viaje_controller)->buscar();
         });
+        Router::add('POST', 'restablecer_viaje', function()use ($viaje_controller){
+            ($viaje_controller)->borrar_filtros();
+        });
 
         // ver los viajes, reccogiendo el id y llevando a la vista
         Router::add('POST', 'detalle_viaje/:id', function(int $id) use ($viaje_controller) {
