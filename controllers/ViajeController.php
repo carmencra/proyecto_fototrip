@@ -225,7 +225,7 @@ class ViajeController {
                         $_SESSION['viaje_creado']= true;
                         // borra las sesiones de errores y los datos del viaje guardado
                         $this->borra_sesiones_errores();
-                        $this->borrar_datos_viaje();
+                        $this->borrar_datos_post();
                         header("Location: ". $_ENV['BASE_URL']."administrar");
                     }
                     else {
@@ -257,7 +257,7 @@ class ViajeController {
     }
 
     // borra los datos del viaje guardada
-    public function borrar_datos_viaje(): void {
+    public function borrar_datos_post(): void {
         if (isset($_POST['data'])) {
             unset($_POST['data']);
         }

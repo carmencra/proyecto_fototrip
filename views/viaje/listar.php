@@ -60,31 +60,43 @@
 
     <section class="buscador_viajes">
         <?php
-            // recogemos si hay alguna cookie de filtros existente
-            if (isset($_COOKIE['data_exigencia'])) {
-                $opcion_exigencia= $_COOKIE['data_exigencia'];
-            }
-            else {
-                $opcion_exigencia = ""; 
-                // Valor predeterminado si no hay cookie
-            } 
-            if (isset($_COOKIE['data_nivel'])) {
-                $opcion_nivel= $_COOKIE['data_nivel'];
-            }
-            else {
-                $opcion_nivel = ""; 
-                // Valor predeterminado si no hay cookie
-            }
+            // // recogemos si hay alguna cookie de filtros existente
+            // if (isset($_COOKIE['data_exigencia'])) {
+            //     $opcion_exigencia= $_COOKIE['data_exigencia'];
+            // }
+            // else {
+            //     $opcion_exigencia = ""; 
+            //     // Valor predeterminado si no hay cookie
+            // } 
+            // if (isset($_COOKIE['data_nivel'])) {
+            //     $opcion_nivel= $_COOKIE['data_nivel'];
+            // }
+            // else {
+            //     $opcion_nivel = ""; 
+            //     // Valor predeterminado si no hay cookie
+            // }
             
 
-            // guardamos los valores de filtros en las cookies
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                $opcion_exigencia = $_POST['data']['exigencia'];
-                setcookie("data_exigencia", $opcion_exigencia);
+            // // guardamos los valores de filtros en las cookies
+            // if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            //     $opcion_exigencia = $_POST['data']['exigencia'];
+            //     setcookie("data_exigencia", $opcion_exigencia);
                 
-                $opcion_nivel = $_POST['data']['nivel'];
-                setcookie("data_nivel", $opcion_nivel);
-            }
+            //     $opcion_nivel = $_POST['data']['nivel'];
+            //     setcookie("data_nivel", $opcion_nivel);
+            // }
+
+            // guardamos los valores del buscador
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $select_exigencia= $_POST['data']['exigencia'];
+                $_SESSION['data_exigencia']= $select_exigencia;
+                
+                $select_nivel= $_POST['data']['nivel'];
+                $_SESSION['data_nivel']= $select_nivel;
+                
+                // $select_fecha= $_POST['data']['fecha'];
+                // $_SESSION['data_fecha']= $select_fecha;
+            }  
         ?>
 
         <form action="<?=$_ENV['BASE_URL']?>viaje_buscar" method="POST" enctype="multipart/form-data">
@@ -105,29 +117,49 @@
 
         <section>
             <label for="data[exigencia]">Exigencia f&iacute;sica: </label>
+            <!-- <select name="data[exigencia]">
+                <option value="indiferente" < ?php if ($opcion_exigencia == "indiferente") echo "selected"; ?>> Indiferente </option>
+                <option value="muy_facil" < ?php if ($opcion_exigencia == "muy_facil") echo "selected"; ?>> Muy f&aacute;cil </option>
+                <option value="novato" < ?php if ($opcion_exigencia == "novato") echo "selected"; ?>> Novato </option>
+                <option value="medio" < ?php if ($opcion_exigencia == "medio") echo "selected"; ?>> Medio </option>
+                <option value="alto" < ?php if ($opcion_exigencia == "alto") echo "selected"; ?>> Alto </option>
+                <option value="experto" < ?php if ($opcion_exigencia == "experto") echo "selected"; ?>> Experto </option>
+            </select> -->
+
             <select name="data[exigencia]">
-                <option value="indiferente" <?php if ($opcion_exigencia == "indiferente") echo "selected"; ?>> Indiferente </option>
-                <option value="muy_facil" <?php if ($opcion_exigencia == "muy_facil") echo "selected"; ?>> Muy f&aacute;cil </option>
-                <option value="novato" <?php if ($opcion_exigencia == "novato") echo "selected"; ?>> Novato </option>
-                <option value="medio" <?php if ($opcion_exigencia == "medio") echo "selected"; ?>> Medio </option>
-                <option value="alto" <?php if ($opcion_exigencia == "alto") echo "selected"; ?>> Alto </option>
-                <option value="experto" <?php if ($opcion_exigencia == "experto") echo "selected"; ?>> Experto </option>
+                <option value="indiferente" <?php if (isset($_SESSION['data_exigencia']) && $_SESSION['data_exigencia']== "indiferente") echo "selected"; ?>> Indiferente </option>
+                <option value="muy_facil" <?php if (isset($_SESSION['data_exigencia']) && $_SESSION['data_exigencia']== "muy_facil") echo "selected"; ?>> Muy f&aacute;cil </option>
+                <option value="novato" <?php if (isset($_SESSION['data_exigencia']) && $_SESSION['data_exigencia']== "novato") echo "selected"; ?>> Novato </option>
+                <option value="medio" <?php if (isset($_SESSION['data_exigencia']) && $_SESSION['data_exigencia']== "medio") echo "selected"; ?>> Medio </option>
+                <option value="alto" <?php if (isset($_SESSION['data_exigencia']) && $_SESSION['data_exigencia']== "alto") echo "selected"; ?>> Alto </option>
+                <option value="experto" <?php if (isset($_SESSION['data_exigencia']) && $_SESSION['data_exigencia']== "experto") echo "selected"; ?>> Experto </option>
             </select>
+
         </section>
 
         <section>
             <label for="data[nivel]">Nivel fotograf&iacute;a:  </label>
+            <!-- <select name="data[nivel]">
+                <option value="indiferente" < ?php if ($opcion_nivel == "indiferente") echo "selected"; ?>> Indiferente </option>
+                <option value="muy_facil" < ?php if ($opcion_nivel == "muy_facil") echo "selected"; ?>> Muy f&aacute;cil </option>
+                <option value="novato" < ?php if ($opcion_nivel == "novato") echo "selected"; ?>> Novato </option>
+                <option value="medio" < ?php if ($opcion_nivel == "medio") echo "selected"; ?>> Medio </option>
+                <option value="alto" < ?php if ($opcion_nivel == "alto") echo "selected"; ?>> Alto </option>
+                <option value="experto" < ?php if ($opcion_nivel == "experto") echo "selected"; ?>> Experto </option>
+            </select> -->
             <select name="data[nivel]">
-                <option value="indiferente" <?php if ($opcion_nivel == "indiferente") echo "selected"; ?>> Indiferente </option>
-                <option value="muy_facil" <?php if ($opcion_nivel == "muy_facil") echo "selected"; ?>> Muy f&aacute;cil </option>
-                <option value="novato" <?php if ($opcion_nivel == "novato") echo "selected"; ?>> Novato </option>
-                <option value="medio" <?php if ($opcion_nivel == "medio") echo "selected"; ?>> Medio </option>
-                <option value="alto" <?php if ($opcion_nivel == "alto") echo "selected"; ?>> Alto </option>
-                <option value="experto" <?php if ($opcion_nivel == "experto") echo "selected"; ?>> Experto </option>
+                <option value="indiferente" <?php if (isset($_SESSION['data_nivel']) && $_SESSION['data_nivel']== "indiferente") echo "selected"; ?>> Indiferente </option>
+                <option value="muy_facil" <?php if (isset($_SESSION['data_nivel']) && $_SESSION['data_nivel']== "muy_facil") echo "selected"; ?>> Muy f&aacute;cil </option>
+                <option value="novato" <?php if (isset($_SESSION['data_nivel']) && $_SESSION['data_nivel']== "novato") echo "selected"; ?>> Novato </option>
+                <option value="medio" <?php if (isset($_SESSION['data_nivel']) && $_SESSION['data_nivel']== "medio") echo "selected"; ?>> Medio </option>
+                <option value="alto" <?php if (isset($_SESSION['data_nivel']) && $_SESSION['data_nivel']== "alto") echo "selected"; ?>> Alto </option>
+                <option value="experto" <?php if (isset($_SESSION['data_nivel']) && $_SESSION['data_nivel']== "experto") echo "selected"; ?>> Experto </option>
             </select>
         </section>
 
             <input type="submit" value="Buscar" id="boton" class="boton_resaltar">
+
+            <a href="<?=$_ENV['BASE_URL']?>restablecer_viaje">Restablecer</a>
         </form>
 
     </section>
