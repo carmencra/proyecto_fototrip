@@ -78,7 +78,7 @@ session_start();
         Router::add('POST', 'viaje_buscar', function()use ($viaje_controller){
             ($viaje_controller)->buscar();
         });
-        Router::add('GET', 'restablecer_viaje', function()use ($viaje_controller){
+        Router::add('GET', 'viaje/restablecer', function()use ($viaje_controller){
             ($viaje_controller)->borrar_filtros();
         });
 
