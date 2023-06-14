@@ -34,6 +34,23 @@ hr {
     border: 2px solid white;
 }
 
+
+.restablecer {
+    text-decoration: none;
+    color: black;
+    padding: 0.5% 2% 0.5% 2%;
+    background-color: #2CCBCB;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.restablecer:hover {
+    text-decoration: underline;
+    font-size: 16px;
+    font-weight: bolder;
+}
+
+
 #flecha {
     position: fixed;
     z-index: 1;
@@ -56,8 +73,8 @@ hr {
     body {
         font-size: 55px;
     }
-    input {
-        font-size: 50px;
+    input, .restablecer {
+        font-size: 50px !important;
     }
     select {
         font-size: 45px;
@@ -81,8 +98,8 @@ hr {
     body {
         font-size: 33px;
     }
-    input {
-        font-size: 28px;
+    input, .restablecer {
+        font-size: 28px !important;
     }
     select {
         font-size: 25px;
@@ -106,8 +123,8 @@ hr {
     body {
         font-size: 21px;
     }
-    input {
-        font-size: 19px;
+    input, .restablecer {
+        font-size: 19px !important;
     }
     select {
         font-size: 17px;

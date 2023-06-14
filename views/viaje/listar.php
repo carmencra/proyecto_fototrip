@@ -113,7 +113,7 @@
 
             <input type="submit" value="Buscar" id="boton" class="boton_resaltar">
 
-            <a href="<?=$_ENV['BASE_URL']?>viaje/restablecer">Restablecer</a>
+            <a href="<?=$_ENV['BASE_URL']?>viaje/restablecer" class="boton_resaltar restablecer">Restablecer</a>
         </form>
 
     </section>
