@@ -256,7 +256,7 @@ class ImagenController{
                             $_SESSION['imagen_creada']= true;
                             // borra las sesiones de errores y los datos del viaje guardado
                             $this->borrar_sesiones();
-                            $this->borrar_datos_imagen();
+                            $this->borrar_datos_post();
                             header("Location: ". $_ENV['BASE_URL']."misviajes");
                         }  
                         else {
@@ -272,6 +272,16 @@ class ImagenController{
         }
     }
 
+    public function borrar_filtros(): void {
+        // borramos campos de texto y número
+        $this->borrar_datos_post();
+        // borramos los valores de los select
+        Utils::deleteSession('data_tipo');
+        Utils::deleteSession('data_fecha');
+                
+        header("Location: ". $_ENV['BASE_URL']."galeria");
+    }
+
     // borra las sesiones de error al crear la imagen 
     public function borrar_sesiones(): void {
         Utils::deleteSession('err_img');
@@ -281,7 +291,7 @@ class ImagenController{
     }
 
     // borra los datos de la imagen guardada
-    public function borrar_datos_imagen(): void {
+    public function borrar_datos_post(): void {
         if (isset($_POST['data'])) {
             unset($_POST['data']);
         }

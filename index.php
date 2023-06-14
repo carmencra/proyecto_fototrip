@@ -107,6 +107,9 @@ session_start();
         Router::add('POST', 'imagen_buscar', function() use ($imagen_controller){
             ($imagen_controller)->buscar();
         });
+        Router::add('GET', 'imagen/restablecer', function()use ($imagen_controller){
+            ($imagen_controller)->borrar_filtros();
+        });
 
 
 
