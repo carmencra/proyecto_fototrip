@@ -3,6 +3,19 @@
 
 <?php require_once('views/layout/header_sub_main.php'); ?>
 
+<!-- si se ha intentado guardar un comentario, muestra si ha ocurrido algún error, si se completa, lo indica en la página de administrar  -->
+<?php use Utils\Utils;
+    if(isset($_SESSION['comentario_guardado']) && $_SESSION['comentario_guardado'] == false): ?>
+        <script type="text/javascript">
+            alert("Ha habido un error al guardar el comentario.");
+            window.close();
+        </script>
+    
+        <?php
+        Utils::deleteSession('comentario_guardado');
+     endif;
+?>
+
 <main>
     <section class="contenido_main">
         <form action="<?=$_ENV['BASE_URL']?>comentario/guardar" method="POST" class="form_crear">

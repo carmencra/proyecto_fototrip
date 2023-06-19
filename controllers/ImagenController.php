@@ -201,6 +201,7 @@ class ImagenController{
                         $admin= "admin";
                     }
                     else { $admin= ""; }
+                    
                     $guardado= $this->repository->guardar($datos, $nombre_foto, $admin);       
                     if ($guardado) {
                         $_SESSION['imagen_creada']= true;

@@ -6,20 +6,23 @@
     <section class="contenido_main">
         <?php use Utils\Utils;
             
-            if(isset($_SESSION['comentario_guardado'])):
-            if ($_SESSION['comentario_guardado'] == true) : ?>
-                <script type="text/javascript">
-                    alert("Tu comentario se ha guardado y está pendiente de ser aceptado.");
-                    window.close();
-                </script>
-            <?php else: ?>
-                <script type="text/javascript">
-                    alert("Tu comentario no se ha podido guardar correctamente.");
-                    window.close();
-                </script>
-            <?php endif;?>     
+        // dice si se ha guardado el comentario
+        if(isset($_SESSION['comentario_guardado']) && $_SESSION['comentario_guardado'] == true): ?>
+            <script type="text/javascript">
+                alert("Tu comentario se ha guardado y está pendiente de ser aceptado.");
+                window.close();
+            </script>  
         <?php endif;?>
 
+        <!-- dice si se ha guardado la imagen -->
+        <?php if(isset($_SESSION['imagen_creada']) && $_SESSION['imagen_creada'] == true): ?>
+            <script type="text/javascript">
+                alert("Tu imagen se ha guardado y está pendiente de ser aceptada.");
+                window.close();
+            </script>  
+        <?php endif;?>
+
+        <!-- dice si el usuario ya ha comentado sobre ese viaje  -->
         <?php if(isset($_SESSION['usuario_ya_comentario']) && $_SESSION['usuario_ya_comentario']== true) : ?>
             <script type="text/javascript">
                 alert("¡Ya has comentado este viaje!. Puedes verlo más abajo.");
@@ -196,6 +199,8 @@
 
 <?php
      Utils::deleteSession('comentario_guardado');
+     Utils::deleteSession('imagen_creada');
  
+     
 require_once('views/layout/footer_main.php'); 
 ?>
