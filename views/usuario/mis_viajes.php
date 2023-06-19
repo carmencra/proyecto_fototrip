@@ -51,7 +51,7 @@
                     <?php foreach($viajes as $viaje) : ?>
 
                         <section class="mi_viaje">
-                            <h1> <?= $viaje->getId(); ?>. <?= $viaje->getPais(); ?> </h1> <hr> <br>  
+                            <h1> <?= $viaje->getPais(); ?> </h1> <hr> <br>  
                             
                             <section class="seccion_viaje">
                                 <img src="./fuente/media/images/galeria/<?= $viaje->getImagen_principal(); ?>"/>
