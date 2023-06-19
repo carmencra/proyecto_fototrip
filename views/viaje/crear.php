@@ -4,23 +4,35 @@
 
 <!-- si se ha intentado guardar un viaje, muestra si ha ocurrido algún error, si se completa, lo indica en la página de administrar  -->
 <?php use Utils\Utils;
-    if(isset($_SESSION['viaje_creado']) && $_SESSION['viaje_creado'] == false):
-        if (isset($_SESSION['error_gastos'])): ?>
-            <script type="text/javascript">
-                alert("Ha habido un error al guardar los gastos del viaje.");
-                window.close();
-            </script>
-        <?php else: ?>
+    if(isset($_SESSION['viaje_creado']) && $_SESSION['viaje_creado'] == false) {
+        if (isset($_SESSION['error_gastos']) || (isset($_SESSION['error_imagen']))) {
+            // error al guardar gastos
+            if (isset($_SESSION['error_gastos'])) { ?>
+                <script type="text/javascript">
+                    alert("Ha habido un error al guardar los gastos del viaje.");
+                    window.close();
+                </script>
+            <?php }
+            // error al guardar imagen
+            else if(isset($_SESSION['error_imagen'])) { ?>
+                <script type="text/javascript">
+                    alert("Ha habido un error al guardar la imagen principal.");
+                    window.close();
+                </script>
+            <?php }
+        }
+        else { ?>
+        <!-- error al guardar el viaje en sí -->
             <script type="text/javascript">
                 alert("Ha habido un error al guardar el viaje.");
                 window.close();
             </script>
-        <?php endif; 
+        <?php }; 
 
         Utils::deleteSession('viaje_creado');
-
-    endif; 
+    }
 ?>
+
 
 <?php        
     // guardamos los valores del formulario
@@ -30,6 +42,9 @@
         
         $select_exigencia= $_POST['data']['exigencia'];
         $_SESSION['data_exigencia']= $select_exigencia;
+        
+        $select_tipo= $_POST['data']['tipo'];
+        $_SESSION['data_tipo']= $select_tipo;
     }    
 ?>
 
@@ -106,6 +121,16 @@
             <input type="file" name="imagen" accept="image/*">
             <br><span style="color:red"> <?php if(isset($_SESSION['err_img'])) echo  $_SESSION['err_img']?> </span>
             
+            <br>
+
+            <label for="data[tipo]">Tipo imagen: </label>
+            <select name="data[tipo]">
+                <option value="naturaleza" <?php if (isset($_SESSION['data_tipo']) && $_SESSION['data_tipo']== "naturaleza") echo "selected"; ?>>Naturaleza</option>
+                <option value="construcciones" <?php if (isset($_SESSION['data_tipo']) && $_SESSION['data_tipo']== "construcciones") echo "selected"; ?>>Construcciones</option>
+                <option value="animales" <?php if (isset($_SESSION['data_tipo']) && $_SESSION['data_tipo']== "animales") echo "selected"; ?>>Animales</option>
+                <option value="personas" <?php if (isset($_SESSION['data_tipo']) && $_SESSION['data_tipo']== "personas") echo "selected"; ?>>Personas</option>
+            </select>
+
             <br><br><br><br>
 
             <label for="data[gastos]">Gastos incluidos: </label> <br>

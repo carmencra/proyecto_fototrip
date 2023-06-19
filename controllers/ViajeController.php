@@ -219,24 +219,47 @@ class ViajeController {
                 $guardado= $this->repository->guardar($datos, $imagen['name']);     
                 
                 if ($guardado) {
+                    // guardamos los gastos del viaje
                     $id_viaje= $this->repository->obtener_id_ultimo_viaje();
                     $guardar_gastos= $this->gastos_controller->guardar($id_viaje, $gastos);
+
+                    // si se guardan los gastos y la imagen del viaje, lo guarda
                     if ($guardar_gastos) {
-                        $_SESSION['viaje_creado']= true;
-                        // borra las sesiones de errores y los datos del viaje guardado
-                        $this->borra_sesiones_errores();
-                        $this->borrar_datos_post();
-                        header("Location: ". $_ENV['BASE_URL']."administrar");
+                        Utils::deleteSession('error_gastos');
+
+                        // guardamos la imagen principal del viaje
+                        $guardar_imagen= $this->imagen_controller->guardar_principal($id_viaje, $datos['fecha_inicio'], $imagen['name'], $datos['tipo']);
+
+                        if ($guardar_imagen) {
+                            Utils::deleteSession('error_imagen');
+
+                            $_SESSION['viaje_creado']= true;
+                            // borra las sesiones de errores y los datos del viaje guardado
+                            $this->borra_sesiones_errores();
+                            $this->borrar_datos_post();
+                            header("Location: ". $_ENV['BASE_URL']."administrar");
+                        }
+                        else {
+                            // si no se guarda bien la imagen, se borran los gastos creados y el viaje porque está incompleto
+                            $id_viaje= $this->repository->obtener_id_ultimo_viaje();
+                            $this->gastos_controller->borrar_por_viaje($id_viaje);
+                            $this->repository->borrar($id_viaje);
+                            $_SESSION['viaje_creado']= false;
+                            $_SESSION['error_imagen']= true;
+                        }
                     }
                     else {
                         // si no se guardan bien los gastos, se borra el viaje porque está incompleto
                         $id_viaje= $this->repository->obtener_id_ultimo_viaje();
-                        $this->repository->borrar($id);
+                        $this->repository->borrar($id_viaje);
                         $_SESSION['viaje_creado']= false;
                         $_SESSION['error_gastos']= true;
                     }
                 }    
+                // si no es error ni de los gastos ni de la imagen, es del viaje en sí
                 else {
+                    Utils::deleteSession('error_gastos');
+                    Utils::deleteSession('error_imagen');
                     $_SESSION['viaje_creado']= false;
                 }
             }

@@ -322,6 +322,38 @@ class ImagenRepository {
         }
     }
 
+    
+    // guarda la imagen principal del viaje recién creado
+    public function guardar_principal($id_viaje, $fecha_imagen, $imagen, $tipo): bool{
+        $ins= $this->db->prepara("INSERT INTO imagenes values (:id, :id_viaje, :id_usuario, :imagen, :tipo, :aceptada, :fecha)");
+        
+        $ins->bindParam(':id', $id, PDO::PARAM_STR);
+        $ins->bindParam(':id_viaje', $id_viaje, PDO::PARAM_INT);
+        $ins->bindParam(':id_usuario', $id_usuario, PDO::PARAM_INT);
+        $ins->bindParam(':imagen', $imagen, PDO::PARAM_STR);
+        $ins->bindParam(':tipo', $tipo, PDO::PARAM_STR);
+        $ins->bindParam(':aceptada', $aceptada, PDO::PARAM_STR);
+        $ins->bindParam(':fecha', $fecha_imagen, PDO::PARAM_STR);
+
+        $id= NULL; // id auto_increment
+        $id_usuario= 1; // id del admin
+        $aceptada= TRUE; // aceptada por defecto al ser del admin
+
+        try{
+            if ($ins->execute()) {
+                return true;
+            }
+            else {return false;}
+        }
+        catch(PDOException $err){
+            return false;
+        }
+        finally {
+            $ins= null;
+            unset($ins); 
+        }
+    }
+
     // obtiene las imágenes que el usuario pasado ha publicado
     public function obtener_imagenes_usuario($id_usuario) : ?array {
         $this->db->consulta("SELECT * FROM imagenes WHERE id_usuario= $id_usuario ORDER BY aceptada DESC");

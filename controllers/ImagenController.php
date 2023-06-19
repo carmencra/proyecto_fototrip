@@ -342,6 +342,11 @@ class ImagenController{
         }
     }
 
+    // guarda la imagen principal del viaje recién creado
+    public function guardar_principal($id_viaje, $fecha_imagen, $imagen, $tipo): bool{
+        return $this->repository->guardar_principal($id_viaje, $fecha_imagen, $imagen, $tipo);
+    }
+
     // obtiene las imágenes que ha publicado el usuario
     public function obtener_imagenes_usuario($id): array {
         return $this->repository->obtener_imagenes_usuario($id);
